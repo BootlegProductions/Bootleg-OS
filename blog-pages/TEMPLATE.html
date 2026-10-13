@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>POST TITLE - Bootleg OS</title>
+    <meta name="description" content="One-line summary for the blog index.">
+    <link rel="icon" type="image/svg+xml" href="../assets/brand/favicon.svg?v=3">
+    <link rel="stylesheet" href="../css/style.css?v=boots-frames-1">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="shell topbar">
+        <a class="brand" href="../index.html">
+          <img src="../assets/brand/bootleg-logo.jpg" alt="Bootleg logo">
+          <span>
+            <strong>Bootleg Productions</strong>
+            <span>Creative Hub / BOOTLEG OS</span>
+          </span>
+        </a>
+        <nav class="nav">
+          <a href="../index.html">Home</a>
+          <a href="../projects.html">Projects</a>
+          <a href="../gallery.html">Gallery</a>
+          <div class="nav-dropdown">
+            <a class="nav-apps-link" href="../applications.html">Apps <span class="nav-caret">▾</span>
+            </a>
+            <div class="nav-dropdown-menu">
+              <a href="../applications.html">All Apps</a>
+              <a href="../weather.html">Weather</a>
+              <a href="../clock.html">World Clock</a>
+              <a href="../radio.html">Pirate Radio</a>
+              <a href="../utilities.html">Image Tools</a>
+              <a href="../pixel-studio.html">Pixel Studio</a>
+              <a href="../archive-scraper.html">Archive Scraper</a>
+              <a href="../youtube-downloader.html">Video Converter</a>
+            </div>
+          </div>
+          <a href="../blog.html">Blog</a>
+          <a href="../contact.html">Contact</a>
+        </nav>
+        <div class="mini-radio">
+          <div class="radio-screen">
+            <span class="frequency">89.5 FM</span>
+            <span class="station">Pirate Radio</span>
+          </div>
+          <img class="radio-base" src="../assets/radio/radio-base.png" alt="Pirate Radio">
+          <button class="dial volume-dial" title="Power / Play">
+            <span class="dial-rotator">
+              <img src="../assets/radio/radio-volume.webp" alt="">
+            </span>
+          </button>
+          <button class="dial tuning-dial" title="Tune station">
+            <span class="dial-rotator">
+              <img src="../assets/radio/radio-tuning.webp" alt="">
+            </span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main class="shell">
+      <section class="panel blog-post">
+        <div class="panel-content">
+          <span class="eyebrow">Category</span>
+          <h1>POST TITLE</h1>
+          <p class="blog-lead">One-line summary for the blog index.</p>
+          <p>
+            <strong>Template:</strong> replace this copy with the post introduction.</p>
+          <h2>Section heading</h2>
+          <p>Add text, images, links or video embeds here.</p>
+          <figure class="blog-media-placeholder">IMAGE / SCREENSHOT</figure>
+          <h2>Another section</h2>
+          <p>Continue the article here.</p>
+        </div>
+      </section>
+      <section class="comments-card card">
+        <div class="card-content">
+          <h2>Comments</h2>
+          <p class="comments-note">Comments are currently saved locally in each visitor's browser. A shared comment service can replace this when the site backend is added.</p>
+          <form class="comment-form" data-comment-form data-post="post-title">
+            <input name="name" placeholder="Name" required>
+            <textarea name="comment" rows="4" placeholder="Comment" required></textarea>
+            <button class="btn" type="submit">Post comment</button>
+          </form>
+          <div class="comment-list" data-comment-list></div>
+        </div>
+      </section>
+    </main>
+    <footer class="shell footer">
+      <a class="footer-support" href="https://buymeacoffee.com/supportweb" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">☕</span> Support my work · Buy me a coffee</a>
+      <span>STATUS ● SYSTEM ONLINE</span>
+      <span>Thanks for stopping by ♥</span>
+      <span id="local-clock"></span>
+    </footer>
+    <script src="../js/gallery-data.js"></script>
+    <script src="../js/app.js"></script>
+    <script src="../js/radio-data.js"></script>
+    <script src="../js/radio-player.js"></script>
+    <script src="../js/blog-comments.js"></script>
+  </body>
+</html>

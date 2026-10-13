@@ -1,0 +1,226 @@
+/* BOOTLEG OS // Pirate Radio full page */
+
+.boombox-stage {
+    position: relative;
+    width: min(1180px, 100%);
+    margin: 0 auto;
+    overflow: visible;
+
+    /* Keep the boombox layers separate from the rest of the page */
+    isolation: isolate;
+    z-index: 0;
+}
+
+/* Override the global .card img styling specifically for the boombox */
+.card img.radio-boombox,
+.radio-boombox {
+    position: relative;
+    z-index: 3;
+
+    width: 100%;
+    height: auto;
+    max-height: none;
+
+    display: block;
+    object-fit: contain;
+
+    /* IMPORTANT:
+       Allows the green display to show through
+       the transparent hole in the PNG */
+    background: transparent;
+
+    filter: drop-shadow(0 28px 32px rgba(0, 0, 0, .42));
+
+    pointer-events: none;
+}
+
+/* Digital screen sits BEHIND the transparent boombox PNG */
+.boombox-screen {
+    position: absolute;
+    z-index: 2;
+
+    left: 28.7%;
+    top: 25%;
+
+    width: 43.6%;
+    height: 14%;
+
+    overflow: hidden;
+
+    display: grid;
+    align-content: center;
+    gap: .22rem;
+
+    padding: .65rem 1rem;
+
+    color: #94ff9b;
+
+    background:
+        radial-gradient(
+            circle at 50% 40%,
+            rgba(50, 255, 100, .12),
+            transparent 65%
+        ),
+        #031309;
+
+    border-radius: 8px;
+
+    font-family: var(--font-mono);
+
+    text-shadow:
+        0 0 8px rgba(148, 255, 155, .72);
+}
+
+.boombox-screen-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+
+    font-weight: 900;
+    letter-spacing: .08em;
+}
+
+.boombox-station {
+    font-weight: 900;
+    letter-spacing: .08em;
+    
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.boombox-track {
+    color: #ffd5ff;
+
+    font-size: .82rem;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    text-shadow:
+        0 0 7px rgba(255, 101, 216, .45);
+}
+
+.boombox-screen-top,
+.boombox-station,
+.boombox-track {
+    position: relative;
+    top: 7px;
+}
+
+.boombox-bars {
+    position: absolute;
+
+    inset: auto .9rem -.1rem .9rem;
+
+    height: 17px;
+
+    display: flex;
+    gap: 4px;
+    align-items: end;
+
+    opacity: .68;
+}
+
+.boombox-bars i {
+    flex: 1;
+    min-width: 3px;
+
+    background: #94ff9b;
+
+    animation:
+        boomboxBars 1s steps(4) infinite alternate;
+}
+
+.boombox-bars i:nth-child(2n) {
+    animation-delay: .15s;
+}
+
+.boombox-bars i:nth-child(3n) {
+    animation-delay: .3s;
+}
+
+.boombox-bars i:nth-child(4n) {
+    animation-delay: .45s;
+}
+
+
+@keyframes boomboxBars {
+    from {
+        height: 20%;
+    }
+
+    to {
+        height: 100%;
+    }
+}
+
+.radio-controls-main {
+    justify-content: center;
+    align-items: center;
+
+    padding: 1rem .4rem .2rem;
+}
+
+.radio-volume-label {
+    color: var(--cyan);
+
+    font:
+        900 .85rem var(--font-mono);
+
+    padding: .55rem .75rem;
+
+    border:
+        1px solid rgba(98, 239, 255, .32);
+
+    border-radius: 8px;
+}
+
+.station-list.radio-stations {
+    margin-top: 1.25rem;
+}
+
+.radio-station-card {
+    transition:
+        transform .2s ease,
+        border-color .2s ease,
+        box-shadow .2s ease;
+}
+
+.radio-station-card.is-active {
+    border-color:
+        rgba(149, 255, 141, .58);
+
+    box-shadow:
+        0 0 24px rgba(149, 255, 141, .15);
+}
+
+.radio-station-card:hover {
+    transform:
+        translateY(-3px);
+}
+
+.archive-credit {
+    margin-top: 1.2rem;
+
+    border-color:
+        rgba(98, 239, 255, .35);
+}
+
+@media (max-width: 760px) {
+
+    .boombox-screen {
+        padding: .35rem .55rem;
+        font-size: .7rem;
+    }
+
+    .boombox-track {
+        display: none;
+    }
+
+    .boombox-bars {
+        height: 9px;
+    }
+}

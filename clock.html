@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Clock - Bootleg OS</title>
+    <meta name="description" content="Animated analogue local clock and RGB world clocks.">
+    <link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg?v=3">
+    <link rel="stylesheet" href="css/style.css?v=boots-frames-1">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="shell topbar">
+        <a class="brand" href="index.html">
+          <img alt="Bootleg logo" src="assets/brand/bootleg-logo.jpg">
+          <span>
+            <strong>Bootleg Productions</strong>
+            <span>Creative Hub / BOOTLEG OS</span>
+          </span>
+        </a>
+        <nav class="nav">
+          <a href="index.html">Home</a>
+          <a href="projects.html">Projects</a>
+          <a href="gallery.html">Gallery</a>
+          <div class="nav-dropdown">
+            <a class="nav-apps-link" href="applications.html">Apps <span class="nav-caret">▾</span>
+            </a>
+            <div class="nav-dropdown-menu">
+              <a href="applications.html">All Apps</a>
+              <a href="weather.html">Weather</a>
+              <a href="clock.html">World Clock</a>
+              <a href="radio.html">Pirate Radio</a>
+              <a href="utilities.html">Image Tools</a>
+              <a href="pixel-studio.html">Pixel Studio</a>
+              <a href="archive-scraper.html">Archive Scraper</a>
+              <a href="youtube-downloader.html">Video Converter</a>
+            </div>
+          </div>
+          <a href="blog.html">Blog</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+        <div class="mini-radio">
+          <div class="radio-screen">
+            <span class="frequency">89.5 FM</span>
+            <span class="station">Pirate Radio</span>
+          </div>
+          <img alt="Pirate Radio" class="radio-base" src="assets/radio/radio-base.png">
+          <button class="dial volume-dial" title="Volume">
+            <span class="dial-rotator">
+              <img alt="" src="assets/radio/radio-volume.webp">
+            </span>
+          </button>
+          <button class="dial tuning-dial" title="Tune station">
+            <span class="dial-rotator">
+              <img alt="" src="assets/radio/radio-tuning.webp">
+            </span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main class="shell">
+      <section class="panel clock-intro">
+        <div class="panel-content">
+          <span class="eyebrow">World Clock // SVG time console</span>
+          <h1>Time, rendered the old way.</h1>
+          <p>The main analogue SVG synchronises to your local device clock. Three smaller clocks keep an eye on Tokyo, Paris and New York.</p>
+        </div>
+      </section>
+      <section class="clock-console">
+        <article class="boot-window local-clock-window">
+          <div class="window-bar">
+            <div class="lights">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div> local_time.svg</div>
+          <div class="panel-content clock-main-wrap" data-clock-sky="night">
+            <div class="analog-clock analog-local" data-clock-zone="local">
+              <svg viewbox="0 0 220 220" role="img" aria-label="Local analogue clock">
+                <circle class="clock-glow-ring" cx="110" cy="110" r="96"></circle>
+                <circle class="clock-face" cx="110" cy="110" r="88"></circle>
+                <g class="clock-marks">
+                  <line x1="110" y1="28" x2="110" y2="40" transform="rotate(0 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(6 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(12 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(18 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(24 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="40" transform="rotate(30 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(36 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(42 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(48 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(54 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="40" transform="rotate(60 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(66 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(72 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(78 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(84 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="40" transform="rotate(90 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(96 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(102 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(108 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(114 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="40" transform="rotate(120 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(126 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(132 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(138 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(144 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="40" transform="rotate(150 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(156 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(162 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(168 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(174 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="40" transform="rotate(180 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(186 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(192 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(198 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(204 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="40" transform="rotate(210 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(216 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(222 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(228 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(234 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="40" transform="rotate(240 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(246 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(252 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(258 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(264 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="40" transform="rotate(270 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(276 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(282 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(288 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(294 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="40" transform="rotate(300 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(306 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(312 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(318 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(324 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="40" transform="rotate(330 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(336 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(342 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(348 110 110)"></line>
+                  <line x1="110" y1="28" x2="110" y2="34" transform="rotate(354 110 110)"></line>
+                </g>
+                <line class="clock-hand hour-hand" x1="110" y1="110" x2="110" y2="67"></line>
+                <line class="clock-hand minute-hand" x1="110" y1="110" x2="110" y2="48"></line>
+                <line class="clock-hand second-hand" x1="110" y1="110" x2="110" y2="39"></line>
+                <circle class="clock-pin" cx="110" cy="110" r="6"></circle>
+              </svg>
+              <div class="clock-digital" data-clock-readout>--:--:--</div>
+              <span class="clock-label">YOUR LOCAL TIME</span>
+            </div>
+          </div>
+        </article>
+        <section class="rgb-clock-grid">
+          <article class="card rgb-clock clock-red" data-clock-zone="Asia/Tokyo">
+            <div class="card-content">
+              <div class="mini-analog">
+                <svg viewbox="0 0 160 160">
+                  <circle class="clock-face" cx="80" cy="80" r="66"></circle>
+                  <g class="clock-marks">
+                    <line x1="80" y1="20" x2="80" y2="31" transform="rotate(0 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(6 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(12 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(18 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(24 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="31" transform="rotate(30 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(36 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(42 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(48 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(54 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="31" transform="rotate(60 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(66 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(72 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(78 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(84 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="31" transform="rotate(90 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(96 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(102 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(108 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(114 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="31" transform="rotate(120 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(126 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(132 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(138 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(144 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="31" transform="rotate(150 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(156 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(162 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(168 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(174 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="31" transform="rotate(180 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(186 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(192 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(198 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(204 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="31" transform="rotate(210 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(216 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(222 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(228 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(234 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="31" transform="rotate(240 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(246 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(252 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(258 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(264 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="31" transform="rotate(270 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(276 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(282 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(288 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(294 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="31" transform="rotate(300 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(306 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(312 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(318 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(324 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="31" transform="rotate(330 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(336 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(342 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(348 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(354 80 80)"></line>
+                  </g>
+                  <line class="clock-hand hour-hand" x1="80" y1="80" x2="80" y2="49"></line>
+                  <line class="clock-hand minute-hand" x1="80" y1="80" x2="80" y2="36"></line>
+                  <line class="clock-hand second-hand" x1="80" y1="80" x2="80" y2="30"></line>
+                  <circle class="clock-pin" cx="80" cy="80" r="5"></circle>
+                </svg>
+              </div>
+              <span class="eyebrow">JAPAN // TOKYO</span>
+              <strong class="clock-digital" data-clock-readout>--:--:--</strong>
+            </div>
+          </article>
+          <article class="card rgb-clock clock-green" data-clock-zone="Europe/Paris">
+            <div class="card-content">
+              <div class="mini-analog">
+                <svg viewbox="0 0 160 160">
+                  <circle class="clock-face" cx="80" cy="80" r="66"></circle>
+                  <g class="clock-marks">
+                    <line x1="80" y1="20" x2="80" y2="31" transform="rotate(0 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(6 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(12 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(18 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(24 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="31" transform="rotate(30 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(36 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(42 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(48 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(54 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="31" transform="rotate(60 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(66 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(72 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(78 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(84 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="31" transform="rotate(90 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(96 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(102 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(108 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(114 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="31" transform="rotate(120 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(126 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(132 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(138 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(144 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="31" transform="rotate(150 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(156 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(162 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(168 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(174 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="31" transform="rotate(180 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(186 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(192 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(198 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(204 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="31" transform="rotate(210 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(216 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(222 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(228 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(234 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="31" transform="rotate(240 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(246 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(252 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(258 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(264 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="31" transform="rotate(270 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(276 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(282 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(288 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(294 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="31" transform="rotate(300 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(306 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(312 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(318 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(324 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="31" transform="rotate(330 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(336 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(342 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(348 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(354 80 80)"></line>
+                  </g>
+                  <line class="clock-hand hour-hand" x1="80" y1="80" x2="80" y2="49"></line>
+                  <line class="clock-hand minute-hand" x1="80" y1="80" x2="80" y2="36"></line>
+                  <line class="clock-hand second-hand" x1="80" y1="80" x2="80" y2="30"></line>
+                  <circle class="clock-pin" cx="80" cy="80" r="5"></circle>
+                </svg>
+              </div>
+              <span class="eyebrow">EUROPE // PARIS</span>
+              <strong class="clock-digital" data-clock-readout>--:--:--</strong>
+            </div>
+          </article>
+          <article class="card rgb-clock clock-blue" data-clock-zone="America/New_York">
+            <div class="card-content">
+              <div class="mini-analog">
+                <svg viewbox="0 0 160 160">
+                  <circle class="clock-face" cx="80" cy="80" r="66"></circle>
+                  <g class="clock-marks">
+                    <line x1="80" y1="20" x2="80" y2="31" transform="rotate(0 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(6 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(12 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(18 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(24 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="31" transform="rotate(30 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(36 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(42 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(48 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(54 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="31" transform="rotate(60 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(66 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(72 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(78 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(84 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="31" transform="rotate(90 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(96 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(102 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(108 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(114 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="31" transform="rotate(120 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(126 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(132 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(138 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(144 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="31" transform="rotate(150 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(156 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(162 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(168 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(174 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="31" transform="rotate(180 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(186 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(192 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(198 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(204 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="31" transform="rotate(210 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(216 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(222 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(228 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(234 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="31" transform="rotate(240 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(246 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(252 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(258 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(264 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="31" transform="rotate(270 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(276 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(282 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(288 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(294 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="31" transform="rotate(300 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(306 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(312 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(318 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(324 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="31" transform="rotate(330 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(336 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(342 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(348 80 80)"></line>
+                    <line x1="80" y1="20" x2="80" y2="26" transform="rotate(354 80 80)"></line>
+                  </g>
+                  <line class="clock-hand hour-hand" x1="80" y1="80" x2="80" y2="49"></line>
+                  <line class="clock-hand minute-hand" x1="80" y1="80" x2="80" y2="36"></line>
+                  <line class="clock-hand second-hand" x1="80" y1="80" x2="80" y2="30"></line>
+                  <circle class="clock-pin" cx="80" cy="80" r="5"></circle>
+                </svg>
+              </div>
+              <span class="eyebrow">AMERICA // NEW YORK</span>
+              <strong class="clock-digital" data-clock-readout>--:--:--</strong>
+            </div>
+          </article>
+        </section>
+      </section>
+      <section class="boot-window world-time-window" aria-labelledby="world-time-title">
+        <div class="window-bar">
+          <div class="lights">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div> world_time.map</div>
+        <div class="panel-content world-time-content">
+          <div class="world-time-heading">
+            <div>
+              <span class="eyebrow">Time zone explorer</span>
+              <h2 id="world-time-title">Around the world, right now.</h2>
+              <p>Select a country on the map to see its current time. Use the list for smaller places. The coloured bands show approximate hour zones; national time zones can follow different borders.</p>
+            </div>
+          </div>
+          <div class="world-map-scroll">
+            <svg id="world-time-map" class="world-time-map" viewbox="0 0 1000 500" role="group" aria-label="Interactive world map of countries and approximate time zone bands"></svg>
+          </div>
+          <div class="world-map-key">
+            <span>
+              <i class="map-key-day"></i> Day</span>
+            <span>
+              <i class="map-key-evening"></i> Evening</span>
+            <span>
+              <i class="map-key-night"></i> Night</span>
+            <span>Tap or select a country</span>
+          </div>
+          <div class="world-time-controls">
+            <label for="world-country">Country<select id="world-country">
+                <option value="">Choose a country</option>
+              </select>
+            </label>
+            <label for="world-zone">Time zone<select id="world-zone" disabled>
+                <option>Choose a country first</option>
+              </select>
+            </label>
+            <div class="world-time-result" aria-live="polite">
+              <span id="world-place">Choose a country</span>
+              <strong id="world-now">--:--:--</strong>
+              <small id="world-date">Live local time appears here</small>
+            </div>
+          </div>
+          <p class="world-map-credit">Country boundaries: <a href="https://github.com/johan/world.geo.json" target="_blank" rel="noopener noreferrer">world.geo.json</a> / Natural Earth. Time zones: IANA time zone database. Some countries have more than one time zone; choose one above.</p>
+        </div>
+      </section>
+    </main>
+    <footer class="shell footer">
+      <a class="footer-support" href="https://buymeacoffee.com/supportweb" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">☕</span> Support my work · Buy me a coffee</a>
+      <span>STATUS ● SYSTEM ONLINE</span>
+      <span>Thanks for stopping by ♥</span>
+      <span id="local-clock"></span>
+    </footer>
+    <script src="js/gallery-data.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/clock-app.js"></script>
+    <script src="js/timezone-map.js"></script>
+    <script src="js/radio-data.js"></script>
+    <script src="js/radio-player.js"></script>
+  </body>
+</html>

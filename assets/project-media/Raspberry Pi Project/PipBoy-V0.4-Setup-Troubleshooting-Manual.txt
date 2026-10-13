@@ -1,0 +1,756 @@
+PIP-BOY V0.4 — BASIC SETUP & RECOVERY MANUAL
+
+Working reference for Oliver’s Raspberry Pi Pip-Boy Last updated: 29
+September 2026
+
+IMPORTANT
+
+This records the setup that is currently known to work.
+
+Normal end state: Power on -> Raspberry Pi desktop -> touchscreen works
+-> tap Pip-Boy desktop launcher -> Pip-Boy V0.4 launches.
+
+The Pi has previously reported UNDERVOLTAGE because it has been powered
+from an improvised power-bank setup. Avoid large system upgrades or
+unnecessary power cycling until a better permanent power supply is
+installed.
+
+1. CONNECT TO THE PI FROM WINDOWS
+
+Normal SSH connection from PowerShell / Windows Terminal:
+
+    ssh oliver@192.168.0.186
+
+The Pi’s IP address can change. If that address stops working, try:
+
+    ssh oliver@raspberrypi.local
+
+To inspect devices Windows can currently see on the network:
+
+    arp -a
+
+Once connected, the prompt should look roughly like:
+
+    oliver@raspberrypi:~ $
+
+The Pip-Boy project lives here:
+
+    /home/oliver/pipboy
+
+Go there with:
+
+    cd ~/pipboy
+
+Show current folder:
+
+    pwd
+
+List files:
+
+    ls -lah
+
+2. VS CODE REMOTE SSH
+
+The normal development folder on the Pi is:
+
+    /home/oliver/pipboy
+
+Connect to the Pi using VS Code Remote SSH, then open that folder.
+
+The main V0.4 program is:
+
+    /home/oliver/pipboy/pipboy_v04.py
+
+There is also an older fallback:
+
+    /home/oliver/pipboy/pipboy.py
+
+A file ending in .swp, such as .pipboy.py.swp, is a Vim swap/recovery
+file and is NOT the actual source file.
+
+3. LAUNCH THE PIP-BOY MANUALLY
+
+Connect through SSH, then:
+
+    cd ~/pipboy
+    DISPLAY=:0 SDL_VIDEODRIVER=x11 python3 pipboy_v04.py
+
+This explicitly launches Pygame onto the Pi’s X11 desktop/display.
+
+Do NOT change this to the Wayland driver on the current setup. A
+previous Wayland launch failed with:
+
+    pygame.error: wayland not available
+
+To stop a manually launched program from the terminal:
+
+    Ctrl+C
+
+4. DESKTOP LAUNCHER
+
+The working launcher is:
+
+    /home/oliver/Desktop/Pip-Boy.desktop
+
+Its known-good contents are:
+
+    [Desktop Entry]
+    Type=Application
+    Name=Pip-Boy
+    Comment=Launch Pip-Boy Interface
+    Exec=env DISPLAY=:0 SDL_VIDEODRIVER=x11 python3 /home/oliver/pipboy/pipboy_v04.py
+    Path=/home/oliver/pipboy
+    Terminal=false
+    Icon=utilities-terminal
+    Categories=Utility
+
+The preferred development setup is NOT to auto-launch the Pip-Boy at
+boot.
+
+Instead: 1. Boot normally to the Raspberry Pi desktop. 2. Check the
+touchscreen. 3. Tap the Pip-Boy desktop launcher.
+
+5. SAFE SHUTDOWN / REBOOT
+
+Shut down safely:
+
+    sudo shutdown -h now
+
+Reboot:
+
+    sudo reboot
+
+Do not simply remove power while Linux is running unless the system has
+completely frozen and there is no alternative.
+
+6. QUICK SYSTEM HEALTH CHECK
+
+Check uptime/load:
+
+    uptime
+
+Interactive CPU/process view:
+
+    top
+
+Memory and swap:
+
+    free -h
+
+Disk space:
+
+    df -h
+
+Short CPU/memory/I/O view:
+
+    vmstat 1 5
+
+Check for failed systemd services:
+
+    systemctl --failed
+
+Check current boot errors:
+
+    journalctl -b -p err
+
+Check Raspberry Pi undervoltage/throttling history:
+
+    vcgencmd get_throttled
+
+The Pi has previously returned:
+
+    throttled=0x50005
+
+and the journal has reported:
+
+    Undervoltage detected!
+
+This is associated with the current temporary power-bank arrangement. If
+strange instability appears, check power before dismantling a working
+software configuration.
+
+7. BOOT SPEED / BOOT DIAGNOSTICS
+
+Show total boot time:
+
+    systemd-analyze
+
+Show services ordered by startup time:
+
+    systemd-analyze blame
+
+The repaired system achieved approximately:
+
+    Startup finished in 2.422s (kernel) + 13.934s (userspace) = 16.357s
+
+Current intended boot sequence:
+
+    Power on
+        |
+        v
+    brief Linux console text
+        |
+        v
+    Raspberry Pi desktop
+        |
+        v
+    touchscreen active
+        |
+        v
+    manually launch Pip-Boy
+
+8. DISPLAY SETUP
+
+The touchscreen/display currently uses the modern MHS35 / piscreen
+setup.
+
+Important working display line in:
+
+    /boot/firmware/config.txt
+
+is:
+
+    dtoverlay=piscreen,speed=18000000,drm,rotate=180
+
+The old vc4-kms-v3d line was disabled during repair.
+
+The display is currently rotated correctly.
+
+SCREEN ROTATION
+
+The working orientation is controlled by:
+
+    rotate=180
+
+in the dtoverlay line above.
+
+Do NOT casually change rotation, display overlays, touchscreen matrices,
+or reinstall LCD drivers just to experiment. Display orientation and
+touchscreen orientation are related but are not the same setting.
+
+If rotation ever genuinely needs changing, BACK UP
+/boot/firmware/config.txt first and change only the rotation value
+deliberately.
+
+9. TOUCHSCREEN — KNOWN-GOOD CALIBRATION
+
+The current calibration file is:
+
+    /etc/X11/xorg.conf.d/99-calibration.conf
+
+Known-good contents:
+
+    Section "InputClass"
+        Identifier "calibration"
+        MatchProduct "ADS7846 Touchscreen"
+        Option "Calibration" "3936 227 70 3900"
+        Option "SwapAxes" "1"
+        Option "TransformationMatrix" "0 -1 1 -1 0 1 0 0 1"
+        Option "EmulateThirdButton" "1"
+        Option "EmulateThirdButtonTimeout" "1000"
+        Option "EmulateThirdButtonMoveThreshold" "300"
+    EndSection
+
+This calibration was tested physically and gives good reach around the
+touchscreen.
+
+DO NOT replace it with the older calibration:
+
+    3936 227 268 3880
+
+unless deliberately reverting during recovery.
+
+10. TOUCHSCREEN TROUBLESHOOTING
+
+List input devices:
+
+    DISPLAY=:0 xinput list
+
+The touchscreen has appeared as:
+
+    ADS7846 Touchscreen
+
+Its ID was 6 during testing, but IDs can change after reboot.
+
+Once you know the current ID, inspect its properties. Example:
+
+    DISPLAY=:0 xinput list-props 6
+
+Watch raw touch events:
+
+    DISPLAY=:0 xinput test 6
+
+Known raw Y values observed during calibration were approximately:
+
+    Top:       136-316
+    Centre:    1916-2342
+    Bottom:    3788-3883
+
+Known-good transformation matrix:
+
+    0 -1 1 -1 0 1 0 0 1
+
+Known-good calibration:
+
+    3936 227 70 3900
+
+If touch suddenly becomes wrong after an OS/display change, inspect
+these values BEFORE reinstalling anything.
+
+11. DISPLAY DRIVER INSTALLATION / RECOVERY
+
+The old fbcp-based display setup became incompatible after the OS/kernel
+update.
+
+The working modern MHS35 installer used during recovery was:
+
+    cd /tmp
+    rm -rf LCD-show
+    git clone https://github.com/ahamedfaisal-dot/LCD-show.git
+    cd LCD-show
+    chmod +x MHS35-fixed-install.sh
+    sudo ./MHS35-fixed-install.sh
+
+IMPORTANT: This section is for RECOVERY, not routine startup.
+
+Do NOT rerun the LCD installer when the display is already working.
+
+The old fbcp startup was removed from /etc/rc.local. It was left
+effectively as:
+
+    # Old fbcp disabled - Xorg now uses /dev/fb1 directly
+    exit 0
+
+12. LIGHTDM 90-SECOND BOOT DELAY FIX
+
+After the graphical update, LightDM was waiting for a nonexistent:
+
+    /dev/dri/renderD128
+
+The working repair was:
+
+    sudo cp /lib/systemd/system/lightdm.service /etc/systemd/system/lightdm.service
+    sudo sed -i 's/ dev-dri-renderD128\.device//g' /etc/systemd/system/lightdm.service
+    sudo systemctl daemon-reload
+
+The local file:
+
+    /etc/systemd/system/lightdm.service
+
+now intentionally overrides the packaged LightDM service.
+
+IMPORTANT: A future package update may change the packaged LightDM
+service, but the local override remains intentional. Do not delete it
+simply because it differs from /lib/systemd/system/lightdm.service.
+
+13. PLYMOUTH / SPLASH
+
+The graphical Plymouth splash was intentionally disabled.
+
+The system uses:
+
+    disable_splash=1
+
+and the kernel command line includes:
+
+    quiet plymouth.enable=0
+
+plymouth-quit-wait.service was also masked.
+
+The desired behaviour is a quick boot with some brief console text
+followed by the desktop. A graphical Raspberry Pi splash is NOT
+required.
+
+14. PYGAME AUDIO — IMPORTANT FIX
+
+Radio playback originally crackled/chopped inside the full Pip-Boy
+application even though direct audio playback was clean.
+
+The important fix was to initialise the Pygame mixer BEFORE
+pygame.init().
+
+In pipboy_v04.py, immediately before:
+
+    pygame.init()
+
+use:
+
+    pygame.mixer.pre_init(
+        frequency=44100,
+        size=-16,
+        channels=2,
+        buffer=4096
+    )
+
+    pygame.init()
+
+This fixed the audio problem.
+
+Do not remove this pre_init block unless intentionally testing audio
+configuration.
+
+15. AUDIO OUTPUT / AUX
+
+List ALSA playback hardware:
+
+    aplay -l
+
+The Pi previously showed a separate bcm2835 Headphones device.
+
+Direct AUX/speaker test example:
+
+    speaker-test -D plughw:1,0 -c 2 -t sine
+
+Stop speaker-test with:
+
+    Ctrl+C
+
+PipeWire device/routing status:
+
+    wpctl status
+
+The headphone sink ID has previously been 71, BUT NUMERICAL IDs CAN
+CHANGE AFTER REBOOT.
+
+Always run:
+
+    wpctl status
+
+before using a numeric sink ID.
+
+Set the current headphone sink as default:
+
+    wpctl set-default <SINK-ID>
+
+Example only:
+
+    wpctl set-default 71
+
+Set normal clean volume:
+
+    wpctl set-volume <SINK-ID> 1.0
+
+100% PipeWire volume plus 100% Pygame music volume gave cleaner audio
+than heavily boosting the software sink.
+
+For additional loudness, use the physical amplifier/speaker volume
+rather than excessive digital boost.
+
+16. TEST AN AUDIO FILE OUTSIDE PYGAME
+
+Use PipeWire’s player:
+
+    pw-play /path/to/song.mp3
+
+If pw-play is clean but the Pip-Boy application crackles, that points
+toward application/mixer configuration rather than the physical AUX
+output.
+
+The Pygame mixer can be checked from Python with:
+
+    import pygame
+    pygame.init()
+    print(pygame.mixer.get_init())
+
+The working mixer format was:
+
+    (44100, -16, 2)
+
+and buffer 4096 proved clean during testing.
+
+17. RADIO FILES
+
+Radio media lives under:
+
+    /home/oliver/pipboy/Radio/
+
+The radio code is in:
+
+    /home/oliver/pipboy/pages/data.py
+
+It scans MP3, OGG and WAV files.
+
+Known stations include:
+
+    RADIO NEW VEGAS
+    GALAXY NEWS RADIO
+
+The application uses a custom end-of-track event and update_radio() to
+advance playback naturally.
+
+18. PYGAME / TOUCH PERFORMANCE
+
+The modern SPI ILI9486/piscreen display is slow at full-screen updates.
+
+A full-screen Pygame flip benchmark produced only about:
+
+    8.4 FPS
+
+This does NOT necessarily mean the Pi CPU is overloaded.
+
+The important application optimisation was to stop redrawing the entire
+480x320 screen continuously.
+
+The V0.4 optimisation uses: - fast event/input polling - redraw only
+when needed - approximately 125 ms redraw interval for animated pages -
+MOUSEBUTTONDOWN for X11 touch input - radio/audio updates independently
+of expensive full-screen drawing
+
+Do not casually return the program to an unconditional:
+
+    pygame.display.flip()
+
+on every 30/60 Hz loop iteration.
+
+That previously made touch input feel severely delayed because each SPI
+screen update could block for roughly 120 ms.
+
+19. CURRENT RADIO-PAGE QUIRK
+
+The DATA -> RADIO page can still feel somewhat slower to tap/select than
+the other pages while music is playing.
+
+Other pages respond normally while the same music continues playing.
+
+This suggests the remaining lag is specific to radio-page
+drawing/workload rather than the touchscreen, operating system or audio
+output.
+
+Do NOT recalibrate the touchscreen to fix a problem that happens only on
+the Radio page.
+
+20. PROJECT STRUCTURE
+
+Current V0.4 layout is approximately:
+
+    pipboy/
+    ├── Assets/
+    ├── Radio/
+    ├── maps/
+    │   └── cache/
+    ├── data/
+    ├── pages/
+    ├── pipboy.py
+    ├── pipboy_v04.py
+    ├── storage.py
+    └── ui.py
+
+Main image library:
+
+    /home/oliver/pipboy/Assets/images/
+
+V0.4 includes: - STAT / STATUS / RAD - SPECIAL - SKILLS - PERKS -
+GENERAL - ITEMS - DATA Notes - DATA Quests - DATA Radio - Local Map -
+World Map
+
+21. BACK UP THE PROJECT TO THE WINDOWS LAPTOP
+
+From WINDOWS POWERSHELL, not from inside the Pi SSH session:
+
+    mkdir "$env:USERPROFILE\Documents\PipBoy Backups"
+
+Then:
+
+    scp -r oliver@192.168.0.186:/home/oliver/pipboy "$env:USERPROFILE\Documents\PipBoy Backups\PipBoy-V0.4-Prototype-1-WORKING"
+
+If the Pi’s IP has changed, replace 192.168.0.186 with its current
+address.
+
+This copies the project to the Vivobook without modifying the Pi copy.
+
+22. IMPORTANT SYSTEM CONFIG BACKUPS
+
+A recovery folder was created at:
+
+    /home/oliver/pipboy-system-backup/
+
+Known working backups include:
+
+    99-calibration.conf-WORKING
+    config.txt-WORKING
+    cmdline.txt-WORKING
+    lightdm.service-WORKING
+
+There may also be:
+
+    rc.local-WORKING
+
+These are particularly useful if a future system update damages the
+working display/touch/boot configuration.
+
+23. IF AN UPDATE IS INTERRUPTED
+
+During the large OS update, power was interrupted.
+
+The package manager was recovered with:
+
+    sudo dpkg --configure -a
+
+followed by:
+
+    sudo apt --fix-broken install
+
+These are recovery commands for an interrupted/broken package
+installation.
+
+Do not run them routinely when apt/dpkg is healthy.
+
+24. BASIC TROUBLESHOOTING ORDER
+
+If something goes wrong, avoid changing five things at once.
+
+A useful order is:
+
+A. PI WILL NOT STAY STABLE / RANDOM REBOOT
+
+1.  Check power.
+
+2.  Run:
+
+    vcgencmd get_throttled journalctl -b -p err
+
+Undervoltage has already been observed on this build.
+
+B. SSH DOES NOT CONNECT
+
+Try:
+
+    ssh oliver@raspberrypi.local
+
+Then from Windows:
+
+    arp -a
+
+The old 192.168.0.186 address may simply have changed.
+
+C. PIP-BOY DOES NOT OPEN FROM DESKTOP
+
+Try manually:
+
+    cd ~/pipboy
+    DISPLAY=:0 SDL_VIDEODRIVER=x11 python3 pipboy_v04.py
+
+The terminal output will normally reveal the actual Python/Pygame error.
+
+D. DISPLAY WORKS BUT TOUCH IS WRONG
+
+Check:
+
+    DISPLAY=:0 xinput list
+    DISPLAY=:0 xinput list-props <TOUCH-ID>
+    DISPLAY=:0 xinput test <TOUCH-ID>
+
+Compare against the known-good calibration in this manual.
+
+Do NOT immediately reinstall the LCD driver.
+
+E. AUDIO DOES NOT COME FROM AUX
+
+Check:
+
+    aplay -l
+    wpctl status
+
+Then select the current bcm2835 Headphones sink.
+
+F. AUDIO CRACKLES ONLY IN PIP-BOY
+
+Check that pygame.mixer.pre_init(… buffer=4096) still appears BEFORE
+pygame.init().
+
+G. BOOT SUDDENLY TAKES ~90 SECONDS
+
+Check:
+
+    systemd-analyze
+    systemd-analyze blame
+    systemctl --failed
+
+Remember the previous LightDM / renderD128 issue and inspect the local
+LightDM override before changing unrelated services.
+
+25. THINGS NOT TO CHANGE RANDOMLY
+
+The following parts were difficult to get working together and should be
+treated as known-good configuration:
+
+-   dtoverlay=piscreen,speed=18000000,drm,rotate=180
+-   ADS7846 touchscreen driver
+-   Calibration: 3936 227 70 3900
+-   SwapAxes 1
+-   TransformationMatrix: 0 -1 1 -1 0 1 0 0 1
+-   local LightDM service override
+-   disabled old fbcp startup
+-   Pygame X11 launch
+-   pygame.mixer.pre_init(… buffer=4096)
+-   optimized/dirty redraw approach
+
+When troubleshooting, diagnose the affected subsystem first instead of
+reinstalling drivers or replacing working configuration.
+
+26. FIVE COMMANDS WORTH REMEMBERING
+
+Connect:
+
+    ssh oliver@192.168.0.186
+
+Open project:
+
+    cd ~/pipboy
+
+Launch:
+
+    DISPLAY=:0 SDL_VIDEODRIVER=x11 python3 pipboy_v04.py
+
+Check general errors:
+
+    journalctl -b -p err
+
+Shut down safely:
+
+    sudo shutdown -h now
+
+27. QUICK COPY/PASTE HEALTH CHECK
+
+    echo "=== UPTIME ==="
+    uptime
+    echo
+    echo "=== MEMORY ==="
+    free -h
+    echo
+    echo "=== DISK ==="
+    df -h /
+    echo
+    echo "=== THROTTLING ==="
+    vcgencmd get_throttled
+    echo
+    echo "=== FAILED SERVICES ==="
+    systemctl --failed
+    echo
+    echo "=== IP ADDRESS ==="
+    hostname -I
+
+28. CURRENT KNOWN-GOOD REFERENCE
+
+OS: Raspberry Pi OS / Debian 12 Bookworm
+
+Kernel observed after update: Linux raspberrypi 6.12.96+rpt-rpi-v8 #1
+SMP PREEMPT Debian 1:6.12.96-1+rpt1 (2026-07-24) aarch64 GNU/Linux
+
+Display: 480 x 320 SPI touchscreen piscreen / ILI9486-type setup
+rotate=180
+
+Touch: ADS7846 Calibration 3936 227 70 3900
+
+Pygame: Pygame 2.1.2 SDL 2.26.5 Python 3.11.2
+
+Application: Pip-Boy V0.4 — Prototype 1
+
+Main program: /home/oliver/pipboy/pipboy_v04.py
+
+Normal launch: DISPLAY=:0 SDL_VIDEODRIVER=x11 python3 pipboy_v04.py
+
+END
+
+Keep a copy of this file on both the Raspberry Pi and the Windows
+backup.

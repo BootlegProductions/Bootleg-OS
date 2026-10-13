@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Utilities - Bootleg OS</title>
+    <meta name="description" content="Image Tools — browser-based image utilities from the Bootleg OS app drawer.">
+    <link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg?v=3">
+    <meta property="og:title" content="Utilities - Bootleg OS">
+    <meta property="og:description" content="Image Tools — browser-based image utilities from the Bootleg OS app drawer.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://bootlegproductions.github.io/Bootleg-OS/assets/brand/bootleg-logo.jpg">
+    <meta property="og:url" content="https://bootlegproductions.github.io/Bootleg-OS/utilities.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Utilities - Bootleg OS">
+    <meta name="twitter:description" content="Image Tools — browser-based image utilities from the Bootleg OS app drawer.">
+    <link rel="stylesheet" href="css/style.css?v=brush-preview-1">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="shell topbar">
+        <a class="brand" href="index.html">
+          <img src="assets/brand/bootleg-logo.jpg" alt="Bootleg logo">
+          <span>
+            <strong>Bootleg Productions</strong>
+            <span>Creative Hub / BOOTLEG
+                        OS</span>
+          </span>
+        </a>
+        <nav class="nav">
+          <a href="index.html">Home</a>
+          <a href="projects.html">Projects</a>
+          <a href="gallery.html">Gallery</a>
+          <div class="nav-dropdown">
+            <a class="nav-apps-link" href="applications.html">Apps <span class="nav-caret">▾</span>
+            </a>
+            <div class="nav-dropdown-menu">
+              <a href="applications.html">All Apps</a>
+              <a href="weather.html">Weather</a>
+              <a href="clock.html">World Clock</a>
+              <a href="radio.html">Pirate Radio</a>
+              <a href="utilities.html">Image Tools</a>
+              <a href="pixel-studio.html">Pixel Studio</a>
+              <a href="archive-scraper.html">Archive Scraper</a>
+              <a href="youtube-downloader.html">Video Converter</a>
+            </div>
+          </div>
+          <a href="blog.html">Blog</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+        <div class="mini-radio">
+          <div class="radio-screen">
+            <span class="frequency">89.5 FM</span>
+            <span class="station">Pirate
+                        Radio</span>
+          </div>
+          <img class="radio-base" src="assets/radio/radio-base.png" alt="Pirate Radio">
+          <button class="dial volume-dial" title="Volume">
+            <span class="dial-rotator">
+              <img src="assets/radio/radio-volume.webp" alt="">
+            </span>
+          </button>
+          <button class="dial tuning-dial" title="Tune station">
+            <span class="dial-rotator">
+              <img src="assets/radio/radio-tuning.webp" alt="">
+            </span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main class="shell image-workspace">
+      <div class="tool-heading"><div><span class="eyebrow">Image Tools</span><h1>Background Remover</h1><p>Drop in an image, cut out the subject, then refine the edges before saving a transparent PNG.</p></div><a class="btn" href="pixel-studio.html">Open Pixel Studio</a></div>
+      <section class="image-editor" aria-label="Background removal editor">
+        <div class="image-controls card"><div class="card-content">
+          <label class="file-drop" for="bg-input"><strong>Choose an image</strong><span>PNG, JPG or WebP · stays in your browser</span><input id="bg-input" type="file" accept="image/png,image/jpeg,image/webp"></label>
+          <button class="btn" type="button" id="auto-remove" disabled>Remove background automatically</button>
+          <p class="tool-hint">The first automatic cutout downloads a model to your browser. It can take a little while; later uses are cached. Nothing is uploaded.</p>
+          <div class="tool-divider"></div>
+          <h2>Colour key</h2><p class="tool-hint">For a plain green screen or solid backdrop.</p>
+          <div class="tool-field"><label for="key-colour">Colour to remove</label><div class="key-picker"><input id="key-colour" type="color" value="#00ff00"><button type="button" class="btn btn-small" id="pick-colour">Pick from image</button></div></div>
+          <div class="tool-field"><label for="key-tolerance">Tolerance <output id="key-tolerance-value">55</output></label><input id="key-tolerance" type="range" min="5" max="180" value="55"></div>
+          <button class="btn btn-small" type="button" id="key-remove" disabled>Remove colour</button>
+          <div class="tool-divider"></div>
+          <h2>Edge cleanup</h2>
+          <p class="tool-hint">For white backgrounds: removes white leftovers connected to transparent space. White details enclosed by an outline stay intact.</p>
+          <div class="tool-field"><label for="fringe-tolerance">White tolerance <output id="fringe-tolerance-value">18</output></label><input id="fringe-tolerance" type="range" min="5" max="60" value="18"></div>
+          <button class="btn btn-small" type="button" id="clean-white-fringe" disabled>Clean white fringe</button>
+          <div class="tool-divider"></div>
+          <h2>Touch up</h2>
+          <div class="segmented" role="group" aria-label="Brush mode"><button type="button" class="is-active" data-brush="erase">Erase</button><button type="button" data-brush="restore">Restore</button></div>
+          <div class="tool-field"><label for="brush-size">Brush size <output id="brush-size-value">32</output> px</label><input id="brush-size" type="range" min="2" max="160" value="32"></div>
+          <div class="tool-actions"><button class="btn btn-small" type="button" id="undo-edit" disabled>Undo</button><button class="btn btn-small" type="button" id="reset-edit" disabled>Reset image</button></div>
+          <div class="tool-divider"></div>
+          <button class="btn" type="button" id="download-png" disabled>Download transparent PNG</button>
+        </div></div>
+        <div class="image-stage card"><div class="image-stage-bar"><span id="image-dimensions">No image loaded</span><div class="segmented" role="group" aria-label="Preview background"><button type="button" class="is-active" data-preview="checker">Checkerboard</button><button type="button" data-preview="dark">Dark</button><button type="button" data-preview="light">Light</button></div></div><div class="image-canvas-wrap" id="image-canvas-wrap"><canvas id="bg-canvas" aria-label="Editable image preview"></canvas><div class="empty-stage" id="empty-stage">Your image appears here</div></div><p class="image-status" id="image-status" role="status" aria-live="polite">Choose a file to begin.</p></div>
+      </section>
+      <p class="model-credit">Automatic cutouts use <a href="https://huggingface.co/studioludens/birefnet-lite-512" target="_blank" rel="noopener noreferrer">BiRefNet lite 512</a> with <a href="https://huggingface.co/docs/transformers.js" target="_blank" rel="noopener noreferrer">Transformers.js</a>. A compact U²-Net model is used if the detailed model cannot run on your device. Fine details may need a brush touch-up.</p>
+    </main>
+    <footer class="shell footer">
+      <a class="footer-support" href="https://buymeacoffee.com/supportweb" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">☕</span> Support my work · Buy me a coffee</a>
+      <span>STATUS ● SYSTEM ONLINE</span>
+      <span>Thanks for stopping by ♥</span>
+      <span id="local-clock"></span>
+    </footer>
+    <script src="js/image-tools.js?v=7" defer></script>
+    <script src="js/gallery-data.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/radio-data.js"></script>
+    <script src="js/radio-player.js"></script>
+  </body>
+</html>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>YouTube Downloader - Bootleg OS</title>
+    <meta name="description" content="Video Converter — a Bootleg OS utility for converting video links.">
+    <link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg?v=3">
+    <meta property="og:title" content="YouTube Downloader - Bootleg OS">
+    <meta property="og:description" content="Video Converter — a Bootleg OS utility for converting video links.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://bootlegproductions.github.io/Bootleg-OS/assets/brand/bootleg-logo.jpg">
+    <meta property="og:url" content="https://bootlegproductions.github.io/Bootleg-OS/youtube-downloader.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="YouTube Downloader - Bootleg OS">
+    <meta name="twitter:description" content="Video Converter — a Bootleg OS utility for converting video links.">
+    <link rel="stylesheet" href="css/style.css?v=boots-frames-1">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="shell topbar">
+        <a class="brand" href="index.html">
+          <img src="assets/brand/bootleg-logo.jpg" alt="Bootleg logo">
+          <span>
+            <strong>Bootleg Productions</strong>
+            <span>Creative Hub / BOOTLEG OS</span>
+          </span>
+        </a>
+        <nav class="nav">
+          <a href="index.html">Home</a>
+          <a href="projects.html">Projects</a>
+          <a href="gallery.html">Gallery</a>
+          <div class="nav-dropdown">
+            <a class="nav-apps-link" href="applications.html">Apps <span class="nav-caret">▾</span>
+            </a>
+            <div class="nav-dropdown-menu">
+              <a href="applications.html">All Apps</a>
+              <a href="weather.html">Weather</a>
+              <a href="clock.html">World Clock</a>
+              <a href="radio.html">Pirate Radio</a>
+              <a href="utilities.html">Image Tools</a>
+              <a href="pixel-studio.html">Pixel Studio</a>
+              <a href="archive-scraper.html">Archive Scraper</a>
+              <a href="youtube-downloader.html">Video Converter</a>
+            </div>
+          </div>
+          <a href="blog.html">Blog</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+        <div class="mini-radio">
+          <div class="radio-screen">
+            <span class="frequency">89.5 FM</span>
+            <span class="station">Pirate Radio</span>
+          </div>
+          <img class="radio-base" src="assets/radio/radio-base.png" alt="Pirate Radio">
+          <button class="dial volume-dial" title="Volume">
+            <span class="dial-rotator">
+              <img src="assets/radio/radio-volume.webp" alt="">
+            </span>
+          </button>
+          <button class="dial tuning-dial" title="Tune station">
+            <span class="dial-rotator">
+              <img src="assets/radio/radio-tuning.webp" alt="">
+            </span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main class="shell"><section class="panel"><div class="panel-content"><span class="eyebrow">Bootleg utilities</span><h1>YouTube Downloader</h1><p>A video or an audio file. One link, a clear progress display, and a download when it’s ready.</p></div></section>
+    <section class="card"><div class="card-content"><form id="yt-form" class="download-form">
+    <label for="yt-url">YouTube video link</label><input id="yt-url" type="url" placeholder="https://www.youtube.com/watch?v=…" required>
+    <div class="download-options"><label>Format <select id="yt-format"><option value="mp4">MP4 video</option><option value="mp3">MP3 audio · 192 kbps</option></select></label><label>Maximum video resolution <select id="yt-quality"><option value="720">720p · smaller file</option><option value="1080">1080p</option></select></label></div>
+    <div><button class="btn" id="yt-start" disabled>Prepare download</button> <button class="btn" id="yt-cancel" type="button" hidden>Cancel</button></div></form>
+    <p id="yt-status" role="status" aria-live="polite">Checking download service…</p><progress id="yt-progress" max="100" value="0" hidden></progress><p id="yt-title"></p><a class="btn" id="yt-download" hidden>Download file</a>
+    <aside class="boots-note"><strong>Before downloading</strong><p>Use videos you own or have permission to download. Completed videos up to 30 minutes and files up to 250 MB are supported. Files expire after 30 minutes.</p></aside>
+    </div></section></main>
+    <footer class="shell footer">
+      <a class="footer-support" href="https://buymeacoffee.com/supportweb" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">☕</span> Support my work · Buy me a coffee</a>
+      <span>STATUS ● SYSTEM ONLINE</span>
+      <span>Thanks for stopping by ♥</span>
+      <span id="local-clock"></span>
+    </footer>
+    <script src="js/gallery-data.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/radio-data.js"></script>
+    <script src="js/radio-player.js"></script>
+    <script src="js/download-config.js"></script><script src="js/youtube-downloader.js"></script>
+  </body></html>

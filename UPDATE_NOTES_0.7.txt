@@ -1,0 +1,13 @@
+Bootleg OS 0.7 — content and scraper integration
+
+Based on the exact uploaded 0.6 code-only ZIP. Preserve your local assets/ folder.
+
+Updated: Pi-Boy case study on Raspberry Pi page, Bootleg Broadcast full writeup, In Mind draft, Top 10 article, three new articles, blog index and article navigation, and updated Archive Link Scraper V2.0.1 backend.
+
+The uploaded Pip-Boy ZIP includes a large media library and one Python file named Pip-Boy 0.2 back-up pygame.py; it does NOT include the described current 0.4 modular application or a separate terminal-command text file. Therefore those files were not invented or published. The original ZIP was not copied into the public site (large music and game image assets may carry third-party rights).
+
+The archive scraper requires Python/Flask and cannot execute on GitHub Pages alone. Run tools/archive-link-scraper/start.bat locally and open archive-scraper.html via a local web server. Public hosting needs a separate backend and deployment configuration.
+
+Clock, radio, weather, gallery refresh scripts and YouTube downloader were left unchanged. Bootleg Studio and day/night clock map are not implemented in this pass.
+
+Drop your existing assets/ folder back in. Run tools/refresh-content.bat after adding new media.

@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Blog - Bootleg OS</title>
+    <meta name="description" content="Bootleg.log — project updates, design notes, lists and technology write-ups.">
+    <link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg?v=3">
+    <link rel="stylesheet" href="css/style.css?v=boots-frames-1">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="shell topbar">
+        <a class="brand" href="index.html">
+          <img alt="Bootleg logo" src="assets/brand/bootleg-logo.jpg">
+          <span>
+            <strong>Bootleg Productions</strong>
+            <span>Creative Hub / BOOTLEG OS</span>
+          </span>
+        </a>
+        <nav class="nav">
+          <a href="index.html">Home</a>
+          <a href="projects.html">Projects</a>
+          <a href="gallery.html">Gallery</a>
+          <div class="nav-dropdown">
+            <a class="nav-apps-link" href="applications.html">Apps <span class="nav-caret">▾</span>
+            </a>
+            <div class="nav-dropdown-menu">
+              <a href="applications.html">All Apps</a>
+              <a href="weather.html">Weather</a>
+              <a href="clock.html">World Clock</a>
+              <a href="radio.html">Pirate Radio</a>
+              <a href="utilities.html">Image Tools</a>
+              <a href="pixel-studio.html">Pixel Studio</a>
+              <a href="archive-scraper.html">Archive Scraper</a>
+              <a href="youtube-downloader.html">Video Converter</a>
+            </div>
+          </div>
+          <a href="blog.html">Blog</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+        <div class="mini-radio">
+          <div class="radio-screen">
+            <span class="frequency">89.5 FM</span>
+            <span class="station">Pirate Radio</span>
+          </div>
+          <img alt="Pirate Radio" class="radio-base" src="assets/radio/radio-base.png">
+          <button class="dial volume-dial" title="Volume">
+            <span class="dial-rotator">
+              <img alt="" src="assets/radio/radio-volume.webp">
+            </span>
+          </button>
+          <button class="dial tuning-dial" title="Tune station">
+            <span class="dial-rotator">
+              <img alt="" src="assets/radio/radio-tuning.webp">
+            </span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main class="shell">
+      <section class="panel">
+        <div class="panel-content">
+          <span class="eyebrow">Bootleg.log</span>
+          <h1>Notes from the weird web.</h1>
+          <p>Project development, recovered university work, design thoughts, technology and whatever else feels worth writing down.</p>
+        </div>
+      </section>
+      <section class="blog-toolbar card">
+        <div class="card-content">
+          <span class="eyebrow">Browse posts</span>
+          <div class="control-row" data-blog-filters></div>
+          <p class="placeholder-copy">Posts are sorted newest first. To add one: copy <code>blog-pages/TEMPLATE.html</code>, edit it, then add one entry to <code>js/blog-data.js</code>.</p>
+        </div>
+      </section>
+      <section class="blog-grid" data-blog-grid></section>
+    </main>
+    <footer class="shell footer">
+      <a class="footer-support" href="https://buymeacoffee.com/supportweb" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">☕</span> Support my work · Buy me a coffee</a>
+      <span>STATUS ● SYSTEM ONLINE</span>
+      <span>Thanks for stopping by ♥</span>
+      <span id="local-clock"></span>
+    </footer>
+    <script src="js/gallery-data.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/radio-data.js"></script>
+    <script src="js/radio-player.js"></script>
+    <script src="js/blog-data.js?v=articles-20260930"></script>
+    <script src="js/blog.js"></script>
+  </body>
+</html>

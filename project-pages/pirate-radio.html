@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Pirate Radio - Bootleg OS</title>
+    <meta name="description" content="Shared Internet Archive radio system and interactive interface.">
+    <link rel="icon" type="image/svg+xml" href="../assets/brand/favicon.svg?v=3">
+    <link rel="stylesheet" href="../css/style.css?v=boots-frames-1">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="shell topbar">
+        <a class="brand" href="../index.html">
+          <img src="../assets/brand/bootleg-logo.jpg" alt="Bootleg logo">
+          <span>
+            <strong>Bootleg Productions</strong>
+            <span>Creative Hub / BOOTLEG OS</span>
+          </span>
+        </a>
+        <nav class="nav">
+          <a href="../index.html">Home</a>
+          <a href="../projects.html">Projects</a>
+          <a href="../gallery.html">Gallery</a>
+          <div class="nav-dropdown">
+            <a class="nav-apps-link" href="../applications.html">Apps <span class="nav-caret">▾</span>
+            </a>
+            <div class="nav-dropdown-menu">
+              <a href="../applications.html">All Apps</a>
+              <a href="../weather.html">Weather</a>
+              <a href="../clock.html">World Clock</a>
+              <a href="../radio.html">Pirate Radio</a>
+              <a href="../utilities.html">Image Tools</a>
+              <a href="../pixel-studio.html">Pixel Studio</a>
+              <a href="../archive-scraper.html">Archive Scraper</a>
+              <a href="../youtube-downloader.html">Video Converter</a>
+            </div>
+          </div>
+          <a href="../blog.html">Blog</a>
+          <a href="../contact.html">Contact</a>
+        </nav>
+        <div class="mini-radio">
+          <div class="radio-screen">
+            <span class="frequency">89.5 FM</span>
+            <span class="station">Pirate Radio</span>
+          </div>
+          <img class="radio-base" src="../assets/radio/radio-base.png" alt="Pirate Radio">
+          <button class="dial volume-dial" title="Power / Play">
+            <span class="dial-rotator">
+              <img src="../assets/radio/radio-volume.webp" alt="">
+            </span>
+          </button>
+          <button class="dial tuning-dial" title="Tune station">
+            <span class="dial-rotator">
+              <img src="../assets/radio/radio-tuning.webp" alt="">
+            </span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main class="shell">
+      <section class="panel project-detail-header">
+        <div class="panel-content">
+          <span class="eyebrow">Interactive audio project</span>
+          <h1>Pirate Radio</h1>
+          <p>An interactive online radio with three hand-curated stations, a full boombox player and a little receiver that follows you around Bootleg OS.</p>
+        </div>
+      </section>
+      <section class="project-detail-grid">
+        <article class="card">
+          <div class="card-content">
+            <h2>The idea</h2>
+            <p>I wanted a radio that felt like tuning into a place rather than opening another playlist. The full console and the small receiver in the site header share the same station, track and playback state, so the music can follow you while you browse.</p>
+            <div class="badge-list"><span class="badge">JavaScript</span><span class="badge">Internet Archive</span><span class="badge">Interactive audio</span></div>
+            <a class="btn" href="../radio.html">Open Pirate Radio</a>
+          </div>
+        </article>
+        <article class="card project-media-card pirate-boombox-card">
+          <img class="project-hero-media" src="../assets/radio/pirate-radio-boombox.webp" alt="The full vintage boombox used for the Pirate Radio console">
+        </article>
+      </section>
+      <section class="panel project-story-panel">
+        <div class="panel-content content-article">
+          <h2>Three signals to tune into</h2>
+          <p>The stations take some of their spirit from the radios in <em>Fallout</em>: finding old recordings, giving them a place to live together and letting the listener stumble onto a song they would not have searched for by name.</p>
+          <div class="radio-station-grid">
+            <div><span>89.5 FM</span><h3>Pirate Oldies</h3><p>Vintage popular music and broadcasts for the familiar, slightly crackly feeling of a radio from another era.</p></div>
+            <div><span>95.7 FM</span><h3>Western Trails</h3><p>Western-flavoured songs and atmosphere for a long drive across an imaginary wasteland.</p></div>
+            <div><span>101.4 FM</span><h3>Classical Signal</h3><p>Orchestral and classical recordings when the scene needs to feel grander, stranger or more dramatic.</p></div>
+          </div>
+          <h2>Building the player</h2>
+          <p>The interface borrows from older interactive websites, where a button or dial felt like part of an object you could operate. I wanted the boombox and header receiver to be playful, physical-looking pieces of the site, with tuning, track controls and volume rather than a plain audio element dropped into a page.</p>
+          <p>Both views use the same JavaScript station data and remember playback position. That lets the compact receiver act as an extension of the larger radio while someone moves between the gallery, projects and blog. The stations are collections of direct audio links, so individual files can be reviewed and replaced without rebuilding the interface.</p>
+          <aside class="post-note"><strong>The Internet Archive connection</strong><span>The Archive is an extraordinary catalogue of recordings that might otherwise be hard to find. Searching its collections has helped me discover old songs, compare versions and assemble station libraries from material preserved by other people. An Archive upload alone does not establish the rights to a recording, so each item still needs its own review before use.</span></aside>
+          <p>This remains a growing part of Bootleg OS. I can change the station lists, add more material and keep refining the receiver as I find better recordings and ways to make the controls feel more natural.</p>
+          <p><a href="../radio.html">Tune in to Pirate Radio ↗</a></p>
+        </div>
+      </section>
+    </main>
+    <footer class="shell footer">
+      <a class="footer-support" href="https://buymeacoffee.com/supportweb" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">☕</span> Support my work · Buy me a coffee</a>
+      <span>STATUS ● SYSTEM ONLINE</span>
+      <span>Thanks for stopping by ♥</span>
+      <span id="local-clock"></span>
+    </footer>
+    <script src="../js/gallery-data.js"></script>
+    <script src="../js/app.js"></script>
+    <script src="../js/radio-data.js"></script>
+    <script src="../js/radio-player.js"></script>
+  </body>
+</html>

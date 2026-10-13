@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Weather - Bootleg OS</title>
+    <meta name="description" content="Live Weather — a Bootleg OS app with geolocation weather, search and a pressure gauge.">
+    <link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg?v=3">
+    <meta property="og:title" content="Weather - Bootleg OS">
+    <meta property="og:description" content="Live Weather — a Bootleg OS app with geolocation weather, search and a pressure gauge.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://bootlegproductions.github.io/Bootleg-OS/assets/brand/bootleg-logo.jpg">
+    <meta property="og:url" content="https://bootlegproductions.github.io/Bootleg-OS/weather.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Weather - Bootleg OS">
+    <meta name="twitter:description" content="Live Weather — a Bootleg OS app with geolocation weather, search and a pressure gauge.">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+    <link rel="stylesheet" href="css/style.css?v=boots-frames-1">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="shell topbar">
+        <a class="brand" href="index.html">
+          <img src="assets/brand/bootleg-logo.jpg" alt="Bootleg logo">
+          <span>
+            <strong>Bootleg Productions</strong>
+            <span>Creative Hub / BOOTLEG OS</span>
+          </span>
+        </a>
+        <nav class="nav">
+          <a href="index.html">Home</a>
+          <a href="projects.html">Projects</a>
+          <a href="gallery.html">Gallery</a>
+          <div class="nav-dropdown">
+            <a class="nav-apps-link" href="applications.html">Apps <span class="nav-caret">▾</span>
+            </a>
+            <div class="nav-dropdown-menu">
+              <a href="applications.html">All Apps</a>
+              <a href="weather.html">Weather</a>
+              <a href="clock.html">World Clock</a>
+              <a href="radio.html">Pirate Radio</a>
+              <a href="utilities.html">Image Tools</a>
+              <a href="pixel-studio.html">Pixel Studio</a>
+              <a href="archive-scraper.html">Archive Scraper</a>
+              <a href="youtube-downloader.html">Video Converter</a>
+            </div>
+          </div>
+          <a href="blog.html">Blog</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+        <div class="mini-radio">
+          <div class="radio-screen">
+            <span class="frequency">89.5 FM</span>
+            <span class="station">Pirate Radio</span>
+          </div>
+          <img class="radio-base" src="assets/radio/radio-base.png" alt="Pirate Radio">
+          <button class="dial volume-dial" title="Volume">
+            <span class="dial-rotator">
+              <img src="assets/radio/radio-volume.webp" alt="">
+            </span>
+          </button>
+          <button class="dial tuning-dial" title="Tune station">
+            <span class="dial-rotator">
+              <img src="assets/radio/radio-tuning.webp" alt="">
+            </span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main class="shell weather-app-page">
+      <section class="boot-window wx-hero-window">
+        <div class="window-bar">
+          <div class="lights">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div> weather.exe</div>
+        <div class="panel-content wx-hero-grid">
+          <div>
+            <span class="eyebrow">BOOT 04 · live weather console</span>
+            <h1>Pastel cyber weather station.</h1>
+            <p>Local weather, searched locations, current conditions, map layers, hourly readings, seven-day forecast and weather stories.</p>
+            <div class="badge-list">
+              <span class="badge">Geolocation</span>
+              <span class="badge">Weather map</span>
+              <span class="badge">7 day forecast</span>
+              <span class="badge">Weather news</span>
+            </div>
+          </div>
+          <form class="wx-search-card" id="weather-search-advanced">
+            <span class="eyebrow">Find location</span>
+            <label for="locationInput">Search a town, city, or country</label>
+            <div class="control-row wx-search-row">
+              <input id="locationInput" name="location" type="search" placeholder="Manchester, Tokyo, New York...">
+              <button class="btn" id="searchBtn" type="submit">Search</button>
+              <button class="btn" id="geoBtn" type="button">Use my location</button>
+            </div>
+            <p class="wx-status" id="appStatus">Starting weather console...</p>
+          </form>
+        </div>
+      </section>
+      <section class="wx-dashboard">
+        <article class="boot-window wx-current-window">
+          <div class="window-bar">
+            <div class="lights">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div> current_conditions.sys</div>
+          <div class="panel-content">
+            <div class="wx-current-card" id="conditionCard">
+              <div>
+                <span class="eyebrow">Current location</span>
+                <h2 id="locationName">Detecting location...</h2>
+                <p id="dateLine">Waiting for weather data</p>
+              </div>
+              <div class="wx-temp-row">
+                <div>
+                  <div class="wx-temp" id="tempNow">--°</div>
+                  <p class="wx-condition" id="conditionText">--</p>
+                </div>
+                <div class="wx-icon" id="weatherIcon" aria-hidden="true">☁️</div>
+              </div>
+            </div>
+            <div class="wx-stat-grid">
+              <div class="wx-stat">
+                <span>Feels like</span>
+                <strong id="feelsLike">--°C</strong>
+              </div>
+              <div class="wx-stat">
+                <span>Humidity</span>
+                <strong id="humidity">--%</strong>
+              </div>
+              <div class="wx-stat">
+                <span>Wind</span>
+                <strong id="wind">-- km/h</strong>
+              </div>
+              <div class="wx-stat">
+                <span>Pressure</span>
+                <strong id="pressure">-- hPa</strong>
+              </div>
+              <div class="wx-stat">
+                <span>Sunrise</span>
+                <strong id="sunrise">--:--</strong>
+              </div>
+              <div class="wx-stat">
+                <span>Sunset</span>
+                <strong id="sunset">--:--</strong>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="boot-window wx-map-window">
+          <div class="window-bar">
+            <div class="lights">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div> weather_map.layers</div>
+          <div class="panel-content">
+            <div class="wx-map-toolbar">
+              <div>
+                <span class="eyebrow">Map control</span>
+                <p>Centres on the detected or searched location. Toggle weather overlays below.</p>
+              </div>
+              <div class="wx-layer-buttons">
+                <button class="btn layer-btn active" type="button" data-layer="precipitation_new">Rain</button>
+                <button class="btn layer-btn" type="button" data-layer="clouds_new">Clouds</button>
+                <button class="btn layer-btn" type="button" data-layer="temp_new">Temp</button>
+                <button class="btn layer-btn" type="button" data-layer="wind_new">Wind</button>
+                <button class="btn layer-btn" type="button" data-layer="pressure_new">Pressure</button>
+              </div>
+            </div>
+            <div id="weatherMap" aria-label="Interactive weather map"></div>
+          </div>
+        </article>
+      </section>
+      <section class="boot-window wx-forecast-window">
+        <div class="window-bar">
+          <div class="lights">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div> forecast.timeline</div>
+        <div class="panel-content">
+          <div class="section-title wx-section-title">
+            <div>
+              <span class="eyebrow">Next 24 hours</span>
+              <h2>Hourly forecast</h2>
+            </div>
+            <p>Temperature and rain chance</p>
+          </div>
+          <div class="wx-hourly-scroll" id="hourlyStrip"></div>
+        </div>
+      </section>
+      <section class="boot-window wx-forecast-window">
+        <div class="window-bar">
+          <div class="lights">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div> seven_day.forecast</div>
+        <div class="panel-content">
+          <div class="section-title wx-section-title">
+            <div>
+              <span class="eyebrow">Week view</span>
+              <h2>7-day forecast</h2>
+            </div>
+            <p>High · low · rain</p>
+          </div>
+          <div class="wx-days" id="dailyForecast"></div>
+        </div>
+      </section>
+      <section class="boot-window wx-news-window">
+        <div class="window-bar">
+          <div class="lights">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div> weather_stories.feed</div>
+        <div class="panel-content">
+          <div class="section-title wx-section-title">
+            <div>
+              <span class="eyebrow">Live feed</span>
+              <h2>Weather stories</h2>
+            </div>
+            <p>Three current articles from NewsData</p>
+          </div>
+          <div class="wx-news-grid" id="weatherNews"></div>
+        </div>
+      </section>
+    </main>
+    <footer class="shell footer">
+      <a class="footer-support" href="https://buymeacoffee.com/supportweb" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">☕</span> Support my work · Buy me a coffee</a>
+      <span>STATUS ● SYSTEM ONLINE</span>
+      <span>Thanks for stopping by ♥</span>
+      <span id="local-clock"></span>
+    </footer>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script src="js/gallery-data.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/weather-app.js"></script>
+    <script src="js/radio-data.js"></script>
+    <script src="js/radio-player.js"></script>
+  </body>
+</html>

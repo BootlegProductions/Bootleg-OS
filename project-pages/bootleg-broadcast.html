@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Bootleg Broadcast - Bootleg OS</title>
+    <meta name="description" content="Browser-based retro TV and movie broadcast project.">
+    <link rel="icon" type="image/svg+xml" href="../assets/brand/favicon.svg?v=3">
+    <link rel="stylesheet" href="../css/style.css?v=boots-frames-1">
+  <link rel="stylesheet" href="../css/broadcast-preview.css?v=1"></head>
+  <body>
+    <header class="site-header">
+      <div class="shell topbar">
+        <a class="brand" href="../index.html">
+          <img src="../assets/brand/bootleg-logo.jpg" alt="Bootleg logo">
+          <span>
+            <strong>Bootleg Productions</strong>
+            <span>Creative Hub / BOOTLEG OS</span>
+          </span>
+        </a>
+        <nav class="nav">
+          <a href="../index.html">Home</a>
+          <a href="../projects.html">Projects</a>
+          <a href="../gallery.html">Gallery</a>
+          <div class="nav-dropdown">
+            <a class="nav-apps-link" href="../applications.html">Apps <span class="nav-caret">▾</span>
+            </a>
+            <div class="nav-dropdown-menu">
+              <a href="../applications.html">All Apps</a>
+              <a href="../weather.html">Weather</a>
+              <a href="../clock.html">World Clock</a>
+              <a href="../radio.html">Pirate Radio</a>
+              <a href="../utilities.html">Image Tools</a>
+              <a href="../pixel-studio.html">Pixel Studio</a>
+              <a href="../archive-scraper.html">Archive Scraper</a>
+              <a href="../youtube-downloader.html">Video Converter</a>
+            </div>
+          </div>
+          <a href="../blog.html">Blog</a>
+          <a href="../contact.html">Contact</a>
+        </nav>
+        <div class="mini-radio">
+          <div class="radio-screen">
+            <span class="frequency">89.5 FM</span>
+            <span class="station">Pirate Radio</span>
+          </div>
+          <img class="radio-base" src="../assets/radio/radio-base.png" alt="Pirate Radio">
+          <button class="dial volume-dial" title="Power / Play">
+            <span class="dial-rotator">
+              <img src="../assets/radio/radio-volume.webp" alt="">
+            </span>
+          </button>
+          <button class="dial tuning-dial" title="Tune station">
+            <span class="dial-rotator">
+              <img src="../assets/radio/radio-tuning.webp" alt="">
+            </span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main class="shell">
+      <section class="panel project-detail-header">
+        <div class="panel-content">
+          <span class="eyebrow">Active main project</span>
+          <h1>Bootleg Broadcast</h1>
+          <p>A browser-based television experiment built around Internet Archive media, a shared UK-time broadcast schedule, CRT presentation and custom channel branding.</p>
+          <div class="badge-list">
+            <span class="badge">HTML/CSS/JS</span>
+            <span class="badge">Internet Archive</span>
+            <span class="badge">Scheduling</span>
+            <span class="badge">CRT UI</span>
+          </div>
+        </div>
+      </section>
+      <section class="broadcast-preview" aria-labelledby="broadcast-preview-title">
+        <span class="eyebrow">Tune in / live timetable</span><h2 id="broadcast-preview-title">A little television, right here.</h2>
+        <p>See what is scheduled on every channel, or turn on the mini CRT and join the selected programme in progress.</p>
+        <p id="broadcast-time" class="broadcast-meta"></p>
+        <div class="broadcast-live-layout">
+          <div><div class="broadcast-tv"><div class="broadcast-screen"><video id="broadcast-video" controls playsinline muted preload="none" aria-label="Bootleg Broadcast mini player"></video><div id="broadcast-screen-status" class="broadcast-screen-status">TV off · choose a channel and turn on the mini TV</div></div><div class="broadcast-tv-brand"><span>BOOTLEG CRT</span><span>● COLOUR</span></div></div>
+          <p class="broadcast-selected"><strong id="broadcast-channel-name">BOOTLEG BROADCAST</strong><span id="broadcast-now-title">Waiting for the timetable…</span></p>
+          <div class="broadcast-actions"><button class="btn" id="broadcast-play" disabled>Turn on mini TV</button><a class="btn" href="https://bootlegproductions.github.io/Bootleg-Broadcast/" target="_blank" rel="noopener">Full Broadcast player ↗</a></div>
+          <p><a id="broadcast-current-link" hidden target="_blank" rel="noopener">Watch this programme from the start ↗</a></p><p class="broadcast-meta">The mini TV starts muted. Use the video controls to enable sound. Archive sources can become unavailable.</p></div>
+          <div><div class="broadcast-guide-heading"><h3>Now &amp; next</h3><button class="btn" id="broadcast-refresh">Refresh guide</button></div><p id="broadcast-guide-status" role="status" aria-live="polite">Loading the published timetable…</p><div class="broadcast-guide" id="broadcast-guide" aria-label="Channel selection"></div></div>
+        </div><p id="broadcast-freshness" class="broadcast-meta"></p>
+      </section>
+      <section class="project-detail-grid">
+        <article class="card">
+          <div class="card-content">
+            <h2>What it does</h2>
+            <p>A CRT-style web television simulator with channels, schedules and Internet Archive media. The design and programme library are documented in the case study below.</p>
+            <h3>Current direction</h3>
+            <p>The current version has written daily timetables, seasonal programming, a searchable media library and a redesigned remote. Live slots follow UK time; choosing an episode lets you watch from the start before returning to the broadcast.</p>
+            <a class="btn" href="https://bootlegproductions.github.io/Bootleg-Broadcast/" target="_blank" rel="noopener">Open live site</a>
+          </div>
+        </article>
+        <article class="card project-media-card">
+          <img class="project-hero-media" src="../assets/project-media/bootleg-broadcast/home-page.png" alt="Bootleg Broadcast homepage with VHS tapes, a CRT television and a power-on screen">
+        </article>
+      </section>
+      <section class="panel project-story-panel">
+      <div class="panel-content content-article">
+        <h2 class="case-story-title">Rebuilding the feeling of television</h2>
+        <aside class="post-note"><strong>The current broadcast</strong><p>The project has grown beyond a weekly playlist. Each channel has a written daily timetable using UK time, with episodes, films, channel idents and advert breaks sharing fixed slots. Turning on the TV joins the programme already in progress instead of restarting the day.</p></aside>
+        <h3>More control, without losing the broadcast feeling</h3><p>The redesigned remote includes channel numbers, volume, mute, pause, programme skipping and a return-to-live control. A guide lets viewers browse other dates and start a programme from the beginning. The searchable library offers another way into the collection, while the mobile layout adapts the television and remote to portrait and landscape screens.</p>
+        <p>October brings Halloween programming and decorations; December has its own Christmas rotation. Between programmes, branded idents and short adverts keep the channels feeling like television. The player also remembers failed sources locally and can try an available alternative, although an archived upload disappearing still means its source needs attention.</p>
+
+        <p>Bootleg Broadcast was an idea born partly from nostalgia and partly from my increasingly despicable hatred of the way we consume media today.</p>
+        <p>More and more programmes are being divided between an ever-growing collection of subscription services. A series disappears from one platform, moves to another, returns with advertisements despite the subscription price continuing to rise, or becomes another so-called exclusive locked behind yet another monthly payment. We may technically have more choice than ever, but watching something often feels less like switching on the television and more like comparing utility bills.</p>
+        <p>I found myself yearning for a simpler time when television was abundant with programmes that people watched together. You might sit down with your family to watch something at the same time as your neighbours, school friends or somebody on the other side of the country. Seasonal specials and films felt like actual events when they appeared during prime-time hours. Even the shoddiest made-for-television film could have a strangely warm and distinctive atmosphere that seems to be missing from a lot of the expensive “exclusive content” we continually pay to access.</p>
+        <p>Perhaps some of that is cynicism and nostalgia talking. Television was never perfect, and there were plenty of repeats, terrible programmes and channels showing absolutely nothing worth watching. However, there was something special about not having complete control.</p>
+        <p>You could flick through the channels, land halfway through a programme you had never heard of and continue watching simply because it was there. A strange film could become part of your Christmas because it happened to be broadcast one afternoon. A cartoon you had forgotten existed could suddenly reappear at six in the morning. Everyone watching received the same schedule rather than being separated into individually calculated recommendations.</p>
+        <p>Bootleg Broadcast is my attempt to recapture some of that magic.</p>
+        <aside class="post-note"><strong>Switch it on</strong><span>The project is live: choose a channel, watch its scheduled programmes and use the guide to see what is playing next. The site grows through new channel libraries and seasonal schedules.</span> <a href="https://bootlegproductions.github.io/Bootleg-Broadcast/" target="_blank" rel="noopener noreferrer">Watch Bootleg Broadcast ↗</a></aside>
+        <h2>The original idea</h2>
+        <p>The project began as a very basic single-page HTML website. The initial idea was simply to create an online television that could play a scheduled collection of programmes rather than asking the viewer to choose every individual episode.</p>
+        <p>At first, there was no enormous technical system behind it. It was a page containing a video player, a small selection of links and the beginnings of a channel-changing function. However, once I saw the idea working, even in that very limited form, I began imagining what it could become.</p>
+        <p>I did not want to create another plain streaming-library interface covered in rows of thumbnails. The entire point was to move away from the feeling of browsing Netflix, Disney+ or another conventional on-demand service. I wanted Bootleg Broadcast to feel like an old television that had somehow been connected to a forgotten collection of channels.</p>
+        <p>The viewer should be able to turn it on, change channel and watch whatever happens to be broadcasting.</p>
+        <p>That simple idea gradually became a much larger web-development project involving HTML, CSS, JavaScript, JSON schedules, graphic design, video editing, media sourcing and a considerable amount of trial and error.</p>
+        <h2>Developing the website</h2>
+        <p>I coded and developed Bootleg Broadcast from the original idea through to its current live version.</p>
+        <p>The early builds were functional but visually simple. As more features were added, the project moved beyond a single HTML page into a structured website using separate HTML, CSS and JavaScript files, accompanied by schedule data and folders containing the various visual and audio assets.</p>
+        <p>JavaScript controls the television itself: loading the schedules, selecting the correct month and week, remembering the position of each channel, switching between broadcasts, handling failed media links and moving to the next scheduled item when a programme finishes.</p>
+        <p>I also added details intended to make the site behave more like a physical television. These include a power button, television-on and television-off sounds, remote-control effects, bursts of static when changing channels, channel numbers, on-screen channel names and individual station logos displayed in the corner of the picture.</p>
+        <p>Pressing the power button begins the broadcast and enables the audio, while changing the channel briefly interrupts the programme with static before loading the next station. If a media link fails, the system can attempt an alternative or continue through the schedule instead of leaving the television permanently stuck on a broken video.</p>
+        <p>A visible programme guide shows what is currently playing and what is coming next. The interface is deliberately designed as part of the television rather than as a modern menu floating over it.</p>
+        <h2>Creating the final visual style</h2>
+        <figure class="case-figure case-right">
+          <img src="../assets/gallery/Bootleg%20Broadcast%20Logos/Bootleg%20TV%20Production%20Logo.webp" alt="Bootleg Broadcast visual identity" loading="lazy">
+          <figcaption>Bootleg Broadcast visual identity</figcaption>
+        </figure>
+        <p>The appearance of Bootleg Broadcast went through a number of different iterations before arriving at the version used on the live site.</p>
+        <p>The earlier designs resembled a conventional webpage with a video player placed inside it. Although they worked, they did not fully communicate the idea. The project needed to feel less like visiting a website and more like discovering a strange television in a room full of old media.</p>
+        <p>The current design is built around a large CRT television surrounded by VHS tapes, a VCR, old film cases, posters and other physical clutter. The room has a warm, dim and slightly grimy appearance, with neon colour, analogue interference and worn textures helping to create the feeling of a pirate station operating from an overfilled bedroom or forgotten video shop.</p>
+        <p>The television screen includes a CRT overlay to soften the sharp digital video and make the footage feel as though it is genuinely playing through an older display. Static, tuning interruptions and “No Signal” screens are integrated into the screen itself, while the schedule uses glowing green text inspired by older electronic displays and teletext-style interfaces.</p>
+        <p>This design also required a lot of adjustment. Elements that initially looked convincing as individual graphics did not always feel naturally attached to the television once placed into the working page. The angle, perspective, size and position of the schedule had to be repeatedly altered so that it appeared to sit properly inside the screen. The tuning and signal messages were redesigned to feel like part of the broadcast rather than website labels hovering over the image.</p>
+        <p>The finished interface is therefore not a single design that appeared fully formed. It is the result of repeatedly testing the site, noticing what looked wrong and gradually bringing the different elements into the same visual world.</p>
+        <h2>Building the programme library</h2>
+        <p>A television interface is not particularly useful without anything to broadcast.</p>
+        <p>The programme library was assembled mainly from direct MP4 files hosted on the Internet Archive. I began by manually searching Archive pages, opening their file lists and extracting the individual video links that could be played by the website.</p>
+        <p>This quickly became one of the largest and most repetitive parts of the project. A single collection might contain hundreds of files mixed with thumbnails, metadata, torrent files, alternate encodes and formats the site did not need. Links also had to preserve their original filenames, use the correct URL encoding and avoid unsuitable derivative files such as <code>.ia.mp4</code> copies where a better original MP4 was available.</p>
+        <p>To make the process manageable, I developed a separate Internet Archive link scraper.</p>
+        <p>The scraper began as a simple tool for extracting MP4 links from one Archive page. It was then gradually expanded and rewritten so that I could process collections and larger batches of Archive favourites. It filters the available files, removes unwanted formats, produces correctly structured direct links and exports the results into organised text files with Windows-safe filenames.</p>
+        <p>Later versions added a loading screen, clearer formatting, individual result files packaged together and tools for clearing a completed search before beginning another. Instead of manually copying hundreds of links one at a time, I could use the scraper to collect a large amount of programme material and then review and organise it for the appropriate channel.</p>
+        <p>Creating the scraper was not originally the main purpose of Bootleg Broadcast, but it became its own connected project because the television could not continue growing without a better way to gather and manage its broadcasts.</p>
+        <h2>Turning the links into schedules</h2>
+        <p>The collected links are organised into JSON files that the website can read.</p>
+        <p>Learning to work with JSON was an important part of developing the project. Rather than permanently writing every episode into the JavaScript, the programmes could be stored separately as structured schedule data. The site could then determine the current month, week, day and channel before loading the appropriate playlist.</p>
+        <p>This made Bootleg Broadcast much easier to expand. New programmes could be added to a channel library without rebuilding the entire player, and the schedules could be changed independently of the website’s main code.</p>
+        <p>Each day has its own generated schedule, with programmes grouped in a way that attempts to create some continuity. Episodes can appear in order, while films, specials and occasional marathon days interrupt the normal rotation. Period-appropriate advertisements, station idents and other short interstitials are placed between programmes to prevent the channels from feeling like basic playlists.</p>
+        <p>There is also a fallback schedule so that the television can continue operating if a monthly file cannot be loaded.</p>
+        <p>The system is designed to reproduce the feeling of broadcasting rather than simply pressing shuffle. Different programmes make sense at different times of day, some channels become stranger or more adult later at night, and longer films or specials can be treated as events within the schedule.</p>
+        <h2>Halloween and Christmas television</h2>
+        <p>Two of the most important additions have been the unique schedules for October and December.</p>
+        <p>Part of the original motivation for Bootleg Broadcast came from the feeling that seasonal television has gradually been lost. Halloween episodes, Christmas specials and annual films once returned at recognisable times of year. Even when you had already seen them, their appearance on television helped create the atmosphere of the season.</p>
+        <p>The October schedule gives the channels a more autumnal and Halloween-focused identity. Horror-themed episodes, supernatural cartoons, seasonal specials and darker films can take over parts of the normal schedule, making the whole service feel temporarily changed by the time of year.</p>
+        <p>December has its own Christmas and winter programming. Programmes such as <em>Christmas with the Joker</em>, <em>Ed, Edd n Eddy’s Jingle Jingle Jangle</em>, <em>A Johnny Bravo Christmas</em>, <em>Billy &amp; Mandy Save Christmas</em>, <em>Merry Christmas, Mr. Bean</em> and <em>The Snowman</em> can return as scheduled seasonal broadcasts rather than existing as isolated files in a folder.</p>
+        <p>The aim is to make switching on Bootleg Broadcast during October or December feel different from visiting it during the rest of the year.</p>
+        <h2>Giving every channel its own identity</h2>
+        <figure class="case-figure case-left broadcast-logo-slideshow" aria-label="Ten Broadcast channel logos">
+          <div class="broadcast-logo-stage"><img id="broadcast-logo-image" src="../assets/gallery/Bootleg%20Broadcast%20Logos/Cartoons%20Cartoons%20Logo.webp" alt="Cartoons Cartoons channel identity" loading="lazy"></div>
+          <figcaption id="broadcast-logo-caption">Cartoons Cartoons · 1 / 10</figcaption>
+          <div class="broadcast-logo-controls"><button type="button" id="broadcast-logo-prev" aria-label="Previous channel logo">←</button><button type="button" id="broadcast-logo-pause" aria-label="Pause logo slideshow">Pause</button><button type="button" id="broadcast-logo-next" aria-label="Next channel logo">→</button></div>
+        </figure>
+        <p>Bootleg Broadcast currently contains ten distinctive channels. I did not want these to feel like ten identical playlists with different names, so I created an individual logo and short station ident for each one.</p>
+        <p>The logos borrow the visual language of the kinds of networks each channel represents without simply using the original branding. The idents help establish the tone before returning to the programme, in the same way an old television channel would remind you where you were between shows.</p>
+        <p>Each station has its own library, schedule and general personality.</p>
+        <aside class="post-note">
+          <strong>Channel idents in motion</strong>
+          <span>The gallery contains all ten animated channel logos, with individual video players.</span>
+          <p><a href="../gallery.html?cat=bootleg-broadcast-animated-logos">View the animated Broadcast logos</a></p>
+        </aside>
+        <h3>90s Toons</h3>
+        <p>90s Toons combines the feeling of late-1980s, 1990s and early-2000s children’s television, particularly the action-heavy schedules associated with Fox Kids, Jetix, Kids’ WB and similar programming blocks.</p>
+        <p>Its library includes superhero cartoons, science-fiction series, monsters and syndicated action animation. Programmes in the wider collection include <em>X-Men: The Animated Series</em>, <em>Spider-Man</em>, <em>Godzilla: The Series</em>, <em>Men in Black: The Series</em>, <em>Street Sharks</em>, <em>Freakazoid!</em> and other shows that feel at home during a Saturday-morning broadcast.</p>
+        <h3>Cartoons Cartoons</h3>
+        <p>Cartoons Cartoons is my recreation of the classic Cartoon Network experience.</p>
+        <p>It concentrates on series such as <em>The Powerpuff Girls</em>, <em>Dexter’s Laboratory</em>, <em>Johnny Bravo</em>, <em>Ed, Edd n Eddy</em>, <em>Courage the Cowardly Dog</em>, <em>Codename: Kids Next Door</em>, <em>Samurai Jack</em> and related Cartoon Network programmes. Archive-sourced bumpers, promos and interstitials help recreate the feeling of the channel between episodes instead of presenting the shows as an ordinary playlist.</p>
+        <h3>3. AAA</h3>
+        <p>AAA is the adult-animation channel.</p>
+        <p>It contains animated comedy and more experimental late-night programming, drawing from the atmosphere of Adult Swim, MTV animation and similar after-hours television. Its library includes programmes such as <em>The Simpsons</em>, <em>Family Guy</em>, <em>Beavis and Butt-Head</em>, <em>MTV’s Downtown</em>, <em>The Maxx</em>, <em>Clerks: The Animated Series</em>, <em>The Ricky Gervais Show</em> and <em>Tripping the Rift</em>.</p>
+        <p>It is intended to feel noticeably different from the daytime cartoon channels, particularly during its later schedule.</p>
+        <h3>4. Off-Licence TV</h3>
+        <p>Off-Licence TV is devoted to British television.</p>
+        <p>Its schedule includes sitcoms, comedy, documentaries and programmes that capture the peculiar atmosphere of British broadcasting. The library includes <em>Mr. Bean</em>, <em>Peep Show</em>, <em>The IT Crowd</em>, <em>The Inbetweeners</em>, <em>Little Britain</em>, <em>Brass Eye</em>, <em>Doctor Who</em>, <em>Sacred Weeds</em> and other Channel 4, BBC and British cult programming.</p>
+        <p>The name and design give it the feeling of a slightly disreputable television station being transmitted from the back of a local off-licence.</p>
+        <h3>5. Japanime</h3>
+        <p>Japanime broadcasts anime from several different generations.</p>
+        <p>It includes both subtitled and dubbed programmes, combining recognisable series with shorter-lived or more obscure productions that viewers may have missed. Its library ranges from accessible daytime shows such as <em>Pokémon</em> to series including <em>Urusei Yatsura</em>, <em>Cromartie High School</em> and <em>Azumanga Daioh</em>.</p>
+        <p>The purpose is not to reproduce one specific anime network, but to create a channel where very different periods and styles of Japanese animation can share a schedule.</p>
+        <h3>6. Star Spangled TV</h3>
+        <p>Star Spangled TV is centred on American live-action television and the exaggerated identity of American broadcasting.</p>
+        <p>It includes sitcoms, sketch comedy, reality television and other programmes that feel distinctly shaped by American network and cable television. Material in the library includes programmes such as <em>MADtv</em>, alongside a mixture of comedy and popular American television from different periods.</p>
+        <p>Its branding deliberately plays with an overblown stars-and-stripes television identity.</p>
+        <h3>7. What</h3>
+        <p>What is the channel for programmes that are harder to categorise.</p>
+        <p>It gives unusual documentaries, obscure television, strange one-off productions, forgotten experiments and general oddities somewhere to exist without having to fit neatly into the other nine stations. It is the sort of channel you switch to late at night and find yourself watching something you would never have deliberately searched for.</p>
+        <p>That element of accidental discovery is one of the most important parts of the entire Bootleg Broadcast idea.</p>
+        <h3>8. Dizzy</h3>
+        <p>Dizzy takes its influence from Disney Channel, Toon Disney and Disney XD.</p>
+        <p>Its schedule contains Disney-associated cartoons, family animation, superhero programmes and energetic series from the 2000s onwards. Shows in its developing library include <em>Phineas and Ferb</em>, alongside Marvel and other action cartoons that fit the broader Disney-era television style.</p>
+        <h3>9. Dickleodeon</h3>
+        <p>Dickleodeon is the project’s deliberately bootleg version of a Nickelodeon-style channel.</p>
+        <p>Its library is led by programmes such as <em>SpongeBob SquarePants</em> and expands into other children’s animation, action series and shows associated with Nickelodeon’s different eras. Its purpose is to recreate the chaotic, colourful atmosphere of the channel rather than limiting itself to one decade.</p>
+        <h3>10. GirlyPop</h3>
+        <p>GirlyPop is built around colourful, character-led and female-focused animation.</p>
+        <p>It provides a home for magical, fashionable, romantic and lighter programmes that might otherwise become scattered across the broader cartoon channels. Its identity is deliberately bright and playful, but the channel is not restricted to one age group or one narrow idea of what “girly” television should contain.</p>
+        <p>Together, the ten channels allow Bootleg Broadcast to move between children’s cartoons, adult animation, anime, British television, American television, Disney and Nickelodeon-inspired programming, seasonal broadcasts and material that does not comfortably belong anywhere else.</p>
+        <h2>Advertisements, idents and the material between programmes</h2>
+        <p>The programmes themselves are only part of what makes something feel like television.</p>
+        <p>Bootleg Broadcast also uses collections of old advertisements, promotional clips, bumpers and channel idents. These shorter pieces are inserted between episodes to break up the schedule and recreate the rhythm of an actual broadcast.</p>
+        <p>The adverts can reflect the period or tone of the channel. Old toy, game, food and technology commercials help place the viewer back into the era of the surrounding programmes. Holiday commercials can enter the December rotation, while Cartoon Network and Adult Swim-style bumps strengthen the identity of their related stations.</p>
+        <p>Some of the adverts are amusing, some are deeply dated and others are simply strange. That is exactly why they belong there. They are part of the texture of old television and often bring back memories just as strongly as the programmes themselves.</p>
+        <h2>What I learned from building it</h2>
+        <p>Bootleg Broadcast has allowed me to combine several different areas of my experience and interests within one project.
+I began with a basic knowledge of HTML, CSS and JavaScript, but the site pushed me to work with larger data structures, JSON files, asynchronous media loading, error handling, scheduling systems and a growing collection of external assets.</p>
+        <p>It also involved graphic design and video editing. I created the channel names, logos and idents, developed the surrounding interface and repeatedly reworked the design until the player, television, schedule and room felt like parts of one coherent project.</p>
+        <p>The Archive scraper taught me more about processing large collections of data and turning inconsistent file listings into something usable. Building the schedules forced me to think not only as a developer but as a programmer in the traditional television sense: deciding which programmes belong together, what should play during the day, what should appear at night and how seasonal events should change the normal routine.
+The project has never followed a perfectly straight development path. Features have been added, removed, broken, repaired and redesigned. Links have disappeared, schedules have trapped channels in advertisement loops, media files have failed to load and visual elements that looked fine in isolation have appeared completely wrong once placed inside the television.
+Each problem has led to another improvement.</p>
+        <h2>The project as it exists now</h2>
+        <p>What began as a basic HTML experiment has become a fully populated live website containing ten individually branded channels, programmed schedules, direct Internet Archive media, advertisements, seasonal rotations, channel idents and an interactive CRT television interface.
+It is part web-development exercise, part graphic-design project, part media archive and part personal protest against the increasingly fragmented subscription model.
+Bootleg Broadcast does not attempt to replace every modern streaming service or provide an endless on-demand library. In some ways, it deliberately offers less control. The viewer chooses a channel, not an individual episode, and accepts whatever happens to be on.
+That limitation is the point.
+The project is about remembering the pleasure of stumbling across something, joining a film halfway through, discovering an obscure programme and allowing a schedule to make the decision for you. It tries to preserve a small part of the warmth, shared experience and accidental discovery that television used to provide.
+Maybe it is nostalgia talking—but Bootleg Broadcast exists because I wanted to see whether that feeling could be rebuilt.</p>
+      </div>
+      </section>
+    </main>
+    <footer class="shell footer">
+      <a class="footer-support" href="https://buymeacoffee.com/supportweb" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">☕</span> Support my work · Buy me a coffee</a>
+      <span>STATUS ● SYSTEM ONLINE</span>
+      <span>Thanks for stopping by ♥</span>
+      <span id="local-clock"></span>
+    </footer>
+    <script src="../js/gallery-data.js"></script>
+    <script src="../js/app.js"></script>
+    <script src="../js/radio-data.js"></script>
+    <script src="../js/radio-player.js"></script>
+  <script src="../js/broadcast-clock.js"></script><script src="../js/broadcast-preview.js?v=1"></script><script src="../js/broadcast-logos.js"></script>
+</body>
+</html>

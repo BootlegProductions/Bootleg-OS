@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>From university weather app to Weather Station - Bootleg OS</title>
+    <meta name="description" content="An old Advanced Front-end brief ended up becoming the blueprint for one of the most developed Bootleg OS applications.">
+    <link rel="icon" type="image/svg+xml" href="../assets/brand/favicon.svg?v=3">
+    <link rel="stylesheet" href="../css/style.css?v=boots-frames-1">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="shell topbar">
+        <a class="brand" href="../index.html">
+          <img src="../assets/brand/bootleg-logo.jpg" alt="Bootleg logo">
+          <span>
+            <strong>Bootleg Productions</strong>
+            <span>Creative Hub / BOOTLEG OS</span>
+          </span>
+        </a>
+        <nav class="nav">
+          <a href="../index.html">Home</a>
+          <a href="../projects.html">Projects</a>
+          <a href="../gallery.html">Gallery</a>
+          <div class="nav-dropdown">
+            <a class="nav-apps-link" href="../applications.html">Apps <span class="nav-caret">▾</span>
+            </a>
+            <div class="nav-dropdown-menu">
+              <a href="../applications.html">All Apps</a>
+              <a href="../weather.html">Weather</a>
+              <a href="../clock.html">World Clock</a>
+              <a href="../radio.html">Pirate Radio</a>
+              <a href="../utilities.html">Image Tools</a>
+              <a href="../pixel-studio.html">Pixel Studio</a>
+              <a href="../archive-scraper.html">Archive Scraper</a>
+              <a href="../youtube-downloader.html">Video Converter</a>
+            </div>
+          </div>
+          <a href="../blog.html">Blog</a>
+          <a href="../contact.html">Contact</a>
+        </nav>
+        <div class="mini-radio">
+          <div class="radio-screen">
+            <span class="frequency">89.5 FM</span>
+            <span class="station">Pirate Radio</span>
+          </div>
+          <img class="radio-base" src="../assets/radio/radio-base.png" alt="Pirate Radio">
+          <button class="dial volume-dial" title="Power / Play">
+            <span class="dial-rotator">
+              <img src="../assets/radio/radio-volume.webp" alt="">
+            </span>
+          </button>
+          <button class="dial tuning-dial" title="Tune station">
+            <span class="dial-rotator">
+              <img src="../assets/radio/radio-tuning.webp" alt="">
+            </span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main class="shell">
+      <a class="btn blog-back-button" href="../blog.html">← Back to blog</a>
+      <div class="blog-reading-grid">
+        <section class="panel blog-post">
+          <figure class="blog-hero-image">
+            <img src="../assets/project-media/university-weather/weather-app-screenshot.jpg" alt="From university project to a live weather station" loading="eager">
+          </figure>
+          <div class="panel-content">
+            <span class="eyebrow">Projects</span>
+            <h1>From university weather app to Weather Station</h1>
+            <p class="blog-lead">An Advanced Front-end brief became the starting point for one of the most developed Bootleg OS applications.</p>
+            <aside class="post-note" aria-label="Article note">
+              <strong>In this post</strong>
+              <span>Then: a searched OpenWeatherMap dashboard. Now: forecasts, geolocation, map layers and weather stories.</span>
+            </aside>
+            <h2>The original idea</h2>
+            <p>The university specification called for a searched weather dashboard using OpenWeatherMap. It needed to show conditions, temperature, humidity and wind speed, with the data rendered dynamically instead of being written into the page.</p>
+            <p>That work also introduced the less glamorous parts of an application: what happens when a location cannot be found, when a request fails, or when the interface needs to explain that it is still loading. I explored progressive-web-app features and an SVG clock driven by the visitor’s local time as well.</p>
+            <h2>Rebuilding it for Bootleg OS</h2>
+            <p>The current Weather Station takes the same basic idea much further. It can use geolocation, resolve location names, show hourly and seven-day forecasts and place weather layers on an interactive map. Current weather stories give the data more context than a single icon and number can provide.</p>
+            <p>The layout has changed alongside the features. A forecast needs to be scannable at a glance, but it should also let somebody dig into the next few hours or a different location without losing their place.</p>
+            <h2>What the old work taught me</h2>
+            <p>Revisiting the coursework made it clear that the first version was a useful blueprint, even though its interface and code needed reworking. The important part was the idea of making external data understandable and pleasant to use.</p>
+            <p>The next steps are visual as much as technical: refining weather symbols, improving the small-screen layout and carrying some of the clock work into the wider application suite. The project can keep changing with the weather.</p>
+          </div>
+        </section>
+        <aside class="blog-related" aria-label="More blog posts">
+          <h2>More from Bootleg.log</h2>
+          <a class="related-post" href="project-update.html">
+            <img src="../assets/gallery/Portfolio%20Websites%20Assets/Graphic%20Design%20Banner.webp" alt="" loading="lazy">
+            <span>Building Bootleg OS in public</span>
+          </a>
+          <a class="related-post" href="technology.html">
+            <img src="../assets/gallery/Website%20Mock-ups/N-Crypt%20-%20Website.png" alt="" loading="lazy">
+            <span>Why personal websites still matter</span>
+          </a>
+          <a class="related-post" href="top10.html">
+            <img src="../assets/gallery/Website%20Mock-ups/Crochet.Com.webp" alt="" loading="lazy">
+            <span>10 Useful Web Tools to Simplify Your Life</span>
+          </a>
+        </aside>
+      </div>
+      <section class="comments-card card">
+        <div class="card-content">
+          <h2>Comments</h2>
+          <p class="comments-note">Comments are currently saved locally in each visitor's browser. A shared comment service can replace this when the site backend is added.</p>
+          <form class="comment-form" data-comment-form data-post="from-university-weather-app-to-weather-station">
+            <input name="name" placeholder="Name" required>
+            <textarea name="comment" rows="4" placeholder="Comment" required></textarea>
+            <button class="btn" type="submit">Post comment</button>
+          </form>
+          <div class="comment-list" data-comment-list></div>
+        </div>
+      </section>
+      <nav class="post-navigation" aria-label="Article navigation">
+        <a class="btn" href="../blog.html">← All blog posts</a>
+        <a class="btn" href="about-bootleg-os.html">← Newer post</a>
+        <a class="btn" href="project-update.html">Older post →</a>
+      </nav>
+    </main>
+    <footer class="shell footer">
+      <a class="footer-support" href="https://buymeacoffee.com/supportweb" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">☕</span> Support my work · Buy me a coffee</a>
+      <span>STATUS ● SYSTEM ONLINE</span>
+      <span>Thanks for stopping by ♥</span>
+      <span id="local-clock"></span>
+    </footer>
+    <script src="../js/gallery-data.js"></script>
+    <script src="../js/app.js"></script>
+    <script src="../js/radio-data.js"></script>
+    <script src="../js/radio-player.js"></script>
+    <script src="../js/blog-comments.js"></script>
+  </body>
+</html>

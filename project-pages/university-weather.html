@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>University Weather Application - Bootleg OS</title>
+    <meta name="description" content="Advanced front-end weather dashboard project and design specification.">
+    <link rel="icon" type="image/svg+xml" href="../assets/brand/favicon.svg?v=3">
+    <link rel="stylesheet" href="../css/style.css?v=boots-frames-1">
+  </head>
+  <body data-project-folder="university-weather">
+    <header class="site-header">
+      <div class="shell topbar">
+        <a class="brand" href="../index.html">
+          <img src="../assets/brand/bootleg-logo.jpg" alt="Bootleg logo">
+          <span>
+            <strong>Bootleg Productions</strong>
+            <span>Creative Hub / BOOTLEG OS</span>
+          </span>
+        </a>
+        <nav class="nav">
+          <a href="../index.html">Home</a>
+          <a href="../projects.html">Projects</a>
+          <a href="../gallery.html">Gallery</a>
+          <div class="nav-dropdown">
+            <a class="nav-apps-link" href="../applications.html">Apps <span class="nav-caret">▾</span>
+            </a>
+            <div class="nav-dropdown-menu">
+              <a href="../applications.html">All Apps</a>
+              <a href="../weather.html">Weather</a>
+              <a href="../clock.html">World Clock</a>
+              <a href="../radio.html">Pirate Radio</a>
+              <a href="../utilities.html">Image Tools</a>
+              <a href="../pixel-studio.html">Pixel Studio</a>
+              <a href="../archive-scraper.html">Archive Scraper</a>
+              <a href="../youtube-downloader.html">Video Converter</a>
+            </div>
+          </div>
+          <a href="../blog.html">Blog</a>
+          <a href="../contact.html">Contact</a>
+        </nav>
+        <div class="mini-radio">
+          <div class="radio-screen">
+            <span class="frequency">89.5 FM</span>
+            <span class="station">Pirate Radio</span>
+          </div>
+          <img class="radio-base" src="../assets/radio/radio-base.png" alt="Pirate Radio">
+          <button class="dial volume-dial" title="Power / Play">
+            <span class="dial-rotator">
+              <img src="../assets/radio/radio-volume.webp" alt="">
+            </span>
+          </button>
+          <button class="dial tuning-dial" title="Tune station">
+            <span class="dial-rotator">
+              <img src="../assets/radio/radio-tuning.webp" alt="">
+            </span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main class="shell">
+      <section class="panel project-detail-header">
+        <div class="panel-content">
+          <span class="eyebrow">Advanced Front-end Web · University</span>
+          <h1>Weather Application</h1>
+          <p>An earlier weather-dashboard project that explored API requests, dynamic data, SVG animation and progressive-web-app ideas.</p>
+        </div>
+      </section>
+      <section class="project-detail-grid">
+        <article class="card">
+          <div class="card-content">
+            <h2>Original specification</h2>
+            <p>The application was designed around searched locations, condition imagery, temperature, humidity and wind speed using OpenWeatherMap data. The specification also explored error states, smooth UI transitions and progressive-web-app installation.</p>
+            <h3>Why it matters now</h3>
+            <p>Several ideas from this university project have returned in the current Bootleg OS Weather Station: API-driven forecasts, location search, weather data visualisation and an animated clock concept.</p>
+            <div class="badge-list">
+              <span class="badge">JavaScript</span>
+              <span class="badge">API data</span>
+              <span class="badge">PWA</span>
+              <span class="badge">SVG</span>
+            </div>
+            <a class="btn" href="../weather.html">See current Weather Station</a>
+          </div>
+        </article>
+        <article class="card project-media-card">
+          <div class="card-content" data-project-media></div>
+        </article>
+      </section>
+      <section class="panel">
+        <div class="panel-content content-article">
+          <h2>From search to forecast</h2>
+          <figure class="case-figure case-right">
+            <img src="../assets/project-media/university-weather/weather-app-screenshot.jpg" alt="University weather app screen" loading="lazy">
+            <figcaption>An earlier weather interface from the university project.</figcaption>
+          </figure>
+          <p>This Advanced Front-end Web project began with a straightforward interaction: enter a place, request current conditions and update the page without a full reload. The specification called for a prominent temperature, a matching condition image, humidity and wind speed. It also planned a clear 404 state when a search could not be matched, while keeping the page layout familiar.</p>
+          <p>The archived work contains an initial weather-app exercise and a more developed site with separate HTML, CSS and JavaScript files, weather icons, a manifest and a service worker. That progression matters: I was moving from a single functional search screen towards a more complete application with installable-app ideas and a distinct visual identity.</p>
+          <h2>Designing beyond the happy path</h2>
+          <p>I explored transitions between conditions and error states, small visual cues in the search field, and an animated SVG clock driven by the visitor's local time. The written specification also considered progressive-web-app installation and offline support. Those were design and implementation goals; an online forecast still depends on network access to return fresh weather data.</p>
+          <p>Several ideas later found their way into the current Bootleg OS Weather Station, particularly location search, API-driven data and weather-specific visuals. The original project remains useful as a record of how I learned to connect an interface to live data and then design for what happens when that data is missing.</p>
+          <p><a href="../weather.html">Explore the current Weather Station ↗</a></p>
+        </div>
+      </section>
+    </main>
+    <footer class="shell footer">
+      <a class="footer-support" href="https://buymeacoffee.com/supportweb" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">☕</span> Support my work · Buy me a coffee</a>
+      <span>STATUS ● SYSTEM ONLINE</span>
+      <span>Thanks for stopping by ♥</span>
+      <span id="local-clock"></span>
+    </footer>
+    <script src="../js/gallery-data.js"></script>
+    <script src="../js/project-media-data.js"></script>
+    <script src="../js/project-media.js"></script>
+    <script src="../js/app.js"></script>
+    <script src="../js/radio-data.js"></script>
+    <script src="../js/radio-player.js"></script>
+  </body>
+</html>
