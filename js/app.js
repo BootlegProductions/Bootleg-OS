@@ -85,4 +85,4 @@ function initGallery() {
 initGallery();
 
 // Load the shared guide relative to this script, including nested project pages.
-{const entry=document.currentScript;if(entry){const helper=document.createElement('script');helper.src=new URL('boots.js?v=frames-1',entry.src).href;helper.defer=true;document.body.append(helper)}}
+{const entry=document.currentScript;if(entry){const helper=document.createElement('script');helper.src=new URL('boots.js?v=polish-2',entry.src).href;helper.defer=true;document.body.append(helper)}}

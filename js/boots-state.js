@@ -3,6 +3,8 @@ import { BOOTS_FRAMES } from './boots-frames.js';
 // A fixed canvas draws decoded frames. Cached GIF playback and CSS scale races
 // cannot resize an old sleeping/idle bitmap during a state change.
 export function createBootsAnimator({sprite,base,reducedMotion=false,setTimer=setTimeout,clearTimer=clearTimeout,loadImage=loadSpriteImage}){
+ // Preserve integer source pixels in the unchanged 72px display box.
+ const size=216; sprite.width=size; sprite.height=size;
  const ctx=sprite.getContext('2d');
  let state='idle',revision=0,frameTimer,endTimer,sleepTimer,destroyed=false;
  const images={};
@@ -11,10 +13,10 @@ export function createBootsAnimator({sprite,base,reducedMotion=false,setTimer=se
  }));
  function cancelAnimation(){clearTimer(frameTimer);clearTimer(endTimer);revision++}
  function paint(name,frame){
-  const image=frame.image,scale=64/48;
-  ctx.clearRect(0,0,72,72);ctx.imageSmoothingEnabled=false;
+  const image=frame.image,scale=4;
+  ctx.clearRect(0,0,size,size);ctx.imageSmoothingEnabled=false;
   // The jump's original travel needs two pixels of extra headroom.
-  ctx.drawImage(image,(72-image.width*scale)/2,(72-image.height*scale)/2+(name==='jump'?2:0),image.width*scale,image.height*scale);
+  ctx.drawImage(image,(size-image.width*scale)/2,(size-image.height*scale)/2+(name==='jump'?6:0),image.width*scale,image.height*scale);
   sprite.dataset.state=name;
  }
  function show(name,{loop=false,duration=0}={}){
