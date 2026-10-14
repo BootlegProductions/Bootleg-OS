@@ -306,7 +306,7 @@ window.GALLERY_CATEGORIES = [
     "files": [
       {
         "name": "Bootleg Production Showcase Reel",
-        "file": "assets/gallery/Portfolio Websites Assets/Bootleg Production Showcase Reel-web-site.mp4",
+        "file": "assets/gallery/Portfolio Websites Assets/Bootleg Production Showcase Reel.mp4",
         "type": "mp4"
       },
       {
@@ -792,10 +792,9 @@ window.GALLERY_CATEGORIES = [
         "poster": "assets/gallery/Bootleg Broadcast Animated Logos/Girly Pop Animated Logo.webp"
       },
       {
-        "name": "Japanime Animated Logo",
-        "file": "assets/gallery/Bootleg Broadcast Animated Logos/Japanime Animated Logo.mp4",
-        "type": "mp4",
-        "poster": "assets/gallery/Bootleg Broadcast Animated Logos/Japanime Animated Logo.webp"
+        "name": "Japanime Logo (still preview)",
+        "file": "assets/gallery/Bootleg Broadcast Animated Logos/Japanime Animated Logo.webp",
+        "type": "webp"
       },
       {
         "name": "Off Licence TV Animated Logo",
