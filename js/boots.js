@@ -1,7 +1,15 @@
 // Boots is a local guide: deterministic answers, no network chat or personal data collection.
 (async () => {
  const entry=document.currentScript.src,base=new URL('../',entry),page=location.pathname;
- const [{createBootsAnimator},{findPlace,timeAnswer,weatherAnswer,WEATHER_PLACE_KEY}]=await Promise.all([import(new URL('boots-state.js?v=polish-2',entry)),import(new URL('boots-live.js',entry))]);
+ const [{createBootsAnimator},{findPlace,timeAnswer,weatherAnswer,WEATHER_PLACE_KEY},{createDialogue}]=await Promise.all([import(new URL('boots-state.js?v=boots-chat-3',entry)),import(new URL('boots-live.js',entry)),import(new URL('boots-dialogue.js?v=boots-chat-3',entry))]);
+ const dialogue=createDialogue();let activeGuide=null,guideStep=0;
+ function toolHelp(guide,advance=false){
+  const steps=guide[2].match(/[^.!?]+(?:[.!?]+|$)/g)||[guide[2]];
+  if(!advance||activeGuide!==guide){activeGuide=guide;guideStep=0}else guideStep++;
+  if(guideStep>=steps.length){message('That’s the basics! Ready to give it a try?','boots',guide[3]);setSuggestions(['Start again','Show me the tools','Contact']);}
+  else{message(steps[guideStep].trim()+(guideStep===0?' Want me to walk you through it?':''),'boots',guide[3]);setSuggestions([guideStep===0?'Walk me through it':'Next step','Show me the tools','Contact']);}
+  draw('focused');
+ }
  const guides=[
  ['utilities','Image Tools','Upload an image, then use automatic cutout to remove the background. Check the edges, use Restore to recover details or Erase to remove leftovers, and download a transparent PNG. Colour key is useful for a flat background.','utilities.html'],
  ['pixel-studio','Pixel Studio','Choose your canvas size and palette, then paint on the grid. Brush size controls the pixel footprint. Use layers for separate parts and frames for animation; onion skin helps line up neighbouring frames. Export your work when ready.','pixel-studio.html'],
@@ -29,17 +37,17 @@
   if(/open bootleg edit/.test(q)){message('Here’s Oliver’s Bootleg Edit channel.','boots','https://youtube.com/@bootleg-edit');setSuggestions(['YouTube channels','Check out Redbubble','Contact']);draw('happy');return}
   if(/youtube channel|internetcourier|internet courier|bootleg.edit/.test(q)){message('Internet Courier has gaming videos and Fallout: New Vegas playthroughs. Bootleg Edit is the other creative channel. Choose one below.','boots','https://youtube.com/@internetcourier');setSuggestions(['Open Bootleg Edit','Check out Redbubble','Contact']);draw('happy');return}
   const matched=guides.find(g=>q.includes(g[1].toLowerCase())||q.includes(g[0])||(g[0]==='utilities'&&/background|cutout|erase|restore|image/.test(q))||(g[0]==='pixel-studio'&&/pixel|onion|layers|animation/.test(q))||(g[0]==='youtube-downloader'&&/youtube|mp3|mp4/.test(q)));
-  if(matched){message(matched[2],'boots',matched[3]);setSuggestions(matched[0]==='weather'?['What’s the weather?','Weather in Huddersfield','What time is it?']:['Help with this tool','What tools are here?','Contact']);draw('focused');return}
-  if(/help|this tool|how.*use/.test(q)&&current){message(current[2],'boots',current[3]);draw('focused');return}
+  if(matched){toolHelp(matched);return}
+  if(/help|this tool|how.*use/.test(q)&&current){toolHelp(current);return}
   if(/contact|email|hire|collaborat/.test(q)){setSuggestions(['Check out Redbubble','YouTube channels','About Oliver']);message('You can email Oliver about projects, collaborations or tool feedback. The Contact page also has professional and creative links.','boots','contact.html');}
-  else if(/about|oliver|who|education/.test(q))message('Oliver is a web designer and creative developer with close to ten years of website building and a 2:1 honours degree in Computer Science. Bootleg OS brings his projects, art, writing and tools together.','boots','about.html');
+  else if(/about|oliver|who|education/.test(q))message('Oliver makes websites, artwork and interactive tools. Bootleg OS brings that work together—want to read his story?','boots','about.html');
   else if(/gallery|art|images/.test(q))message('The Gallery groups artwork, sketches, photography and other media into folders. Open a folder to explore its contents.','boots','gallery.html');
   else if(/project|portfolio/.test(q))message('The Projects page contains case studies, including university work and newer experiments. Open a project to see the story, process and media.','boots','projects.html');
   else if(/blog|article|writing/.test(q))message('The Blog has articles about technology, creativity and making things online. Each article links to related reading.','boots','blog.html');
-  else if(/tools|apps|what can/.test(q))message('Try Image Tools, Pixel Studio, World Clock, Weather, Pirate Radio or Archive Scraper. Ask me about one and I’ll explain where to start.','boots','applications.html');
-  else message('I can help with the site and its tools. Try “remove a background”, “pixel studio”, “projects” or “contact”. I don’t have a general chat model, so I may miss questions outside those topics.');draw('happy');
+  else if(/tools|apps|what can/.test(q)){message('Want to make something, check the world, or find media? Pick a starting point.','boots','applications.html');setSuggestions(['Remove a background','Make some pixel art','World Clock']);}
+  else message('I didn’t quite catch that. Are you looking for a tool, a project, or a chat?');draw('happy');
  }
- function open(value,clicked=false){win.hidden=!value;toggle.setAttribute('aria-expanded',String(value));animator.setOpen(value,clicked);if(value){if(!log.children.length)message(current?`Hi, I’m Boots! You’re on ${current[1]}. Ask me how to get started.`:'Hi, I’m Boots! Need a hand finding a project or using a tool?');input.focus()}}
+ function open(value,clicked=false){win.hidden=!value;toggle.setAttribute('aria-expanded',String(value));animator.setOpen(value,clicked);if(value){if(!log.children.length){message(dialogue.welcome());setSuggestions(current?['Help with this tool','Show me the tools','Just chatting']:['Show me the tools','Find a project','Just chatting']);}input.focus()}}
  for(const event of ['pointerdown','keydown','wheel'])document.addEventListener(event,e=>{if(!e.target.closest?.('.boots-toggle'))animator.activity()},{passive:true});
  let lastMovement=0;document.addEventListener('pointermove',e=>{const now=Date.now();if(now-lastMovement>1000&&!e.target.closest?.('.boots-toggle')){lastMovement=now;animator.activity()}},{passive:true});
  input.addEventListener('input',()=>animator.activity());
@@ -54,7 +62,11 @@
  function setSuggestions(labels){const box=shell.querySelector('.boots-suggestions');box.replaceChildren();for(const label of labels){const b=document.createElement('button');b.type='button';b.textContent=label;b.onclick=()=>submitQuestion(label);box.append(b)}}
  function rememberedPlace(){try{const p=JSON.parse(localStorage.getItem(WEATHER_PLACE_KEY));return p&&Number.isFinite(p.lat)&&Number.isFinite(p.lon)?p:null}catch{return null}}
  async function answer(question){
-  const q=question.toLowerCase(),weatherMatch=question.match(/(?:weather|forecast)(?:\s+like)?\s+(?:in|for|at)\s+(.+?)[?.!]*$/i),timeMatch=question.match(/time(?:\s+is(?:\s+it)?)?\s+(?:in|at)\s+(.+?)[?.!]*$/i);
+  const q=question.toLowerCase();
+  if(activeGuide&&/^(walk me through it|next step|yes|yeah|yep|sure|okay|ok|start again)[!. ]*$/.test(q)){pendingWeather=false;toolHelp(activeGuide,!/^start again/.test(q));return;}
+  activeGuide=null;
+  const social=dialogue.reply(question);if(social){pendingWeather=false;activeGuide=null;message(social.text);setSuggestions(social.suggestions);draw('happy');return;}
+  const weatherMatch=question.match(/(?:weather|forecast)(?:\s+like)?\s+(?:in|for|at)\s+(.+?)[?.!]*$/i),timeMatch=question.match(/time(?:\s+is(?:\s+it)?)?\s+(?:in|at)\s+(.+?)[?.!]*$/i);
   if(timeMatch||/what.*time|time now|current time|^time$/.test(q)){
    try{const place=timeMatch?await findPlace(timeMatch[1]):null;message(timeAnswer(place),'boots','clock.html')}catch(e){message(e.message,'boots','clock.html')}
    setSuggestions(['Time in Tokyo','Time in New York','What’s the weather?']);draw('happy');return;
@@ -78,7 +90,7 @@
    try{await new Promise(r=>setTimeout(r,700));await answer(q)}catch{message('I couldn’t complete that answer. Please try again.')}finally{dots.remove()}
   });
  }
- setSuggestions([current?'Help with this tool':'What tools are here?','What time is it?','Contact']);
+ setSuggestions([current?'Help with this tool':'Show me the tools','Find a project','Just chatting']);
  shell.querySelector('form').onsubmit=e=>{e.preventDefault();submitQuestion(input.value)};
 })();
 

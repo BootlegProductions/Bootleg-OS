@@ -43,39 +43,39 @@ export const BOOTS_FRAMES = {
   ],
   "talk": [
     {
-      "file": "frames/talk-00.png",
+      "file": "frames/conversation-00.png",
       "duration": 200
     },
     {
-      "file": "frames/talk-01.png",
+      "file": "frames/conversation-01.png",
       "duration": 200
     },
     {
-      "file": "frames/talk-02.png",
+      "file": "frames/conversation-02.png",
       "duration": 200
     },
     {
-      "file": "frames/talk-03.png",
+      "file": "frames/conversation-03.png",
       "duration": 200
     },
     {
-      "file": "frames/talk-04.png",
+      "file": "frames/conversation-04.png",
       "duration": 200
     },
     {
-      "file": "frames/talk-05.png",
+      "file": "frames/conversation-05.png",
       "duration": 200
     },
     {
-      "file": "frames/talk-06.png",
+      "file": "frames/conversation-06.png",
       "duration": 200
     },
     {
-      "file": "frames/talk-07.png",
+      "file": "frames/conversation-07.png",
       "duration": 200
     },
     {
-      "file": "frames/talk-08.png",
+      "file": "frames/conversation-08.png",
       "duration": 200
     }
   ],

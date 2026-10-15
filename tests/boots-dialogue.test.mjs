@@ -1,0 +1,11 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const source=fs.readFileSync('js/boots-dialogue.js','utf8');
+const {createDialogue}=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
+test('greetings offer a short response and a few choices',()=>{const r=createDialogue().reply('Hello there!');assert.match(r.text,/How can I help/);assert.equal(r.suggestions.length,3);assert.ok(r.text.length<120)});
+test('names are remembered within one conversation and do not leak into another',()=>{const chat=createDialogue();assert.match(chat.reply("Hi, I'm Alex").text,/Alex/);assert.match(chat.reply('What is my name?').text,/Alex/);assert.match(createDialogue().reply('What is my name?').text,/haven’t told/)});
+test('feelings are not mistaken for names',()=>{const chat=createDialogue();assert.match(chat.reply("I'm tired").text,/sleep state/);assert.match(chat.reply('What is my name?').text,/haven’t told/)});
+test('rude language gets a playful response, with word boundaries',()=>{const chat=createDialogue();assert.match(chat.reply('fuck off').text,/Baka!/);assert.equal(chat.reply('weather in Scunthorpe'),null)});
+test('site and live-data questions remain available to the existing router',()=>{const chat=createDialogue();for(const q of ['Weather in Huddersfield','What time is it?','Remove a background','Contact','Pixel Studio'])assert.equal(chat.reply(q),null)});
+test('basic call and response, thanks and apologies stay concise',()=>{const chat=createDialogue();for(const q of ['How are you?','Doing good','Just chatting','Thanks','Sorry, Boots','Bye']){const r=chat.reply(q);assert.ok(r.text.length<250);assert.ok(r.suggestions.length<=3)}});

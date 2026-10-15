@@ -1,4 +1,10 @@
 window.GALLERY_CATEGORIES = [
+  {"slug":"boots-pixel-assistant","title":"Boots — Pixel Assistant","files":[
+    {"name":"Boots — Standing Idle","file":"assets/brand/boots/idle.png","type":"png"},
+    {"name":"Boots — Jumping for Joy","file":"assets/brand/boots/jump.gif","type":"gif"},
+    {"name":"Boots — Talking and Explaining","file":"assets/brand/boots/talk-detailed.gif","type":"gif"},
+    {"name":"Boots — Sleeping","file":"assets/brand/boots/sleep.png","type":"png"}
+  ]},
   {
     "slug": "bootleg-broadcast-logos",
     "title": "Bootleg Broadcast Logos",

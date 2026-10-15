@@ -1,4 +1,4 @@
-import { BOOTS_FRAMES } from './boots-frames.js';
+import { BOOTS_FRAMES } from './boots-frames.js?v=boots-chat-3';
 
 // A fixed canvas draws decoded frames. Cached GIF playback and CSS scale races
 // cannot resize an old sleeping/idle bitmap during a state change.
