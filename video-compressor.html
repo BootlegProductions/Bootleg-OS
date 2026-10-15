@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Video Compressor - Bootleg OS</title>
+    <meta name="description" content="Compress a video locally in your browser. Quality presets, resolution controls and MP4 downloads without a watermark.">
+    <link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg?v=3">
+    <meta property="og:title" content="Video Compressor - Bootleg OS">
+    <meta property="og:description" content="Compress a video locally in your browser. Quality presets, resolution controls and MP4 downloads without a watermark.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://bootlegproductions.github.io/Bootleg-OS/assets/brand/bootleg-logo.jpg">
+    <meta property="og:url" content="https://bootlegproductions.github.io/Bootleg-OS/video-compressor.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Video Compressor - Bootleg OS">
+    <meta name="twitter:description" content="Compress a video locally in your browser. Quality presets, resolution controls and MP4 downloads without a watermark.">
+    <link rel="stylesheet" href="css/style.css?v=compressor-1">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="shell topbar">
+        <a class="brand" href="index.html">
+          <img src="assets/brand/bootleg-logo.jpg" alt="Bootleg logo">
+          <span>
+            <strong>Bootleg Productions</strong>
+            <span>Creative Hub / BOOTLEG
+                        OS</span>
+          </span>
+        </a>
+        <nav class="nav">
+          <a href="index.html">Home</a>
+          <a href="projects.html">Projects</a>
+          <a href="gallery.html">Gallery</a>
+          <div class="nav-dropdown">
+            <a class="nav-apps-link" href="applications.html">Apps <span class="nav-caret">▾</span>
+            </a>
+            <div class="nav-dropdown-menu">
+              <a href="applications.html">All Apps</a>
+              <a href="weather.html">Weather</a>
+              <a href="clock.html">World Clock</a>
+              <a href="radio.html">Pirate Radio</a>
+              <a href="utilities.html">Image Tools</a>
+              <a href="pixel-studio.html">Pixel Studio</a>
+              <a href="video-compressor.html">Video Compressor</a>
+              <a href="archive-scraper.html">Archive Scraper</a>
+              <a href="youtube-downloader.html">Video Converter</a>
+            </div>
+          </div>
+          <a href="blog.html">Blog</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+        <div class="mini-radio">
+          <div class="radio-screen">
+            <span class="frequency">89.5 FM</span>
+            <span class="station">Pirate
+                        Radio</span>
+          </div>
+          <img class="radio-base" src="assets/radio/radio-base.png" alt="Pirate Radio">
+          <button class="dial volume-dial" title="Volume">
+            <span class="dial-rotator">
+              <img src="assets/radio/radio-volume.webp" alt="">
+            </span>
+          </button>
+          <button class="dial tuning-dial" title="Tune station">
+            <span class="dial-rotator">
+              <img src="assets/radio/radio-tuning.webp" alt="">
+            </span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main class="shell compressor-workspace">
+  <div class="tool-heading"><div><span class="eyebrow">Video Tools // local processing</span><h1>Video Compressor</h1><p>A smaller video, ready to share. Compress a clip on your device and save it as an MP4.</p></div><a class="btn" href="applications.html">All tools</a></div>
+  <section class="compressor-grid" aria-label="Video compression workspace">
+    <form class="compressor-controls card" id="compress-form"><div class="card-content">
+      <label class="file-drop" id="compress-drop" for="compress-input"><strong>Choose or drop a video</strong><span>MP4, M4V, MOV or WebM · up to 500 MB</span><input id="compress-input" type="file" accept="video/mp4,video/quicktime,video/webm,.mp4,.m4v,.mov,.webm"></label>
+      <p id="compress-file-info" class="tool-hint">No video selected.</p>
+      <label class="tool-field" for="compress-preset">Compression level<select id="compress-preset"><option value="small">Smallest file — more quality loss</option><option value="balanced" selected>Balanced — recommended</option><option value="quality">Better quality — larger file</option></select></label>
+      <label class="tool-field" for="compress-resolution">Maximum video height<select id="compress-resolution"><option value="0">Keep original resolution</option><option value="1080">1080 pixels</option><option value="720" selected>720 pixels — recommended</option><option value="480">480 pixels — smallest</option></select></label>
+      <label class="tool-field" for="compress-mode">Size control<select id="compress-mode"><option value="quality">Use quality preset</option><option value="target">Aim for a file size</option></select></label>
+      <label class="tool-field" for="compress-target">Target size (MB)<input id="compress-target" type="number" min="1" max="500" step="1" value="25" disabled><small>An estimate, not a guaranteed limit. Tiny targets reduce quality.</small></label>
+      <label class="tool-field" for="compress-speed">Encoding speed<select id="compress-speed"><option value="veryfast">Balanced speed and size</option><option value="ultrafast">Fastest — may produce a larger file</option></select></label>
+      <label class="compressor-checkbox"><input id="compress-mute" type="checkbox"> Remove audio</label>
+      <div class="tool-actions"><button class="btn" type="submit" id="compress-start" disabled>Compress video</button><button class="btn" type="button" id="compress-cancel" disabled>Cancel</button></div>
+    </div></form>
+    <div class="compressor-stage card"><div class="card-content"><h2>Original video</h2><video id="compress-original" controls preload="metadata" playsinline></video><progress id="compress-progress" max="100" value="0" aria-label="Compression progress"></progress><p id="compress-status" role="status" aria-live="polite">Choose a video to begin.</p><details id="compress-diagnostics" hidden><summary>Encoder details</summary><pre id="compress-log"></pre></details></div></div>
+  </section>
+  <section class="card compressor-result" id="compress-result" hidden aria-labelledby="compress-result-title"><div class="card-content"><span class="eyebrow">Ready to save</span><h2 id="compress-result-title">Your compressed video</h2><p id="compress-summary" class="compressor-summary"></p><video id="compress-output" controls preload="metadata" playsinline></video><p id="compress-advice"></p><a class="btn" id="compress-download" download>Download MP4</a></div></section>
+  <div class="boots-note"><strong>On your device. No watermark. No signup.</strong><p>Your video is not uploaded. The first compression downloads a video engine of about 32 MB. Keep this tab open while it works; long or high-resolution videos can take several minutes or exceed your device’s memory. A laptop or desktop works best for larger files. Compression is lossy, and an already-small video may not shrink further.</p></div>
+  <p class="model-credit">Powered by <a href="https://ffmpegwasm.netlify.app/" target="_blank" rel="noopener noreferrer">FFmpeg.wasm</a>. <a href="https://github.com/ffmpegwasm/ffmpeg.wasm/tree/main/packages/core" target="_blank" rel="noopener noreferrer">Engine source and licensing</a>. The engine loads from jsDelivr; processing stays in your browser.</p>
+<aside class="tool-support-notice" aria-label="Support development"><div><strong>Useful? Help build what comes next.</strong><p>These tools are free to use. If one saves you time, an optional coffee helps fund upgrades, new features and ongoing development. Thanks for the support.</p></div><a class="btn" href="https://buymeacoffee.com/supportweb" target="_blank" rel="noopener noreferrer">Support development ↗</a></aside>
+    </main>
+    <footer class="shell footer">
+      <div class="footer-left"><a class="footer-support" href="https://buymeacoffee.com/supportweb" target="_blank" rel="noopener noreferrer"><svg class="footer-coffee-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M7 12h16v9a6 6 0 0 1-6 6h-4a6 6 0 0 1-6-6Z" fill="currentColor"/><path d="M23 14h2a4 4 0 0 1 0 8h-2M5 29h21M11 3v5M16 2v5M21 3v5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg><span class="footer-support-copy"><strong>Buy me a coffee</strong><small>Thanks for supporting my work ♥</small></span></a><span class="footer-time"><span>LOCAL TIME</span><time id="local-clock"></time></span></div>
+      <span class="footer-status"><span class="footer-online-dot" aria-hidden="true"></span>SYSTEM ONLINE</span>
+    </footer>
+    <script type="module" src="js/video-compressor.js?v=compressor-1"></script>
+    <script src="js/gallery-data.js?v=boots-chat-3"></script>
+    <script src="js/app.js?v=compressor-1"></script>
+    <script src="js/radio-data.js"></script>
+    <script src="js/radio-player.js"></script>
+  </body>
+</html>

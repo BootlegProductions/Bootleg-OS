@@ -11,6 +11,7 @@
   draw('focused');
  }
  const guides=[
+ ['video-compressor','Video Compressor','Choose a video from your device. Start with Balanced quality and 720 pixels. Press Compress and keep the tab open while it works. Preview the result, then download your MP4. You can also aim for a target size, but the final size is an estimate.','video-compressor.html'],
  ['utilities','Image Tools','Upload an image, then use automatic cutout to remove the background. Check the edges, use Restore to recover details or Erase to remove leftovers, and download a transparent PNG. Colour key is useful for a flat background.','utilities.html'],
  ['pixel-studio','Pixel Studio','Choose your canvas size and palette, then paint on the grid. Brush size controls the pixel footprint. Use layers for separate parts and frames for animation; onion skin helps line up neighbouring frames. Export your work when ready.','pixel-studio.html'],
  ['archive-scraper','Archive Scraper','Paste the Internet Archive item or collection link into the scraper. Choose the files you want from the results before downloading. Large collections can take longer to scan.','archive-scraper.html'],
@@ -36,7 +37,7 @@
   if(/redbubble|shop|stickers/.test(q)){message('Oliver’s Bootleg-Edits shop has clothing, stickers and artwork on Redbubble.','boots','https://www.redbubble.com/people/Bootleg-Edits/shop?asc=u');setSuggestions(['YouTube channels','Explore the gallery','Contact']);draw('happy');return}
   if(/open bootleg edit/.test(q)){message('Here’s Oliver’s Bootleg Edit channel.','boots','https://youtube.com/@bootleg-edit');setSuggestions(['YouTube channels','Check out Redbubble','Contact']);draw('happy');return}
   if(/youtube channel|internetcourier|internet courier|bootleg.edit/.test(q)){message('Internet Courier has gaming videos and Fallout: New Vegas playthroughs. Bootleg Edit is the other creative channel. Choose one below.','boots','https://youtube.com/@internetcourier');setSuggestions(['Open Bootleg Edit','Check out Redbubble','Contact']);draw('happy');return}
-  const matched=guides.find(g=>q.includes(g[1].toLowerCase())||q.includes(g[0])||(g[0]==='utilities'&&/background|cutout|erase|restore|image/.test(q))||(g[0]==='pixel-studio'&&/pixel|onion|layers|animation/.test(q))||(g[0]==='youtube-downloader'&&/youtube|mp3|mp4/.test(q)));
+  const matched=guides.find(g=>(g[0]==='video-compressor'&&/compress|smaller video|reduce.*video/.test(q))||q.includes(g[1].toLowerCase())||q.includes(g[0])||(g[0]==='utilities'&&/background|cutout|erase|restore|image/.test(q))||(g[0]==='pixel-studio'&&/pixel|onion|layers|animation/.test(q))||(g[0]==='youtube-downloader'&&/youtube|mp3|mp4/.test(q)));
   if(matched){toolHelp(matched);return}
   if(/help|this tool|how.*use/.test(q)&&current){toolHelp(current);return}
   if(/contact|email|hire|collaborat/.test(q)){setSuggestions(['Check out Redbubble','YouTube channels','About Oliver']);message('You can email Oliver about projects, collaborations or tool feedback. The Contact page also has professional and creative links.','boots','contact.html');}
@@ -44,7 +45,7 @@
   else if(/gallery|art|images/.test(q))message('The Gallery groups artwork, sketches, photography and other media into folders. Open a folder to explore its contents.','boots','gallery.html');
   else if(/project|portfolio/.test(q))message('The Projects page contains case studies, including university work and newer experiments. Open a project to see the story, process and media.','boots','projects.html');
   else if(/blog|article|writing/.test(q))message('The Blog has articles about technology, creativity and making things online. Each article links to related reading.','boots','blog.html');
-  else if(/tools|apps|what can/.test(q)){message('Want to make something, check the world, or find media? Pick a starting point.','boots','applications.html');setSuggestions(['Remove a background','Make some pixel art','World Clock']);}
+  else if(/tools|apps|what can/.test(q)){message('Want to make something, check the world, or find media? Pick a starting point.','boots','applications.html');setSuggestions(['Remove a background','Make some pixel art','Video Compressor']);}
   else message('I didn’t quite catch that. Are you looking for a tool, a project, or a chat?');draw('happy');
  }
  function open(value,clicked=false){win.hidden=!value;toggle.setAttribute('aria-expanded',String(value));animator.setOpen(value,clicked);if(value){if(!log.children.length){message(dialogue.welcome());setSuggestions(current?['Help with this tool','Show me the tools','Just chatting']:['Show me the tools','Find a project','Just chatting']);}input.focus()}}
