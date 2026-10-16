@@ -494,6 +494,11 @@ window.GALLERY_CATEGORIES = [
     "title": "Sketches",
     "files": [
       {
+        "name": "Dwight Schrute — Portrait Sketch",
+        "file": "assets/gallery/Sketches/Dwight Schrute Portrait.jpeg",
+        "type": "jpeg"
+      },
+      {
         "name": "IMG_1253",
         "file": "assets/gallery/Sketches/IMG_1253.webp",
         "type": "webp"
