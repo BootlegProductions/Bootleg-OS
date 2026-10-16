@@ -499,6 +499,11 @@ window.GALLERY_CATEGORIES = [
         "type": "jpeg"
       },
       {
+        "name": "Dwight Schrute — Exploding Head Animation",
+        "file": "assets/gallery/Sketches/Dwight Schrute Head Explode.gif",
+        "type": "gif"
+      },
+      {
         "name": "IMG_1253",
         "file": "assets/gallery/Sketches/IMG_1253.webp",
         "type": "webp"
