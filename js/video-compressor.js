@@ -13,7 +13,7 @@ async function choose(candidate){
  if(inputURL)URL.revokeObjectURL(inputURL);inputURL=null;original.removeAttribute('src');original.load();
  $('compress-file-info').textContent='No video selected.';
  if(!/\.(mp4|m4v|mov|webm)$/i.test(candidate.name)){tell('Choose an MP4, M4V, MOV or WebM video.');return}
- if(candidate.size>MAX_INPUT_BYTES){tell('This browser tool currently accepts files up to 500 MB. Please choose a smaller clip.');return}
+ if(candidate.size>MAX_INPUT_BYTES){tell('This video is too large for browser mode. Use the Windows helper below for 2 GB recordings; it aims for a 480 MB MP4.');$('compress-desktop-title').scrollIntoView({behavior:'smooth',block:'center'});return}
  if(!candidate.size){tell('That file is empty. Please choose another video.');return}
  const url=URL.createObjectURL(candidate);inputURL=url;original.src=url;
  tell('Reading the video…');
