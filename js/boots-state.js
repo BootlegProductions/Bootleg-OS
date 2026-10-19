@@ -13,7 +13,7 @@ export function createBootsAnimator({sprite,base,reducedMotion=false,setTimer=se
  }));
  function cancelAnimation(){clearTimer(frameTimer);clearTimer(endTimer);revision++}
  function paint(name,frame){
-  const image=frame.image,scale=4;
+  const image=frame.image,scale=name==='angry'?3:4;
   ctx.clearRect(0,0,size,size);ctx.imageSmoothingEnabled=false;
   // The jump's original travel needs two pixels of extra headroom.
   ctx.drawImage(image,(size-image.width*scale)/2,(size-image.height*scale)/2+(name==='jump'?6:0),image.width*scale,image.height*scale);
@@ -37,7 +37,7 @@ export function createBootsAnimator({sprite,base,reducedMotion=false,setTimer=se
  }
  function armSleep(){clearTimer(sleepTimer);sleepTimer=setTimer(()=>{sleepTimer=null;show('sleep')},300000)}
  function idle(){show('idle');if(!sleepTimer)armSleep()}
- function temporary(name,duration=0){armSleep();show(name,{loop:name==='talk'||name==='explain',duration})}
+ function temporary(name,duration=0){armSleep();show(name,{loop:name==='talk'||name==='explain'||name==='angry',duration})}
  function activity(){if(state==='sleep')show('idle');armSleep()}
  function setOpen(value,clicked=false){
   if(value||(clicked&&(state==='idle'||state==='sleep')))temporary('jump');
@@ -46,10 +46,13 @@ export function createBootsAnimator({sprite,base,reducedMotion=false,setTimer=se
  function talk(){temporary('talk',7000)}
  function explain(){temporary('explain',7000)}
  function celebrate(){temporary('jump')}
+ function angry(){temporary('angry',4600)}
+ function sleepy(){temporary('sleep',4500)}
  function destroy(){destroyed=true;cancelAnimation();clearTimer(sleepTimer)}
  idle();
- return {setOpen,talk,explain,celebrate,activity,destroy,ready};
+ return {setOpen,talk,explain,celebrate,angry,sleepy,activity,destroy,ready};
 }
 function loadSpriteImage(url){
  return new Promise((resolve,reject)=>{const image=new Image();image.onload=()=>resolve(image);image.onerror=()=>reject(Error('Sprite image unavailable'));image.src=url});
 }
+

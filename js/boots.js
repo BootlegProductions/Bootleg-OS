@@ -66,7 +66,7 @@
   const q=question.toLowerCase();
   if(activeGuide&&/^(walk me through it|next step|yes|yeah|yep|sure|okay|ok|start again)[!. ]*$/.test(q)){pendingWeather=false;toolHelp(activeGuide,!/^start again/.test(q));return;}
   activeGuide=null;
-  const social=dialogue.reply(question);if(social){pendingWeather=false;activeGuide=null;message(social.text);setSuggestions(social.suggestions);draw('happy');return;}
+  const social=dialogue.reply(question);if(social){pendingWeather=false;activeGuide=null;message(social.text,'boots',social.href);setSuggestions(social.suggestions);if(social.mood==='angry')animator.angry();else if(social.mood==='sleepy')animator.sleepy();else if(social.mood==='explain')animator.explain();else draw('happy');return;}
   const weatherMatch=question.match(/(?:weather|forecast)(?:\s+like)?\s+(?:in|for|at)\s+(.+?)[?.!]*$/i),timeMatch=question.match(/time(?:\s+is(?:\s+it)?)?\s+(?:in|at)\s+(.+?)[?.!]*$/i);
   if(timeMatch||/what.*time|time now|current time|^time$/.test(q)){
    try{const place=timeMatch?await findPlace(timeMatch[1]):null;message(timeAnswer(place),'boots','clock.html')}catch(e){message(e.message,'boots','clock.html')}
@@ -94,4 +94,5 @@
  setSuggestions([current?'Help with this tool':'Show me the tools','Find a project','Just chatting']);
  shell.querySelector('form').onsubmit=e=>{e.preventDefault();submitQuestion(input.value)};
 })();
+
 

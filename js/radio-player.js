@@ -22,7 +22,7 @@
   );
 
   const audio = new Audio();
-  audio.preload = "none";
+  audio.preload = "metadata";
   // Archive audio does not need CORS. Requiring it makes playable files fail.
   audio.volume = state.volume;
   document.body.appendChild(audio);
@@ -43,6 +43,37 @@
 
   let loadTimer;
   let loadingId = 0;
+  let attempted = new Set();
+  let lastProgress = 0;
+  const LOAD_TIMEOUT = 18000;
+  function stopWatchdog() { clearTimeout(loadTimer); }
+  function watchPlayback(id = loadingId) {
+    stopWatchdog();
+    lastProgress = audio.currentTime || 0;
+    loadTimer = setTimeout(() => {
+      if (id !== loadingId || !state.wantsPlayback) return;
+      if (audio.currentTime > lastProgress + 0.5) { watchPlayback(id); return; }
+      skipUnavailable(id, "Archive audio stalled");
+    }, LOAD_TIMEOUT);
+  }
+  function skipUnavailable(id, reason) {
+    if (id !== loadingId || !state.wantsPlayback) return;
+    const station = currentStation();
+    attempted.add(state.trackIndex);
+    // Do not churn through an entire station if the Archive is offline.
+    if (attempted.size >= Math.min(6, station.tracks.length)) {
+      stopWatchdog();
+      state.wantsPlayback = false;
+      sessionStorage.setItem("bootlegRadioWanted", "0");
+      audio.pause();
+      state.playing = false;
+      updateDisplays("Several tracks failed · try another station");
+      return;
+    }
+    state.trackIndex = clampIndex(state.trackIndex + 1, station.tracks.length);
+    updateDisplays(reason + " · trying next track");
+    loadTrack(true);
+  }
   function savePosition() {
     localStorage.setItem("bootlegRadioStation", state.stationIndex);
     localStorage.setItem("bootlegRadioTrack", state.trackIndex);
@@ -52,10 +83,12 @@
   function loadTrack(autoplay = false, restore = false) {
     const track = currentTrack();
     if (!track) return;
-    clearTimeout(loadTimer);
+    stopWatchdog();
     const id = ++loadingId;
     if (!restore) localStorage.setItem("bootlegRadioTime", "0");
     const savedTime = restore ? Number(localStorage.getItem("bootlegRadioTime") || 0) : 0;
+    audio.pause();
+    state.playing = false;
     audio.src = track.url;
     audio.load();
     if (savedTime > 0) {
@@ -91,23 +124,24 @@
     state.wantsPlayback = true;
     sessionStorage.setItem("bootlegRadioWanted", "1");
     updateDisplays("TUNING...");
-    clearTimeout(loadTimer);
-    loadTimer = setTimeout(() => {
-      if (audio.readyState < 3 && state.wantsPlayback) {
-        updateDisplays("Still loading archive audio · Next track may help");
-      }
-    }, 12000);
+    watchPlayback();
+    const id = loadingId;
     audio
       .play()
       .then(() => {
-        clearTimeout(loadTimer);
+        if (id !== loadingId) return;
         state.playing = true;
         updateDisplays();
       })
       .catch(error => {
-        clearTimeout(loadTimer);
+        if (id !== loadingId || !state.wantsPlayback) return;
         state.playing = false;
-        updateDisplays(error.name === "NotAllowedError" ? "Tap play to resume" : "Audio unavailable · try next track");
+        if (error.name === "NotAllowedError") {
+          stopWatchdog();
+          updateDisplays("Tap Play to resume audio");
+        } else if (error.name !== "AbortError") {
+          skipUnavailable(id, "Archive file failed");
+        }
       });
   }
 
@@ -115,6 +149,7 @@
     state.wantsPlayback = false;
     sessionStorage.setItem("bootlegRadioWanted", "0");
     audio.pause();
+    stopWatchdog();
     savePosition();
     state.playing = false;
     updateDisplays();
@@ -126,6 +161,7 @@
 
   function nextTrack() {
     const station = currentStation();
+    attempted.clear();
 
     state.trackIndex = clampIndex(
       state.trackIndex + 1,
@@ -137,6 +173,7 @@
 
   function prevTrack() {
     const station = currentStation();
+    attempted.clear();
 
     state.trackIndex = clampIndex(
       state.trackIndex - 1,
@@ -159,6 +196,7 @@ function spinTuningDial(direction = 1) {
 }
 
   function tuneStation(direction = 1) {
+    attempted.clear();
     state.stationIndex = clampIndex(
       state.stationIndex + direction,
       stations.length
@@ -247,6 +285,9 @@ function spinTuningDial(direction = 1) {
           message ||
           (state.playing ? "ON AIR" : "STANDBY");
       });
+    document.querySelectorAll("[data-radio-status-short]").forEach(el => {
+      el.textContent = message || (state.playing ? "ON AIR" : state.wantsPlayback ? "READY · tap Play" : "STANDBY");
+    });
 
     document
       .querySelectorAll("[data-radio-volume]")
@@ -406,6 +447,7 @@ function spinTuningDial(direction = 1) {
       );
 
       if (select) {
+        attempted.clear();
         state.stationIndex = clampIndex(
           Number(select.dataset.selectStation),
           stations.length
@@ -427,6 +469,7 @@ function spinTuningDial(direction = 1) {
     });
 
     audio.addEventListener("ended", () => {
+      attempted.clear();
       const station = currentStation();
 
       state.trackIndex = clampIndex(
@@ -443,11 +486,18 @@ function spinTuningDial(direction = 1) {
     });
 
     audio.addEventListener("timeupdate", () => {
+      if (audio.currentTime > lastProgress + 0.5) {
+        attempted.clear();
+        if (state.wantsPlayback) watchPlayback();
+      }
       if (Math.floor(audio.currentTime) % 3 === 0) savePosition();
     });
     audio.addEventListener("error", () => {
-      if (state.wantsPlayback) updateDisplays("This archive file failed · try next track");
+      skipUnavailable(loadingId, "Archive file failed");
     });
+    audio.addEventListener("stalled", () => { if (state.wantsPlayback) watchPlayback(); });
+    audio.addEventListener("waiting", () => { if (state.wantsPlayback) watchPlayback(); });
+    audio.addEventListener("playing", () => { if (state.wantsPlayback) watchPlayback(); });
 
     audio.addEventListener("play", () => {
       state.playing = true;
@@ -473,7 +523,7 @@ function spinTuningDial(direction = 1) {
   // A shared mobile drawer uses this same Audio instance and existing controls.
   const dock=document.createElement('section');dock.className='mobile-radio';dock.setAttribute('aria-label','Pirate Radio player');
   dock.innerHTML=`<button class="mobile-radio-handle" type="button" aria-expanded="false" aria-controls="mobile-radio-details" aria-label="Expand radio player"><span aria-hidden="true">━━</span><span class="mobile-radio-hint">Radio · swipe up</span></button>
-  <div class="mobile-radio-bar"><div class="mobile-radio-copy"><strong data-radio-station></strong><span data-radio-track></span></div><button type="button" data-play-radio data-radio-play>Play</button><button type="button" data-next-track aria-label="Next track">Next</button><button type="button" class="mobile-radio-switch" aria-label="Show station controls">Stations</button></div>
+  <div class="mobile-radio-bar"><div class="mobile-radio-copy"><strong data-radio-station></strong><span data-radio-track></span><small data-radio-status-short role="status"></small></div><button type="button" data-play-radio data-radio-play>Play</button><button type="button" data-next-track aria-label="Next track">Next</button><button type="button" class="mobile-radio-switch" aria-label="Show station controls">Stations</button></div>
   <div id="mobile-radio-details" class="mobile-radio-details" hidden><p data-radio-status role="status"></p><div class="mobile-radio-stations"></div><label>Volume <input class="mobile-radio-volume" type="range" min="0" max="100" value="${Math.round(state.volume*100)}"><span data-radio-volume></span></label></div>`;
   document.body.append(dock);
   const stationButtons=dock.querySelector('.mobile-radio-stations');stations.forEach((station,index)=>{const button=document.createElement('button');button.type='button';button.dataset.selectStation=String(index);button.textContent=station.name;stationButtons.append(button)});
@@ -494,3 +544,4 @@ function spinTuningDial(direction = 1) {
 
   updateDisplays();
 })();
+

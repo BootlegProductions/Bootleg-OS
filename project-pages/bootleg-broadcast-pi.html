@@ -1,0 +1,84 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Bootleg Broadcast Pi TV — Bootleg OS</title><meta name="description" content="A native Pygame and mpv Raspberry Pi television prototype with ten channels, local idents and schedules from Bootleg Broadcast."><link rel="canonical" href="https://bootlegproductions.github.io/Bootleg-OS/project-pages/bootleg-broadcast-pi.html"><link rel="icon" type="image/svg+xml" href="../assets/brand/favicon.svg?v=3"><link rel="stylesheet" href="../css/style.css?v=pygame-radio-1"></head><body>
+<header class="site-header">
+      <div class="shell topbar">
+        <a class="brand" href="../index.html">
+          <img src="../assets/brand/bootleg-logo.jpg" alt="Bootleg logo">
+          <span>
+            <strong>Bootleg Productions</strong>
+            <span>Creative Hub / BOOTLEG
+                        OS</span>
+          </span>
+        </a>
+        <nav class="nav">
+          <a href="../index.html">Home</a>
+          <a href="../projects.html">Projects</a>
+          <a href="../gallery.html">Gallery</a>
+          <div class="nav-dropdown">
+            <a class="nav-apps-link" href="../applications.html">Apps <span class="nav-caret">▾</span>
+            </a>
+            <div class="nav-dropdown-menu">
+              <a href="../applications.html">All Apps</a>
+              <a href="../weather.html">Weather</a>
+              <a href="../clock.html">World Clock</a>
+              <a href="../radio.html">Pirate Radio</a>
+              <a href="../utilities.html">Image Tools</a>
+              <a href="../pixel-studio.html">Pixel Studio</a>
+              <a href="../video-compressor.html">Video Compressor</a>
+              <a href="../archive-scraper.html">Archive Scraper</a>
+              <a href="../youtube-downloader.html">Video Converter</a>
+            </div>
+          </div>
+          <a href="../blog.html">Blog</a>
+          <a href="../contact.html">Contact</a>
+        </nav>
+        <div class="mini-radio">
+          <div class="radio-screen">
+            <span class="frequency">89.5 FM</span>
+            <span class="station">Pirate
+                        Radio</span>
+          </div>
+          <img class="radio-base" src="../assets/radio/radio-base.png" alt="Pirate Radio">
+          <button class="dial volume-dial" title="Volume">
+            <span class="dial-rotator">
+              <img src="../assets/radio/radio-volume.webp" alt="">
+            </span>
+          </button>
+          <button class="dial tuning-dial" title="Tune station">
+            <span class="dial-rotator">
+              <img src="../assets/radio/radio-tuning.webp" alt="">
+            </span>
+          </button>
+        </div>
+      </div>
+    </header>
+    
+<main class="shell pygame-case-study">
+  <a class="btn" href="../projects.html#pygame-applications">← Back to Pygame applications</a>
+  <section class="panel pygame-hero"><div class="panel-content">
+    <span class="eyebrow">Pygame applications / Raspberry Pi</span>
+    <h1>Bootleg Broadcast Pi TV</h1>
+    <p>The browser broadcast has a second life as a small physical TV. This native Python and Pygame version puts the channel selector, schedule and controls on a Raspberry Pi screen while mpv handles the actual video.</p>
+    <div class="pygame-tags"><span class="tag">Working proof of concept</span><span class="tag">v0.4.3</span><span class="tag">Python + Pygame</span><span class="tag">mpv</span></div>
+    <p><a class="btn" href="https://bootlegproductions.github.io/Bootleg-Broadcast/" target="_blank" rel="noopener noreferrer">Open the web broadcast ↗</a></p>
+  </div></section>
+  <section class="pygame-story"><div>
+    <span class="eyebrow">From website to screen</span><h2>Ten channels, one small television</h2>
+    <p>The original Bootleg Broadcast runs in a browser with a CRT frame, a remote and scheduled media from the Internet Archive. I wanted to see whether the same experience could live in a dedicated device that you can turn on and tune like a television.</p>
+    <p>The Pi version pulls the channel schedule and break information from the web project, then presents it in a full-screen Pygame interface. The current build includes all ten channel logos and local ident clips. If a network break cannot be fetched, a local station ident can fill that slot.</p>
+  </div><figure><img src="../assets/project-media/bootleg-broadcast/home-page.png" alt="Bootleg Broadcast browser interface, the starting point for the Pi TV adaptation" loading="lazy"><figcaption>The web broadcast that inspired the native Pi TV version.</figcaption></figure></section>
+  <section class="pygame-detail-grid"><article class="card"><div class="card-content"><span class="eyebrow">Under the hood</span><h2>Native controls and video</h2><p>Pygame draws the interface and remote controls. mpv renders video into a dedicated X11 child surface inside the player area, so the UI does not paint over playback. The packaged idents are smaller H.264 files suited to the current Raspberry Pi display.</p></div></article><article class="card"><div class="card-content"><span class="eyebrow">Current state</span><h2>A real device prototype</h2><p>The interface, channel data, controls, logos and video now work on the Pi. Playback has been improved by reducing unnecessary screen redraws and buffering remote streams. Hardware limits still affect smoothness, so it is a proof of concept being refined on the device.</p></div></article></section>
+  <aside class="pygame-note"><strong>How this relates to the website</strong><p>This page documents a native Raspberry Pi build. The button above opens the separate browser version of Bootleg Broadcast; it does not run the Pygame program in this page.</p></aside>
+  <section class="section-title"><div><span class="eyebrow">Where it could go</span><h2>Next transmissions</h2></div><p>Continue tuning performance, polish the on-device controls, and build a more finished case so it feels like a tiny television rather than a development board.</p></section>
+  <p class="pygame-related"><a class="btn" href="raspberry-pi.html">See the Pi-Boy wearable →</a> <a class="btn" href="bootleg-broadcast.html">Read about Bootleg Broadcast →</a></p>
+</main>
+<footer class="shell footer">
+      <div class="footer-left"><a class="footer-support" href="https://buymeacoffee.com/supportweb" target="_blank" rel="noopener noreferrer"><svg class="footer-coffee-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M7 12h16v9a6 6 0 0 1-6 6h-4a6 6 0 0 1-6-6Z" fill="currentColor"/><path d="M23 14h2a4 4 0 0 1 0 8h-2M5 29h21M11 3v5M16 2v5M21 3v5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg><span class="footer-support-copy"><strong>Buy me a coffee</strong><small>Thanks for supporting my work ♥</small></span></a><span class="footer-time"><span>LOCAL TIME</span><time id="local-clock"></time></span></div>
+      <span class="footer-status"><span class="footer-online-dot" aria-hidden="true"></span>SYSTEM ONLINE</span>
+    </footer>
+    <script src="../js/gallery-data.js?v=boots-chat-3"></script>
+    <script src="../js/app.js?v=compressor-1"></script>
+    <script src="../js/radio-data.js"></script>
+    <script src="../js/radio-player.js"></script>
+  </body>
+</html>
+

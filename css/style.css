@@ -1794,8 +1794,34 @@ body:has(.content-article) .content-article .post-note a{color:#5a386f}
 @media(max-width:680px){.footer{padding:16px}.footer-left{display:grid;grid-template-columns:minmax(0,1fr) 106px;gap:16px;padding-right:0}.footer-support{width:auto;justify-content:flex-start}.footer-support-copy small{font-size:.65rem}.footer-time{margin:0}.footer-coffee-icon{width:26px;height:26px;flex-basis:26px}}
 @media(prefers-reduced-motion:reduce){.footer-online-dot{animation:none}}
 
+/* Native Pygame work sits beside the browser projects. */
+.pygame-projects .planned-project{border-style:dashed;opacity:.88}
+.pygame-projects .planned-project:hover{transform:none}
+.pygame-case-study{padding-block:22px 48px}
+.pygame-case-study>.btn{display:inline-flex;margin-bottom:18px}
+.pygame-hero h1{max-width:20ch}
+.pygame-hero .panel-content{max-width:850px}
+.pygame-tags{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+.pygame-story{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,1fr);gap:32px;align-items:center;margin:35px 0}
+.pygame-story figure{margin:0;min-width:0}
+.pygame-story img{display:block;width:100%;height:auto;max-height:460px;object-fit:contain;border:1px solid var(--line);border-radius:12px;background:#131b31}
+.pygame-story figcaption{padding:9px 2px;color:#c9cbd6;font-size:.8rem}
+.pygame-detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.pygame-note{margin:28px 0;padding:20px 24px;border-left:5px solid var(--orange);border-radius:10px;background:#30273d;color:#ffe0be}
+.pygame-note p{margin-bottom:0}
+.pygame-related{display:flex;flex-wrap:wrap;gap:12px}
+@media(max-width:760px){.pygame-story,.pygame-detail-grid{grid-template-columns:1fr}}
+@media(max-width:680px){
+ .mobile-radio-copy small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10px;color:#f6b484}
+ .mobile-radio-bar{height:58px}
+ .mobile-radio-bar button{padding:6px 8px}
+ .mobile-radio .mobile-radio-handle{height:28px}
+ .mobile-radio-details[hidden]{display:none}
+}
+
 /* Local video tools and optional support, without interrupting the task. */
 .compressor-workspace{padding-top:24px}.compressor-grid{display:grid;grid-template-columns:minmax(280px,360px) minmax(0,1fr);gap:24px;align-items:start}
 .compressor-controls .card-content{display:grid;gap:18px}.compressor-controls .tool-field{display:grid;gap:8px;margin:0}.compressor-controls select,.compressor-controls input[type=number]{width:100%;padding:11px;border:1px solid #8c82a0;border-radius:8px;background:#18203d;color:#fff;font:inherit;min-height:44px}.compressor-controls small{font-size:.75rem;color:#cad1e2}.compressor-checkbox{display:flex;gap:10px;align-items:center}.compressor-controls .file-drop{min-width:0;overflow-wrap:anywhere}.compressor-controls input[type=file]{max-width:100%}.compressor-controls .is-dragging{outline:3px solid #91e1cd}.compressor-stage{min-width:0}.compressor-stage video,.compressor-result video{display:block;width:100%;max-height:480px;background:#080e20;border-radius:10px}.compressor-stage progress{display:block;width:100%;margin-top:22px;height:16px;accent-color:#91e1cd}.compressor-result{margin-top:24px}.compressor-summary{color:#91e1cd;font-size:1.25rem;font-weight:700}.compressor-result .btn{margin-top:8px}#compress-log{white-space:pre-wrap;overflow-wrap:anywhere;font-size:.75rem;max-height:180px;overflow:auto}.compressor-controls :disabled{opacity:.55;cursor:not-allowed}
 .tool-support-notice{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:20px 24px;margin:28px 0;border:1px solid #927388;border-radius:14px;background:rgba(37,28,53,.88);color:#ead9e2}.tool-support-notice strong{color:#ffd39a}.tool-support-notice p{margin:7px 0 0;max-width:72ch;font-size:.9rem;line-height:1.6}.tool-support-notice .btn{flex-shrink:0}
 @media(max-width:760px){.compressor-grid{grid-template-columns:1fr}.tool-support-notice{align-items:flex-start;flex-direction:column;padding:18px}.tool-support-notice .btn{width:100%;text-align:center}}
+

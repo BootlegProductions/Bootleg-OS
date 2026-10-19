@@ -11,6 +11,17 @@ export const BOOTS_FRAMES = {
       "duration": 0
     }
   ],
+  "angry": [
+    {"file":"frames/angry-00.png","duration":180},
+    {"file":"frames/angry-01.png","duration":180},
+    {"file":"frames/angry-02.png","duration":180},
+    {"file":"frames/angry-03.png","duration":180},
+    {"file":"frames/angry-04.png","duration":180},
+    {"file":"frames/angry-05.png","duration":180},
+    {"file":"frames/angry-06.png","duration":180},
+    {"file":"frames/angry-07.png","duration":180},
+    {"file":"frames/angry-08.png","duration":180}
+  ],
   "jump": [
     {
       "file": "frames/jump-00.png",
@@ -118,3 +129,4 @@ export const BOOTS_FRAMES = {
     }
   ]
 };
+
