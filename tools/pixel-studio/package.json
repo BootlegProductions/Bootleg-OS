@@ -1,0 +1,14 @@
+{
+  "name": "bootleg-pixel-studio-build",
+  "private": true,
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "node ../../tests/pixel-import.test.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "fflate": "0.8.3",
+    "gifenc": "1.0.3",
+    "gifuct-js": "2.1.2"
+  }
+}

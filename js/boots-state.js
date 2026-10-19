@@ -13,10 +13,14 @@ export function createBootsAnimator({sprite,base,reducedMotion=false,setTimer=se
  }));
  function cancelAnimation(){clearTimer(frameTimer);clearTimer(endTimer);revision++}
  function paint(name,frame){
-  const image=frame.image,scale=name==='angry'?3:4;
+  const image=frame.image,scale=4;
   ctx.clearRect(0,0,size,size);ctx.imageSmoothingEnabled=false;
   // The jump's original travel needs two pixels of extra headroom.
-  ctx.drawImage(image,(size-image.width*scale)/2,(size-image.height*scale)/2+(name==='jump'?6:0),image.width*scale,image.height*scale);
+  if(name==='angry'){
+   // Trim only empty pack padding; keep the same 4x pixels and foot baseline
+   // as idle, with extra width for the folded arms.
+   ctx.drawImage(image,8,8,52,52,(size-52*scale)/2,(size-52*scale)/2,52*scale,52*scale);
+  }else ctx.drawImage(image,(size-image.width*scale)/2,(size-image.height*scale)/2+(name==='jump'?6:0),image.width*scale,image.height*scale);
   sprite.dataset.state=name;
  }
  function show(name,{loop=false,duration=0}={}){

@@ -1,0 +1,60 @@
+/* Pixel Studio: paint / canvas / animation, with document controls below. */
+.pixel-workspace{padding-top:24px}
+.pixel-studio-layout{grid-template-columns:210px minmax(0,1fr) 240px;gap:16px;align-items:start}
+.pixel-studio-layout .card{overflow:hidden}
+.pixel-studio-layout .pixel-sidebar .card-content{padding:17px;gap:9px}
+.pixel-studio-layout h2{font-size:1rem;margin:0 0 4px;color:#ffd3ad}
+.pixel-studio-layout .eyebrow{font-size:.68rem}
+.pixel-studio-layout button,.pixel-studio-layout select{min-height:40px}
+.pixel-studio-layout .pixel-tools{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.pixel-studio-layout .pixel-tools button{font-size:.77rem;padding:8px 5px}
+.pixel-studio-layout .pixel-palette{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}
+.pixel-studio-layout .pixel-palette button{min-height:28px;padding:0;border-radius:5px;aspect-ratio:1.4}
+.pixel-studio-layout .pixel-colour-picker{gap:6px}
+.pixel-studio-layout #pixel-colour{width:48px;flex:none}
+.pixel-studio-layout #pixel-hex{width:0;flex:1;font-size:.8rem;padding:8px}
+.pixel-rgb-details summary{cursor:pointer;font-size:.8rem;color:#91e1cd;padding:5px 0}
+.pixel-studio-layout .pixel-main-bar{padding:12px 15px;min-height:58px;font-size:.75rem}
+.pixel-studio-layout .pixel-canvas-shell{min-height:420px;max-height:70dvh;overflow:auto;padding:18px;align-content:center;justify-content:safe center}
+.pixel-studio-layout .pixel-canvas-shell.is-dragging{outline:3px dashed #91e1cd;outline-offset:-5px}
+.pixel-studio-layout #pixel-canvas{width:512px;max-width:100%;height:auto;aspect-ratio:auto;flex:none;image-rendering:pixelated}
+.pixel-studio-layout .pixel-timeline{padding:12px 14px}
+.pixel-studio-layout .pixel-timeline-head small{font-size:.7rem;color:#bdc6dd}
+.pixel-studio-layout .pixel-frames{min-width:0;max-width:100%;overscroll-behavior-x:contain}
+.pixel-studio-layout .pixel-frames button{flex:0 0 58px;height:68px;padding:4px;display:grid;place-items:center;gap:3px;font:700 .65rem var(--font-mono)}
+.pixel-studio-layout .pixel-frames canvas{display:block;max-width:44px;max-height:43px;image-rendering:pixelated;background:#dce1eb}
+.pixel-canvas-toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:end;padding:14px;border-top:1px solid #7d839750;background:#151e35}
+.pixel-canvas-toolbar .tool-field{flex:1 1 115px;margin:0;min-width:0}
+.pixel-canvas-toolbar label{font-size:.72rem;display:flex;gap:6px;align-items:center;justify-content:space-between;color:#cfd3e3}
+.pixel-canvas-toolbar select{width:100%;font:inherit;font-size:.8rem;padding:7px;background:#26304b;color:#fff;border:1px solid #818bb0;border-radius:5px}
+.pixel-canvas-toolbar input[type=range]{width:100%;accent-color:#91e1cd}
+.pixel-canvas-toolbar input[type=color]{width:44px;height:35px;margin-top:5px}
+.pixel-canvas-toolbar .btn{padding:8px;font-size:.72rem}
+.pixel-background-hint{flex-basis:100%;font-size:.68rem;color:#bec8d9}
+.pixel-studio-status{padding:12px 15px;margin:0;border-top:1px solid #7d839750;color:#9ce8cf;font-size:.78rem;line-height:1.6;overflow-wrap:anywhere}
+.pixel-studio-layout .pixel-animation-panel small{font-size:.72rem;color:#c2c9da;line-height:1.5}
+.pixel-studio-layout .pixel-animation-panel .btn{font-size:.73rem;padding:8px;white-space:normal}
+.pixel-animation-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.pixel-studio-layout .pixel-fps{max-width:100%;font-size:.7rem;gap:5px;min-width:0}
+.pixel-studio-layout .pixel-fps input{min-width:20px;width:60px}
+.pixel-studio-layout .import-pixels{font-size:.76rem;padding:9px;border:1px dashed #91e1cd;border-radius:7px}
+.pixel-studio-layout .import-pixels input{max-width:100%;font-size:.7rem;margin-top:9px}
+#pixel-import-choice[hidden]{display:none}
+#pixel-import-choice{display:grid;gap:8px}
+#pixel-import-choice label{font-size:.72rem}
+#pixel-import-group{max-width:100%;font-size:.73rem;background:#17233c;color:white;padding:7px;border:1px solid #8b9bb9;border-radius:5px}
+@media(max-width:1150px) and (min-width:761px){
+ .pixel-studio-layout{grid-template-columns:200px minmax(0,1fr)}
+ .pixel-animation-panel{grid-column:1/-1}
+ .pixel-studio-layout .pixel-animation-panel .card-content{grid-template-columns:1fr 1fr;column-gap:24px}
+ .pixel-animation-panel .tool-divider{grid-column:1/-1}
+}
+@media(max-width:760px){
+ .pixel-studio-layout{grid-template-columns:1fr}
+ .pixel-stage-panel{grid-row:1}
+ .pixel-studio-layout .pixel-canvas-shell{min-height:280px;padding:12px;max-height:60dvh}
+ .pixel-studio-layout .pixel-paint-panel .card-content{grid-template-columns:1fr 1fr;column-gap:16px}
+ .pixel-paint-panel .eyebrow,.pixel-paint-panel h2,.pixel-paint-panel .tool-divider,.pixel-paint-panel .pixel-rgb-details{grid-column:1/-1}
+ .pixel-studio-layout .pixel-palette{grid-template-columns:repeat(4,minmax(0,1fr))}
+ .pixel-studio-layout .pixel-main-bar{padding:10px;font-size:.7rem}
+}

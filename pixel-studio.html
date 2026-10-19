@@ -7,15 +7,16 @@
     <link rel="canonical" href="https://bootlegproductions.github.io/Bootleg-OS/pixel-studio.html">
     <meta name="description" content="Pixel Studio — draw pixel art and animated GIFs in the browser.">
     <link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg?v=3">
-    <meta property="og:title" content="Utilities - Bootleg OS">
+    <meta property="og:title" content="Pixel Studio - Bootleg OS">
     <meta property="og:description" content="Pixel Studio — draw pixel art and animated GIFs in the browser.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://bootlegproductions.github.io/Bootleg-OS/assets/brand/bootleg-logo.jpg">
-    <meta property="og:url" content="https://bootlegproductions.github.io/Bootleg-OS/utilities.html">
+    <meta property="og:url" content="https://bootlegproductions.github.io/Bootleg-OS/pixel-studio.html">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Utilities - Bootleg OS">
+    <meta name="twitter:title" content="Pixel Studio - Bootleg OS">
     <meta name="twitter:description" content="Pixel Studio — draw pixel art and animated GIFs in the browser.">
-    <link rel="stylesheet" href="css/style.css?v=brush-preview-1">
+    <link rel="stylesheet" href="css/style.css?v=pixel-studio-3">
+    <link rel="stylesheet" href="css/pixel-studio.css?v=pixel-studio-3">
   </head>
   <body>
     <header class="site-header">
@@ -72,28 +73,53 @@
     </header>
     <main class="shell pixel-workspace">
       <div class="tool-heading"><div><span class="eyebrow">Bootleg OS / Apps</span><h1>Pixel Studio</h1><p>Draw one pixel at a time, build layers and frames, then export your art or animation.</p></div><a class="btn" href="utilities.html">Background Remover</a></div>
-      <section class="pixel-editor" aria-label="Pixel art editor">
-        <aside class="pixel-sidebar card"><div class="card-content">
-          <h2>Canvas</h2><div class="tool-field"><label for="pixel-size">Size</label><select id="pixel-size"><option value="16">16 × 16</option><option value="32" selected>32 × 32</option><option value="64">64 × 64</option><option value="128">128 × 128</option></select></div>
-          <button type="button" class="btn btn-small" id="pixel-new">New blank canvas</button>
-          <label class="import-pixels">Import an image<input type="file" id="pixel-import" accept="image/png,image/jpeg,image/webp"></label>
-          <div class="tool-divider"></div><h2>Tools</h2>
-          <div class="pixel-tools" role="group" aria-label="Drawing tool"><button type="button" class="is-active" data-pixel-tool="pencil">Pencil</button><button type="button" data-pixel-tool="eraser">Eraser</button><button type="button" data-pixel-tool="fill">Fill</button><button type="button" data-pixel-tool="picker">Picker</button></div>
+      <section class="pixel-editor pixel-studio-layout" aria-label="Pixel art editor">
+        <aside class="pixel-sidebar pixel-paint-panel card" aria-label="Brushes and colours"><div class="card-content">
+          <span class="eyebrow">Paint</span><h2>Brushes &amp; colour</h2>
+          <div class="pixel-tools" role="group" aria-label="Drawing tool">
+            <button type="button" class="is-active" data-pixel-tool="pencil">Pencil</button><button type="button" data-pixel-tool="eraser">Eraser</button>
+            <button type="button" data-pixel-tool="fill">Fill</button><button type="button" data-pixel-tool="picker">Picker</button>
+          </div>
+          <div class="tool-field"><label for="pixel-brush">Brush <output id="pixel-brush-value">1</output> px</label><input type="range" id="pixel-brush" min="1" max="16" value="1"></div>
+          <button type="button" class="btn btn-small" id="pixel-undo">Undo stroke</button>
+          <div class="tool-divider"></div>
           <div class="tool-field"><label for="pixel-palette-set">Palette</label><select id="pixel-palette-set"><option value="classic">Classic RGB</option><option value="pastel">Pastel</option><option value="retro">Retro 16</option><option value="grey">Greyscale</option></select></div>
-          <div class="tool-field"><label for="pixel-colour">Drawing colour</label><div class="pixel-colour-picker"><input type="color" id="pixel-colour" value="#ff0000"><input type="text" id="pixel-hex" value="#ff0000" maxlength="7" aria-label="Hex colour"></div></div>
-          <div class="pixel-rgb-controls"><label>Red <input id="pixel-red" type="range" min="0" max="255" value="255"><output id="pixel-red-value">255</output></label><label>Green <input id="pixel-green" type="range" min="0" max="255" value="0"><output id="pixel-green-value">0</output></label><label>Blue <input id="pixel-blue" type="range" min="0" max="255" value="0"><output id="pixel-blue-value">0</output></label></div>
           <div class="pixel-palette" id="pixel-palette" aria-label="Quick colours"></div>
-          <div class="tool-field"><label for="pixel-brush">Brush <output id="pixel-brush-value">1</output> px</label><input type="range" id="pixel-brush" min="1" max="8" value="1"></div>
-          <div class="tool-actions"><button type="button" class="btn btn-small" id="pixel-undo">Undo</button><button type="button" class="btn btn-small" id="pixel-grid" aria-pressed="true">Hide grid</button></div>
-          <div class="tool-field"><label for="pixel-grid-opacity">Grid opacity <output id="pixel-grid-opacity-value">60%</output></label><input id="pixel-grid-opacity" type="range" min="0" max="100" value="60"></div>
-          <div class="tool-field"><label for="pixel-background">Canvas background</label><select id="pixel-background"><option value="white">White</option><option value="colour">Custom colour</option><option value="transparent">Transparent</option></select><input type="color" id="pixel-background-colour" value="#ffffff" aria-label="Custom canvas background colour" hidden><small>Included in PNG and GIF exports.</small></div>
-          <div class="tool-divider"></div><h2>Layers</h2><div id="pixel-layers" class="pixel-list"></div><button type="button" class="btn btn-small" id="pixel-add-layer">Add layer</button>
+          <div class="tool-field"><label for="pixel-colour">Drawing colour</label><div class="pixel-colour-picker"><input type="color" id="pixel-colour" value="#ff0000"><input type="text" id="pixel-hex" value="#ff0000" maxlength="7" aria-label="Hex colour"></div></div>
+          <details class="pixel-rgb-details"><summary>RGB sliders</summary><div class="pixel-rgb-controls">
+            <label>Red <input id="pixel-red" type="range" min="0" max="255" value="255"><output id="pixel-red-value">255</output></label>
+            <label>Green <input id="pixel-green" type="range" min="0" max="255" value="0"><output id="pixel-green-value">0</output></label>
+            <label>Blue <input id="pixel-blue" type="range" min="0" max="255" value="0"><output id="pixel-blue-value">0</output></label>
+          </div></details>
         </div></aside>
-        <section class="pixel-main card"><div class="pixel-main-bar"><span id="pixel-info">32 × 32 · frame 1</span><label class="pixel-onion"><input id="pixel-onion" type="checkbox" checked> Onion skin</label></div>
+        <section class="pixel-main pixel-stage-panel card" aria-label="Canvas and frames">
+          <div class="pixel-main-bar"><span id="pixel-info">32 × 32 · frame 1</span><label class="pixel-onion"><input id="pixel-onion" type="checkbox" checked> Onion skin</label></div>
           <div class="pixel-canvas-shell" id="pixel-canvas-shell"><canvas id="pixel-canvas" width="512" height="512" aria-label="Pixel drawing canvas"></canvas></div>
-          <div class="pixel-timeline"><div class="pixel-timeline-head"><h2>Frames</h2><div class="tool-actions"><button type="button" class="btn btn-small" id="pixel-play">Play</button><button type="button" class="btn btn-small" id="pixel-add-frame">New frame</button><button type="button" class="btn btn-small" id="pixel-duplicate-frame">Duplicate</button><button type="button" class="btn btn-small" id="pixel-delete-frame">Delete</button></div></div><div id="pixel-frames" class="pixel-frames"></div><label class="pixel-fps">Speed <input type="range" id="pixel-fps" min="2" max="16" value="8"><output id="pixel-fps-value">8</output> FPS</label></div>
-          <div class="pixel-export"><button type="button" class="btn" id="pixel-download-png">Download PNG</button><button type="button" class="btn" id="pixel-download-gif">Download animated GIF</button><p id="pixel-status" role="status" aria-live="polite">Ready to draw. GIF export uses your frames.</p></div>
+          <div class="pixel-timeline"><div class="pixel-timeline-head"><h2>Frame strip</h2><small>Choose a frame to edit</small></div><div id="pixel-frames" class="pixel-frames" aria-label="Animation frames"></div></div>
+          <section class="pixel-canvas-toolbar" aria-label="Canvas settings">
+            <div class="tool-field"><label for="pixel-size">Canvas size</label><select id="pixel-size"><option value="16">16 × 16</option><option value="32" selected>32 × 32</option><option value="48">48 × 48</option><option value="64">64 × 64</option><option value="128">128 × 128</option><option value="256">256 × 256</option></select></div>
+            <button type="button" class="btn btn-small" id="pixel-new">New blank canvas</button>
+            <div class="tool-field"><label for="pixel-background">Background</label><select id="pixel-background"><option value="white">White</option><option value="colour">Custom colour</option><option value="transparent">Transparent</option></select><input type="color" id="pixel-background-colour" value="#ffffff" aria-label="Custom canvas background colour" hidden></div>
+            <button type="button" class="btn btn-small" id="pixel-grid" aria-pressed="true">Hide grid</button>
+            <div class="tool-field"><label for="pixel-grid-opacity">Grid <output id="pixel-grid-opacity-value">60%</output></label><input id="pixel-grid-opacity" type="range" min="0" max="100" value="60"></div>
+            <div class="tool-field"><label for="pixel-zoom">Zoom <output id="pixel-zoom-value">100%</output></label><input id="pixel-zoom" type="range" min="50" max="250" step="25" value="100"></div>
+            <small class="pixel-background-hint">Background choice is included in exports. Imported art starts transparent.</small>
+          </section>
+          <p id="pixel-status" class="pixel-studio-status" role="status" aria-live="polite">Ready to draw. Drop images or a sprite ZIP onto the canvas to import frames.</p>
         </section>
+        <aside class="pixel-sidebar pixel-animation-panel card" aria-label="Import, layers and animation"><div class="card-content">
+          <span class="eyebrow">Build</span><h2>Import artwork</h2>
+          <label class="import-pixels">Choose images, GIF or ZIP<input type="file" id="pixel-import" accept=".zip,image/png,image/jpeg,image/webp,image/gif" multiple></label>
+          <small>Native size, separate frames. Sprite ZIPs with several animations let you choose a group. Files stay on your device.</small>
+          <div id="pixel-import-choice" hidden><label for="pixel-import-group">Animation / image group</label><select id="pixel-import-group"></select><button type="button" class="btn btn-small" id="pixel-import-load">Load frames</button></div>
+          <div class="tool-divider"></div><h2>Layers</h2><div id="pixel-layers" class="pixel-list"></div><button type="button" class="btn btn-small" id="pixel-add-layer">Add layer</button>
+          <div class="tool-divider"></div><h2>Animation</h2>
+          <div class="pixel-animation-actions"><button type="button" class="btn btn-small" id="pixel-play">Play</button><button type="button" class="btn btn-small" id="pixel-add-frame">New frame</button><button type="button" class="btn btn-small" id="pixel-duplicate-frame">Duplicate</button><button type="button" class="btn btn-small" id="pixel-delete-frame">Delete frame</button></div>
+          <label class="pixel-fps">Speed <input type="range" id="pixel-fps" min="1" max="60" value="8"><output id="pixel-fps-value">8</output> FPS</label>
+          <small>GIF timings are preserved on import. Changing speed applies to every frame.</small>
+          <div class="tool-divider"></div><h2>Export</h2>
+          <button type="button" class="btn btn-small" id="pixel-download-png">Download PNG</button><button type="button" class="btn btn-small" id="pixel-download-gif">Download animated GIF</button>
+        </div></aside>
       </section>
     <aside class="tool-support-notice" aria-label="Support development"><div><strong>Useful? Help build what comes next.</strong><p>These tools are free to use. If one saves you time, an optional coffee helps fund upgrades, new features and ongoing development. Thanks for the support.</p></div><a class="btn" href="https://buymeacoffee.com/supportweb" target="_blank" rel="noopener noreferrer">Support development ↗</a></aside>
     </main>
@@ -101,7 +127,7 @@
       <div class="footer-left"><a class="footer-support" href="https://buymeacoffee.com/supportweb" target="_blank" rel="noopener noreferrer"><svg class="footer-coffee-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M7 12h16v9a6 6 0 0 1-6 6h-4a6 6 0 0 1-6-6Z" fill="currentColor"/><path d="M23 14h2a4 4 0 0 1 0 8h-2M5 29h21M11 3v5M16 2v5M21 3v5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg><span class="footer-support-copy"><strong>Buy me a coffee</strong><small>Thanks for supporting my work ♥</small></span></a><span class="footer-time"><span>LOCAL TIME</span><time id="local-clock"></time></span></div>
       <span class="footer-status"><span class="footer-online-dot" aria-hidden="true"></span>SYSTEM ONLINE</span>
     </footer>
-    <script src="js/pixel-studio.bundle.js?v=2" type="module"></script>
+    <script src="js/pixel-studio.bundle.js?v=pixel-studio-3" type="module"></script>
     <script src="js/gallery-data.js?v=boots-chat-3"></script>
     <script src="js/app.js?v=compressor-1"></script>
     <script src="js/radio-data.js"></script>

@@ -43,21 +43,23 @@
 
   let loadTimer;
   let loadingId = 0;
+  let pageSuspended = false;
   let attempted = new Set();
   let lastProgress = 0;
   const LOAD_TIMEOUT = 18000;
   function stopWatchdog() { clearTimeout(loadTimer); }
   function watchPlayback(id = loadingId) {
     stopWatchdog();
+    if (pageSuspended || !state.wantsPlayback) return;
     lastProgress = audio.currentTime || 0;
     loadTimer = setTimeout(() => {
-      if (id !== loadingId || !state.wantsPlayback) return;
+      if (id !== loadingId || pageSuspended || !state.wantsPlayback) return;
       if (audio.currentTime > lastProgress + 0.5) { watchPlayback(id); return; }
       skipUnavailable(id, "Archive audio stalled");
     }, LOAD_TIMEOUT);
   }
   function skipUnavailable(id, reason) {
-    if (id !== loadingId || !state.wantsPlayback) return;
+    if (id !== loadingId || pageSuspended || !state.wantsPlayback) return;
     const station = currentStation();
     attempted.add(state.trackIndex);
     // Do not churn through an entire station if the Archive is offline.
@@ -75,6 +77,7 @@
     loadTrack(true);
   }
   function savePosition() {
+    if (pageSuspended) return;
     localStorage.setItem("bootlegRadioStation", state.stationIndex);
     localStorage.setItem("bootlegRadioTrack", state.trackIndex);
     if (Number.isFinite(audio.currentTime)) localStorage.setItem("bootlegRadioTime", String(audio.currentTime));
@@ -93,7 +96,7 @@
     audio.load();
     if (savedTime > 0) {
       audio.addEventListener("loadedmetadata", function seek() {
-        if (id !== loadingId) return;
+        if (id !== loadingId || pageSuspended) return;
         if (savedTime < audio.duration - 1) audio.currentTime = savedTime;
       }, { once: true });
     }
@@ -134,7 +137,7 @@
         updateDisplays();
       })
       .catch(error => {
-        if (id !== loadingId || !state.wantsPlayback) return;
+        if (id !== loadingId || pageSuspended || !state.wantsPlayback) return;
         state.playing = false;
         if (error.name === "NotAllowedError") {
           stopWatchdog();
@@ -469,6 +472,7 @@ function spinTuningDial(direction = 1) {
     });
 
     audio.addEventListener("ended", () => {
+      if (pageSuspended || !state.wantsPlayback) return;
       attempted.clear();
       const station = currentStation();
 
@@ -486,6 +490,7 @@ function spinTuningDial(direction = 1) {
     });
 
     audio.addEventListener("timeupdate", () => {
+      if (pageSuspended) return;
       if (audio.currentTime > lastProgress + 0.5) {
         attempted.clear();
         if (state.wantsPlayback) watchPlayback();
@@ -516,8 +521,24 @@ function spinTuningDial(direction = 1) {
     });
   }
 
-  window.addEventListener("beforeunload", () => {
+  // A history entry can be frozen and later restored without rerunning this
+  // script. Never resume its stale watchdog, station or track on Back/Forward.
+  window.addEventListener("pagehide", () => {
     savePosition();
+    pageSuspended = true;
+    stopWatchdog();
+    loadingId++;
+    audio.pause();
+  });
+  window.addEventListener("pageshow", event => {
+    if (!event.persisted) return;
+    pageSuspended = false;
+    state.stationIndex = clampIndex(Number(localStorage.getItem("bootlegRadioStation") || 0), stations.length);
+    state.trackIndex = clampIndex(Number(localStorage.getItem("bootlegRadioTrack") || 0), currentStation().tracks.length);
+    state.wantsPlayback = sessionStorage.getItem("bootlegRadioWanted") === "1";
+    attempted.clear();
+    loadTrack(state.wantsPlayback, true);
+    refreshActiveCards();
   });
 
   // A shared mobile drawer uses this same Audio instance and existing controls.
