@@ -3,6 +3,18 @@ export const MAX_ROM_BYTES = 32 * 1024 * 1024;
 export function romTitle(name) {
   return name.replace(/\.(bin|md|gen|smd|zip)$/i, '').replace(/_/g, ' ');
 }
+// Stable across file extensions and region tags, like the native catalogue titles.
+export function favouriteKey(title) {
+  return romTitle(title).split('(')[0].trim().toLocaleLowerCase();
+}
+export function readPreferences(storage) {
+  try {
+    const value = JSON.parse(storage.getItem('g4tch-preview-v1') || '{}');
+    return {theme:value?.theme === 'green' ? 'green' : 'blue',
+      sound:value?.sound === true,
+      favourites:Array.isArray(value?.favourites) ? value.favourites.filter(x => typeof x === 'string').slice(0,2000) : []};
+  } catch { return {theme:'blue',sound:false,favourites:[]}; }
+}
 export function checkRom(file) {
   if (!/\.(bin|md|gen|smd|zip)$/i.test(file.name)) return 'Choose a Mega Drive .bin, .md, .gen, .smd or individual game .zip.';
   if (!file.size) return 'This file is empty.';

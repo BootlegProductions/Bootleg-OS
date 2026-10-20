@@ -18,3 +18,11 @@ Core: https://github.com/ekeeke/Genesis-Plus-GX — see its own licence and non-
 
 Run the pure logic checks with:
 node tests/g4tch-arcade.test.mjs
+
+## Source-informed update
+
+The supplied v0.3 native project was inspected on 20 October 2026. Its Python launcher uses Pygame, then starts RetroArch with Genesis Plus GX as a separate process. The browser preview remains a JavaScript adaptation using EmulatorJS; the native Windows runtime and Python environment are not web assets.
+
+The preview now uses the native theme palette values, saves favourite title keys and theme/intro-sound preferences in `g4tch-preview-v1` localStorage, and includes the native application's original generated seven-second prism music, encoded as `prism-original.mp3`. Audio starts only following a user action. Sound controls apply to the intro; game audio is managed by the emulator. Files and file handles are never persisted. Unavailable storage does not block the tool. Ctrl+D toggles a favourite while the library is active; Tab keeps normal browser focus navigation.
+
+The native archive also contains runtime dependencies, local configuration and cached game files. These were not copied into the website. Pi execution and the cabinet hardware remain to be tested. The page documents native cover matching and custom artwork support; automatic cover lookup and folder scanning are not implemented in this browser adaptation.

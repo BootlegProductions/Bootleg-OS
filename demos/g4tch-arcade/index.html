@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>G4TCH’s ARCADE — browser cabinet preview</title><meta name="robots" content="noindex, follow"><link rel="stylesheet" href="arcade.css?v=1"></head>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>G4TCH’s ARCADE — browser cabinet preview</title><meta name="robots" content="noindex, follow"><link rel="stylesheet" href="arcade.css?v=2"></head>
 <body data-theme="blue">
 <main id="cabinet" tabindex="-1">
   <header><div><h1>G4TCH’s ARCADE</h1><p id="theme-label">OCP / CITY PATROL</p></div><span>50 YEARS / STILL PLAYING</span></header>
-  <div class="toolbar"><button id="theme" type="button">Green / blue</button><button id="full" type="button">Fullscreen</button><button id="intro" type="button">Replay intro</button><span id="controller">KEYBOARD / TOUCH</span></div>
+  <div class="toolbar"><button id="theme" type="button">Green / blue</button><button id="sound" type="button" aria-pressed="false">Intro sound off</button><button id="full" type="button">Fullscreen</button><button id="intro" type="button">Replay intro</button><span id="controller">KEYBOARD / TOUCH</span></div>
   <section id="boot" aria-label="Prism start screen">
     <p>G4TCH SYSTEMS // PERSONAL ENTERTAINMENT DIVISION</p>
     <svg viewBox="0 0 640 200" role="img" aria-label="A beam of white light passes through a prism and splits into a rainbow">
@@ -15,8 +15,9 @@
   </section>
   <section id="library" hidden>
     <div class="find"><label for="search">FIND &gt;</label><input id="search" type="search" placeholder="Search your cartridges" autocomplete="off"><button id="pick" type="button">Add ROMs</button><input id="roms" type="file" accept=".bin,.md,.gen,.smd,.zip" multiple hidden></div>
+    <div class="library-actions"><button id="favourites" type="button" aria-pressed="false">Favourites / all</button><button id="star" type="button" aria-pressed="false">☆ Favourite</button><span>Preferences saved on this device</span></div>
     <div class="library-grid"><section class="catalogue"><h2>01 / GAME ARCHIVE</h2><div id="games" aria-label="Cartridges"></div></section><section class="cartridge"><h2>02 / CARTRIDGE IDENTIFICATION</h2><div class="cartridge-art" aria-hidden="true">G4<br>▱ ▰ ▱</div><h3 id="game-title">Prism Break</h3><p id="game-description">A built-in paddle game to try the cabinet. No ROM needed.</p><button id="launch" type="button">LAUNCH GAME</button></section></div>
-    <p id="library-status" role="status">Built-in test ready. Add individual Mega Drive ROMs to try browser emulation.</p>
+    <p id="library-status" role="status">Built-in test ready. Add individual Mega Drive ROMs to try browser emulation. Ctrl+D stars a game.</p>
   </section>
   <section id="play" hidden aria-label="Game screen">
     <div class="play-bar"><strong id="playing-title">PRISM BREAK</strong><button id="pause" type="button">Pause</button><button id="restart" type="button">Restart</button><button id="back" type="button">Back to library</button></div>
@@ -25,5 +26,5 @@
   </section>
   <footer><span>BROWSER CABINET PREVIEW</span><span>ROM files stay in your browser.</span></footer>
 </main>
-<script type="module" src="arcade.mjs?v=1"></script>
+<script type="module" src="arcade.mjs?v=2"></script>
 </body></html>

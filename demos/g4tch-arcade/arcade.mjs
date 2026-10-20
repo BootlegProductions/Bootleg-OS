@@ -1,12 +1,39 @@
-import {romTitle, checkRom, makeGame, launch, stepGame} from './arcade-model.mjs';
+import {romTitle, checkRom, makeGame, launch, stepGame, favouriteKey, readPreferences} from './arcade-model.mjs?v=2';
 const $ = id => document.getElementById(id);
 let view = 'boot', selected = 'test', game = makeGame(), paused = false, pointer = null, direction = 0, last = performance.now();
 let padAction = false, padVertical = 0, emulationFrame = null;
 const keys = new Set();
+// Storage can be unavailable in an embedded/private browser. The tool still works.
+let storage;
+try { storage = window.localStorage; } catch {}
+const preferences = readPreferences(storage);
+const favourites = new Set(preferences.favourites);
+let favouritesOnly = false, soundEnabled = preferences.sound;
+const introAudio = new Audio('prism-original.mp3');
+introAudio.preload = 'none'; introAudio.volume = .4;
+function savePreferences() {
+  try { storage?.setItem('g4tch-preview-v1',JSON.stringify({theme:document.body.dataset.theme,sound:soundEnabled,favourites:[...favourites]})); } catch {}
+}
+function applyTheme(theme) {
+  document.body.dataset.theme = theme;
+  $('theme-label').textContent = theme === 'green' ? 'MU/TH/UR TERMINAL' : 'OCP / CITY PATROL';
+}
+function playIntro() {
+  introAudio.pause(); introAudio.currentTime = 0;
+  if (soundEnabled) introAudio.play().catch(() => {
+    $('library-status').textContent = 'Intro sound could not play. The cabinet is still available.';
+  });
+}
+function soundLabel() {
+  $('sound').textContent = soundEnabled ? 'Intro sound on' : 'Intro sound off';
+  $('sound').setAttribute('aria-pressed',String(soundEnabled));
+}
+applyTheme(preferences.theme); soundLabel();
 const catalogue = [{id:'test', title:'Prism Break', description:'A built-in paddle game to try the cabinet. No ROM needed.'}];
 let filtered = catalogue.slice();
 function show(next) {
   view = next;
+  if (next !== 'boot') introAudio.pause();
   for (const id of ['boot','library','play']) $(id).hidden = id !== next;
 }
 function choose(id) {
@@ -15,17 +42,21 @@ function choose(id) {
   $('game-title').textContent = item?.title || 'No matching cartridge';
   $('game-description').textContent = item?.description || 'Try a different search, or add a ROM.';
   $('launch').disabled = !item;
+  const starred = !!item && favourites.has(favouriteKey(item.title));
+  $('star').disabled = !item;
+  $('star').textContent = starred ? '★ Favourited' : '☆ Favourite';
+  $('star').setAttribute('aria-pressed',String(starred));
   $('games').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed',String(b.dataset.id === id)));
 }
 function renderLibrary() {
   const query = $('search').value.trim().toLocaleLowerCase();
-  filtered = catalogue.filter(x => x.title.toLocaleLowerCase().includes(query));
+  filtered = catalogue.filter(x => x.title.toLocaleLowerCase().includes(query) && (!favouritesOnly || favourites.has(favouriteKey(x.title))));
   $('games').replaceChildren();
   for (const item of filtered) {
     const button = document.createElement('button'); button.type = 'button'; button.dataset.id = item.id;
-    button.textContent = item.title; button.addEventListener('click',() => choose(item.id)); $('games').append(button);
+    button.textContent = (favourites.has(favouriteKey(item.title)) ? '★ ' : '') + item.title; button.addEventListener('click',() => choose(item.id)); $('games').append(button);
   }
-  if (!filtered.length) { const p = document.createElement('p');p.textContent='No matches.'; $('games').append(p); }
+  if (!filtered.length) { const p = document.createElement('p');p.textContent=favouritesOnly ? 'No favourites match. Choose All games to star a cartridge.' : 'No matches.'; $('games').append(p); }
   choose(filtered.some(x => x.id === selected) ? selected : filtered[0]?.id);
 }
 function leaveGame() {
@@ -55,10 +86,24 @@ function serve() {
   launch(game);$('screen').focus();
 }
 $('start').addEventListener('click',()=>{show('library');$('search').focus();});
-$('intro').addEventListener('click',()=>{emulationFrame?.remove();emulationFrame=null;show('boot');$('start').focus();});
+$('intro').addEventListener('click',()=>{emulationFrame?.remove();emulationFrame=null;show('boot');playIntro();$('start').focus();});
 $('theme').addEventListener('click',()=>{
-  const green = document.body.dataset.theme !== 'green';document.body.dataset.theme=green?'green':'blue';
-  $('theme-label').textContent=green?'MU/TH/UR TERMINAL':'OCP / CITY PATROL';
+  applyTheme(document.body.dataset.theme === 'green' ? 'blue' : 'green'); savePreferences();
+});
+$('sound').addEventListener('click',()=>{
+  soundEnabled = !soundEnabled; soundLabel(); savePreferences();
+  if (soundEnabled && view === 'boot') playIntro(); else introAudio.pause();
+});
+$('favourites').addEventListener('click',()=>{
+  favouritesOnly = !favouritesOnly;
+  $('favourites').setAttribute('aria-pressed',String(favouritesOnly));
+  $('favourites').textContent = favouritesOnly ? 'Show all games' : 'Favourites / all'; renderLibrary();
+});
+$('star').addEventListener('click',()=>{
+  const item = catalogue.find(x => x.id === selected); if (!item) return;
+  const key = favouriteKey(item.title);
+  if (favourites.has(key)) favourites.delete(key); else favourites.add(key);
+  savePreferences(); renderLibrary();
 });
 $('full').addEventListener('click',async()=>{
   try { if(document.fullscreenElement) await document.exitFullscreen(); else await $('cabinet').requestFullscreen(); }
@@ -73,7 +118,7 @@ $('roms').addEventListener('change',()=>{
     if(catalogue.some(x=>x.file?.name===file.name&&x.file?.size===file.size))continue;
     catalogue.push({id:'rom-'+catalogue.length,title:romTitle(file.name),file,description:'Mega Drive cartridge · '+(file.size/1024/1024).toFixed(1)+' MB · browser emulation'});added++;
   }
-  $('search').value='';renderLibrary();$('library-status').textContent=(added?added+' cartridge'+(added===1?'':'s')+' added. ':'')+(errors[0]||'Select a game, then launch. Files stay in this browser tab.');
+  $('search').value='';if(favouritesOnly)$('favourites').click();renderLibrary();$('library-status').textContent=(added?added+' cartridge'+(added===1?'':'s')+' added. ':'')+(errors[0]||'Select a game, then launch. Files stay in this browser tab.');
   $('roms').value='';
 });
 $('launch').addEventListener('click',runSelected);$('back').addEventListener('click',leaveGame);
@@ -89,6 +134,7 @@ canvas.addEventListener('pointerdown',e=>{dragging=true;canvas.setPointerCapture
 canvas.addEventListener('pointermove',e=>{if(dragging)movePointer(e);});
 for(const event of ['pointerup','pointercancel'])canvas.addEventListener(event,()=>{dragging=false;pointer=null;});
 document.addEventListener('keydown',e=>{
+  if(view === 'library' && e.ctrlKey && e.key.toLowerCase() === 'd') {e.preventDefault();if(!e.repeat)$('star').click();return;}
   if(e.target.matches('input,textarea'))return;
   if(view==='boot'&&e.key==='Enter'){e.preventDefault();$('start').click();return;}
   if(view==='play'&&selected==='test'&&['ArrowLeft','ArrowRight','a','A','d','D',' ','p','P','Escape'].includes(e.key)){

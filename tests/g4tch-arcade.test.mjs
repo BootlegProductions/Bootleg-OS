@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {checkRom,romTitle,makeGame,launch,stepGame,MAX_ROM_BYTES} from '../demos/g4tch-arcade/arcade-model.mjs';
+import {checkRom,romTitle,makeGame,launch,stepGame,MAX_ROM_BYTES,favouriteKey,readPreferences} from '../demos/g4tch-arcade/arcade-model.mjs';
 assert.equal(romTitle('Golden_Axe_(Europe).bin'),'Golden Axe (Europe)');
 for (const name of ['game.bin','game.MD','game.gen','game.smd','game.zip']) assert.equal(checkRom({name,size:1024}),'');
 assert.match(checkRom({name:'collection.zip',size:MAX_ROM_BYTES+1}),/one game/);
@@ -13,3 +13,14 @@ g=makeGame();launch(g);g.ball={x:30,y:36,vx:0,vy:110};stepGame(g,.01);assert.equ
 g=makeGame();for(let i=0;i<3;i++){launch(g);g.ball.y=250;g.ball.vy=115;stepGame(g,.01);}assert.equal(g.lives,0);assert(g.over);assert(!g.launched);
 g=makeGame();g.bricks.forEach(b=>b.alive=false);launch(g);stepGame(g,.01);assert(g.won);
 console.log('G4TCH cartridge validation, controls, collisions, scoring, lives and completion passed.');
+
+assert.equal(favouriteKey('Golden_Axe_(Europe).bin'), 'golden axe');
+assert.equal(favouriteKey('Golden Axe (USA).md'), 'golden axe');
+const defaults={theme:'blue',sound:false,favourites:[]};
+assert.deepEqual(readPreferences(undefined),defaults,'storage failure must not stop startup');
+assert.deepEqual(readPreferences({getItem:()=>'{broken'}),defaults);
+assert.deepEqual(readPreferences({getItem:()=> 'null'}),defaults);
+assert.deepEqual(readPreferences({getItem:()=>JSON.stringify({theme:'green',sound:true,favourites:['golden axe',42],file:{name:'private.bin'}})}),{theme:'green',sound:true,favourites:['golden axe']});
+assert.deepEqual(readPreferences({getItem:()=>JSON.stringify({theme:'bogus',sound:'true',favourites:{}})}),defaults);
+assert.equal(readPreferences({getItem:()=>JSON.stringify({favourites:Array(3000).fill('test')})}).favourites.length,2000);
+console.log('Favourite identity, preference validation and unavailable/corrupt storage checks passed.');
