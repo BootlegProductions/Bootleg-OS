@@ -137,7 +137,7 @@ body.blog-feature-case .editorial-image-grid{grid-template-columns:repeat(3,minm
 .blog-editorial .editorial-reaction--square{width:min(100%,244px)}
 .blog-editorial .reaction-media{position:relative;width:100%;line-height:0;border-radius:8px;overflow:hidden}
 .blog-editorial .reaction-media video{display:block;width:100%;height:auto;max-width:100%;max-height:none;object-fit:contain;margin:0;background:#0d1727}
-.blog-editorial .editorial-reaction .reaction-toggle{position:absolute;right:8px;bottom:8px;display:grid;place-items:center;width:34px;height:32px;min-height:0;padding:0;margin:0;background:#111a2ddd;color:#fff;border:1px solid #e4e5efaa;border-radius:5px;font:700 15px/1 system-ui;cursor:pointer;box-shadow:0 2px 7px #0006}
+.blog-editorial .editorial-reaction .reaction-toggle{position:absolute;top:8px;right:8px;bottom:auto;display:grid;place-items:center;width:34px;height:32px;min-height:0;padding:0;margin:0;background:#111a2ddd;color:#fff;border:1px solid #e4e5efaa;border-radius:5px;font:700 15px/1 system-ui;cursor:pointer;box-shadow:0 2px 7px #0006}
 .blog-editorial .editorial-reaction .reaction-toggle:hover{background:#253a50}
 .blog-editorial .editorial-reaction .reaction-toggle:focus-visible{outline:3px solid #91e2cf;outline-offset:-3px}
 .blog-editorial .editorial-reaction .reaction-toggle[hidden]{display:none}
