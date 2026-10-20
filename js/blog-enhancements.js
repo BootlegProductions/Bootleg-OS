@@ -58,7 +58,9 @@
         video.muted = true;
         video.play().catch(() => setPlaying(false));
       } else video.pause();
-      button.textContent = playing ? 'Pause GIF' : 'Play GIF';
+      button.textContent = playing ? 'Ⅱ' : '▶';
+      button.setAttribute('aria-label', playing ? 'Pause GIF' : 'Play GIF');
+      button.title = playing ? 'Pause GIF' : 'Play GIF';
       button.setAttribute('aria-pressed', String(playing));
     }
     button.hidden = false;
