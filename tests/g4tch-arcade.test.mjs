@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import {checkRom,romTitle,makeGame,launch,stepGame,MAX_ROM_BYTES} from '../demos/g4tch-arcade/arcade-model.mjs';
+assert.equal(romTitle('Golden_Axe_(Europe).bin'),'Golden Axe (Europe)');
+for (const name of ['game.bin','game.MD','game.gen','game.smd','game.zip']) assert.equal(checkRom({name,size:1024}),'');
+assert.match(checkRom({name:'collection.zip',size:MAX_ROM_BYTES+1}),/one game/);
+assert.match(checkRom({name:'game.bin',size:0}),/empty/);
+assert.match(checkRom({name:'picture.png',size:1024}),/Mega Drive/);
+let g=makeGame();stepGame(g,.025,-1,0);assert.equal(g.paddle,0);assert.equal(g.ball.x,30);
+stepGame(g,.025,1,360);assert.equal(g.paddle,300);assert.equal(g.ball.x,330);
+launch(g);assert(g.launched);g.ball={x:1,y:120,vx:-88,vy:115};stepGame(g,.01);assert(g.ball.vx>0);
+g=makeGame();launch(g);g.ball={x:180,y:207,vx:0,vy:115};stepGame(g,.01);assert(g.ball.vy<0,'paddle returns ball');
+g=makeGame();launch(g);g.ball={x:30,y:36,vx:0,vy:110};stepGame(g,.01);assert.equal(g.score,10);assert.equal(g.bricks.filter(b=>!b.alive).length,1);
+g=makeGame();for(let i=0;i<3;i++){launch(g);g.ball.y=250;g.ball.vy=115;stepGame(g,.01);}assert.equal(g.lives,0);assert(g.over);assert(!g.launched);
+g=makeGame();g.bricks.forEach(b=>b.alive=false);launch(g);stepGame(g,.01);assert(g.won);
+console.log('G4TCH cartridge validation, controls, collisions, scoring, lives and completion passed.');

@@ -1,0 +1,8 @@
+Original desktop prototype screenshots supplied by Oliver, 20 October 2026.
+
+prism-splash.png — Prism Spalsh Screen.png
+blue-hud.png — Blue Theme.png
+green-terminal.png — Green Theme.png
+golden-axe-search.png — Golden Axe Search.png
+
+Original image bytes and dimensions retained. The screenshots show the native desktop prototype, not a browser emulator session. The Golden Axe box art appears within the supplied screenshot; game artwork belongs to its respective owners.

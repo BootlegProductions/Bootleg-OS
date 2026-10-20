@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <title>
+   G4TCH’s ARCADE — a personalised Raspberry Pi cabinet | Bootleg OS
+  </title>
+  <meta content="A Pygame arcade project for my dad’s 50th birthday: Mega Drive games, Alien and RoboCop inspired themes, a prism intro and plans for a printed Raspberry Pi cabinet." name="description"/>
+  <link href="https://bootlegproductions.github.io/Bootleg-OS/project-pages/g4tch-arcade.html" rel="canonical"/>
+  <link href="../assets/brand/favicon.svg?v=3" rel="icon" type="image/svg+xml"/>
+  <link href="../css/style.css?v=pygame-radio-1" rel="stylesheet"/>
+  <meta content="G4TCH’s ARCADE — 50 years, still playing" property="og:title"/>
+  <meta content="website" property="og:type"/>
+  <meta content="https://bootlegproductions.github.io/Bootleg-OS/project-pages/g4tch-arcade.html" property="og:url"/>
+  <meta content="A Pygame arcade project for my dad’s 50th birthday: Mega Drive games, Alien and RoboCop inspired themes, a prism intro and plans for a printed Raspberry Pi cabinet." property="og:description"/>
+  <meta content="https://bootlegproductions.github.io/Bootleg-OS/assets/project-media/g4tch-arcade/prism-splash.png" property="og:image"/>
+  <link href="../css/g4tch-project.css?v=1" rel="stylesheet"/>
+ </head>
+ <body class="g4tch-project">
+  <header class="site-header">
+   <div class="shell topbar">
+    <a class="brand" href="../index.html">
+     <img alt="Bootleg logo" src="../assets/brand/bootleg-logo.jpg"/>
+     <span>
+      <strong>
+       Bootleg Productions
+      </strong>
+      <span>
+       Creative Hub / BOOTLEG
+                        OS
+      </span>
+     </span>
+    </a>
+    <nav class="nav">
+     <a href="../index.html">
+      Home
+     </a>
+     <a href="../projects.html">
+      Projects
+     </a>
+     <a href="../gallery.html">
+      Gallery
+     </a>
+     <div class="nav-dropdown">
+      <a class="nav-apps-link" href="../applications.html">
+       Apps
+       <span class="nav-caret">
+        ▾
+       </span>
+      </a>
+      <div class="nav-dropdown-menu">
+       <a href="../applications.html">
+        All Apps
+       </a>
+       <a href="../weather.html">
+        Weather
+       </a>
+       <a href="../clock.html">
+        World Clock
+       </a>
+       <a href="../radio.html">
+        Pirate Radio
+       </a>
+       <a href="../utilities.html">
+        Image Tools
+       </a>
+       <a href="../pixel-studio.html">
+        Pixel Studio
+       </a>
+       <a href="../video-compressor.html">
+        Video Compressor
+       </a>
+       <a href="../archive-scraper.html">
+        Archive Scraper
+       </a>
+       <a href="../youtube-downloader.html">
+        Video Converter
+       </a>
+      </div>
+     </div>
+     <a href="../blog.html">
+      Blog
+     </a>
+     <a href="../contact.html">
+      Contact
+     </a>
+    </nav>
+    <div class="mini-radio">
+     <div class="radio-screen">
+      <span class="frequency">
+       89.5 FM
+      </span>
+      <span class="station">
+       Pirate
+                        Radio
+      </span>
+     </div>
+     <img alt="Pirate Radio" class="radio-base" src="../assets/radio/radio-base.png"/>
+     <button class="dial volume-dial" title="Volume">
+      <span class="dial-rotator">
+       <img alt="" src="../assets/radio/radio-volume.webp"/>
+      </span>
+     </button>
+     <button class="dial tuning-dial" title="Tune station">
+      <span class="dial-rotator">
+       <img alt="" src="../assets/radio/radio-tuning.webp"/>
+      </span>
+     </button>
+    </div>
+   </div>
+  </header>
+  <main class="shell pygame-case-study arcade-case-study">
+   <a class="btn" href="../projects.html#pygame-applications">
+    ← Back to Pygame applications
+   </a>
+   <section class="boot-window arcade-project-hero">
+    <div class="window-bar">
+     <span aria-hidden="true" class="lights">
+      <span>
+      </span>
+      <span>
+      </span>
+      <span>
+      </span>
+     </span>
+     g4tch_arcade.exe
+    </div>
+    <div class="arcade-project-intro">
+     <div>
+      <span class="eyebrow">
+       Pygame applications / personal hardware
+      </span>
+      <h1>
+       G4TCH’s ARCADE
+      </h1>
+      <p class="arcade-lead">
+       50 years. Still playing.
+      </p>
+      <p>
+       A miniature arcade cabinet for my dad’s 50th birthday: the Mega Drive games he loves, a screen full of sci-fi personality, and a machine made especially for him.
+      </p>
+      <div class="pygame-tags">
+       <span class="tag">
+        Working desktop prototype
+       </span>
+       <span class="tag">
+        Pygame
+       </span>
+       <span class="tag">
+        Cabinet in development
+       </span>
+      </div>
+      <a class="btn" href="#try-the-cabinet">
+       Try the browser preview ↓
+      </a>
+     </div>
+     <figure>
+      <a href="../assets/project-media/g4tch-arcade/prism-splash.png" rel="noopener" target="_blank">
+       <img alt="G4TCH’s ARCADE desktop prototype with a prism splitting a beam into rainbow colours" fetchpriority="high" src="../assets/project-media/g4tch-arcade/prism-splash.png"/>
+      </a>
+      <figcaption>
+       The current desktop splash screen. The prism makes the machine feel like his before a game has even started.
+      </figcaption>
+     </figure>
+    </div>
+   </section>
+   <section class="arcade-story-row">
+    <div>
+     <span class="eyebrow">
+      Built for someone
+     </span>
+     <h2>
+      A birthday present with its own identity
+     </h2>
+     <p>
+      The project started with a simple idea: build my dad a small arcade cabinet for his 50th birthday in December. His favourite games include Golden Axe, Double Dragon, Street Fighter and Ghouls ’n Ghosts. I wanted a dedicated machine that feels inviting to turn on, browse and play.
+     </p>
+     <p>
+      “G4TCH’s ARCADE” gives the build his own name and identity. The intention is a desktop-sized cabinet rather than a full-size machine, with a Raspberry Pi doing the work inside a custom case.
+     </p>
+     <p>
+      The software has moved beyond the initial idea. I have a working desktop prototype with a searchable game library and a launch interface. Golden Axe has been one of the early tests, and the latest screenshots show its cover art appearing alongside the matching search result.
+     </p>
+    </div>
+    <figure>
+     <a href="../assets/project-media/g4tch-arcade/golden-axe-search.png" rel="noopener" target="_blank">
+      <img alt="Golden Axe found in the arcade library with its Mega Drive box art and launch button" loading="lazy" src="../assets/project-media/g4tch-arcade/golden-axe-search.png"/>
+     </a>
+     <figcaption>
+      Searching the real prototype for Golden Axe. Click any screenshot to view it at its original size.
+     </figcaption>
+    </figure>
+   </section>
+   <section class="arcade-copy">
+    <span class="eyebrow">
+     Sci-fi systems, arcade habits
+    </span>
+    <h2>
+     Two ways to enter the game archive
+    </h2>
+    <p>
+     The interface borrows its atmosphere from two of my dad’s favourite sci-fi worlds. The green theme leans towards the computer terminals of Alien: dark screens, restrained lines and readable text. The blue theme takes its cues from RoboCop’s HUD, with a sharper patrol-system feel.
+    </p>
+    <p>
+     Both themes keep the same practical layout: a search field, the catalogue on the left, and a cartridge panel on the right. Cover art is a useful extra when it is available; the screenshot of the unfiltered catalogue shows the fallback panel for a game without an image. The library should remain usable in either case.
+    </p>
+    <div class="arcade-screenshot-grid">
+     <figure>
+      <a href="../assets/project-media/g4tch-arcade/green-terminal.png" rel="noopener" target="_blank">
+       <img alt="Green MU/TH/UR-inspired terminal theme with searchable cartridge catalogue" loading="lazy" src="../assets/project-media/g4tch-arcade/green-terminal.png"/>
+      </a>
+      <figcaption>
+       Green terminal theme: an Alien-inspired archive.
+      </figcaption>
+     </figure>
+     <figure>
+      <a href="../assets/project-media/g4tch-arcade/blue-hud.png" rel="noopener" target="_blank">
+       <img alt="Blue OCP City Patrol theme with the same arcade game library layout" loading="lazy" src="../assets/project-media/g4tch-arcade/blue-hud.png"/>
+      </a>
+      <figcaption>
+       Blue HUD theme: a RoboCop-inspired alternative.
+      </figcaption>
+     </figure>
+    </div>
+   </section>
+   <aside class="arcade-info">
+    <strong>
+     A personal boot sequence
+    </strong>
+    <p>
+     The prism splash is a nod to his love of Pink Floyd. A white beam splitting into a spectrum adds a more personal opening than a generic emulator menu. The themes, title and birthday message are all part of making this a gift for him, rather than a collection of games on a spare computer.
+    </p>
+   </aside>
+   <section class="boot-window arcade-preview-window" id="try-the-cabinet">
+    <div class="window-bar">
+     <span aria-hidden="true" class="lights">
+      <span>
+      </span>
+      <span>
+      </span>
+      <span>
+      </span>
+     </span>
+     cabinet_preview.exe / interactive beta
+    </div>
+    <div class="arcade-preview-grid">
+     <div class="arcade-preview-help">
+      <span class="eyebrow">
+       A little hands-on version
+      </span>
+      <h2>
+       Try the cabinet
+      </h2>
+      <p>
+       Press Start, switch between the green and blue themes, and launch
+       <strong>
+        Prism Break
+       </strong>
+       , a small original paddle game included for testing the controls.
+      </p>
+      <p>
+       Use
+       <kbd>
+        ←
+       </kbd>
+       <kbd>
+        →
+       </kbd>
+       or
+       <kbd>
+        A
+       </kbd>
+       /
+       <kbd>
+        D
+       </kbd>
+       to move,
+       <kbd>
+        Space
+       </kbd>
+       to launch and
+       <kbd>
+        P
+       </kbd>
+       to pause. On a phone, drag the paddle or use the buttons. A supported connected controller can also operate the preview.
+      </p>
+      <p>
+       For Mega Drive playback, choose
+       <strong>
+        Add ROMs
+       </strong>
+       and select an individual game file: .bin, .md, .gen, .smd or a single-game .zip. The first launch downloads the browser emulator; the cartridge stays in your browser.
+      </p>
+      <p class="arcade-small">
+       This is a browser adaptation of the cabinet concept. The screenshots above show the separate native Pygame prototype. Original game ROMs are not bundled with this page.
+      </p>
+      <a class="btn" href="../demos/g4tch-arcade/" rel="noopener" target="_blank">
+       Open a larger preview ↗
+      </a>
+     </div>
+     <iframe allow="autoplay; fullscreen; gamepad" allowfullscreen="" class="arcade-preview-frame" loading="lazy" src="../demos/g4tch-arcade/" title="Interactive G4TCH’s ARCADE cabinet preview">
+     </iframe>
+    </div>
+   </section>
+   <section class="arcade-copy">
+    <span class="eyebrow">
+     From the desktop to a physical build
+    </span>
+    <h2>
+     Less wiring, more time on the cabinet
+    </h2>
+    <p>
+     My current control idea is to use a preassembled USB arcade joystick and button unit. It would plug into the Pi, with its electronics and USB cable hidden inside the cabinet. That could simplify the build compared with wiring every button and joystick switch individually.
+    </p>
+    <p>
+     The controller still needs to suit the Pi’s operating system and the software’s input mapping. Its physical dimensions will also affect where the buttons, stick and mounting points can go. Those checks need to happen before committing to the case layout.
+    </p>
+    <p>
+     Morgan would like to help with the project by printing the casing, much like the work on the Pi-Boy enclosure. The compact
+     <a href="https://www.printables.com/model/1360199-arcade-machine" rel="noopener noreferrer" target="_blank">
+      Arcade Machine design by David C on Printables ↗
+     </a>
+     is a reference for the direction. It is inspiration for the enclosure, with the final shape dependent on the display, controller, Pi, ventilation and access to the ports.
+    </p>
+    <div class="arcade-status-grid">
+     <div>
+      <strong>
+       Working now
+      </strong>
+      <p>
+       The desktop library, game search, themes, prism splash and game launching.
+      </p>
+     </div>
+     <div>
+      <strong>
+       Physical build next
+      </strong>
+      <p>
+       Confirm the screen and USB controls, then work with Morgan on the printed case and mounting.
+      </p>
+     </div>
+     <div>
+      <strong>
+       Keep developing
+      </strong>
+      <p>
+       Refine input mappings, artwork and boot behaviour as the machine moves onto its intended hardware.
+      </p>
+     </div>
+    </div>
+   </section>
+   <section class="arcade-copy">
+    <span class="eyebrow">
+     The game collection
+    </span>
+    <h2>
+     Mega Drive memories, organised as a library
+    </h2>
+    <p>
+     For my local collection I used the
+     <a href="https://archive.org/details/Sega_Megadrive_and_Genesis_TOSEC_2012_04_13" rel="noopener noreferrer" target="_blank">
+      TOSEC Sega Megadrive and Genesis collection on the Internet Archive ↗
+     </a>
+     . The front end makes it possible to search that collection rather than work through a long list of filenames every time.
+    </p>
+    <p>
+     The collection, the interface and the emulation layer each have a different job. The screenshots document my native game library; the small web version uses EmulatorJS for user-selected Mega Drive cartridges and includes its own original test game so visitors can try the cabinet immediately.
+    </p>
+   </section>
+   <aside class="arcade-info">
+    <strong>
+     Project references &amp; useful links
+    </strong>
+    <ul>
+     <li>
+      <a href="https://www.printables.com/model/1360199-arcade-machine" rel="noopener noreferrer" target="_blank">
+       Cabinet reference — Arcade Machine by David C ↗
+      </a>
+     </li>
+     <li>
+      <a href="https://archive.org/details/Sega_Megadrive_and_Genesis_TOSEC_2012_04_13" rel="noopener noreferrer" target="_blank">
+       Local library source — TOSEC on Internet Archive ↗
+      </a>
+     </li>
+     <li>
+      <a href="https://emulatorjs.org/" rel="noopener noreferrer" target="_blank">
+       Browser emulation — EmulatorJS ↗
+      </a>
+     </li>
+     <li>
+      <a href="raspberry-pi.html">
+       Pi-Boy: another custom Raspberry Pi device →
+      </a>
+     </li>
+     <li>
+      <a href="bootleg-broadcast-pi.html">
+       Bootleg Broadcast Pi TV →
+      </a>
+     </li>
+    </ul>
+   </aside>
+  </main>
+  <footer class="shell footer">
+   <div class="footer-left">
+    <a class="footer-support" href="https://buymeacoffee.com/supportweb" rel="noopener noreferrer" target="_blank">
+     <svg aria-hidden="true" class="footer-coffee-icon" focusable="false" viewbox="0 0 32 32">
+      <path d="M7 12h16v9a6 6 0 0 1-6 6h-4a6 6 0 0 1-6-6Z" fill="currentColor">
+      </path>
+      <path d="M23 14h2a4 4 0 0 1 0 8h-2M5 29h21M11 3v5M16 2v5M21 3v5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2.5">
+      </path>
+     </svg>
+     <span class="footer-support-copy">
+      <strong>
+       Buy me a coffee
+      </strong>
+      <small>
+       Thanks for supporting my work ♥
+      </small>
+     </span>
+    </a>
+    <span class="footer-time">
+     <span>
+      LOCAL TIME
+     </span>
+     <time id="local-clock">
+     </time>
+    </span>
+   </div>
+   <span class="footer-status">
+    <span aria-hidden="true" class="footer-online-dot">
+    </span>
+    SYSTEM ONLINE
+   </span>
+  </footer>
+  <script src="../js/gallery-data.js?v=boots-chat-3">
+  </script>
+  <script src="../js/app.js?v=compressor-1">
+  </script>
+  <script src="../js/radio-data.js">
+  </script>
+  <script src="../js/radio-player.js">
+  </script>
+ </body>
+</html>
