@@ -1,326 +1,327 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Pi-Boy — Raspberry Pi Pip-Boy - Bootleg OS</title>
-    <link rel="canonical" href="https://bootlegproductions.github.io/Bootleg-OS/project-pages/raspberry-pi.html">
-    <meta name="description" content="A developing wearable Raspberry Pi and Pygame application inspired by Fallout.">
-    <link rel="icon" type="image/svg+xml" href="../assets/brand/favicon.svg?v=3">
-    <link rel="stylesheet" href="../css/style.css?v=compressor-1">
-    <link rel="stylesheet" href="../css/pipboy-beta.css?v=2">
-  </head>
-  <body data-project-folder="Raspberry Pi Project">
-    <header class="site-header">
-      <div class="shell topbar">
-        <a class="brand" href="../index.html">
-          <img src="../assets/brand/bootleg-logo.jpg" alt="Bootleg logo">
-          <span>
-            <strong>Bootleg Productions</strong>
-            <span>Creative Hub / BOOTLEG OS</span>
-          </span>
-        </a>
-        <nav class="nav">
-          <a href="../index.html">Home</a>
-          <a href="../projects.html">Projects</a>
-          <a href="../gallery.html">Gallery</a>
-          <div class="nav-dropdown">
-            <a class="nav-apps-link" href="../applications.html">Apps <span class="nav-caret">▾</span>
-            </a>
-            <div class="nav-dropdown-menu">
-              <a href="../applications.html">All Apps</a>
-              <a href="../weather.html">Weather</a>
-              <a href="../clock.html">World Clock</a>
-              <a href="../radio.html">Pirate Radio</a>
-              <a href="../utilities.html">Image Tools</a>
-              <a href="../pixel-studio.html">Pixel Studio</a>
-              <a href="../video-compressor.html">Video Compressor</a>
-              <a href="../archive-scraper.html">Archive Scraper</a>
-              <a href="../youtube-downloader.html">Video Converter</a>
-            </div>
-          </div>
-          <a href="../blog.html">Blog</a>
-          <a href="../contact.html">Contact</a>
-        </nav>
-        <div class="mini-radio">
-          <div class="radio-screen">
-            <span class="frequency">89.5 FM</span>
-            <span class="station">Pirate Radio</span>
-          </div>
-          <img class="radio-base" src="../assets/radio/radio-base.png" alt="Pirate Radio">
-          <button class="dial volume-dial" title="Volume">
-            <span class="dial-rotator">
-              <img src="../assets/radio/radio-volume.webp" alt="">
-            </span>
-          </button>
-          <button class="dial tuning-dial" title="Tune station">
-            <span class="dial-rotator">
-              <img src="../assets/radio/radio-tuning.webp" alt="">
-            </span>
-          </button>
-        </div>
-      </div>
-    </header>
-    <main class="shell">
-      <a class="btn" href="../projects.html">← Projects</a>
-      <section class="panel project-detail-header">
-        <div class="panel-content">
-          <span class="eyebrow">Active project / physical computing</span>
-          <h1>Pi-Boy: Raspberry Pi Pip-Boy</h1>
-          <p>A developing wearable Raspberry Pi and Pygame application inspired by Fallout.</p>
-        </div>
-      </section>
-      <section class="card pipboy-beta" aria-labelledby="pipboy-beta-title">
-        <div class="card-content">
-          <span class="eyebrow">V0.4 / playable browser beta</span>
-          <h2 id="pipboy-beta-title">Try the Pi-Boy</h2>
-          <p>The Pygame prototype, running at the Pi screen’s original 480 × 320 resolution. Tap or click the screen to explore STAT, ITEMS and DATA.</p>
-          <div class="pipboy-beta-layout">
-            <aside class="pipboy-beta-controls" aria-label="Beta controls and settings">
-              <div class="pipboy-beta-toolbar">
-                <div class="pipboy-beta-actions">
-                  <button class="btn" id="pipboy-start" type="button">Start beta</button>
-                  <button class="btn" id="pipboy-stop" type="button" disabled>Stop</button>
-                </div>
-                <label>Screen size <select id="pipboy-scale"><option value="1">Original · 480 × 320</option><option value="2">Enlarged · 960 × 640</option></select></label>
-                <button class="btn" id="pipboy-reset" type="button">Reset beta save</button>
-              </div>
-              <p class="pipboy-beta-status" id="pipboy-status" role="status" aria-live="polite">Start the beta to load Python and Pygame.</p>
-              <div class="pipboy-beta-help">
-                <strong>Controls</strong>
-                <p>Click or tap tabs and buttons. Click the screen to focus the keyboard.</p>
-                <ul><li>← / →: change STAT page</li><li>↑ / ↓: move selection</li><li>+ / −: adjust skills</li></ul>
-                <p>Notes and quests have an on-screen keyboard.</p>
-              </div>
-            </aside>
-            <div class="pipboy-beta-display">
-              <div class="pipboy-beta-device" id="pipboy-device">
-                <div class="pipboy-beta-screen" id="pipboy-screen">
-                  <div class="pipboy-beta-idle"><strong>PI-BOY / V0.4</strong><span>Ready when you are.</span></div>
-                </div>
-              </div>
-              <p class="pipboy-beta-caption">Original Raspberry Pi display · 480 × 320</p>
-            </div>
-          </div>
-          <details class="pipboy-beta-scope"><summary>Beta features and limitations</summary>
-            <p>Character, inventory, perks, notes and quests save in this browser. Map data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a>; LOCAL MAP is the prototype’s fictional test map. Radio includes four 30-second previews. Physical Pi sensor readings are unavailable here.</p>
-          </details>
-          <noscript><p>Enable JavaScript to run the interactive prototype.</p></noscript>
-        </div>
-      </section>
-      <section class="project-detail-grid">
-        <article class="card">
-          <div class="card-content">
-            <h2>Project overview</h2>
-            <p>A wearable Raspberry Pi and Pygame project that grew from my university prototype. The case, interface and touchscreen controls are still being developed together.</p>
-            <p>
-              <a class="btn" href="../gallery.html">Explore development images in the Gallery →</a>
-            </p>
-          </div>
-        </article>
-        <article class="card project-media-card">
-          <div class="card-content" data-project-media></div>
-        </article>
-      </section>
-      <section class="panel">
-        <div class="panel-content content-article">
-          <h1>Pi-Boy: Building a Real Raspberry Pi Pip-Boy</h1>
-          <p>Like most of the projects featured in my portfolio, my Pi-Boy is still a work in progress. I intend to continue developing it as I improve the software, finish assembling the casing and find new ways to make the device more useful, wearable and faithful to the Pip-Boy seen in the <em>Fallout</em> games.</p>
-          <p>The project combines several different areas of work: application development, Python programming, interface design, Raspberry Pi configuration, touchscreen controls, 3D printing and physical assembly. However, the idea behind it did not begin as a direct attempt to recreate a Pip-Boy.</p>
-          <p>It originally developed from my final-year university project.</p>
-          <h2>The original university concept</h2>
-          <figure class="case-figure case-right">
-            <img src="../assets/project-media/Raspberry%20Pi%20Project/Original%20Stat%20Screen.jpeg" alt="Early Pi-Boy status screen" loading="lazy">
-            <figcaption>Early Pi-Boy status screen</figcaption>
-          </figure>
-          <p>For my final-year project, I had to propose and develop a working application alongside a physical prototype. My idea was inspired by the Pip-Boy but imagined as a more realistic, everyday wrist-mounted computer—something closer in purpose to an Apple Watch, but with more emphasis on health monitoring, personal information and portable storage.</p>
-          <p>I theorised that the device could read and record biometric information from the person wearing it, including their heart rate and other health-related data. It could potentially help the user monitor long-term health conditions, retain important personal or medical information and act as a portable storage device that remained physically attached to the wearer.</p>
-          <p>The Pip-Boy was a useful source of inspiration because it already presented information about the player’s health, physical condition, inventory and surroundings through a device worn on the character’s arm. My university concept attempted to take those fictional ideas and consider how they might be adapted into something useful in the real world.</p>
-          <p>The finished university project allowed me to explore interface design, applications, physical prototyping and the relationship between software and the device running it. It also connected with the wider work I was beginning to create in web design, digital graphics and interactive applications—the same areas that eventually developed into many of the projects now displayed throughout my portfolio.</p>
-          <figure class="case-figure case-left">
-            <a href="../assets/project-media/pi-boy-university/original-project-poster.png" target="_blank" rel="noopener noreferrer" title="Open the full university poster"><img src="../assets/project-media/pi-boy-university/original-project-poster.png" alt="Original university poster proposing a wrist-mounted Raspberry Pi device and graphical interface" loading="lazy"></a>
-            <figcaption>The original final-year poster: a 3.5-inch wrist-mounted smart device with a larger interface than a conventional watch.</figcaption>
-          </figure>
-          <p>The surviving proposal and poster show the scope I initially imagined: a Raspberry Pi 4, a 3.5-inch touchscreen, speaker and a wrist-mounted enclosure, with health, internet and profile screens in the planned interface. Camera, microphone, GPS and sensors were possible future extensions in the proposal—not hardware I had already installed. The early research also considered accessibility, data accuracy and privacy because a device carrying health information would need more than a convincing shell.</p>
-          <p>After graduating, however, the prototype spent the next couple of years sitting in a box and doing very little.</p>
-          <p>The original course had ended, the work had been submitted and there was no immediate reason to continue developing it. The idea had not disappeared, but it had effectively become another abandoned prototype.</p>
-          <p>Eventually, I decided to return to it from a different direction.</p>
-          <p>Instead of making a general wrist-mounted health device inspired by a Pip-Boy, I thought I might as well attempt to build an actual working Pip-Boy.</p>
-          <h2>Turning the concept into a real Pi-Boy</h2>
-          <p>The renewed project became the <strong>Pi-Boy</strong>: a Raspberry Pi-powered Pip-Boy containing a working touchscreen application based on the interfaces from <em>Fallout</em>.</p>
-          <p>I already had the original university concept to build from, but this version required a more focused identity. It was no longer only a theoretical wearable device. I wanted it to look recognisably like something from the games while also functioning as a real portable computer.</p>
-          <p>The basic hardware consists of a Raspberry Pi board, a small touchscreen and a speaker. These components needed to fit inside a wearable enclosure while leaving access to the Pi’s ports and enough room for wiring, controls and possible future additions.</p>
-          <p>The project became much more achievable when local artist and family friend <a href="https://www.etsy.com/uk/shop/MorganSpear3D?ref=shop-header-name&amp;listing_id=4311235842&amp;from_page=listing&amp;page=1#about">MorganSpear3D</a> offered to help fabricate the physical casing.</p>
-          <p>Morgan was able to develop and 3D-print a model using the dimensions of the Raspberry Pi board and touchscreen. The design included space for the speaker, access to the Pi’s ports and room for future additions such as working dials, buttons and lights. These details mean the physical model can continue to develop rather than permanently trapping the project in its first configuration.</p>
-          <p>Having a real enclosure designed around the hardware gave me a much stronger reason to turn the software from a simple experiment into a complete working application.</p>
-          <h2>Designing the physical enclosure</h2>
-          <p>The main body of the Pi-Boy is a large green wrist-mounted chassis that holds the touchscreen, Raspberry Pi and other internal hardware.</p>
-          <p>The lower gauntlet was printed in two sections so that it can open and close around the wearer’s wrist. Spaces were included for small but strong magnets, allowing the two halves to clip together rather than permanently sealing the device or relying entirely on glue.</p>
-          <p>The upper section contains the main electronics compartment. A cavity inside the housing holds the Raspberry Pi board and associated components. Multiple openings provide access to the Pi’s ports, while four screw holes align with the mounting points on the board so that it can be mechanically secured instead of moving around inside the casing.</p>
-          <p>A separate, more detailed section surrounds the screen and includes the Geiger-counter housing positioned beside it. This section can be screwed into place, partially covering the unfinished edges of the display and helping the touchscreen feel integrated into the casing rather than simply placed on top of it.</p>
-          <p>The printed collection also includes:</p>
-          <ul>
-            <li>The large central chassis containing the touchscreen</li>
-            <li>A rounded front bezel designed to sit around the display</li>
-            <li>A rectangular front and side housing section</li>
-            <li>A curved rear wrist enclosure</li>
-            <li>Internal black supports and clamps</li>
-            <li>A cylindrical side-control or gauge housing</li>
-            <li>An external black control knob</li>
-            <li>Smaller mounting and control pieces</li>
-            <li>A secondary screen or housing frame</li>
-            <li>Screws and other assembly hardware</li>
-            <li>Several spare or alternative printed pieces</li>
-          </ul>
-          <p>Producing the casing as separate components makes it possible to assemble, test and modify the device without having to destroy the enclosure whenever something changes. It also gives me the option to replace individual parts or redesign the controls later.</p>
-          <p>The touchscreen bezel is one of the first pieces to fit. It sits over the display from the front, surrounding the silver edge of the LCD and covering some of the unfinished gap between the screen and the green body. Before anything is glued or permanently fastened, the bezel, display and screw holes need to be tested together to make sure the screen remains accessible and the touch input is not obstructed.</p>
-          <p>The physical assembly is still in progress. Some components can be secured with screws, while the remaining supports, external controls and cosmetic parts need to be test-fitted before a final method of attachment is chosen.</p>
-          <h2>Beginning as an HTML application</h2>
-          <p>The Pi-Boy software did not begin in Python.</p>
-          <p>My first version was created as an HTML website. Building the interface in HTML, CSS and JavaScript allowed me to quickly experiment with the familiar green-and-black Pip-Boy aesthetic, create different sections and test how information could be arranged on a small screen.</p>
-          <p>This was useful for developing the appearance, but a webpage was not necessarily the best final format for a dedicated Raspberry Pi touchscreen. I wanted the Pi-Boy to feel like its own application rather than a website that happened to be running in a browser.</p>
-          <p>A browser also introduced elements that did not belong inside the device, including window borders, navigation controls, scaling differences and other distractions. Even when displayed in full-screen mode, it still behaved like a webpage underneath.</p>
-          <p>I therefore decided to rebuild the application using Python and Pygame.</p>
-          <h2>Learning Python and rebuilding the application</h2>
-          <figure class="case-figure case-left">
-            <img src="../assets/project-media/Raspberry%20Pi%20Project/Coding%20Pipboy.Py%20Beta.webp" alt="Developing the Pygame application" loading="lazy">
-            <figcaption>Developing the Pygame application</figcaption>
-          </figure>
-          <p>Converting the project from HTML into Pygame was not simply a matter of copying the original files into another format. I had to develop a much better understanding of Python and rebuild the interface as a proper application.</p>
-          <p>Pygame gave me direct control over the screen, layout, images, fonts, buttons, touch regions and navigation. It also made it easier to run the program full-screen as a dedicated Pi-Boy interface.</p>
-          <p>The application is designed specifically around the small touchscreen resolution, using large touchable areas while still trying to preserve the narrow text, glowing green lines and information-heavy appearance of the game.</p>
-          <p>As the project grew, I divided the program into separate modules rather than trying to keep everything inside one enormous Python file. The main application controls navigation between the primary sections, while other files handle pages such as the character status, SPECIAL attributes, skills, perks, inventory, maps, notes and radio.</p>
-          <p>The user’s information is saved into separate data files so that closing the application does not reset the character. This allows the Pi-Boy to behave more like a persistent personal device rather than a visual demonstration that returns to its defaults every time it launches.</p>
-          <p>The current software is a version 0.4 development build, and it continues to be revised as individual sections become more complete.</p>
-          <h2>Recreating the Pip-Boy interface</h2>
-          <figure class="case-figure case-right">
-            <img src="../assets/gallery/PipBoy%20Development%20Images/Pip-Boy%20Stat%20Screen%20Version%200.2.jpeg" alt="A Pi-Boy STAT screen" loading="lazy">
-            <figcaption>A Pi-Boy STAT screen</figcaption>
-          </figure>
-          <p>The main interface is divided into the familiar <strong>STAT</strong>, <strong>ITEMS</strong> and <strong>DATA</strong> sections.</p>
-          <p>I used visual assets and reference material gathered from the <em>Fallout</em> Fandom Wiki and the games to help recreate the appearance of the Pip-Boy. These include Vault Boy illustrations, perk images, SPECIAL artwork and item graphics.</p>
-          <p>The purpose was not just to place green text over a black background. I wanted the different pages to behave in recognisable ways while remaining usable on a real touchscreen.</p>
-          <p>The screen includes bright and dim shades of Pip-Boy green, highlighted selections, glowing divider lines, scrollable lists and a persistent navigation system. Character information such as level, hit points, action points and experience can remain visible across the relevant pages.</p>
-          <p>I also had to account for the limitations of the physical screen. A layout that looks comfortable on a computer monitor can become almost unusable when reduced to a wrist-mounted display. Buttons need to be large enough to press, text must remain legible and scrollbars need to work with a finger rather than only with a precise mouse pointer.</p>
-          <h2>The STAT section</h2>
-          <p>The STAT section contains several pages based on the character systems used throughout <em>Fallout</em>.</p>
-          <h3>Status</h3>
-          <p>The status page provides an overview of the user’s character, including information such as health, level, action points and experience.</p>
-          <p>The long-term intention is to connect parts of this area back to the original university concept. Instead of displaying only fictional character statistics, a future version could show genuine system information or readings from additional sensors.</p>
-          <h3>SPECIAL</h3>
-          <p>The SPECIAL page uses the seven familiar categories:</p>
-          <ul>
-            <li>Strength</li>
-            <li>Perception</li>
-            <li>Endurance</li>
-            <li>Charisma</li>
-            <li>Intelligence</li>
-            <li>Agility</li>
-            <li>Luck</li>
-          </ul>
-          <p>Each value can be adjusted and stored as part of the user’s character profile. The page uses matching artwork to give each category the same personality it has inside the games.</p>
-          <h3>Skills</h3>
-          <p>The skills page contains abilities such as Barter, Energy Weapons, Explosives, Guns, Lockpick, Medicine, Repair, Science, Sneak, Speech and Survival.</p>
-          <p>The user can edit the values to create their own character build. This means the Pi-Boy does not have to represent an existing save file from the game; it can become a personalised character sheet for the person wearing it.</p>
-          <h3>Perks</h3>
-          <p>The perk system allows the user to browse a collection of <em>Fallout</em> perks, view their artwork and add selected perks to their own profile.</p>
-          <p>Perks can be added and removed, and the owned-perk list is saved between sessions. Scrollbars and touch controls were developed so that the larger library can still be used on the limited display.</p>
-          <h3>General</h3>
-          <p>The General page connects the fictional interface to the actual Raspberry Pi.</p>
-          <p>It can show real information about the device, including its host name, operating system, uptime, IP address, processor temperature, memory use, available storage and power status.</p>
-          <p>There is also an option to exit the Pi-Boy application and return to the Raspberry Pi desktop. This means the device still functions as a small computer rather than locking the user permanently inside the themed interface.</p>
-          <h2>The ITEMS section</h2>
-          <p>The inventory is divided into familiar categories:</p>
-          <ul>
-            <li>Weapons</li>
-            <li>Apparel</li>
-            <li>Aid</li>
-            <li>Miscellaneous items</li>
-            <li>Ammunition</li>
-          </ul>
-          <p>The application contains a catalogue of existing <em>Fallout</em> items with corresponding names and artwork. The user can add items to their personal inventory and remove them again when they are no longer needed.</p>
-          <p>More importantly, the Pi-Boy is not restricted to items taken from the games.</p>
-          <p>I developed an on-screen keyboard that allows the user to enter the name of a completely custom object and create it inside their inventory. This means somebody could use the Pi-Boy to keep track of real possessions, equipment, supplies or anything else they wanted to carry as part of their character.</p>
-          <p>A custom item might not have official game artwork, but it still becomes a saved object within the inventory. This transforms the feature from a static collection of <em>Fallout</em> images into a system that the wearer can actually personalise.</p>
-          <p>The inventory required its own touchscreen scrolling system because the lists can quickly become longer than the available space. Both the main catalogue and the user’s owned items need to remain navigable without relying on a keyboard and mouse.</p>
-          <h2>The DATA section</h2>
-          <p>The DATA section contains some of the most ambitious features in the project:</p>
-          <ul>
-            <li>Local Map</li>
-            <li>World Map</li>
-            <li>Quests</li>
-            <li>Notes</li>
-            <li>Radio</li>
-          </ul>
-          <h3>Maps</h3>
-          <p>One of my aims was to incorporate a real-world map rather than limiting the device to a fictional map of the Mojave or Capital Wasteland.</p>
-          <p>The mapping section gives the Pi-Boy a practical connection to the wearer’s actual surroundings. It also returns to the original idea of creating a portable device that could provide useful personal information rather than only recreating a game prop.</p>
-          <p>Displaying a real map inside a small Pygame interface created its own problems involving scale, controls, loading and fitting useful information into the available screen area. It remains an area I can continue to expand with location markers and other data.</p>
-          <h3>Quests</h3>
-          <p>The quest system allows the user to create and manage personal objectives in the style of a <em>Fallout</em> quest log.</p>
-          <p>Rather than showing a fixed list copied from the games, the wearer can add their own tasks and objectives. This could be used for actual projects, appointments, reminders or everyday goals while keeping them inside the role-playing interface.</p>
-          <h3>Notes</h3>
-          <p>The Notes page provides another editable area using a touchscreen keyboard.</p>
-          <p>The user can create a title, enter text, save the note and return to it later. Notes are stored locally so that they remain available after the application has closed.</p>
-          <p>Developing a usable keyboard on such a small display was a challenge, particularly when allowing enough room for letters, spaces, deletion controls and save buttons. However, it means the Pi-Boy can accept information directly from the touchscreen without always needing an external keyboard.</p>
-          <h3>Radio</h3>
-          <p>The radio is one of the features that helps the device feel most like a functioning Pip-Boy.</p>
-          <p>I added <em>Fallout</em>-style radio music to the Raspberry Pi so that tracks can be selected and played directly through the application and its speaker. This required more than simply displaying station names: the program needed to load audio, play and pause it, move between tracks and continue operating within the rest of the interface.</p>
-          <p>The radio also presented several technical problems while the software was being reorganised and optimised. Fixing its playback became an individual stage of the version 0.4 development process.</p>
-          <p>Eventually, I would like to expand the radio with additional stations and collections while keeping the controls simple enough to operate from the wrist.</p>
-          <h2>Configuring the Raspberry Pi touchscreen</h2>
-          <p>Getting the application to work on my computer was only part of the project. It also had to run correctly on the Raspberry Pi and its attached touchscreen.</p>
-          <p>The display created several recurring problems involving resolution, rotation and touch alignment.</p>
-          <p>The physical orientation required for the enclosure did not always match the Raspberry Pi’s default screen orientation. Rotating the image could cause the touchscreen input to remain mapped in its original direction, meaning the interface appeared correctly but touches were registered in the wrong part of the screen.</p>
-          <p>A button displayed at one side could respond only when an entirely different area was pressed. Rotating the screen in another way could fix the image but turn the touch coordinates upside down or swap the horizontal and vertical axes.</p>
-          <p>The small resolution also meant that a program developed in a normal computer window did not automatically scale correctly when transferred to the Pi. Text could become too large, controls could extend beyond the edge of the display and the bottom navigation could be partially hidden.</p>
-          <p>I had to repeatedly adjust the Raspberry Pi’s display settings, full-screen behaviour, interface dimensions and touchscreen handling until the visible controls and physical touch positions matched.</p>
-          <p>These problems were frustrating because the application could appear perfectly functional with a mouse on a desktop computer and then become almost unusable when placed on the hardware for which it was actually intended.</p>
-          <p>However, resolving them helped me understand more about Linux display configuration, Raspberry Pi hardware, coordinate systems and the differences between developing software for a monitor and building an interface for a specific physical device.</p>
-          <h2>Developing for touch rather than a mouse</h2>
-          <p>The application can still be tested with a mouse and keyboard, but its main controls are designed for touch.</p>
-          <p>Every page needs clearly defined interactive regions. Tabs, list entries, adjustment buttons, scrollbars and on-screen keyboards must all respond reliably to a finger on a small display.</p>
-          <p>Some controls went through several versions because they were technically clickable but impractical to use. Narrow scrollbars, closely packed buttons and long lists might be acceptable with a mouse, but not on a wearable screen.</p>
-          <p>I therefore added larger hit areas, draggable scrollbars, highlighted selections and alternative navigation controls. Keyboard support remains useful during development, but the goal is for the final Pi-Boy to operate independently without needing a separate mouse or keyboard connected to it.</p>
-          <h2>Combining the software and the casing</h2>
-          <figure class="case-figure case-left">
-            <img src="../assets/project-media/Raspberry%20Pi%20Project/PipBoy%20On%20Wrist.webp" alt="The physical Pi-Boy worn on the wrist" loading="lazy">
-            <figcaption>The physical Pi-Boy worn on the wrist</figcaption>
-          </figure>
-          <p>The software and hardware have influenced one another throughout the project.</p>
-          <p>The dimensions of the screen determine how much information the program can display. The bezel affects how close buttons can be placed to the edges. The position of the speaker and Raspberry Pi ports affects how the casing can be assembled. Future physical buttons or dials may eventually replace some of the on-screen controls.</p>
-          <p>For now, most interaction happens through the touchscreen. The printed dial, cylindrical housing and smaller control pieces mainly help reproduce the appearance of the in-game device, but the enclosure was designed with enough space for later experimentation.</p>
-          <p>Possible future additions include connecting the external controls to the Raspberry Pi’s GPIO pins, adding working indicator lights, creating physical navigation buttons and incorporating sensors that return to the biometric ideas behind the original university project.</p>
-          <p>That would allow the Pi-Boy to move further beyond being a costume prop. It could become a genuinely interactive wearable computer enclosed inside a recognisable piece of <em>Fallout</em>-inspired design.</p>
-          <h2>What I have learned</h2>
-          <p>The Pi-Boy has developed into one of my most varied projects because it has required me to work across both software and physical design.</p>
-          <p>It began with the skills I already had in HTML, CSS and interface design. Rebuilding it in Pygame required me to learn more about Python, modular programming, local data storage, image handling, audio playback and touchscreen input.</p>
-          <p>Installing it on the Raspberry Pi introduced Linux configuration, screen rotation, full-screen applications, system information and hardware troubleshooting. The physical casing added measurements, component placement, mounting points, magnets, screws and the practical problem of fitting everything into a wearable form.</p>
-          <p>The application has also gone through several versions and individual fixes. Pages have been rebuilt, controls have been resized, code has been separated into modules and features such as radio playback, scrolling and custom data entry have each required their own rounds of testing.</p>
-          <p>Like the university prototype before it, the Pi-Boy has taught me that an idea can work perfectly well as a visual design but behave very differently once it has to operate on real hardware.</p>
-          <h2>The current state of the project</h2>
-          <p>The Pi-Boy is now much more than the abandoned prototype that sat in a box after university.</p>
-          <p>The Raspberry Pi can run a dedicated full-screen Pygame application with touch-controlled STAT, ITEMS and DATA sections. The user can create a character, edit SPECIAL attributes and skills, choose perks, manage an inventory, add custom objects, create quests and notes, view maps, play radio music and monitor information from the Pi itself.</p>
-          <p>The 3D-printed casing has been produced around the dimensions of the board and screen, with dedicated areas for the speaker, ports, mounting screws, display bezel, magnets and future controls.</p>
-          <p>However, I do not consider it completely finished.</p>
-          <p>The physical parts still need further fitting and final assembly. Some of the software pages can be expanded, the controls can continue to improve and there are still opportunities to integrate more real-world information and hardware.</p>
-          <p>That unfinished quality is not necessarily a weakness. The entire project exists because I returned to an old idea that had already been placed in a box and decided that it could become something more.</p>
-          <p>What began as a university proposal for a theoretical health and storage device has developed into a working Raspberry Pi application, a custom 3D-printed enclosure and a platform that I can continue modifying as my programming and hardware knowledge grows.</p>
-          <p>For now, it is a functioning Pi-Boy.</p>
-          <p>Eventually, I would like it to become the kind of device that originally inspired the idea: part fictional prop, part personal organiser and part genuinely useful wearable computer.</p>
-        </div>
-      </section>
-    </main>
-    <footer class="shell footer">
-      <div class="footer-left"><a class="footer-support" href="https://buymeacoffee.com/supportweb" target="_blank" rel="noopener noreferrer"><svg class="footer-coffee-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M7 12h16v9a6 6 0 0 1-6 6h-4a6 6 0 0 1-6-6Z" fill="currentColor"/><path d="M23 14h2a4 4 0 0 1 0 8h-2M5 29h21M11 3v5M16 2v5M21 3v5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg><span class="footer-support-copy"><strong>Buy me a coffee</strong><small>Thanks for supporting my work ♥</small></span></a><span class="footer-time"><span>LOCAL TIME</span><time id="local-clock"></time></span></div>
-      <span class="footer-status"><span class="footer-online-dot" aria-hidden="true"></span>SYSTEM ONLINE</span>
-    </footer>
-    <script src="../js/pipboy-beta.js?v=2"></script>
-    <script src="../js/gallery-data.js?v=boots-chat-3"></script>
-    <script src="../js/project-media-data.js"></script>
-    <script src="../js/project-media.js"></script>
-    <script src="../js/app.js?v=compressor-1"></script>
-    <script src="../js/radio-data.js"></script>
-    <script src="../js/radio-player.js"></script>
-  </body>
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Pi-Boy — Raspberry Pi Pip-Boy - Bootleg OS</title>
+<link href="https://bootlegproductions.github.io/Bootleg-OS/project-pages/raspberry-pi.html" rel="canonical"/>
+<meta content="A developing wearable Raspberry Pi and Pygame application inspired by Fallout." name="description"/>
+<link href="../assets/brand/favicon.svg?v=3" rel="icon" type="image/svg+xml"/>
+<link href="../css/style.css?v=compressor-1" rel="stylesheet"/>
+<link href="../css/pipboy-beta.css?v=2" rel="stylesheet"/>
+<link href="../css/blog-editorial.css?v=editorial-4" rel="stylesheet"/></head>
+<body class="blog-feature-case" data-project-folder="Raspberry Pi Project">
+<header class="site-header">
+<div class="shell topbar">
+<a class="brand" href="../index.html">
+<img alt="Bootleg logo" src="../assets/brand/bootleg-logo.jpg"/>
+<span>
+<strong>Bootleg Productions</strong>
+<span>Creative Hub / BOOTLEG OS</span>
+</span>
+</a>
+<nav class="nav">
+<a href="../index.html">Home</a>
+<a href="../projects.html">Projects</a>
+<a href="../gallery.html">Gallery</a>
+<div class="nav-dropdown">
+<a class="nav-apps-link" href="../applications.html">Apps <span class="nav-caret">▾</span>
+</a>
+<div class="nav-dropdown-menu">
+<a href="../applications.html">All Apps</a>
+<a href="../weather.html">Weather</a>
+<a href="../clock.html">World Clock</a>
+<a href="../radio.html">Pirate Radio</a>
+<a href="../utilities.html">Image Tools</a>
+<a href="../pixel-studio.html">Pixel Studio</a>
+<a href="../video-compressor.html">Video Compressor</a>
+<a href="../archive-scraper.html">Archive Scraper</a>
+<a href="../youtube-downloader.html">Video Converter</a>
+</div>
+</div>
+<a href="../blog.html">Blog</a>
+<a href="../contact.html">Contact</a>
+</nav>
+<div class="mini-radio">
+<div class="radio-screen">
+<span class="frequency">89.5 FM</span>
+<span class="station">Pirate Radio</span>
+</div>
+<img alt="Pirate Radio" class="radio-base" src="../assets/radio/radio-base.png"/>
+<button class="dial volume-dial" title="Volume">
+<span class="dial-rotator">
+<img alt="" src="../assets/radio/radio-volume.webp"/>
+</span>
+</button>
+<button class="dial tuning-dial" title="Tune station">
+<span class="dial-rotator">
+<img alt="" src="../assets/radio/radio-tuning.webp"/>
+</span>
+</button>
+</div>
+</div>
+</header>
+<main class="shell">
+<a class="btn" href="../projects.html">← Projects</a>
+<section class="panel project-detail-header">
+<div class="panel-content">
+<span class="eyebrow">Active project / physical computing</span>
+<h1>Pi-Boy: Raspberry Pi Pip-Boy</h1>
+<p>A developing wearable Raspberry Pi and Pygame application inspired by Fallout.</p>
+</div>
+</section>
+<section aria-labelledby="pipboy-beta-title" class="card pipboy-beta">
+<div class="card-content">
+<span class="eyebrow">V0.4 / playable browser beta</span>
+<h2 id="pipboy-beta-title">Try the Pi-Boy</h2>
+<p>The Pygame prototype, running at the Pi screen’s original 480 × 320 resolution. Tap or click the screen to explore STAT, ITEMS and DATA.</p>
+<div class="pipboy-beta-layout">
+<aside aria-label="Beta controls and settings" class="pipboy-beta-controls">
+<div class="pipboy-beta-toolbar">
+<div class="pipboy-beta-actions">
+<button class="btn" id="pipboy-start" type="button">Start beta</button>
+<button class="btn" disabled="" id="pipboy-stop" type="button">Stop</button>
+</div>
+<label>Screen size <select id="pipboy-scale"><option value="1">Original · 480 × 320</option><option value="2">Enlarged · 960 × 640</option></select></label>
+<button class="btn" id="pipboy-reset" type="button">Reset beta save</button>
+</div>
+<p aria-live="polite" class="pipboy-beta-status" id="pipboy-status" role="status">Start the beta to load Python and Pygame.</p>
+<div class="pipboy-beta-help">
+<strong>Controls</strong>
+<p>Click or tap tabs and buttons. Click the screen to focus the keyboard.</p>
+<ul><li>← / →: change STAT page</li><li>↑ / ↓: move selection</li><li>+ / −: adjust skills</li></ul>
+<p>Notes and quests have an on-screen keyboard.</p>
+</div>
+</aside>
+<div class="pipboy-beta-display">
+<div class="pipboy-beta-device" id="pipboy-device">
+<div class="pipboy-beta-screen" id="pipboy-screen">
+<div class="pipboy-beta-idle"><strong>PI-BOY / V0.4</strong><span>Ready when you are.</span></div>
+</div>
+</div>
+<p class="pipboy-beta-caption">Original Raspberry Pi display · 480 × 320</p>
+</div>
+</div>
+<details class="pipboy-beta-scope"><summary>Beta features and limitations</summary>
+<p>Character, inventory, perks, notes and quests save in this browser. Map data © <a href="https://www.openstreetmap.org/copyright" rel="noopener noreferrer" target="_blank">OpenStreetMap contributors</a>; LOCAL MAP is the prototype’s fictional test map. Radio includes four 30-second previews. Physical Pi sensor readings are unavailable here.</p>
+</details>
+<noscript><p>Enable JavaScript to run the interactive prototype.</p></noscript>
+</div>
+</section>
+<section class="project-detail-grid">
+<article class="card">
+<div class="card-content">
+<h2>Project overview</h2>
+<p>A wearable Raspberry Pi and Pygame project that grew from my university prototype. The case, interface and touchscreen controls are still being developed together.</p>
+<p>
+<a class="btn" href="../gallery.html">Explore development images in the Gallery →</a>
+</p>
+</div>
+</article>
+<article class="card project-media-card">
+<div class="card-content" data-project-media=""></div>
+</article>
+</section>
+<section class="panel">
+<div class="panel-content content-article">
+<h1>Pi-Boy: Building a Real Raspberry Pi Pip-Boy</h1>
+<p>Like most of the projects featured in my portfolio, my Pi-Boy is still a work in progress. I intend to continue developing it as I improve the software, finish assembling the casing and find new ways to make the device more useful, wearable and faithful to the Pip-Boy seen in the <em>Fallout</em> games.</p>
+<p>The project combines several different areas of work: application development, Python programming, interface design, Raspberry Pi configuration, touchscreen controls, 3D printing and physical assembly. However, the idea behind it did not begin as a direct attempt to recreate a Pip-Boy.</p>
+<p>It originally developed from my final-year university project.</p>
+<h2>The original university concept</h2>
+<figure class="case-figure case-right">
+<img alt="Early Pi-Boy status screen" loading="lazy" src="../assets/project-media/Raspberry%20Pi%20Project/Original%20Stat%20Screen.jpeg"/>
+<figcaption>Early Pi-Boy status screen</figcaption>
+</figure>
+<p>For my final-year project, I had to propose and develop a working application alongside a physical prototype. My idea was inspired by the Pip-Boy but imagined as a more realistic, everyday wrist-mounted computer—something closer in purpose to an Apple Watch, but with more emphasis on health monitoring, personal information and portable storage.</p>
+<p>I theorised that the device could read and record biometric information from the person wearing it, including their heart rate and other health-related data. It could potentially help the user monitor long-term health conditions, retain important personal or medical information and act as a portable storage device that remained physically attached to the wearer.</p>
+<p>The Pip-Boy was a useful source of inspiration because it already presented information about the player’s health, physical condition, inventory and surroundings through a device worn on the character’s arm. My university concept attempted to take those fictional ideas and consider how they might be adapted into something useful in the real world.</p>
+<p>The finished university project allowed me to explore interface design, applications, physical prototyping and the relationship between software and the device running it. It also connected with the wider work I was beginning to create in web design, digital graphics and interactive applications—the same areas that eventually developed into many of the projects now displayed throughout my portfolio.</p>
+<figure class="case-figure case-left">
+<a href="../assets/project-media/pi-boy-university/original-project-poster.png" rel="noopener noreferrer" target="_blank" title="Open the full university poster"><img alt="Original university poster proposing a wrist-mounted Raspberry Pi device and graphical interface" loading="lazy" src="../assets/project-media/pi-boy-university/original-project-poster.png"/></a>
+<figcaption>The original final-year poster: a 3.5-inch wrist-mounted smart device with a larger interface than a conventional watch.</figcaption>
+</figure>
+<p>The surviving proposal and poster show the scope I initially imagined: a Raspberry Pi 4, a 3.5-inch touchscreen, speaker and a wrist-mounted enclosure, with health, internet and profile screens in the planned interface. Camera, microphone, GPS and sensors were possible future extensions in the proposal—not hardware I had already installed. The early research also considered accessibility, data accuracy and privacy because a device carrying health information would need more than a convincing shell.</p>
+<p>After graduating, however, the prototype spent the next couple of years sitting in a box and doing very little.</p>
+<p>The original course had ended, the work had been submitted and there was no immediate reason to continue developing it. The idea had not disappeared, but it had effectively become another abandoned prototype.</p>
+<p>Eventually, I decided to return to it from a different direction.</p>
+<p>Instead of making a general wrist-mounted health device inspired by a Pip-Boy, I thought I might as well attempt to build an actual working Pip-Boy.</p>
+<h2>Turning the concept into a real Pi-Boy</h2>
+<p>The renewed project became the <strong>Pi-Boy</strong>: a Raspberry Pi-powered Pip-Boy containing a working touchscreen application based on the interfaces from <em>Fallout</em>.</p>
+<p>I already had the original university concept to build from, but this version required a more focused identity. It was no longer only a theoretical wearable device. I wanted it to look recognisably like something from the games while also functioning as a real portable computer.</p>
+<p>The basic hardware consists of a Raspberry Pi board, a small touchscreen and a speaker. These components needed to fit inside a wearable enclosure while leaving access to the Pi’s ports and enough room for wiring, controls and possible future additions.</p>
+<p>The project became much more achievable when local artist and family friend <a href="https://www.etsy.com/uk/shop/MorganSpear3D?ref=shop-header-name&amp;listing_id=4311235842&amp;from_page=listing&amp;page=1#about">MorganSpear3D</a> offered to help fabricate the physical casing.</p>
+<p>Morgan was able to develop and 3D-print a model using the dimensions of the Raspberry Pi board and touchscreen. The design included space for the speaker, access to the Pi’s ports and room for future additions such as working dials, buttons and lights. These details mean the physical model can continue to develop rather than permanently trapping the project in its first configuration.</p>
+<p>Having a real enclosure designed around the hardware gave me a much stronger reason to turn the software from a simple experiment into a complete working application.</p>
+<h2>Designing the physical enclosure</h2>
+<p>The main body of the Pi-Boy is a large green wrist-mounted chassis that holds the touchscreen, Raspberry Pi and other internal hardware.</p>
+<p>The lower gauntlet was printed in two sections so that it can open and close around the wearer’s wrist. Spaces were included for small but strong magnets, allowing the two halves to clip together rather than permanently sealing the device or relying entirely on glue.</p>
+<p>The upper section contains the main electronics compartment. A cavity inside the housing holds the Raspberry Pi board and associated components. Multiple openings provide access to the Pi’s ports, while four screw holes align with the mounting points on the board so that it can be mechanically secured instead of moving around inside the casing.</p>
+<p>A separate, more detailed section surrounds the screen and includes the Geiger-counter housing positioned beside it. This section can be screwed into place, partially covering the unfinished edges of the display and helping the touchscreen feel integrated into the casing rather than simply placed on top of it.</p>
+<p>The printed collection also includes:</p>
+<ul>
+<li>The large central chassis containing the touchscreen</li>
+<li>A rounded front bezel designed to sit around the display</li>
+<li>A rectangular front and side housing section</li>
+<li>A curved rear wrist enclosure</li>
+<li>Internal black supports and clamps</li>
+<li>A cylindrical side-control or gauge housing</li>
+<li>An external black control knob</li>
+<li>Smaller mounting and control pieces</li>
+<li>A secondary screen or housing frame</li>
+<li>Screws and other assembly hardware</li>
+<li>Several spare or alternative printed pieces</li>
+</ul>
+<p>Producing the casing as separate components makes it possible to assemble, test and modify the device without having to destroy the enclosure whenever something changes. It also gives me the option to replace individual parts or redesign the controls later.</p>
+<p>The touchscreen bezel is one of the first pieces to fit. It sits over the display from the front, surrounding the silver edge of the LCD and covering some of the unfinished gap between the screen and the green body. Before anything is glued or permanently fastened, the bezel, display and screw holes need to be tested together to make sure the screen remains accessible and the touch input is not obstructed.</p>
+<p>The physical assembly is still in progress. Some components can be secured with screws, while the remaining supports, external controls and cosmetic parts need to be test-fitted before a final method of attachment is chosen.</p>
+<h2>Beginning as an HTML application</h2>
+<p>The Pi-Boy software did not begin in Python.</p>
+<p>My first version was created as an HTML website. Building the interface in HTML, CSS and JavaScript allowed me to quickly experiment with the familiar green-and-black Pip-Boy aesthetic, create different sections and test how information could be arranged on a small screen.</p>
+<p>This was useful for developing the appearance, but a webpage was not necessarily the best final format for a dedicated Raspberry Pi touchscreen. I wanted the Pi-Boy to feel like its own application rather than a website that happened to be running in a browser.</p>
+<p>A browser also introduced elements that did not belong inside the device, including window borders, navigation controls, scaling differences and other distractions. Even when displayed in full-screen mode, it still behaved like a webpage underneath.</p>
+<p>I therefore decided to rebuild the application using Python and Pygame.</p>
+<h2>Learning Python and rebuilding the application</h2>
+<figure class="case-figure case-left">
+<img alt="Developing the Pygame application" loading="lazy" src="../assets/project-media/Raspberry%20Pi%20Project/Coding%20Pipboy.Py%20Beta.webp"/>
+<figcaption>Developing the Pygame application</figcaption>
+</figure>
+<p>Converting the project from HTML into Pygame was not simply a matter of copying the original files into another format. I had to develop a much better understanding of Python and rebuild the interface as a proper application.</p>
+<p>Pygame gave me direct control over the screen, layout, images, fonts, buttons, touch regions and navigation. It also made it easier to run the program full-screen as a dedicated Pi-Boy interface.</p>
+<p>The application is designed specifically around the small touchscreen resolution, using large touchable areas while still trying to preserve the narrow text, glowing green lines and information-heavy appearance of the game.</p>
+<p>As the project grew, I divided the program into separate modules rather than trying to keep everything inside one enormous Python file. The main application controls navigation between the primary sections, while other files handle pages such as the character status, SPECIAL attributes, skills, perks, inventory, maps, notes and radio.</p>
+<p>The user’s information is saved into separate data files so that closing the application does not reset the character. This allows the Pi-Boy to behave more like a persistent personal device rather than a visual demonstration that returns to its defaults every time it launches.</p>
+<p>The current software is a version 0.4 development build, and it continues to be revised as individual sections become more complete.</p>
+<h2>Recreating the Pip-Boy interface</h2>
+<figure class="case-figure case-right">
+<img alt="A Pi-Boy STAT screen" loading="lazy" src="../assets/gallery/PipBoy%20Development%20Images/Pip-Boy%20Stat%20Screen%20Version%200.2.jpeg"/>
+<figcaption>A Pi-Boy STAT screen</figcaption>
+</figure>
+<p>The main interface is divided into the familiar <strong>STAT</strong>, <strong>ITEMS</strong> and <strong>DATA</strong> sections.</p>
+<p>I used visual assets and reference material gathered from the <em>Fallout</em> Fandom Wiki and the games to help recreate the appearance of the Pip-Boy. These include Vault Boy illustrations, perk images, SPECIAL artwork and item graphics.</p>
+<p>The purpose was not just to place green text over a black background. I wanted the different pages to behave in recognisable ways while remaining usable on a real touchscreen.</p>
+<p>The screen includes bright and dim shades of Pip-Boy green, highlighted selections, glowing divider lines, scrollable lists and a persistent navigation system. Character information such as level, hit points, action points and experience can remain visible across the relevant pages.</p>
+<p>I also had to account for the limitations of the physical screen. A layout that looks comfortable on a computer monitor can become almost unusable when reduced to a wrist-mounted display. Buttons need to be large enough to press, text must remain legible and scrollbars need to work with a finger rather than only with a precise mouse pointer.</p>
+<h2>The STAT section</h2>
+<p>The STAT section contains several pages based on the character systems used throughout <em>Fallout</em>.</p>
+<h3>Status</h3>
+<p>The status page provides an overview of the user’s character, including information such as health, level, action points and experience.</p>
+<p>The long-term intention is to connect parts of this area back to the original university concept. Instead of displaying only fictional character statistics, a future version could show genuine system information or readings from additional sensors.</p>
+<h3>SPECIAL</h3>
+<p>The SPECIAL page uses the seven familiar categories:</p>
+<ul>
+<li>Strength</li>
+<li>Perception</li>
+<li>Endurance</li>
+<li>Charisma</li>
+<li>Intelligence</li>
+<li>Agility</li>
+<li>Luck</li>
+</ul>
+<p>Each value can be adjusted and stored as part of the user’s character profile. The page uses matching artwork to give each category the same personality it has inside the games.</p>
+<h3>Skills</h3>
+<p>The skills page contains abilities such as Barter, Energy Weapons, Explosives, Guns, Lockpick, Medicine, Repair, Science, Sneak, Speech and Survival.</p>
+<p>The user can edit the values to create their own character build. This means the Pi-Boy does not have to represent an existing save file from the game; it can become a personalised character sheet for the person wearing it.</p>
+<h3>Perks</h3>
+<p>The perk system allows the user to browse a collection of <em>Fallout</em> perks, view their artwork and add selected perks to their own profile.</p>
+<p>Perks can be added and removed, and the owned-perk list is saved between sessions. Scrollbars and touch controls were developed so that the larger library can still be used on the limited display.</p>
+<h3>General</h3>
+<p>The General page connects the fictional interface to the actual Raspberry Pi.</p>
+<p>It can show real information about the device, including its host name, operating system, uptime, IP address, processor temperature, memory use, available storage and power status.</p>
+<p>There is also an option to exit the Pi-Boy application and return to the Raspberry Pi desktop. This means the device still functions as a small computer rather than locking the user permanently inside the themed interface.</p>
+<h2>The ITEMS section</h2>
+<p>The inventory is divided into familiar categories:</p>
+<ul>
+<li>Weapons</li>
+<li>Apparel</li>
+<li>Aid</li>
+<li>Miscellaneous items</li>
+<li>Ammunition</li>
+</ul>
+<p>The application contains a catalogue of existing <em>Fallout</em> items with corresponding names and artwork. The user can add items to their personal inventory and remove them again when they are no longer needed.</p>
+<p>More importantly, the Pi-Boy is not restricted to items taken from the games.</p>
+<p>I developed an on-screen keyboard that allows the user to enter the name of a completely custom object and create it inside their inventory. This means somebody could use the Pi-Boy to keep track of real possessions, equipment, supplies or anything else they wanted to carry as part of their character.</p>
+<p>A custom item might not have official game artwork, but it still becomes a saved object within the inventory. This transforms the feature from a static collection of <em>Fallout</em> images into a system that the wearer can actually personalise.</p>
+<p>The inventory required its own touchscreen scrolling system because the lists can quickly become longer than the available space. Both the main catalogue and the user’s owned items need to remain navigable without relying on a keyboard and mouse.</p>
+<h2>The DATA section</h2>
+<p>The DATA section contains some of the most ambitious features in the project:</p>
+<ul>
+<li>Local Map</li>
+<li>World Map</li>
+<li>Quests</li>
+<li>Notes</li>
+<li>Radio</li>
+</ul>
+<h3>Maps</h3>
+<p>One of my aims was to incorporate a real-world map rather than limiting the device to a fictional map of the Mojave or Capital Wasteland.</p>
+<p>The mapping section gives the Pi-Boy a practical connection to the wearer’s actual surroundings. It also returns to the original idea of creating a portable device that could provide useful personal information rather than only recreating a game prop.</p>
+<p>Displaying a real map inside a small Pygame interface created its own problems involving scale, controls, loading and fitting useful information into the available screen area. It remains an area I can continue to expand with location markers and other data.</p>
+<h3>Quests</h3>
+<p>The quest system allows the user to create and manage personal objectives in the style of a <em>Fallout</em> quest log.</p>
+<p>Rather than showing a fixed list copied from the games, the wearer can add their own tasks and objectives. This could be used for actual projects, appointments, reminders or everyday goals while keeping them inside the role-playing interface.</p>
+<h3>Notes</h3>
+<p>The Notes page provides another editable area using a touchscreen keyboard.</p>
+<p>The user can create a title, enter text, save the note and return to it later. Notes are stored locally so that they remain available after the application has closed.</p>
+<p>Developing a usable keyboard on such a small display was a challenge, particularly when allowing enough room for letters, spaces, deletion controls and save buttons. However, it means the Pi-Boy can accept information directly from the touchscreen without always needing an external keyboard.</p>
+<h3>Radio</h3>
+<p>The radio is one of the features that helps the device feel most like a functioning Pip-Boy.</p>
+<p>I added <em>Fallout</em>-style radio music to the Raspberry Pi so that tracks can be selected and played directly through the application and its speaker. This required more than simply displaying station names: the program needed to load audio, play and pause it, move between tracks and continue operating within the rest of the interface.</p>
+<p>The radio also presented several technical problems while the software was being reorganised and optimised. Fixing its playback became an individual stage of the version 0.4 development process.</p>
+<p>Eventually, I would like to expand the radio with additional stations and collections while keeping the controls simple enough to operate from the wrist.</p>
+<h2>Configuring the Raspberry Pi touchscreen</h2>
+<p>Getting the application to work on my computer was only part of the project. It also had to run correctly on the Raspberry Pi and its attached touchscreen.</p>
+<p>The display created several recurring problems involving resolution, rotation and touch alignment.</p>
+<p>The physical orientation required for the enclosure did not always match the Raspberry Pi’s default screen orientation. Rotating the image could cause the touchscreen input to remain mapped in its original direction, meaning the interface appeared correctly but touches were registered in the wrong part of the screen.</p>
+<p>A button displayed at one side could respond only when an entirely different area was pressed. Rotating the screen in another way could fix the image but turn the touch coordinates upside down or swap the horizontal and vertical axes.</p>
+<p>The small resolution also meant that a program developed in a normal computer window did not automatically scale correctly when transferred to the Pi. Text could become too large, controls could extend beyond the edge of the display and the bottom navigation could be partially hidden.</p>
+<p>I had to repeatedly adjust the Raspberry Pi’s display settings, full-screen behaviour, interface dimensions and touchscreen handling until the visible controls and physical touch positions matched.</p>
+<p>These problems were frustrating because the application could appear perfectly functional with a mouse on a desktop computer and then become almost unusable when placed on the hardware for which it was actually intended.</p>
+<p>However, resolving them helped me understand more about Linux display configuration, Raspberry Pi hardware, coordinate systems and the differences between developing software for a monitor and building an interface for a specific physical device.</p>
+<h2>Developing for touch rather than a mouse</h2>
+<p>The application can still be tested with a mouse and keyboard, but its main controls are designed for touch.</p>
+<p>Every page needs clearly defined interactive regions. Tabs, list entries, adjustment buttons, scrollbars and on-screen keyboards must all respond reliably to a finger on a small display.</p>
+<p>Some controls went through several versions because they were technically clickable but impractical to use. Narrow scrollbars, closely packed buttons and long lists might be acceptable with a mouse, but not on a wearable screen.</p>
+<p>I therefore added larger hit areas, draggable scrollbars, highlighted selections and alternative navigation controls. Keyboard support remains useful during development, but the goal is for the final Pi-Boy to operate independently without needing a separate mouse or keyboard connected to it.</p>
+<h2>Combining the software and the casing</h2>
+<figure class="case-figure case-left">
+<img alt="The physical Pi-Boy worn on the wrist" loading="lazy" src="../assets/project-media/Raspberry%20Pi%20Project/PipBoy%20On%20Wrist.webp"/>
+<figcaption>The physical Pi-Boy worn on the wrist</figcaption>
+</figure>
+<p>The software and hardware have influenced one another throughout the project.</p>
+<p>The dimensions of the screen determine how much information the program can display. The bezel affects how close buttons can be placed to the edges. The position of the speaker and Raspberry Pi ports affects how the casing can be assembled. Future physical buttons or dials may eventually replace some of the on-screen controls.</p>
+<p>For now, most interaction happens through the touchscreen. The printed dial, cylindrical housing and smaller control pieces mainly help reproduce the appearance of the in-game device, but the enclosure was designed with enough space for later experimentation.</p>
+<p>Possible future additions include connecting the external controls to the Raspberry Pi’s GPIO pins, adding working indicator lights, creating physical navigation buttons and incorporating sensors that return to the biometric ideas behind the original university project.</p>
+<p>That would allow the Pi-Boy to move further beyond being a costume prop. It could become a genuinely interactive wearable computer enclosed inside a recognisable piece of <em>Fallout</em>-inspired design.</p>
+<h2>What I have learned</h2>
+<p>The Pi-Boy has developed into one of my most varied projects because it has required me to work across both software and physical design.</p>
+<p>It began with the skills I already had in HTML, CSS and interface design. Rebuilding it in Pygame required me to learn more about Python, modular programming, local data storage, image handling, audio playback and touchscreen input.</p>
+<p>Installing it on the Raspberry Pi introduced Linux configuration, screen rotation, full-screen applications, system information and hardware troubleshooting. The physical casing added measurements, component placement, mounting points, magnets, screws and the practical problem of fitting everything into a wearable form.</p>
+<p>The application has also gone through several versions and individual fixes. Pages have been rebuilt, controls have been resized, code has been separated into modules and features such as radio playback, scrolling and custom data entry have each required their own rounds of testing.</p>
+<p>Like the university prototype before it, the Pi-Boy has taught me that an idea can work perfectly well as a visual design but behave very differently once it has to operate on real hardware.</p>
+<section class="pi-hardware-update"><h2>Latest hardware photos</h2><p>The new images show the wrist strap and brass hinges fitted to the enclosure, plus the speaker hardware I have been exploring. They bring the physical side of the build up to date alongside the software story.</p><div class="editorial-image-grid"><figure class="editorial-figure"><a href="../assets/project-media/pi-boy-updates/wearing-complete.webp" rel="noopener" target="_blank"><img alt="Pi-Boy worn on a wrist" loading="lazy" src="../assets/project-media/pi-boy-updates/wearing-complete.webp"/></a><figcaption>The latest wearable assembly.</figcaption></figure><figure class="editorial-figure"><a href="../assets/project-media/pi-boy-updates/wrist-strap.webp" rel="noopener" target="_blank"><img alt="Wrist strap attached to the Pi-Boy" loading="lazy" src="../assets/project-media/pi-boy-updates/wrist-strap.webp"/></a><figcaption>The strap fitted around the arm.</figcaption></figure><figure class="editorial-figure"><a href="../assets/project-media/pi-boy-updates/wrist-strap-underside.webp" rel="noopener" target="_blank"><img alt="Underside of the wrist strap" loading="lazy" src="../assets/project-media/pi-boy-updates/wrist-strap-underside.webp"/></a><figcaption>The underside and fastening arrangement.</figcaption></figure><figure class="editorial-figure"><a href="../assets/project-media/pi-boy-updates/brass-hinges.webp" rel="noopener" target="_blank"><img alt="Brass hinges on the case" loading="lazy" src="../assets/project-media/pi-boy-updates/brass-hinges.webp"/></a><figcaption>Hinges fitted to the printed enclosure.</figcaption></figure><figure class="editorial-figure"><a href="../assets/project-media/pi-boy-updates/speaker.webp" rel="noopener" target="_blank"><img alt="Small speaker for the build" loading="lazy" src="../assets/project-media/pi-boy-updates/speaker.webp"/></a><figcaption>Speaker hardware being considered for the case.</figcaption></figure><figure class="editorial-figure"><a href="../assets/project-media/pi-boy-updates/optional-speaker.webp" rel="noopener" target="_blank"><img alt="Speaker and wiring beside the Pi board" loading="lazy" src="../assets/project-media/pi-boy-updates/optional-speaker.webp"/></a><figcaption>Exploring a possible speaker connection.</figcaption></figure></div><aside class="post-note"><strong>Still a work in progress</strong><p>The wearable assembly has moved forward. The next hardware work includes refining the speaker fit, routing the wiring and testing the wearable assembly in use.</p></aside></section><h2>The current state of the project</h2>
+<p>The Pi-Boy is now much more than the abandoned prototype that sat in a box after university.</p>
+<p>The Raspberry Pi can run a dedicated full-screen Pygame application with touch-controlled STAT, ITEMS and DATA sections. The user can create a character, edit SPECIAL attributes and skills, choose perks, manage an inventory, add custom objects, create quests and notes, view maps, play radio music and monitor information from the Pi itself.</p>
+<p>The 3D-printed casing has been produced around the dimensions of the board and screen, with dedicated areas for the speaker, ports, mounting screws, display bezel, magnets and future controls.</p>
+<p>However, I do not consider it completely finished.</p>
+<p>The physical parts still need further fitting and final assembly. Some of the software pages can be expanded, the controls can continue to improve and there are still opportunities to integrate more real-world information and hardware.</p>
+<p>That unfinished quality is not necessarily a weakness. The entire project exists because I returned to an old idea that had already been placed in a box and decided that it could become something more.</p>
+<p>What began as a university proposal for a theoretical health and storage device has developed into a working Raspberry Pi application, a custom 3D-printed enclosure and a platform that I can continue modifying as my programming and hardware knowledge grows.</p>
+<p>For now, it is a functioning Pi-Boy.</p>
+<p>Eventually, I would like it to become the kind of device that originally inspired the idea: part fictional prop, part personal organiser and part genuinely useful wearable computer.</p>
+</div>
+</section>
+</main>
+<footer class="shell footer">
+<div class="footer-left"><a class="footer-support" href="https://buymeacoffee.com/supportweb" rel="noopener noreferrer" target="_blank"><svg aria-hidden="true" class="footer-coffee-icon" focusable="false" viewbox="0 0 32 32"><path d="M7 12h16v9a6 6 0 0 1-6 6h-4a6 6 0 0 1-6-6Z" fill="currentColor"></path><path d="M23 14h2a4 4 0 0 1 0 8h-2M5 29h21M11 3v5M16 2v5M21 3v5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2.5"></path></svg><span class="footer-support-copy"><strong>Buy me a coffee</strong><small>Thanks for supporting my work ♥</small></span></a><span class="footer-time"><span>LOCAL TIME</span><time id="local-clock"></time></span></div>
+<span class="footer-status"><span aria-hidden="true" class="footer-online-dot"></span>SYSTEM ONLINE</span>
+</footer>
+<script src="../js/pipboy-beta.js?v=2"></script>
+<script src="../js/gallery-data.js?v=boots-chat-3"></script>
+<script src="../js/project-media-data.js"></script>
+<script src="../js/project-media.js"></script>
+<script src="../js/app.js?v=compressor-1"></script>
+<script src="../js/radio-data.js"></script>
+<script src="../js/radio-player.js"></script>
+</body>
 </html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Linux terminal walkthrough: commands I actually found useful — Bootleg OS</title><meta content="A step-by-step route from navigating folders to passwords, mounts, service checks and the logs behind my tower troubleshooting." name="description"/><link href="https://bootlegproductions.github.io/Bootleg-OS/blog-pages/linux-terminal.html" rel="canonical"/>
+<meta content="Linux terminal walkthrough: commands I actually found useful" property="og:title"/><meta content="A step-by-step route from navigating folders to passwords, mounts, service checks and the logs behind my tower troubleshooting." property="og:description"/><meta content="article" property="og:type"/><meta content="https://bootlegproductions.github.io/Bootleg-OS/blog-pages/linux-terminal.html" property="og:url"/><meta content="https://bootlegproductions.github.io/Bootleg-OS/assets/blog/editorial/terminal-guide.svg" property="og:image"/><meta content="summary_large_image" name="twitter:card"/>
+<meta content="2026-10-20" property="article:published_time"/><meta content="2026-10-20" property="article:modified_time"/>
+<link href="../assets/brand/favicon.svg?v=3" rel="icon" type="image/svg+xml"/><link href="../css/style.css?v=editorial-4" rel="stylesheet"/><link href="../css/blog-editorial.css?v=editorial-4" rel="stylesheet"/>
+</head><body class="blog-editorial">
+<header class="site-header">
+<div class="shell topbar">
+<a class="brand" href="../index.html">
+<img alt="Bootleg logo" src="../assets/brand/bootleg-logo.jpg"/>
+<span>
+<strong>Bootleg Productions</strong>
+<span>Creative Hub / BOOTLEG OS</span>
+</span>
+</a>
+<nav class="nav">
+<a href="../index.html">Home</a>
+<a href="../projects.html">Projects</a>
+<a href="../gallery.html">Gallery</a>
+<div class="nav-dropdown">
+<a class="nav-apps-link" href="../applications.html">Apps <span class="nav-caret">▾</span>
+</a>
+<div class="nav-dropdown-menu">
+<a href="../applications.html">All Apps</a>
+<a href="../weather.html">Weather</a>
+<a href="../clock.html">World Clock</a>
+<a href="../radio.html">Pirate Radio</a>
+<a href="../utilities.html">Image Tools</a>
+<a href="../pixel-studio.html">Pixel Studio</a>
+<a href="../video-compressor.html">Video Compressor</a>
+<a href="../archive-scraper.html">Archive Scraper</a>
+<a href="../youtube-downloader.html">Video Converter</a>
+</div>
+</div>
+<a href="../blog.html">Blog</a>
+<a href="../contact.html">Contact</a>
+</nav>
+<div class="mini-radio">
+<div class="radio-screen">
+<span class="frequency">89.5 FM</span>
+<span class="station">Pirate Radio</span>
+</div>
+<img alt="Pirate Radio" class="radio-base" src="../assets/radio/radio-base.png"/>
+<button class="dial volume-dial" title="Volume">
+<span class="dial-rotator">
+<img alt="" src="../assets/radio/radio-volume.webp"/>
+</span>
+</button>
+<button class="dial tuning-dial" title="Tune station">
+<span class="dial-rotator">
+<img alt="" src="../assets/radio/radio-tuning.webp"/>
+</span>
+</button>
+</div>
+</div>
+</header>
+<main class="shell blog-post-shell">
+<a class="btn blog-back-button" href="../blog.html">← Back to Bootleg.log</a>
+<header class="editorial-heading"><span class="eyebrow">Guides / Bootleg.log</span><h1>Linux terminal walkthrough: commands I actually found useful</h1><p class="blog-lead">A step-by-step route from navigating folders to passwords, mounts, service checks and the logs behind my tower troubleshooting.</p><p class="editorial-meta">By Oliver Lewis <span>·</span> Updated <time datetime="2026-10-20">20 October 2026</time> <span>·</span> About 5 min read</p></header>
+<div class="blog-reading-grid"><article class="panel blog-post">
+<figure class="blog-hero-image"><img alt="Linux terminal walkthrough: commands I actually found useful" fetchpriority="high" src="../assets/blog/editorial/terminal-guide.svg"/></figure>
+<div class="panel-content content-article"><details class="post-toc" hidden=""><summary>In this article</summary><ol data-article-toc=""></ol></details>
+<h2>You do not need to memorise the terminal</h2><p>I learnt more Linux by trying to make the tower useful than by reading a list of commands in isolation. Checking a mount, finding a log or asking why Jellyfin could not see a folder gave each command a purpose.</p><p>This guide starts with navigation, then moves into users, packages, drives and services. The examples suit Mint and other Debian/Ubuntu-based systems. Read what each command does before using it; a terminal is direct, so it will not always ask twice.</p><aside class="post-note"><strong>How to read the examples</strong><p>Copy the command itself, without a prompt symbol. <code>~</code> means your home folder, <code>..</code> means the parent folder, and quotes keep spaces inside a path together. <code>sudo</code> asks to run a command with administrator privileges; use it only where required.</p></aside><h2>1. Find your bearings</h2><div class="command-card"><pre><code>whoami
+pwd
+ls -lah</code></pre><p><code>whoami</code> shows the current user. <code>pwd</code> shows your current directory. <code>ls</code> lists its contents: <code>-l</code> adds detail, <code>-a</code> includes hidden names, and <code>-h</code> makes file sizes easier to read.</p></div><div class="command-card"><pre><code>cd ~/Documents
+mkdir -p terminal-practice
+cd terminal-practice
+pwd</code></pre><p>Move into Documents, create a practice folder, enter it and confirm where you are. If your Documents directory has a different name, use that path. <kbd>Tab</kbd> completes names; the arrow keys recall previous commands.</p></div><h2>2. Create, read and copy a file</h2><div class="command-card"><pre><code>printf 'My first terminal note\n' &gt; note.txt
+cat note.txt
+cp -i note.txt note-copy.txt
+ls -lh</code></pre><p><code>printf</code> writes a small note. The <code>&gt;</code> redirect replaces the named output file, so use the practice filename. <code>cat</code> prints it, and <code>cp -i</code> asks before overwriting an existing copy.</p></div><div class="command-card"><pre><code>less note.txt
+man ls</code></pre><p><code>less</code> lets you read without editing; <kbd>q</kbd> exits. <code>man</code> opens the installed manual for a command. Use <kbd>Ctrl</kbd> + <kbd>C</kbd> to interrupt a running command when appropriate.</p></div><h2>3. Set a password and check its status</h2><div class="command-card"><pre><code>passwd
+passwd -S "$USER"</code></pre><p><code>passwd</code> changes your own password and prompts for the current and new values. Typing is deliberately invisible, including asterisks. The status command reports account information: <code>P</code> means a usable password, <code>L</code> locked and <code>NP</code> no password. It does not display or recover the password.</p></div><p>Your Linux login, a Samba share login and a Jellyfin user are different accounts. Changing one does not automatically change the others. Keep that distinction in mind when a network application rejects a password that works at the desktop.</p><h2>4. Understand permissions before changing them</h2><div class="command-card"><pre><code>ls -ld ~/Documents
+id</code></pre><p>The directory listing shows permission bits and its owner/group. <code>id</code> shows your identity and group memberships. Read, write and execute have different meanings for files and directories; a directory needs execute permission to be traversed.</p></div><div class="command-card"><pre><code>chmod u+x my-script.sh</code></pre><p>For a script you created and inspected, <code>u+x</code> grants its owner execute permission. Replace the filename with that script. Avoid copying recursive permissions commands across an entire home folder or media drive to solve one missing-access error.</p></div><h2>5. Install software on Mint</h2><div class="command-card"><pre><code>sudo apt update
+apt search smartmontools
+sudo apt install smartmontools</code></pre><p><code>apt update</code> refreshes the package list; it does not itself upgrade every installed application. Search first, then install the package you actually need. Mint’s graphical Software Manager and Update Manager remain good alternatives.</p></div><section class="editorial-split"><div><h2>6. See which disks are really mounted</h2><p>My tower has several drives with different filesystems and mount points. The order of names such as <code>/dev/sda</code> can change, so a label or UUID is usually more meaningful when you are matching a drive to a permanent mount.</p><div class="command-card"><pre><code>lsblk -f
+df -h
+findmnt /mnt/movies</code></pre><p>List block devices and filesystem identifiers, check used/free space, then inspect one example mount. Substitute your own mount point. These commands inspect the system; they do not format anything.</p></div></div><figure class="editorial-figure"><a href="../assets/blog/linux/ssd-upgrade.webp" rel="noopener" target="_blank"><img alt="A solid-state drive being checked during the tower rebuild" loading="lazy" src="../assets/blog/linux/ssd-upgrade.webp"/></a><figcaption>Learning to identify the actual drive comes before changing its configuration.</figcaption></figure></section><div class="command-card"><pre><code>du -sh ~/Documents
+sudo blkid</code></pre><p><code>du -sh</code> totals one directory. <code>blkid</code> shows filesystem identifiers. If you later edit <code>/etc/fstab</code>, keep a backup and follow a guide matching the filesystem; an incorrect entry can disrupt boot or access to a drive.</p></div><h2>7. Check services and logs</h2><div class="command-card"><pre><code>systemctl status jellyfin --no-pager
+journalctl -u jellyfin -b --no-pager -n 50</code></pre><p>Check the service, then read its latest 50 log entries from this boot. Some logs require administrator privileges. A log line helps narrow down a fault; it is not automatically a diagnosis.</p></div><div class="command-card"><pre><code>sudo journalctl -k -b -1 | grep -Ei 'amdgpu|radeon|gpu|timeout|mce|hardware error'</code></pre><p><code>-k</code> selects kernel messages, <code>-b -1</code> selects the previous boot, and the pipe sends the output into a case-insensitive search. Previous-boot logs may be unavailable if the journal was not retained. This was the kind of check that exposed GPU-lockup messages during my troubleshooting.</p></div><h2>8. Connect the desktop to the rest of the house</h2><div class="command-card"><pre><code>hostname -I
+testparm</code></pre><p>The first command lists local network addresses. <code>testparm</code>, provided by Samba, checks its configuration. On an iPhone or another compatible client, use <code>smb://SERVER-IP</code> with the server’s actual LAN address to reach a configured share.</p></div><div class="command-card"><pre><code>sudo -u jellyfin ls "/mnt/cartoons"</code></pre><p>Run a read-only directory listing as the Jellyfin service user. This separates “my desktop can see it” from “the server account can read it”. It was a useful check on my own tower.</p></div><aside class="post-note"><strong>Screen off is not suspend</strong><p>My “Chill Mode” idea is to turn the display off while keeping Samba and Jellyfin running. On a compatible X11 desktop, <code>xset dpms force off</code> requests display power-off; it depends on the session, driver and screen. It is not a universal Wayland command, and the panel-launcher idea is still a work in progress.</p></aside><h2>A few habits worth keeping</h2><p>Use the terminal to ask one question at a time. Check the path with <code>pwd</code>, inspect the target with <code>ls</code>, and read the installed manual when an option is unfamiliar. Keep a small note of commands that solved an actual problem, together with what their output meant.</p><p>I still use the normal desktop. The terminal simply gives me another way in when a menu cannot explain what is happening.</p><aside class="useful-links"><strong>Official references &amp; useful links</strong><ul><li><a href="https://www.gnu.org/software/coreutils/manual/html_node/index.html" rel="noopener noreferrer" target="_blank">GNU file and directory commands ↗</a></li><li><a href="https://manpages.ubuntu.com/manpages/jammy/man1/passwd.1.html" rel="noopener noreferrer" target="_blank">Password command manual ↗</a></li><li><a href="https://www.freedesktop.org/software/systemd/man/latest/journalctl.html" rel="noopener noreferrer" target="_blank">journalctl reference ↗</a></li><li><a href="https://www.freedesktop.org/software/systemd/man/latest/systemctl.html" rel="noopener noreferrer" target="_blank">systemctl reference ↗</a></li><li><a href="jellyfin-home-server.html" rel="noopener noreferrer" target="_blank">Jellyfin setup ↗</a></li></ul><small>Technical references checked 20 October 2026. Screens and options can change.</small></aside>
+</div></article><aside aria-label="Related reading" class="blog-related"><span class="eyebrow">Keep exploring</span><h2>More from Bootleg.log</h2><a class="related-post" href="install-linux-mint.html"><img alt="" loading="lazy" src="../assets/blog/linux/motherboard.webp"/><span>Installing Linux Mint Cinnamon: giving my tower a second life</span></a><a class="related-post" href="jellyfin-home-server.html"><img alt="" loading="lazy" src="../assets/blog/editorial/jellyfin-library.svg"/><span>Jellyfin: turning my Linux tower into a home media server</span></a><a class="related-post" href="starting-youtube.html"><img alt="" loading="lazy" src="../assets/blog/youtube/studio-dashboard.png"/><span>How to start a YouTube channel with the equipment you already have</span></a><a class="btn" href="../blog.html">All articles →</a></aside></div>
+<nav aria-label="Article navigation" class="post-navigation"><a class="btn" href="../blog.html">← All articles</a><a class="btn" href="../projects.html">Explore the projects →</a></nav></main>
+<footer class="shell footer">
+<div class="footer-left"><a class="footer-support" href="https://buymeacoffee.com/supportweb" rel="noopener noreferrer" target="_blank"><svg aria-hidden="true" class="footer-coffee-icon" focusable="false" viewbox="0 0 32 32"><path d="M7 12h16v9a6 6 0 0 1-6 6h-4a6 6 0 0 1-6-6Z" fill="currentColor"></path><path d="M23 14h2a4 4 0 0 1 0 8h-2M5 29h21M11 3v5M16 2v5M21 3v5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2.5"></path></svg><span class="footer-support-copy"><strong>Buy me a coffee</strong><small>Thanks for supporting my work ♥</small></span></a><span class="footer-time"><span>LOCAL TIME</span><time id="local-clock"></time></span></div>
+<span class="footer-status"><span aria-hidden="true" class="footer-online-dot"></span>SYSTEM ONLINE</span>
+</footer>
+<script src="../js/gallery-data.js?v=boots-chat-3"></script>
+<script src="../js/app.js?v=compressor-1"></script>
+<script src="../js/radio-data.js"></script><script src="../js/radio-player.js"></script>
+<script defer="" src="../js/blog-enhancements.js?v=editorial-4"></script>
+</body></html>

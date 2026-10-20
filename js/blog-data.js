@@ -1,12 +1,122 @@
 window.BOOTLEG_BLOG_POSTS = [
-  { title:"Pi-Boy: Building a Real Raspberry Pi Pip-Boy", date:"2026-09-22", category:"Projects", excerpt:"A wearable Fallout-inspired touchscreen computer, from university prototype to Pygame and 3D printing.", href:"project-pages/raspberry-pi.html", icon:"PI", image:"assets/gallery/PipBoy Development Images/3D printed Custom Pip-Boy Case.webp" },
-  { title:"How to Start a YouTube Channel With No Money or Professional Equipment", date:"2026-09-21", category:"Guides", excerpt:"Starting with an iPod taped to a chair and building a Fallout Let's Play channel.", href:"blog-pages/starting-youtube.html", icon:"YT", image:"assets/blog/youtube/studio-dashboard.png" },
-  { title:"Why I Support Piracy", date:"2026-09-20", category:"Opinion", excerpt:"Digital ownership, preservation and why paying for access is not always the same as keeping a copy.", href:"blog-pages/piracy-and-ownership.html", icon:"DRM", image:"assets/blog/pirate-bay.jpg" },
-  { title:"Sites for Cinephiles", date:"2026-09-19", category:"Film", excerpt:"IMDb, Letterboxd and Rotten Tomatoes: film facts, personal diaries and a critical look at ratings.", href:"blog-pages/sites-for-cinephiles.html", icon:"FILM", image:"assets/gallery/Posters/Bodmin Beast Poster.webp" },
-
-  { title:"What is Bootleg OS?", date:"2026-09-03", category:"Projects", excerpt:"Why this portfolio grew from a university website into a personal creative operating system.", href:"blog-pages/about-bootleg-os.html", icon:"OS", image:"assets/gallery/Portfolio Websites Assets/Graphic Design Banner.webp" },
-  { title:"From university weather app to Weather Station", date:"2026-09-02", category:"Projects", excerpt:"Revisiting an Advanced Front-end project and rebuilding its API, map and clock ideas years later.", href:"blog-pages/weather-evolution.html", icon:"WX", image:"assets/project-media/university-weather/weather-app-screenshot.jpg" },
-  { title:"Building Bootleg OS in public", date:"2026-09-01", category:"News", excerpt:"A reusable development-log post for documenting changes, screenshots and what comes next.", href:"blog-pages/project-update.html", icon:"~", image:"assets/gallery/Portfolio Websites Assets/Graphic Design Banner.webp" },
-  { title:"Why personal websites still matter", date:"2026-08-30", category:"Technology", excerpt:"Nearly ten years of learning web design, from spare computer parts to Bootleg OS.", href:"blog-pages/technology.html", icon:">_", image:"assets/gallery/Website Mock-ups/N-Crypt - Website.png" },
-  { title:"10 Useful Web Tools to Simplify Your Life", date:"2026-08-28", category:"Lists", excerpt:"Ten tools and web communities I use for research, design, editing and creative projects.", href:"blog-pages/top10.html", icon:"10", image:"assets/gallery/Website Mock-ups/Crochet.Com.webp" }
+  {
+    "title": "Installing Linux Mint Cinnamon: giving my tower a second life",
+    "date": "2026-10-20",
+    "updated": "2026-10-20",
+    "category": "Guides",
+    "excerpt": "A practical Mint installation guide, the laptop failure that prompted my switch, and the tower I rebuilt afterwards.",
+    "href": "blog-pages/install-linux-mint.html",
+    "image": "assets/blog/linux/motherboard.webp",
+    "icon": "LOG"
+  },
+  {
+    "title": "Jellyfin: turning my Linux tower into a home media server",
+    "date": "2026-10-20",
+    "updated": "2026-10-20",
+    "category": "Guides",
+    "excerpt": "Install the server, organise your own media, create local accounts and watch across your home network.",
+    "href": "blog-pages/jellyfin-home-server.html",
+    "image": "assets/blog/editorial/jellyfin-library.svg",
+    "icon": "LOG"
+  },
+  {
+    "title": "Linux terminal walkthrough: commands I actually found useful",
+    "date": "2026-10-20",
+    "updated": "2026-10-20",
+    "category": "Guides",
+    "excerpt": "A step-by-step route from navigating folders to passwords, mounts, service checks and the logs behind my tower troubleshooting.",
+    "href": "blog-pages/linux-terminal.html",
+    "image": "assets/blog/editorial/terminal-guide.svg",
+    "icon": "LOG"
+  },
+  {
+    "title": "Internet Archive: a library, a time machine and the engine behind Bootleg Broadcast",
+    "date": "2026-10-20",
+    "updated": "2026-10-20",
+    "category": "Technology",
+    "excerpt": "Find media, explore the Wayback Machine and old games, and see how Archive links power the radio and broadcast projects.",
+    "href": "blog-pages/internet-archive.html",
+    "image": "assets/blog/editorial/internet-archive.svg",
+    "icon": "LOG"
+  },
+  {
+    "title": "How to start a YouTube channel with the equipment you already have",
+    "date": "2026-09-21",
+    "updated": "2026-10-20",
+    "category": "Guides",
+    "excerpt": "A direct first-upload walkthrough, followed by my story of returning to YouTube, learning to edit and gradually finding an audience.",
+    "href": "blog-pages/starting-youtube.html",
+    "image": "assets/blog/youtube/studio-dashboard.png",
+    "icon": "LOG"
+  },
+  {
+    "title": "What is Bootleg OS? Building my creative corner of the web",
+    "date": "2026-09-03",
+    "updated": "2026-10-20",
+    "category": "Projects",
+    "excerpt": "The portfolio, tools, recovered work and ongoing experiments behind Bootleg OS—combined with the development story.",
+    "href": "blog-pages/about-bootleg-os.html",
+    "image": "assets/gallery/Portfolio Websites Assets/Graphic Design Banner.webp",
+    "icon": "LOG"
+  },
+  {
+    "title": "From university weather app to Weather Station",
+    "date": "2026-09-02",
+    "updated": "2026-10-20",
+    "category": "Projects",
+    "excerpt": "Icons, animation, forecast APIs and interactive maps: how an old coursework dashboard became the current Bootleg OS weather app.",
+    "href": "blog-pages/weather-evolution.html",
+    "image": "assets/blog/editorial/weather-station.svg",
+    "icon": "LOG"
+  },
+  {
+    "title": "Sites for cinephiles: facts, film diaries and reading past the ratings",
+    "date": "2026-09-19",
+    "updated": "2026-10-20",
+    "category": "Film",
+    "excerpt": "How I use IMDb, Letterboxd and Rotten Tomatoes, with practical routes into each site and room for personal taste.",
+    "href": "blog-pages/sites-for-cinephiles.html",
+    "image": "assets/blog/editorial/cinema-seats.svg",
+    "icon": "LOG"
+  },
+  {
+    "title": "10 useful web tools for making, researching and finding things",
+    "date": "2026-08-28",
+    "updated": "2026-10-20",
+    "category": "Lists",
+    "excerpt": "Tools I return to for design, editing, clips, web projects and digital archives—with examples and links into Bootleg OS.",
+    "href": "blog-pages/top10.html",
+    "image": "assets/blog/editorial/terminal-guide.svg",
+    "icon": "LOG"
+  },
+  {
+    "title": "Why personal websites still matter",
+    "date": "2026-08-30",
+    "updated": "2026-10-20",
+    "category": "Technology",
+    "excerpt": "Nearly ten years of learning, from spare computer parts and early HTML to a place where the work can keep growing.",
+    "href": "blog-pages/technology.html",
+    "image": "assets/gallery/Website Mock-ups/N-Crypt - Website.png",
+    "icon": "LOG"
+  },
+  {
+    "title": "Why I support piracy",
+    "date": "2026-09-20",
+    "updated": "2026-10-20",
+    "category": "Opinion",
+    "excerpt": "Digital ownership, preservation and the difference between paying for access and keeping a copy.",
+    "href": "blog-pages/piracy-and-ownership.html",
+    "image": "assets/blog/pirate-bay.jpg",
+    "icon": "LOG"
+  },
+  {
+    "title": "Pi-Boy: building a real Raspberry Pi Pip-Boy",
+    "date": "2026-09-22",
+    "updated": "2026-10-20",
+    "category": "Projects",
+    "excerpt": "The wearable interface, printed case and continuing hardware build, with new wrist-strap, hinge and speaker photos.",
+    "href": "project-pages/raspberry-pi.html",
+    "image": "assets/project-media/pi-boy-updates/wearing-complete.webp",
+    "icon": "PI"
+  }
 ];

@@ -19,6 +19,10 @@ export function createDialogue(){
   if(/^(bad|rough|not great|i'?m (?:sad|stressed|having a bad day)|feeling (?:sad|stressed))[!. ]*$/.test(q))return {text:'Sorry it’s been a rough one. We can take it easy—want a distraction, some music, or just a chat?',suggestions:['Pirate Radio','Recommend an article','Just chatting']};
   if(/^(what have you been reading|recommend (?:an? )?article|what should i read|read anything interesting|tell me something interesting)[?.! ]*$/.test(q)){
    const articles=[
+    ['I’ve been reading the tower’s Linux story. Reusing old hardware and finding a new purpose for it sounds very Bootleg OS to me.','blog-pages/install-linux-mint.html'],
+    ['The Jellyfin guide turns a folder of videos into a library you can actually browse. The permissions bit is where the tower needed some patience.','blog-pages/jellyfin-home-server.html'],
+    ['The terminal guide starts with finding your way around, then gets into drives and logs. Much less mysterious when every command has a job.','blog-pages/linux-terminal.html'],
+    ['I’ve been exploring the Internet Archive article. There’s a time machine for old websites in there, and it explains where the radio’s source links come from.','blog-pages/internet-archive.html'],
     ['I’ve been reading about why Oliver still makes personal websites. I like the idea of one little corner of the internet with room to grow.','blog-pages/technology.html'],
     ['The YouTube story starts with an iPod taped to a chair. Things improved from there!','blog-pages/starting-youtube.html'],
     ['The Bootleg OS introduction explains how the projects, art and tools ended up under one roof.','blog-pages/about-bootleg-os.html']
@@ -38,4 +42,5 @@ export function createDialogue(){
  }
  return {reply,welcome};
 }
+
 
