@@ -42,3 +42,34 @@
     code.closest('.command-card').prepend(button);
   });
 })();
+
+// Keep loops optional, and respect the reader's motion preference.
+(() => {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  document.querySelectorAll('.editorial-reaction').forEach(figure => {
+    const video = figure.querySelector('video[data-animation]');
+    const button = figure.querySelector('.reaction-toggle');
+    if (!video || !button) return;
+    let playing = false;
+    function setPlaying(value) {
+      playing = value;
+      if (playing) {
+        if (!video.getAttribute('src')) video.src = video.dataset.animation;
+        video.muted = true;
+        video.play().catch(() => setPlaying(false));
+      } else video.pause();
+      button.textContent = playing ? 'Pause GIF' : 'Play GIF';
+      button.setAttribute('aria-pressed', String(playing));
+    }
+    button.hidden = false;
+    button.addEventListener('click', () => setPlaying(!playing));
+    const observer = new IntersectionObserver(entries => {
+      if (entries.some(entry => entry.isIntersecting)) {
+        setPlaying(!reduceMotion.matches);
+        observer.disconnect();
+      }
+    }, {rootMargin: '100px'});
+    observer.observe(figure);
+    reduceMotion.addEventListener('change', () => { if (reduceMotion.matches) setPlaying(false); });
+  });
+})();

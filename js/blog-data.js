@@ -16,7 +16,7 @@ window.BOOTLEG_BLOG_POSTS = [
     "category": "Guides",
     "excerpt": "Install the server, organise your own media, create local accounts and watch across your home network.",
     "href": "blog-pages/jellyfin-home-server.html",
-    "image": "assets/blog/editorial/jellyfin-library.svg",
+    "image": "assets/blog/photos/jellyfin-library.webp",
     "icon": "LOG"
   },
   {
@@ -26,7 +26,7 @@ window.BOOTLEG_BLOG_POSTS = [
     "category": "Guides",
     "excerpt": "A step-by-step route from navigating folders to passwords, mounts, service checks and the logs behind my tower troubleshooting.",
     "href": "blog-pages/linux-terminal.html",
-    "image": "assets/blog/editorial/terminal-guide.svg",
+    "image": "assets/project-media/Raspberry%20Pi%20Project/Connecting%20To%20Pi%20Via%20Terminal.png",
     "icon": "LOG"
   },
   {
@@ -36,7 +36,7 @@ window.BOOTLEG_BLOG_POSTS = [
     "category": "Technology",
     "excerpt": "Find media, explore the Wayback Machine and old games, and see how Archive links power the radio and broadcast projects.",
     "href": "blog-pages/internet-archive.html",
-    "image": "assets/blog/editorial/internet-archive.svg",
+    "image": "assets/blog/photos/wayback-machine.webp",
     "icon": "LOG"
   },
   {
@@ -66,7 +66,7 @@ window.BOOTLEG_BLOG_POSTS = [
     "category": "Projects",
     "excerpt": "Icons, animation, forecast APIs and interactive maps: how an old coursework dashboard became the current Bootleg OS weather app.",
     "href": "blog-pages/weather-evolution.html",
-    "image": "assets/blog/editorial/weather-station.svg",
+    "image": "assets/project-media/university-weather/weather-app-screenshot.jpg",
     "icon": "LOG"
   },
   {
@@ -76,7 +76,7 @@ window.BOOTLEG_BLOG_POSTS = [
     "category": "Film",
     "excerpt": "How I use IMDb, Letterboxd and Rotten Tomatoes, with practical routes into each site and room for personal taste.",
     "href": "blog-pages/sites-for-cinephiles.html",
-    "image": "assets/blog/editorial/cinema-seats.svg",
+    "image": "assets/blog/photos/son-of-rambow.jpg",
     "icon": "LOG"
   },
   {
@@ -86,7 +86,7 @@ window.BOOTLEG_BLOG_POSTS = [
     "category": "Lists",
     "excerpt": "Tools I return to for design, editing, clips, web projects and digital archives—with examples and links into Bootleg OS.",
     "href": "blog-pages/top10.html",
-    "image": "assets/blog/editorial/terminal-guide.svg",
+    "image": "assets/gallery/Website Mock-ups/N-Crypt - Website.png",
     "icon": "LOG"
   },
   {

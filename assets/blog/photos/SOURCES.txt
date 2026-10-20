@@ -1,0 +1,26 @@
+Article image sources — 20 October 2026
+
+son-of-rambow.jpg
+Son of Rambow (2007) film still, supplied by Oliver via:
+https://georgeashleymedia.weebly.com/uploads/5/4/0/2/54025245/226104803.jpg
+Editorial illustration of the cinephiles article; film rights remain with their owners.
+
+jellyfin-library.webp
+Official Jellyfin website library screenshot (10.8 interface):
+https://jellyfin.org/assets/images/10.8-library-9c07ba46877a03e749c0c8b5ed157e53.png
+https://jellyfin.org/
+This is an example interface, not Oliver's personal server.
+
+wayback-machine.webp
+Internet Archive interface screenshot uploaded by Zio27, 28 October 2021:
+https://commons.wikimedia.org/wiki/File:Wayback_Machine.png
+https://upload.wikimedia.org/wikipedia/commons/7/72/Wayback_Machine.png
+Wikimedia file page identifies this as a freely usable software screenshot.
+
+Animations (../reactions/):
+Kip / Napoleon Dynamite:
+https://tenor.com/view/kip-technology-love-napoleon-gif-5150148
+Obadiah Stane / Iron Man:
+https://tenor.com/view/obadiah-stane-tony-stark-was-able-to-build-this-in-a-cave-with-a-box-of-scraps-tony-stark-box-of-scraps-iron-man-gif-23963164
+Animations encoded as silent MP4 loops to reduce transfer size, with still previews and pause controls.
+Movie rights remain with their owners. Source links appear alongside the animations.
