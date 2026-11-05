@@ -1,0 +1,22 @@
+name: Clear stalled Pages deployment
+
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/clear-stalled-pages.yml]
+  workflow_dispatch:
+
+permissions:
+  pages: write
+
+jobs:
+  clear-stalled-deployment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Cancel the timed-out Image Tools deployment
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          gh api --method POST "repos/$GH_REPO/pages/deployments/57b9675983d225006157dfb33079140635f0e20d/cancel"
