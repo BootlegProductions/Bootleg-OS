@@ -1,21 +1,63 @@
+import {eraseSelected} from './line-erase.mjs?v=1';
 // Bootleg OS Image Tools. Edits are made on a real RGBA canvas; checkerboard is preview only.
 (() => {
   const $ = id => document.getElementById(id);
   const canvas = $('bg-canvas');
   if (!canvas) return;
   canvas.hidden = true;
+  canvas.tabIndex = 0;
   const ctx = canvas.getContext('2d', {willReadFrequently:true});
   const input = $('bg-input'), status = $('image-status');
+  const header = document.querySelector('.site-header');
+  function sizeWorkspace() {
+    document.documentElement.style.setProperty('--image-header-height', (header?.getBoundingClientRect().height || 0) + 'px');
+  }
+  sizeWorkspace();
+  if (header && typeof ResizeObserver !== 'undefined') new ResizeObserver(sizeWorkspace).observe(header);
   let original = null, fileName = 'cutout', working = null, brush = 'erase';
   let picking = false, drawing = false, lastPoint = null, busy = false, generation = 0;
-  const history = [];
+  const history = [], future = [];
+  let lineMode = false, selection = null, lineSeed = null, selectionWorker = null, selectionRequest = 0;
   const setStatus = value => { status.textContent = value; };
-  const controls = ['auto-remove','key-remove','download-png','reset-edit','clean-white-fringe'];
-  function enable(loaded) { controls.forEach(id => $(id).disabled = !loaded); $('undo-edit').disabled = !history.length; }
-  function render() { if (working) ctx.putImageData(working, 0, 0); }
-  function snapshot() { if (working) { history.push(new ImageData(new Uint8ClampedArray(working.data), canvas.width, canvas.height)); if (history.length > 8) history.shift(); $('undo-edit').disabled = false; } }
+  const controls = ['auto-remove','key-remove','download-png','reset-edit','clean-white-fringe','line-select','pick-colour'];
+  function enable(loaded) {
+    controls.forEach(id => $(id).disabled = !loaded || busy);
+    $('bg-input').disabled = busy;
+    $('undo-edit').disabled = busy || !history.length;
+    $('redo-edit').disabled = busy || !future.length;
+    $('line-apply').disabled = busy || !selection;
+    $('line-cancel').disabled = !selection && !selectionWorker;
+  }
+  function render() {
+    if (!working) return;
+    if (!selection) { ctx.putImageData(working, 0, 0); return; }
+    // Highlight only the display copy; working pixels and PNG export remain untouched.
+    const preview = new ImageData(new Uint8ClampedArray(working.data), canvas.width, canvas.height);
+    for (let i = 0; i < selection.length; i++) if (selection[i]) {
+      const p = i * 4;
+      preview.data[p] = Math.round(preview.data[p] * .45 + 255 * .55);
+      preview.data[p + 1] = Math.round(preview.data[p + 1] * .45 + 45 * .55);
+      preview.data[p + 2] = Math.round(preview.data[p + 2] * .45 + 150 * .55);
+    }
+    ctx.putImageData(preview, 0, 0);
+  }
+  function clearSelection(redraw = true) {
+    selectionRequest++; selectionWorker?.terminate(); selectionWorker = null;
+    selection = null; lineSeed = null;
+    $('line-selection-status').textContent = 'No area selected.';
+    enable(!!working); if (redraw) render();
+  }
+  function snapshot() {
+    if (!working) return;
+    clearSelection(false);
+    history.push(new ImageData(new Uint8ClampedArray(working.data), canvas.width, canvas.height));
+    if (history.length > 8) history.shift();
+    future.length = 0; enable(true);
+  }
+  function setBusy(value) { busy = value; enable(!!working); updateBrushPreview(); }
   function coords(event) { const r = canvas.getBoundingClientRect(); return {x:(event.clientX-r.left)*canvas.width/r.width,y:(event.clientY-r.top)*canvas.height/r.height}; }
   async function openFile(file) {
+    if (busy) { setStatus('Let the current operation finish before opening another image.'); return; }
     if (!file || !/^image\/(png|jpeg|webp)$/.test(file.type)) { setStatus('Choose a PNG, JPG or WebP image.'); return; }
     const id = ++generation;
     try {
@@ -26,7 +68,7 @@
       ctx.clearRect(0,0,canvas.width,canvas.height); ctx.drawImage(image,0,0); image.close();
       original = ctx.getImageData(0,0,canvas.width,canvas.height);
       working = ctx.getImageData(0,0,canvas.width,canvas.height);
-      history.length = 0; fileName = file.name.replace(/\.[^.]+$/,'');
+      clearSelection(false); history.length = 0; future.length = 0; fileName = file.name.replace(/\.[^.]+$/,'');
       $('image-dimensions').textContent = `${canvas.width} × ${canvas.height} px`;
       $('empty-stage').hidden = true; enable(true);
       setStatus('Image ready. Remove its background or use the brush to edit it.');
@@ -40,7 +82,7 @@
   let hoverPoint = null;
   function updateBrushPreview(event) {
     if (event) hoverPoint = { x:event.clientX, y:event.clientY, type:event.pointerType };
-    if (!hoverPoint || hoverPoint.type === 'touch' || !working || busy || picking) { brushPreview.hidden = true; return; }
+    if (!hoverPoint || hoverPoint.type === 'touch' || !working || busy || picking || lineMode) { brushPreview.hidden = true; return; }
     const rect = canvas.getBoundingClientRect(), parent = wrap.getBoundingClientRect();
     if (hoverPoint.x < rect.left || hoverPoint.x >= rect.right || hoverPoint.y < rect.top || hoverPoint.y >= rect.bottom) { brushPreview.hidden = true; return; }
     brushPreview.hidden = false; brushPreview.dataset.mode = brush;
@@ -60,6 +102,8 @@
   $('key-tolerance').addEventListener('input', e => $('key-tolerance-value').value = e.target.value);
   $('brush-size').addEventListener('input', e => { $('brush-size-value').value = e.target.value; updateBrushPreview(); });
   document.querySelectorAll('[data-brush]').forEach(button => button.addEventListener('click', () => {
+    if (busy) return;
+    lineMode = false; picking = false; clearSelection(); syncLineMode();
     brush = button.dataset.brush; updateBrushPreview();
     document.querySelectorAll('[data-brush]').forEach(b => b.classList.toggle('is-active', b === button));
   }));
@@ -67,9 +111,9 @@
     wrap.dataset.preview = button.dataset.preview;
     document.querySelectorAll('[data-preview]').forEach(b => b.classList.toggle('is-active', b === button));
   }));
-  $('pick-colour').addEventListener('click', () => { if (!working) return; picking = true; updateBrushPreview(); setStatus('Click the background colour in the image.'); });
+  $('pick-colour').addEventListener('click', () => { if (!working || busy) return; lineMode = false; clearSelection(); syncLineMode(); picking = true; updateBrushPreview(); setStatus('Click the background colour in the image.'); });
   $('key-remove').addEventListener('click', () => {
-    if (!working) return;
+    if (!working || busy) return;
     snapshot(); const target = $('key-colour').value.match(/[0-9a-f]{2}/gi).map(n=>parseInt(n,16));
     const tolerance = +$('key-tolerance').value, pixels = working.data;
     for (let i=0;i<pixels.length;i+=4) {
@@ -82,7 +126,7 @@
   $('fringe-tolerance').addEventListener('input', e => $('fringe-tolerance-value').value = e.target.value);
   $('clean-white-fringe').addEventListener('click', async () => {
     if (!working || busy) return;
-    busy = true; updateBrushPreview(); $('clean-white-fringe').disabled = true;
+    clearSelection(); setBusy(true);
     const id = generation;
     try {
       const { cleanWhiteFringe } = await import('./edge-cleanup.js?v=1');
@@ -92,11 +136,11 @@
       snapshot(); working = new ImageData(cleaned.data, canvas.width, canvas.height); render();
       setStatus('White fringe cleaned. Check with the Dark preview; Undo restores the previous result.');
     } catch (error) { setStatus(`Edge cleanup failed: ${error.message}`); }
-    finally { busy = false; $('clean-white-fringe').disabled = !working; }
+    finally { setBusy(false); }
   });
   $('auto-remove').addEventListener('click', async () => {
     if (!working || busy) return;
-    busy = true; updateBrushPreview(); $('auto-remove').disabled = true;
+    clearSelection(); setBusy(true);
     const id = generation, sourceOriginal = original;
     setStatus('Loading the cutout model. The first download may take several minutes...');
     try {
@@ -118,7 +162,70 @@
       }
       render(); setStatus('Cutout ready. Check the edges, touch up with the brush, then download PNG.');
     } catch (error) { const message = typeof error?.message === 'string' && error.message ? error.message : typeof error === 'string' ? error : typeof error === 'number' ? `Runtime stopped with code ${error}` : 'The cutout engine stopped unexpectedly'; console.error('Automatic cutout failed', error); setStatus(`Automatic cutout failed: ${message}. Colour key and brush remain available.`); }
-    finally { busy=false; if (working) $('auto-remove').disabled=false; }
+    finally { setBusy(false); }
+  });
+  function syncLineMode() {
+    $('line-select').setAttribute('aria-pressed', String(lineMode));
+    wrap.dataset.tool = lineMode ? 'line' : 'brush';
+    document.querySelectorAll('[data-brush]').forEach(b => b.classList.toggle('is-active', !lineMode && b.dataset.brush === brush));
+    updateBrushPreview();
+  }
+  function previewLineRegion(point) {
+    if (!working || busy) return;
+    clearSelection(false); lineSeed = point;
+    const request = ++selectionRequest;
+    setStatus('Finding the connected colour area and protecting dark outlines…');
+    try {
+      selectionWorker = new Worker('js/line-erase-worker.js?v=1', {type:'module'});
+      setBusy(true);
+      const finish = () => { selectionWorker?.terminate(); selectionWorker = null; setBusy(false); };
+      selectionWorker.onmessage = ({data}) => {
+        if (request !== selectionRequest) return;
+        finish();
+        if (data.error) { setStatus('Line-aware selection failed: ' + data.error); return; }
+        if (!data.selected) {
+          const message = data.reason === 'line' ? 'That point is protected linework. Click the excess colour beside it.' : 'Click a visible colour blob outside the outline.';
+          $('line-selection-status').textContent = message; setStatus(message); render(); return;
+        }
+        selection = data.mask; enable(true); render();
+        const warning = data.selected > data.visible * .5 ? ' Large area selected: check that the character is not highlighted.' : '';
+        $('line-selection-status').textContent = data.selected.toLocaleString() + ' pixels highlighted.' + warning;
+        setStatus('Pink shows what will be erased. Check the outline, then choose Erase selection. Nothing has changed yet.' + warning);
+      };
+      selectionWorker.onerror = event => {
+        event.preventDefault(); if (request !== selectionRequest) return;
+        finish(); setStatus('Line-aware selection could not run. Your image is unchanged; the regular brush is still available.');
+      };
+      // Transfer a copy; the editor retains its own full-quality RGBA data.
+      const rgba = new Uint8ClampedArray(working.data);
+      selectionWorker.postMessage({rgba, width:canvas.width, height:canvas.height, x:point.x, y:point.y,
+        options:{tolerance:+$('line-tolerance').value, lineThreshold:+$('line-strength').value, gap:+$('line-gap').value}}, [rgba.buffer]);
+    } catch (error) {
+      selectionWorker?.terminate(); selectionWorker = null; setBusy(false);
+      setStatus('Line-aware selection is unavailable: ' + error.message + '. Your image is unchanged.');
+    }
+  }
+  $('line-select').addEventListener('click', () => {
+    if (!working || busy) return;
+    lineMode = !lineMode; picking = false; clearSelection(); syncLineMode();
+    setStatus(lineMode ? 'Click the unwanted colour outside your character. You will see a preview before erasing.' : 'Regular brush ready.');
+  });
+  for (const name of ['line-tolerance','line-strength','line-gap']) $(name).addEventListener('input', e => {
+    $(name + '-value').value = e.target.value;
+    // Cancel an older calculation before recomputing from the same click.
+    const seed = lineSeed;
+    if (selectionWorker) { selectionWorker.terminate(); selectionWorker = null; selectionRequest++; setBusy(false); }
+    if (seed && lineMode) previewLineRegion(seed);
+  });
+  $('line-apply').addEventListener('click', () => {
+    if (!working || !selection || busy) return;
+    const mask = selection;
+    snapshot(); working = new ImageData(eraseSelected(working.data, mask), canvas.width, canvas.height);
+    render(); setStatus('Selected spill erased. The outline is protected. Click another blob, or Undo to restore this edit.');
+  });
+  $('line-cancel').addEventListener('click', () => {
+    if (selectionWorker) { selectionWorker.terminate(); selectionWorker = null; setBusy(false); }
+    clearSelection(); setStatus('Selection cancelled. Your image is unchanged.');
   });
   function dab(from,to) {
     const radius=+$('brush-size').value/2, pixels=working.data, source=original.data;
@@ -136,15 +243,40 @@
     render();
   }
   canvas.addEventListener('pointerdown', e => {
-    if(!working || busy)return;
-    updateBrushPreview(e); e.preventDefault(); const p=coords(e);
+    if(!working || busy || drawing)return;
+    updateBrushPreview(e); e.preventDefault(); canvas.focus({preventScroll:true}); const p=coords(e);
     if(picking){ const i=(Math.min(canvas.height-1,Math.floor(p.y))*canvas.width+Math.min(canvas.width-1,Math.floor(p.x)))*4; $('key-colour').value='#'+Array.from(working.data.slice(i,i+3),n=>n.toString(16).padStart(2,'0')).join(''); picking=false;setStatus('Background colour selected. Adjust tolerance, then remove colour.');return; }
+    if (lineMode) { previewLineRegion(p); return; }
     snapshot(); drawing=true;lastPoint=p;canvas.setPointerCapture(e.pointerId);dab(p,p);
   });
   canvas.addEventListener('pointermove',e=>{updateBrushPreview(e);if(!drawing)return;const p=coords(e);dab(lastPoint,p);lastPoint=p;});
   function stop(){drawing=false;lastPoint=null;}
-  canvas.addEventListener('pointerup',stop);canvas.addEventListener('pointercancel',stop);
-  $('undo-edit').addEventListener('click',()=>{if(!history.length)return;working=history.pop();render();$('undo-edit').disabled=!history.length;setStatus('Last edit undone.');});
-  $('reset-edit').addEventListener('click',()=>{if(!original)return;snapshot();working=new ImageData(new Uint8ClampedArray(original.data),canvas.width,canvas.height);render();setStatus('Original image restored.');});
-  $('download-png').addEventListener('click',()=>{if(!working)return;canvas.toBlob(blob=>{if(!blob){setStatus('Could not create a PNG.');return;}const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=fileName+'-transparent.png';a.click();setTimeout(()=>URL.revokeObjectURL(url),60000);},'image/png');});
+  canvas.addEventListener('pointerup',stop);canvas.addEventListener('pointercancel',stop);canvas.addEventListener('lostpointercapture',stop);
+  function undo() {
+    if (busy || drawing || !history.length) return;
+    clearSelection(false); future.push(working); working = history.pop(); render(); enable(true); setStatus('Last edit undone. Redo is available.');
+  }
+  function redo() {
+    if (busy || drawing || !future.length) return;
+    clearSelection(false); history.push(working); working = future.pop(); render(); enable(true); setStatus('Edit restored.');
+  }
+  $('undo-edit').addEventListener('click', undo);
+  $('redo-edit').addEventListener('click', redo);
+  document.addEventListener('keydown', event => {
+    if (event.target.matches('input,textarea,[contenteditable="true"]')) return;
+    const key = event.key.toLowerCase();
+    if ((event.ctrlKey || event.metaKey) && !event.altKey && (key === 'z' || key === 'y') && working) {
+      event.preventDefault(); if (key === 'y' || event.shiftKey) redo(); else undo();
+    }
+    if (event.key === 'Escape' && (selection || selectionWorker)) $('line-cancel').click();
+  });
+  $('reset-edit').addEventListener('click',()=>{if(!original || busy || drawing)return;snapshot();working=new ImageData(new Uint8ClampedArray(original.data),canvas.width,canvas.height);render();setStatus('Original image restored. Undo can reverse this reset.');});
+  $('download-png').addEventListener('click',()=>{
+    if(!working || busy || drawing)return;
+    // Export the actual edit buffer, never the pink selection preview or checkerboard.
+    const output = document.createElement('canvas'); output.width = canvas.width; output.height = canvas.height;
+    output.getContext('2d').putImageData(working,0,0);
+    output.toBlob(blob=>{if(!blob){setStatus('Could not create a PNG.');return;}const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=fileName+'-transparent.png';a.click();setTimeout(()=>URL.revokeObjectURL(url),60000);},'image/png');
+  });
+  enable(false);
 })();
