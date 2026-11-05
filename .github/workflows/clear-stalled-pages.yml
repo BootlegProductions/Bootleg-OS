@@ -7,16 +7,26 @@ on:
   workflow_dispatch:
 
 permissions:
+  actions: write
   pages: write
 
 jobs:
   clear-stalled-deployment:
     runs-on: ubuntu-latest
     timeout-minutes: 2
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
     steps:
-      - name: Cancel the timed-out Image Tools deployment
-        env:
-          GH_TOKEN: ${{ github.token }}
-          GH_REPO: ${{ github.repository }}
-        run: |
-          gh api --method POST "repos/$GH_REPO/pages/deployments/57b9675983d225006157dfb33079140635f0e20d/cancel"
+      - name: Force-cancel the original unresponsive workflow
+        continue-on-error: true
+        run: gh api --method POST "repos/$GH_REPO/actions/runs/42086879068/force-cancel"
+      - name: Cancel the timed-out Image Tools Pages deployment
+        continue-on-error: true
+        run: gh api --method POST "repos/$GH_REPO/pages/deployments/57b9675983d225006157dfb33079140635f0e20d/cancel"
+      - name: Report the original workflow state
+        if: always()
+        run: gh api "repos/$GH_REPO/actions/runs/42086879068" --jq '{status,conclusion}'
+      - name: Report the original Pages deployment state
+        if: always()
+        run: gh api "repos/$GH_REPO/pages/deployments/57b9675983d225006157dfb33079140635f0e20d"
