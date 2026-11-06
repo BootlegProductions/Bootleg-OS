@@ -1,3 +1,4 @@
+import {clampZoom, fitZoom, wheelZoom} from './image-viewport.mjs?v=1';
 import {eraseSelected} from './line-erase.mjs?v=1';
 // Bootleg OS Image Tools. Edits are made on a real RGBA canvas; checkerboard is preview only.
 (() => {
@@ -70,19 +71,90 @@ import {eraseSelected} from './line-erase.mjs?v=1';
       working = ctx.getImageData(0,0,canvas.width,canvas.height);
       clearSelection(false); history.length = 0; future.length = 0; fileName = file.name.replace(/\.[^.]+$/,'');
       $('image-dimensions').textContent = `${canvas.width} × ${canvas.height} px`;
-      $('empty-stage').hidden = true; enable(true);
+      $('empty-stage').hidden = true; enable(true); requestAnimationFrame(fitCanvas);
       setStatus('Image ready. Remove its background or use the brush to edit it.');
     } catch (error) { setStatus(`Could not open that image: ${error.message}`); }
   }
   input.addEventListener('change', () => openFile(input.files[0]));
   const wrap = $('image-canvas-wrap');
+  const sheet = $('image-viewport-content');
+  let zoom = 1, fitMode = true, handMode = false, spaceDown = false, pan = null;
+  function layoutCanvas() {
+    if (!working) return;
+    canvas.style.width = (canvas.width * zoom) + 'px';
+    canvas.style.height = (canvas.height * zoom) + 'px';
+    sheet.style.width = Math.max(wrap.clientWidth, canvas.width * zoom) + 'px';
+    sheet.style.height = Math.max(wrap.clientHeight, canvas.height * zoom) + 'px';
+    $('canvas-zoom').value = Math.round(zoom * 100);
+    $('canvas-zoom-value').value = Math.round(zoom * 100) + '%';
+    updateBrushPreview();
+  }
+  function setZoom(value, clientX, clientY) {
+    if (!working || drawing || pan) return;
+    const bounds = wrap.getBoundingClientRect(), before = canvas.getBoundingClientRect();
+    clientX ??= bounds.left + wrap.clientWidth / 2;
+    clientY ??= bounds.top + wrap.clientHeight / 2;
+    const imageX = (clientX - before.left) / zoom, imageY = (clientY - before.top) / zoom;
+    zoom = clampZoom(value); fitMode = false; layoutCanvas();
+    const after = canvas.getBoundingClientRect();
+    wrap.scrollLeft += after.left + imageX * zoom - clientX;
+    wrap.scrollTop += after.top + imageY * zoom - clientY;
+    hoverPoint = null; brushPreview.hidden = true;
+  }
+  function fitCanvas() {
+    if (!working || drawing || pan) return;
+    zoom = fitZoom(canvas.width, canvas.height, wrap.clientWidth, wrap.clientHeight);
+    fitMode = true; layoutCanvas(); wrap.scrollLeft = 0; wrap.scrollTop = 0;
+  }
+  $('canvas-zoom').addEventListener('input', e => setZoom(+e.target.value / 100));
+  $('zoom-in').addEventListener('click', () => setZoom(zoom * 1.25));
+  $('zoom-out').addEventListener('click', () => setZoom(zoom / 1.25));
+  $('zoom-actual').addEventListener('click', () => setZoom(1));
+  $('zoom-fit').addEventListener('click', fitCanvas);
+  wrap.addEventListener('wheel', e => {
+    if (!working) return;
+    e.preventDefault();
+    const delta = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? wrap.clientHeight : 1);
+    setZoom(wheelZoom(zoom, delta), e.clientX, e.clientY);
+  }, {passive:false});
+  function panCursor() {
+    wrap.dataset.pan = String(handMode || spaceDown); $('pan-tool').setAttribute('aria-pressed', String(handMode));
+    updateBrushPreview();
+  }
+  $('pan-tool').addEventListener('click', () => {handMode = !handMode; panCursor();});
+  document.addEventListener('keydown', e => {
+    if (e.code === 'Space' && !e.target.matches('input,textarea,button,[contenteditable=true]') && document.activeElement?.closest('.image-editor')) {
+      e.preventDefault(); spaceDown = true; panCursor();
+    }
+  });
+  document.addEventListener('keyup', e => {if (e.code === 'Space') {spaceDown = false; panCursor();}});
+  window.addEventListener('blur', () => {spaceDown = false; pan = null; wrap.dataset.panning = 'false'; panCursor();});
+  wrap.addEventListener('pointerdown', e => {
+    if (!working || (!handMode && !spaceDown && e.button !== 1) || (e.button !== 0 && e.button !== 1)) return;
+    e.preventDefault(); e.stopImmediatePropagation(); canvas.focus({preventScroll:true});
+    pan = {id:e.pointerId,x:e.clientX,y:e.clientY,left:wrap.scrollLeft,top:wrap.scrollTop};
+    wrap.dataset.panning = 'true'; wrap.setPointerCapture(e.pointerId); brushPreview.hidden = true;
+  }, true);
+  wrap.addEventListener('pointermove', e => {
+    if (!pan || pan.id !== e.pointerId) return;
+    e.preventDefault(); wrap.scrollLeft = pan.left - (e.clientX - pan.x); wrap.scrollTop = pan.top - (e.clientY - pan.y);
+  });
+  function endPan(e) {if (pan?.id === e.pointerId) {pan = null; wrap.dataset.panning = 'false';}}
+  for (const type of ['pointerup','pointercancel','lostpointercapture']) wrap.addEventListener(type, endPan);
+  if (typeof ResizeObserver !== 'undefined') new ResizeObserver(() => {if (fitMode) fitCanvas(); else layoutCanvas();}).observe(wrap);
+  function showInspector(name) {
+    for (const panel of document.querySelectorAll('.inspector-panel')) panel.hidden = panel.id !== 'settings-' + name;
+    for (const button of document.querySelectorAll('[data-inspector]')) button.setAttribute('aria-pressed', String(button.dataset.inspector === name));
+  }
+  for (const button of document.querySelectorAll('[data-inspector]')) button.addEventListener('click', () => showInspector(button.dataset.inspector));
+
   const brushPreview = document.createElement('div');
   brushPreview.className = 'image-brush-preview'; brushPreview.hidden = true;
   brushPreview.setAttribute('aria-hidden', 'true'); wrap.append(brushPreview);
   let hoverPoint = null;
   function updateBrushPreview(event) {
     if (event) hoverPoint = { x:event.clientX, y:event.clientY, type:event.pointerType };
-    if (!hoverPoint || hoverPoint.type === 'touch' || !working || busy || picking || lineMode) { brushPreview.hidden = true; return; }
+    if (!hoverPoint || hoverPoint.type === 'touch' || !working || busy || picking || lineMode || handMode || spaceDown || pan) { brushPreview.hidden = true; return; }
     const rect = canvas.getBoundingClientRect(), parent = wrap.getBoundingClientRect();
     if (hoverPoint.x < rect.left || hoverPoint.x >= rect.right || hoverPoint.y < rect.top || hoverPoint.y >= rect.bottom) { brushPreview.hidden = true; return; }
     brushPreview.hidden = false; brushPreview.dataset.mode = brush;
@@ -103,7 +175,7 @@ import {eraseSelected} from './line-erase.mjs?v=1';
   $('brush-size').addEventListener('input', e => { $('brush-size-value').value = e.target.value; updateBrushPreview(); });
   document.querySelectorAll('[data-brush]').forEach(button => button.addEventListener('click', () => {
     if (busy) return;
-    lineMode = false; picking = false; clearSelection(); syncLineMode();
+    handMode = false; panCursor(); lineMode = false; picking = false; clearSelection(); syncLineMode();
     brush = button.dataset.brush; updateBrushPreview();
     document.querySelectorAll('[data-brush]').forEach(b => b.classList.toggle('is-active', b === button));
   }));
@@ -111,7 +183,7 @@ import {eraseSelected} from './line-erase.mjs?v=1';
     wrap.dataset.preview = button.dataset.preview;
     document.querySelectorAll('[data-preview]').forEach(b => b.classList.toggle('is-active', b === button));
   }));
-  $('pick-colour').addEventListener('click', () => { if (!working || busy) return; lineMode = false; clearSelection(); syncLineMode(); picking = true; updateBrushPreview(); setStatus('Click the background colour in the image.'); });
+  $('pick-colour').addEventListener('click', () => { if (!working || busy) return; lineMode = false; clearSelection(); syncLineMode(); handMode = false; panCursor(); picking = true; updateBrushPreview(); setStatus('Click the background colour in the image.'); });
   $('key-remove').addEventListener('click', () => {
     if (!working || busy) return;
     snapshot(); const target = $('key-colour').value.match(/[0-9a-f]{2}/gi).map(n=>parseInt(n,16));
@@ -207,7 +279,7 @@ import {eraseSelected} from './line-erase.mjs?v=1';
   }
   $('line-select').addEventListener('click', () => {
     if (!working || busy) return;
-    lineMode = !lineMode; picking = false; clearSelection(); syncLineMode();
+    handMode = false; panCursor(); lineMode = !lineMode; picking = false; clearSelection(); syncLineMode(); if (lineMode) showInspector('line');
     setStatus(lineMode ? 'Click the unwanted colour outside your character. You will see a preview before erasing.' : 'Regular brush ready.');
   });
   for (const name of ['line-tolerance','line-strength','line-gap']) $(name).addEventListener('input', e => {
@@ -243,7 +315,7 @@ import {eraseSelected} from './line-erase.mjs?v=1';
     render();
   }
   canvas.addEventListener('pointerdown', e => {
-    if(!working || busy || drawing)return;
+    if(!working || busy || drawing || e.button !== 0)return;
     updateBrushPreview(e); e.preventDefault(); canvas.focus({preventScroll:true}); const p=coords(e);
     if(picking){ const i=(Math.min(canvas.height-1,Math.floor(p.y))*canvas.width+Math.min(canvas.width-1,Math.floor(p.x)))*4; $('key-colour').value='#'+Array.from(working.data.slice(i,i+3),n=>n.toString(16).padStart(2,'0')).join(''); picking=false;setStatus('Background colour selected. Adjust tolerance, then remove colour.');return; }
     if (lineMode) { previewLineRegion(p); return; }

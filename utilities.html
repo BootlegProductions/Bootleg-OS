@@ -16,9 +16,9 @@
     <meta name="twitter:title" content="Utilities - Bootleg OS">
     <meta name="twitter:description" content="Image Tools — browser-based image utilities from the Bootleg OS app drawer.">
     <link rel="stylesheet" href="css/style.css?v=brush-preview-1">
-    <link rel="stylesheet" href="css/image-tools.css?v=line-erase-1">
+    <link rel="stylesheet" href="css/image-tools.css?v=zoom-1">
   </head>
-  <body>
+  <body class="image-tools-page">
     <header class="site-header">
       <div class="shell topbar">
         <a class="brand" href="index.html">
@@ -73,25 +73,21 @@
     </header>
     <main class="shell image-workspace">
       <div class="tool-heading"><div><span class="eyebrow">Image Tools</span><h1>Background Remover</h1><p>Drop in an image, cut out the subject, then refine the edges before saving a transparent PNG.</p></div><a class="btn" href="pixel-studio.html">Open Pixel Studio</a></div>
-      <section class="image-editor" aria-label="Background removal editor">
-        <div class="image-controls card"><div class="card-content">
-          <label class="file-drop" for="bg-input"><strong>Choose an image</strong><span>PNG, JPG or WebP · stays in your browser</span><input id="bg-input" type="file" accept="image/png,image/jpeg,image/webp"></label>
-          <button class="btn" type="button" id="auto-remove" disabled>Remove background automatically</button>
-          <p class="tool-hint">The first automatic cutout downloads a model to your browser. It can take a little while; later uses are cached. Nothing is uploaded.</p>
-          <div class="tool-divider"></div>
-          <h2>Colour key</h2><p class="tool-hint">For a plain green screen or solid backdrop.</p>
-          <div class="tool-field"><label for="key-colour">Colour to remove</label><div class="key-picker"><input id="key-colour" type="color" value="#00ff00"><button type="button" class="btn btn-small" id="pick-colour">Pick from image</button></div></div>
-          <div class="tool-field"><label for="key-tolerance">Tolerance <output id="key-tolerance-value">55</output></label><input id="key-tolerance" type="range" min="5" max="180" value="55"></div>
-          <button class="btn btn-small" type="button" id="key-remove" disabled>Remove colour</button>
-          <div class="tool-divider"></div>
-          <h2>Edge cleanup</h2>
-          <p class="tool-hint">For white backgrounds: removes white leftovers connected to transparent space. White details enclosed by an outline stay intact.</p>
-          <div class="tool-field"><label for="fringe-tolerance">White tolerance <output id="fringe-tolerance-value">18</output></label><input id="fringe-tolerance" type="range" min="5" max="60" value="18"></div>
-          <button class="btn btn-small" type="button" id="clean-white-fringe" disabled>Clean white fringe</button>
-          <div class="tool-divider"></div>
+      <section class="image-editor" aria-label="Background removal editor"><div class="image-filebar">          <label class="file-drop" for="bg-input"><strong>Choose an image</strong><span>PNG, JPG or WebP · stays in your browser</span><input id="bg-input" type="file" accept="image/png,image/jpeg,image/webp"></label>
+          <button class="btn" type="button" id="auto-remove" disabled>Auto cutout</button>
+          <p class="tool-hint auto-hint">The first automatic cutout downloads a model to your browser. It can take a little while; later uses are cached. Nothing is uploaded.</p>
+<button class="btn" type="button" id="download-png" disabled>Download PNG</button></div>
+<aside class="image-controls card"><div class="card-content">
+          <h2>Touch up</h2>
+          <div class="segmented" role="group" aria-label="Brush mode"><button type="button" class="is-active" data-brush="erase">Erase</button><button type="button" data-brush="restore">Restore</button></div>
+          <div class="tool-field"><label for="brush-size">Brush size <output id="brush-size-value">32</output> px</label><input id="brush-size" type="range" min="2" max="160" value="32"></div>
+          
+<button class="btn btn-small" type="button" id="line-select" aria-pressed="false" disabled>Select excess colour</button><button class="btn btn-small" id="pan-tool" type="button" aria-pressed="false">✥ Move canvas</button><div class="tool-actions"><button class="btn btn-small" type="button" id="reset-edit" disabled>Reset image</button></div><p class="tool-hint">Wheel: zoom<br>Space + drag: move<br>Middle-button drag: move<br>Ctrl+Z / Ctrl+Y: undo / redo</p></div></aside>
+        <div class="image-stage card"><div class="image-stage-bar"><span id="image-dimensions">No image loaded</span><div class="image-history" role="group" aria-label="Edit history"><button type="button" id="undo-edit" class="btn btn-small" title="Undo (Ctrl+Z / ⌘Z)" disabled>↶ Undo</button><button type="button" id="redo-edit" class="btn btn-small" title="Redo (Ctrl+Y / ⌘⇧Z)" disabled>↷ Redo</button></div><div class="segmented" role="group" aria-label="Preview background"><button type="button" class="is-active" data-preview="checker">Checkerboard</button><button type="button" data-preview="dark">Dark</button><button type="button" data-preview="light">Light</button></div></div><div class="image-canvas-wrap" id="image-canvas-wrap"><div class="image-viewport-content" id="image-viewport-content"><canvas id="bg-canvas" aria-label="Editable image preview"></canvas><div class="empty-stage" id="empty-stage">Your image appears here</div></div></div><div class="canvas-navigation" aria-label="Canvas navigation"><button id="zoom-out" type="button" title="Zoom out">−</button><label class="sr-only" for="canvas-zoom">Canvas zoom</label><input id="canvas-zoom" type="range" min="5" max="800" value="100" aria-label="Canvas zoom"><output id="canvas-zoom-value">100%</output><button id="zoom-in" type="button" title="Zoom in">+</button><button id="zoom-fit" type="button">Fit</button><button id="zoom-actual" type="button">100%</button></div><p class="image-status" id="image-status" role="status" aria-live="polite">Choose a file to begin.</p></div>
+<aside class="image-inspector card"><div class="inspector-tabs" role="group" aria-label="Cleanup settings"><button type="button" data-inspector="line" aria-pressed="true" aria-controls="settings-line">Outline</button><button type="button" data-inspector="key" aria-pressed="false" aria-controls="settings-key">Colour</button><button type="button" data-inspector="fringe" aria-pressed="false" aria-controls="settings-fringe">Fringe</button></div><section class="card-content inspector-panel" id="settings-line">
           <h2>Line-aware erase</h2>
           <p class="tool-hint">Click a colour spill outside your drawing. The selection stops at dark outlines and different colours. Check the pink preview, then erase it.</p>
-          <button class="btn btn-small" type="button" id="line-select" aria-pressed="false" disabled>Select excess colour</button>
+          
           <div class="tool-field"><label for="line-tolerance">Colour tolerance <output id="line-tolerance-value">55</output></label><input id="line-tolerance" type="range" min="0" max="150" value="55"></div>
           <div class="tool-field"><label for="line-strength">Line detection <output id="line-strength-value">120</output></label><input id="line-strength" type="range" min="40" max="220" value="120"></div>
           <p class="tool-hint">Raise line detection for lighter outlines. Raise tolerance to include more shades of the clicked colour.</p>
@@ -99,15 +95,17 @@
           <p class="tool-hint">Gap size uses original image pixels. If the subject turns pink too, cancel and raise this setting. Large openings need a manual touch-up.</p>
           <div class="tool-actions"><button class="btn btn-small" type="button" id="line-apply" disabled>Erase selection</button><button class="btn btn-small" type="button" id="line-cancel" disabled>Cancel selection</button></div>
           <p class="tool-hint line-selection-status" id="line-selection-status" role="status">No area selected.</p>
-          <div class="tool-divider"></div>
-          <h2>Touch up</h2>
-          <div class="segmented" role="group" aria-label="Brush mode"><button type="button" class="is-active" data-brush="erase">Erase</button><button type="button" data-brush="restore">Restore</button></div>
-          <div class="tool-field"><label for="brush-size">Brush size <output id="brush-size-value">32</output> px</label><input id="brush-size" type="range" min="2" max="160" value="32"></div>
-          <div class="tool-actions"><button class="btn btn-small" type="button" id="reset-edit" disabled>Reset image</button></div>
-          <div class="tool-divider"></div>
-          <button class="btn" type="button" id="download-png" disabled>Download transparent PNG</button>
-        </div></div>
-        <div class="image-stage card"><div class="image-stage-bar"><span id="image-dimensions">No image loaded</span><div class="image-history" role="group" aria-label="Edit history"><button type="button" id="undo-edit" class="btn btn-small" title="Undo (Ctrl+Z / ⌘Z)" disabled>↶ Undo</button><button type="button" id="redo-edit" class="btn btn-small" title="Redo (Ctrl+Y / ⌘⇧Z)" disabled>↷ Redo</button></div><div class="segmented" role="group" aria-label="Preview background"><button type="button" class="is-active" data-preview="checker">Checkerboard</button><button type="button" data-preview="dark">Dark</button><button type="button" data-preview="light">Light</button></div></div><div class="image-canvas-wrap" id="image-canvas-wrap"><canvas id="bg-canvas" aria-label="Editable image preview"></canvas><div class="empty-stage" id="empty-stage">Your image appears here</div></div><p class="image-status" id="image-status" role="status" aria-live="polite">Choose a file to begin.</p></div>
+</section><section class="card-content inspector-panel" id="settings-key" hidden>
+          <h2>Colour key</h2><p class="tool-hint">For a plain green screen or solid backdrop.</p>
+          <div class="tool-field"><label for="key-colour">Colour to remove</label><div class="key-picker"><input id="key-colour" type="color" value="#00ff00"><button type="button" class="btn btn-small" id="pick-colour">Pick from image</button></div></div>
+          <div class="tool-field"><label for="key-tolerance">Tolerance <output id="key-tolerance-value">55</output></label><input id="key-tolerance" type="range" min="5" max="180" value="55"></div>
+          <button class="btn btn-small" type="button" id="key-remove" disabled>Remove colour</button>
+</section><section class="card-content inspector-panel" id="settings-fringe" hidden>
+          <h2>Edge cleanup</h2>
+          <p class="tool-hint">For white backgrounds: removes white leftovers connected to transparent space. White details enclosed by an outline stay intact.</p>
+          <div class="tool-field"><label for="fringe-tolerance">White tolerance <output id="fringe-tolerance-value">18</output></label><input id="fringe-tolerance" type="range" min="5" max="60" value="18"></div>
+          <button class="btn btn-small" type="button" id="clean-white-fringe" disabled>Clean white fringe</button>
+</section></aside>
       </section>
       <p class="model-credit">Automatic cutouts use <a href="https://huggingface.co/studioludens/birefnet-lite-512" target="_blank" rel="noopener noreferrer">BiRefNet lite 512</a> with <a href="https://huggingface.co/docs/transformers.js" target="_blank" rel="noopener noreferrer">Transformers.js</a>. A compact U²-Net model is used if the detailed model cannot run on your device. Fine details may need a brush touch-up.</p>
     <aside class="tool-support-notice" aria-label="Support development"><div><strong>Useful? Help build what comes next.</strong><p>These tools are free to use. If one saves you time, an optional coffee helps fund upgrades, new features and ongoing development. Thanks for the support.</p></div><a class="btn" href="https://buymeacoffee.com/supportweb" target="_blank" rel="noopener noreferrer">Support development ↗</a></aside>
@@ -116,7 +114,7 @@
       <div class="footer-left"><a class="footer-support" href="https://buymeacoffee.com/supportweb" target="_blank" rel="noopener noreferrer"><svg class="footer-coffee-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M7 12h16v9a6 6 0 0 1-6 6h-4a6 6 0 0 1-6-6Z" fill="currentColor"/><path d="M23 14h2a4 4 0 0 1 0 8h-2M5 29h21M11 3v5M16 2v5M21 3v5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg><span class="footer-support-copy"><strong>Buy me a coffee</strong><small>Thanks for supporting my work ♥</small></span></a><span class="footer-time"><span>LOCAL TIME</span><time id="local-clock"></time></span></div>
       <span class="footer-status"><span class="footer-online-dot" aria-hidden="true"></span>SYSTEM ONLINE</span>
     </footer>
-    <script type="module" src="js/image-tools.js?v=line-erase-1"></script>
+    <script type="module" src="js/image-tools.js?v=zoom-1"></script>
     <script src="js/gallery-data.js?v=boots-chat-3"></script>
     <script src="js/app.js?v=compressor-1"></script>
     <script src="js/radio-data.js"></script>
