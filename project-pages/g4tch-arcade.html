@@ -6,16 +6,16 @@
   <title>
    G4TCH’s ARCADE — a personalised Raspberry Pi cabinet | Bootleg OS
   </title>
-  <meta content="A Pygame arcade project for my dad’s 50th birthday: Mega Drive games, Alien and RoboCop inspired themes, a prism intro and plans for a printed Raspberry Pi cabinet." name="description"/>
+  <meta content="A Raspberry Pi arcade for my dad’s 50th birthday. See the working joystick and ten-button prototype, bench build photos and proposed RoboCop enclosure." name="description"/>
   <link href="https://bootlegproductions.github.io/Bootleg-OS/project-pages/g4tch-arcade.html" rel="canonical"/>
   <link href="../assets/brand/favicon.svg?v=3" rel="icon" type="image/svg+xml"/>
   <link href="../css/style.css?v=pygame-radio-1" rel="stylesheet"/>
   <meta content="G4TCH’s ARCADE — 50 years, still playing" property="og:title"/>
   <meta content="website" property="og:type"/>
   <meta content="https://bootlegproductions.github.io/Bootleg-OS/project-pages/g4tch-arcade.html" property="og:url"/>
-  <meta content="A Pygame arcade project for my dad’s 50th birthday: Mega Drive games, Alien and RoboCop inspired themes, a prism intro and plans for a printed Raspberry Pi cabinet." property="og:description"/>
-  <meta content="https://bootlegproductions.github.io/Bootleg-OS/assets/project-media/g4tch-arcade/prism-splash.png" property="og:image"/>
-  <link href="../css/g4tch-project.css?v=1" rel="stylesheet"/>
+  <meta content="A Raspberry Pi arcade for my dad’s 50th birthday. See the working joystick and ten-button prototype, bench build photos and proposed RoboCop enclosure." property="og:description"/>
+  <meta content="https://bootlegproductions.github.io/Bootleg-OS/assets/project-media/g4tch-arcade/powered-arcade-prototype.webp" property="og:image"/>
+  <link href="../css/g4tch-project.css?v=2" rel="stylesheet"/>
  </head>
  <body class="g4tch-project">
   <header class="site-header">
@@ -142,7 +142,7 @@
       </p>
       <div class="pygame-tags">
        <span class="tag">
-        Working desktop prototype
+        Playable Raspberry Pi prototype
        </span>
        <span class="tag">
         Pygame
@@ -154,13 +154,14 @@
       <a class="btn" href="#try-the-cabinet">
        Try the browser preview ↓
       </a>
+      <a class="btn" href="#build-progress">See the hardware build ↓</a>
      </div>
      <figure>
-      <a href="../assets/project-media/g4tch-arcade/prism-splash.png" rel="noopener" target="_blank">
-       <img alt="G4TCH’s ARCADE desktop prototype with a prism splitting a beam into rainbow colours" fetchpriority="high" src="../assets/project-media/g4tch-arcade/prism-splash.png"/>
+      <a href="../assets/project-media/g4tch-arcade/powered-arcade-prototype.webp" rel="noopener" target="_blank">
+       <img src="../assets/project-media/g4tch-arcade/powered-arcade-prototype.webp" alt="The arcade launcher running on a display above the illuminated joystick and button panel" width="1080" height="1440" fetchpriority="high" decoding="async">
       </a>
       <figcaption>
-       The current desktop splash screen. The prism makes the machine feel like his before a game has even started.
+       <strong>Powered arcade prototype.</strong> The Pi launcher running with the connected control panel and all ten buttons lit, including COIN and Player. The encoder and wiring are still outside the planned enclosure.
       </figcaption>
      </figure>
     </div>
@@ -180,7 +181,7 @@
       “G4TCH’s ARCADE” gives the build his own name and identity. The intention is a desktop-sized cabinet rather than a full-size machine, with a Raspberry Pi doing the work inside a custom case.
      </p>
      <p>
-      The software has moved beyond the initial idea. I have a working desktop prototype with a searchable game library and a launch interface. Golden Axe has been one of the early tests, and the latest screenshots show its cover art appearing alongside the matching search result.
+      The software has moved beyond the initial idea. The launcher started as a desktop prototype and now runs on the Raspberry Pi. Golden Axe was one of the early tests; this screenshot shows its cover art alongside the matching search result.
      </p>
     </div>
     <figure>
@@ -191,6 +192,56 @@
       Searching the real prototype for Golden Axe. Click any screenshot to view it at its original size.
      </figcaption>
     </figure>
+   </section>
+   <section class="arcade-copy" id="build-progress">
+    <span class="eyebrow">Build log / November 2026</span>
+    <h2>Playable on the bench. Cabinet next.</h2>
+    <p>The arcade now runs on its Raspberry Pi and display. I wired up a joystick and ten buttons using an <a href="https://amzn.eu/d/016P2SNc" target="_blank" rel="noopener noreferrer">arcade controls kit ↗</a> with a USB encoder. Wiring and mapping were straightforward. The eight coloured buttons sit on top, with the COIN button to start and the Player icon button on the front.</p>
+    <p>The launcher’s <strong>Controls (F4)</strong> menu lets you reconfigure the inputs yourself, so the layout can be adjusted without rewiring the panel.</p>
+    <p>I suggested a RoboCop-inspired enclosure to Morgan Spears, using OCP badges as a visual reference to tie the casing in with the blue launcher theme. The <a href="https://www.printables.com/model/1360199-arcade-machine" target="_blank" rel="noopener noreferrer">compact cabinet by David C ↗</a> remains a reference for the form. Next comes fitting the screen, Pi and wired control panel into the case, with room for ventilation, cables and access to the ports.</p>
+    <div class="arcade-status-grid">
+     <div><strong>Running now</strong><p>Raspberry Pi, display, launcher and playable games.</p></div>
+     <div><strong>Wired and mapped</strong><p>Joystick and ten buttons through a USB encoder, with remapping available.</p></div>
+     <div><strong>Next: the enclosure</strong><p>Work with Morgan on the RoboCop-inspired case and mounting.</p></div>
+    </div>
+    <div class="arcade-screenshot-grid arcade-build-gallery">
+     <figure>
+      <a href="../assets/project-media/g4tch-arcade/pi-bench-setup.webp" target="_blank" rel="noopener">
+       <img src="../assets/project-media/g4tch-arcade/pi-bench-setup.webp" alt="Raspberry Pi, display and HDMI capture hardware on the bench during setup" width="1080" height="1440" loading="lazy" decoding="async">
+      </a>
+      <figcaption><strong>01 · Bringing up the Raspberry Pi</strong> The Pi connected to the cabinet display during software setup, with a terminal open and the hardware still accessible for testing.</figcaption>
+     </figure>
+     <figure>
+      <a href="../assets/project-media/g4tch-arcade/hdmi-capture.webp" target="_blank" rel="noopener">
+       <img src="../assets/project-media/g4tch-arcade/hdmi-capture.webp" alt="HDMI capture adapter and cables beside the display" width="1080" height="1440" loading="lazy" decoding="async">
+      </a>
+      <figcaption><strong>02 · HDMI capture during testing</strong> A closer look at the HDMI capture adapter used in the bench setup while checking the Pi’s video output.</figcaption>
+     </figure>
+     <figure>
+      <a href="../assets/project-media/g4tch-arcade/pi-prism-boot.webp" target="_blank" rel="noopener">
+       <img src="../assets/project-media/g4tch-arcade/pi-prism-boot.webp" alt="The arcade’s prism splash screen running on a display with a Raspberry Pi in front" width="1080" height="1440" loading="lazy" decoding="async">
+      </a>
+      <figcaption><strong>03 · First prism boot on the Pi</strong> The launcher’s prism intro running on the Raspberry Pi and intended display. This photo shows an early windowed test before the components go into the enclosure.</figcaption>
+     </figure>
+     <figure>
+      <a href="../assets/project-media/g4tch-arcade/usb-encoder-wiring.webp" target="_blank" rel="noopener">
+       <img src="../assets/project-media/g4tch-arcade/usb-encoder-wiring.webp" alt="Arcade button harnesses, joystick and USB encoder on the underside of the control panel" width="1080" height="1440" loading="lazy" decoding="async">
+      </a>
+      <figcaption><strong>04 · Wiring the USB encoder</strong> The joystick and button leads plug into a single USB encoder, which presents the controls to the Pi as a controller.</figcaption>
+     </figure>
+     <figure>
+      <a href="../assets/project-media/g4tch-arcade/control-panel-assembly.webp" target="_blank" rel="noopener">
+       <img src="../assets/project-media/g4tch-arcade/control-panel-assembly.webp" alt="Red ball-top joystick, eight coloured buttons and two front buttons on a black panel" width="1080" height="1440" loading="lazy" decoding="async">
+      </a>
+      <figcaption><strong>05 · Test-fitting the control panel</strong> The assembled test panel: a joystick, eight coloured action buttons, and two front buttons marked COIN and Player. The encoder is still exposed for testing.</figcaption>
+     </figure>
+     <figure>
+      <a href="../assets/project-media/g4tch-arcade/robocop-ocp-badges.webp" target="_blank" rel="noopener">
+       <img src="../assets/project-media/g4tch-arcade/robocop-ocp-badges.webp" alt="Two black-and-white OCP badges held in a hand" width="1080" height="1440" loading="lazy" decoding="async">
+      </a>
+      <figcaption><strong>06 · RoboCop casing direction</strong> These OCP badges show the RoboCop-inspired look I suggested to Morgan Spears for the enclosure. The case itself is still to be built around the display and Pi.</figcaption>
+     </figure>
+    </div>
    </section>
    <section class="arcade-copy">
     <span class="eyebrow">
@@ -234,7 +285,7 @@
    </aside>
    <section class="arcade-copy">
     <span class="eyebrow">
-     Inside the current build / v0.3
+     Inside the native build
     </span>
     <h2>
      A Pygame front end, with RetroArch behind it
@@ -267,7 +318,7 @@
        Back to the cabinet
       </strong>
       <p>
-       Escape leaves a running game and returns to the launcher. The backtick key opens RetroArch’s quick menu. The six-button game layout can be mapped to the final USB controls.
+       Escape leaves a running game and returns to the launcher. The backtick key opens RetroArch’s quick menu. The cabinet inputs can be reassigned from the launcher’s Controls menu.
       </p>
      </div>
     </div>
@@ -355,53 +406,6 @@
      </div>
      <iframe allow="autoplay; fullscreen; gamepad" allowfullscreen="" class="arcade-preview-frame" loading="lazy" src="../demos/g4tch-arcade/?v=2" title="Interactive G4TCH’s ARCADE cabinet preview">
      </iframe>
-    </div>
-   </section>
-   <section class="arcade-copy">
-    <span class="eyebrow">
-     From the desktop to a physical build
-    </span>
-    <h2>
-     Less wiring, more time on the cabinet
-    </h2>
-    <p>
-     My current control idea is to use a preassembled USB arcade joystick and button unit. It would plug into the Pi, with its electronics and USB cable hidden inside the cabinet. That could simplify the build compared with wiring every button and joystick switch individually.
-    </p>
-    <p>
-     The controller still needs to suit the Pi’s operating system and the software’s input mapping. Its physical dimensions will also affect where the buttons, stick and mounting points can go. Those checks need to happen before committing to the case layout.
-    </p>
-    <p>
-     Morgan would like to help with the project by printing the casing, much like the work on the Pi-Boy enclosure. The compact
-     <a href="https://www.printables.com/model/1360199-arcade-machine" rel="noopener noreferrer" target="_blank">
-      Arcade Machine design by David C on Printables ↗
-     </a>
-     is a reference for the direction. It is inspiration for the enclosure, with the final shape dependent on the display, controller, Pi, ventilation and access to the ports.
-    </p>
-    <div class="arcade-status-grid">
-     <div>
-      <strong>
-       Working now
-      </strong>
-      <p>
-       The desktop library, game search, themes, prism splash and game launching.
-      </p>
-     </div>
-     <div>
-      <strong>
-       Physical build next
-      </strong>
-      <p>
-       Confirm the screen and USB controls, test the software on the intended Pi, then work with Morgan on the printed case and mounting.
-      </p>
-     </div>
-     <div>
-      <strong>
-       Keep developing
-      </strong>
-      <p>
-       Refine input mappings, artwork and boot behaviour as the machine moves onto its intended hardware.
-      </p>
-     </div>
     </div>
    </section>
    <section class="arcade-copy">
