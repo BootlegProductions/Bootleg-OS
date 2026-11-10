@@ -493,6 +493,16 @@ window.GALLERY_CATEGORIES = [
     "slug": "sketches",
     "title": "Sketches",
     "files": [
+      {"name": "Acid Bath", "file": "assets/gallery/Sketches/nov-2026/acid-bath.webp", "type": "webp", "description": "A skeleton in a bubbling bath, with green spills and purple foam picked out in coloured pencil."},
+      {"name": "Vault Suit Study", "file": "assets/gallery/Sketches/nov-2026/vault-suit.webp", "type": "webp", "description": "A blue-and-yellow vault suit in coloured pencil, with an angled pose and folds worked into the fabric."},
+      {"name": "Don’t Forget to Bring a Towel", "file": "assets/gallery/Sketches/nov-2026/bring-a-towel.webp", "type": "webp", "description": "A character sketch in pink and black, with South Park’s Towelie worked into the composition."},
+      {"name": "Heart-Eye Portrait", "file": "assets/gallery/Sketches/nov-2026/heart-eyes.webp", "type": "webp", "description": "A graphite portrait with heart-shaped eye highlights, a septum ring and a loose, wavy bob."},
+      {"name": "Casual Pose Study", "file": "assets/gallery/Sketches/nov-2026/casual-pose.webp", "type": "webp", "description": "A pencil character study in a rolled-sleeve top and jeans, with one hand raised."},
+      {"name": "Headband Pose Study", "file": "assets/gallery/Sketches/nov-2026/headband-pose.webp", "type": "webp", "description": "A seated character with a headband and one hand lifted into her hair."},
+      {"name": "Summer Costume Study", "file": "assets/gallery/Sketches/nov-2026/summer-costume.webp", "type": "webp", "description": "A pencil costume study with a striped top, a high bun and small expression sketches in the margin."},
+      {"name": "Standing Figure Study", "file": "assets/gallery/Sketches/nov-2026/standing-figure.webp", "type": "webp", "description": "A front-facing graphite figure study with a belted skirt and curled hair."},
+      {"name": "Over the Shoulder", "file": "assets/gallery/Sketches/nov-2026/over-the-shoulder.webp", "type": "webp", "description": "A turned pose in graphite, with a high ponytail, patterned stockings and platform boots."},
+      {"name": "Popcorn Figure Study", "file": "assets/gallery/Sketches/nov-2026/popcorn-figure.webp", "type": "webp", "description": "A seated graphite figure study with short hair, a raised hand and a bowl of popcorn."},
       {
         "name": "Dwight Schrute — Portrait Sketch",
         "file": "assets/gallery/Sketches/Dwight Schrute Portrait.jpeg",
