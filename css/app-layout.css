@@ -1,0 +1,82 @@
+.app-title-panel {
+  margin-block: clamp(1rem, 2vw, 1.6rem);
+}
+
+.tool-heading.app-title-panel > div {
+  flex: 1;
+  min-width: 0;
+}
+
+.app-heading-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: clamp(.65rem, 2vw, 2rem);
+}
+
+.app-heading-line h1 {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.app-heading-line .app-heading-icon {
+  flex: 0 0 auto;
+  width: clamp(44px, 7vw, 104px);
+  height: clamp(44px, 7vw, 104px);
+  margin: 0;
+  background: linear-gradient(135deg, #312044, #18384a);
+  border-radius: .45rem;
+  font-size: clamp(1.25rem, 4vw, 3.4rem);
+}
+
+.post-note.app-helper-setup {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+  align-items: start;
+  gap: 1rem 2rem;
+  width: 100%;
+  max-width: none;
+  margin-block: 0 1.3rem;
+}
+
+.post-note.app-helper-setup :is(h2, h3) {
+  color: #31243b;
+  margin: 0 0 .65rem;
+}
+
+.post-note.app-helper-setup h2 {
+  font-size: clamp(1.22rem, 2.4vw, 2rem);
+}
+
+.post-note.app-helper-setup h3 {
+  font-size: 1.12rem;
+}
+
+.app-helper-action p {
+  margin: .8rem 0 0;
+}
+
+.app-helper-walkthrough ol {
+  margin: 0;
+  padding-inline-start: 1.4rem;
+}
+
+.app-helper-walkthrough li + li {
+  margin-top: .4rem;
+}
+
+.post-note.app-helper-setup li strong {
+  display: inline;
+  margin: 0;
+}
+
+.app-return {
+  margin-block: 1.3rem;
+}
+
+@media (max-width: 640px) {
+  .post-note.app-helper-setup {
+    grid-template-columns: 1fr;
+  }
+}
