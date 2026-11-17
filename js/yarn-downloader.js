@@ -1,6 +1,7 @@
 const $ = id => document.getElementById(id);
 const form = $('yarn-form');
 const local = $('yarn-local');
+const fallback = $('yarn-fallback');
 
 function counts() {
   return {before: Number($('yarn-before').value), after: Number($('yarn-after').value)};
@@ -10,6 +11,7 @@ function reset() {
   const {before, after} = counts();
   $('yarn-total').textContent = `Up to ${before + after + 1} clips including the starting clip; collection stops at the end of a scene.`;
   $('yarn-job').hidden = true;
+  if (fallback) fallback.hidden = true;
 }
 
 const clipPageHosts = new Set([
@@ -82,7 +84,13 @@ async function downloadSequence(settings) {
     setTimeout(() => URL.revokeObjectURL(url), 30000);
     status.textContent = 'ZIP ready. Check your browser downloads.';
   } catch (error) {
-    status.textContent = error.message;
+    if (/Yarn returned HTTP 403/.test(error.message) && fallback) {
+      status.textContent = 'Yarn blocked the local helper from reading this clip. The ZIP could not be created.';
+      $('yarn-fallback-open').href = settings.url;
+      fallback.hidden = false;
+    } else {
+      status.textContent = error.message;
+    }
   } finally {
     controls.forEach((control, index) => {control.disabled = disabled[index];});
     submit.focus();
