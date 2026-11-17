@@ -16,6 +16,7 @@
     <meta name="twitter:title" content="Video Compressor - Bootleg OS">
     <meta name="twitter:description" content="Compress a video locally in your browser. Quality presets, resolution controls and MP4 downloads without a watermark.">
     <link rel="stylesheet" href="css/style.css?v=compressor-1">
+  <link rel="stylesheet" href="css/app-layout.css?v=1">
   </head>
   <body>
     <header class="site-header">
@@ -71,7 +72,7 @@
       </div>
     </header>
     <main class="shell compressor-workspace">
-  <div class="tool-heading"><div><span class="eyebrow">Video Tools // local processing</span><h1>Video Compressor</h1><p>A smaller video, ready to share. Compress a clip on your device and save it as an MP4.</p></div><a class="btn" href="applications.html">All tools</a></div>
+  <div class="tool-heading app-title-panel"><div><span class="eyebrow">Video Tools // local processing</span><div class="app-heading-line"><h1>Video Compressor</h1><span class="app-icon app-heading-icon" aria-hidden="true">▸</span></div><p>A smaller video, ready to share. Compress a clip on your device and save it as an MP4.</p></div></div>
   <section class="compressor-grid" aria-label="Video compression workspace">
     <form class="compressor-controls card" id="compress-form"><div class="card-content">
       <label class="file-drop" id="compress-drop" for="compress-input"><strong>Choose or drop a video</strong><span>MP4, M4V, MOV or WebM · browser mode up to 500 MB</span><input id="compress-input" type="file" accept="video/mp4,video/quicktime,video/webm,.mp4,.m4v,.mov,.webm"></label>
@@ -91,6 +92,7 @@
   <div class="boots-note"><strong>On your device. No watermark. No signup.</strong><p>Your video is not uploaded. The first compression downloads a video engine of about 32 MB. Keep this tab open while it works; long or high-resolution videos can take several minutes or exceed your device’s memory. A laptop or desktop works best for larger files. Compression is lossy, and an already-small video may not shrink further.</p></div>
   <p class="model-credit">Powered by <a href="https://ffmpegwasm.netlify.app/" target="_blank" rel="noopener noreferrer">FFmpeg.wasm</a>. <a href="https://github.com/ffmpegwasm/ffmpeg.wasm/tree/main/packages/core" target="_blank" rel="noopener noreferrer">Engine source and licensing</a>. The engine loads from jsDelivr; processing stays in your browser.</p>
 <aside class="tool-support-notice" aria-label="Support development"><div><strong>Useful? Help build what comes next.</strong><p>These tools are free to use. If one saves you time, an optional coffee helps fund upgrades, new features and ongoing development. Thanks for the support.</p></div><a class="btn" href="https://buymeacoffee.com/supportweb" target="_blank" rel="noopener noreferrer">Support development ↗</a></aside>
+    <p class="app-return"><a href="applications.html">← All apps</a></p>
     </main>
     <footer class="shell footer">
       <div class="footer-left"><a class="footer-support" href="https://buymeacoffee.com/supportweb" target="_blank" rel="noopener noreferrer"><svg class="footer-coffee-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M7 12h16v9a6 6 0 0 1-6 6h-4a6 6 0 0 1-6-6Z" fill="currentColor"/><path d="M23 14h2a4 4 0 0 1 0 8h-2M5 29h21M11 3v5M16 2v5M21 3v5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg><span class="footer-support-copy"><strong>Buy me a coffee</strong><small>Thanks for supporting my work ♥</small></span></a><span class="footer-time"><span>LOCAL TIME</span><time id="local-clock"></time></span></div>
