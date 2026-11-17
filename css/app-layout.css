@@ -1,15 +1,10 @@
-.app-title-panel {
+.boot-window.app-title-panel {
   margin-block: clamp(1rem, 2vw, 1.6rem);
 }
 
-.tool-heading.app-title-panel > div {
-  flex: 1;
-  min-width: 0;
-}
-
-.app-heading-line {
-  display: flex;
-  justify-content: space-between;
+.app-title-panel .app-heading-line {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(max-content, 22%);
   align-items: center;
   gap: clamp(.65rem, 2vw, 2rem);
 }
@@ -20,13 +15,27 @@
 }
 
 .app-heading-line .app-heading-icon {
-  flex: 0 0 auto;
+  justify-self: center;
   width: clamp(44px, 7vw, 104px);
   height: clamp(44px, 7vw, 104px);
   margin: 0;
   background: linear-gradient(135deg, #312044, #18384a);
   border-radius: .45rem;
   font-size: clamp(1.25rem, 4vw, 3.4rem);
+}
+
+.app-title-action {
+  margin-top: 1rem;
+}
+
+@media (max-width: 640px) {
+  .app-title-panel .app-heading-line {
+    grid-template-columns: minmax(0, 1fr) minmax(max-content, 18%);
+  }
+
+  .app-heading-line h1 {
+    font-size: clamp(1.55rem, 7vw, 2.75rem);
+  }
 }
 
 .post-note.app-helper-setup {
