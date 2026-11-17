@@ -17,6 +17,7 @@
     <meta name="twitter:description" content="Image Tools — browser-based image utilities from the Bootleg OS app drawer.">
     <link rel="stylesheet" href="css/style.css?v=brush-preview-1">
     <link rel="stylesheet" href="css/image-tools.css?v=zoom-1">
+  <link rel="stylesheet" href="css/app-layout.css?v=1">
   </head>
   <body class="image-tools-page">
     <header class="site-header">
@@ -72,7 +73,7 @@
       </div>
     </header>
     <main class="shell image-workspace">
-      <div class="tool-heading"><div><span class="eyebrow">Image Tools</span><h1>Background Remover</h1><p>Drop in an image, cut out the subject, then refine the edges before saving a transparent PNG.</p></div><a class="btn" href="pixel-studio.html">Open Pixel Studio</a></div>
+      <div class="tool-heading app-title-panel"><div><span class="eyebrow">Image Tools</span><div class="app-heading-line"><h1>Background Remover</h1><span class="app-icon app-heading-icon" aria-hidden="true">✦</span></div><p>Drop in an image, cut out the subject, then refine the edges before saving a transparent PNG.</p></div><a class="btn" href="pixel-studio.html">Open Pixel Studio</a></div>
       <section class="image-editor" aria-label="Background removal editor"><div class="image-filebar">          <label class="file-drop" for="bg-input"><strong>Choose an image</strong><span>PNG, JPG or WebP · stays in your browser</span><input id="bg-input" type="file" accept="image/png,image/jpeg,image/webp"></label>
           <button class="btn" type="button" id="auto-remove" disabled>Auto cutout</button>
           <p class="tool-hint auto-hint">The first automatic cutout downloads a model to your browser. It can take a little while; later uses are cached. Nothing is uploaded.</p>
