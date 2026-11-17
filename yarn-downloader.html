@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Yarn Sequence Downloader - Bootleg OS</title>
+    <title>Yarn.co Sequencer - Bootleg OS</title>
     <link rel="canonical" href="https://bootlegproductions.github.io/Bootleg-OS/yarn-downloader.html">
     <meta name="description" content="Collect neighbouring Yarn clips and download MP4 sequences as one ZIP with Bootleg Helper.">
     <link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg?v=3">
@@ -16,7 +16,8 @@
     <meta name="twitter:title" content="Applications - Bootleg OS">
     <meta name="twitter:description" content="Browse the Bootleg OS app drawer — weather, world clock, pirate radio, image tools, archive scraper and video converter.">
     <link rel="stylesheet" href="css/style.css?v=compressor-1">
-  <link rel="stylesheet" href="css/yarn-downloader.css?v=batch-3"></head>
+  <link rel="stylesheet" href="css/yarn-downloader.css?v=batch-3"><link rel="stylesheet" href="css/app-layout.css?v=1">
+  </head>
   <body>
     <header class="site-header">
       <div class="shell topbar">
@@ -71,22 +72,28 @@
       </div>
     </header>
     <main class="shell">
-      <a class="btn" href="applications.html">← All apps</a>
-      <section class="panel"><div class="panel-content">
-        <span class="eyebrow">Editing tools / Bootleg Helper</span><h1>Yarn sequence downloader</h1>
-        <p>Keep the moments before and after a quote. Collect neighbouring Yarn clips and download numbered MP4s in their original scene order.</p>
+
+      <section class="panel app-title-panel"><div class="panel-content">
+        <span class="eyebrow">Editing tools / Bootleg Helper</span><div class="app-heading-line"><h1>Yarn.co Sequencer</h1><span class="app-icon app-heading-icon" aria-hidden="true">✂</span></div>
+        <p>Collect clips before and after a Yarn quote and save the numbered MP4s as one ZIP.</p>
       </div></section>
       <section class="yarn-layout">
         <article class="card"><div class="card-content">
           <h2>Build your clip batch</h2>
-          <aside class="post-note">
-      <strong>Set up once on Windows</strong>
-      <ol>
-        <li>Click <a class="btn" href="downloads/Bootleg-Helper-Setup.cmd" download>Download Bootleg Helper</a>.</li>
-        <li>Open the downloaded file, press <kbd>I</kbd>, then <kbd>Enter</kbd>.</li>
-        <li>When setup says the helper is running, paste a link and click <strong>Download</strong>. Choose <strong>Allow</strong> if prompted.</li>
-      </ol>
-      <p>The same helper works for Yarn and YouTube on 64-bit Intel or AMD Windows.</p>
+          <aside class="post-note app-helper-setup">
+      <div class="app-helper-action">
+        <h2>Set up once on Windows</h2>
+        <a class="btn" href="downloads/Bootleg-Helper-Setup.cmd" download>Download Bootleg Helper</a>
+        <p>One install covers Yarn and YouTube on 64-bit Intel or AMD Windows.</p>
+      </div>
+      <div class="app-helper-walkthrough">
+        <h3>Set-up walkthrough</h3>
+        <ol>
+          <li>Download Bootleg Helper.</li>
+          <li>Open the file, press <kbd>I</kbd>, then <kbd>Enter</kbd>.</li>
+          <li>When the helper is running, paste a link and click <strong>Download</strong>. Choose <strong>Allow</strong> if prompted.</li>
+        </ol>
+      </div>
     </aside>
           <form id="yarn-form">
             <label for="yarn-url">Starting Yarn clip</label>
@@ -99,6 +106,7 @@
           <div id="yarn-job" hidden><p id="yarn-status" role="status"></p><div id="yarn-fallback" hidden><p>Open this clip on Yarn and use the browser companion on that tab. Enter the same counts, then choose <strong>Collect sequence</strong>.</p><a class="btn" id="yarn-fallback-open" target="_blank" rel="noopener">Open clip on Yarn</a> <a href="downloads/Bootleg-Yarn-Browser-Companion.zip" download>Get the Yarn browser companion</a></div></div>
         </div></article>
       </section>
+    <p class="app-return"><a href="applications.html">← All apps</a></p>
     </main>
     <footer class="shell footer">
       <div class="footer-left"><a class="footer-support" href="https://buymeacoffee.com/supportweb" target="_blank" rel="noopener noreferrer"><svg class="footer-coffee-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M7 12h16v9a6 6 0 0 1-6 6h-4a6 6 0 0 1-6-6Z" fill="currentColor"/><path d="M23 14h2a4 4 0 0 1 0 8h-2M5 29h21M11 3v5M16 2v5M21 3v5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg><span class="footer-support-copy"><strong>Buy me a coffee</strong><small>Thanks for supporting my work ♥</small></span></a><span class="footer-time"><span>LOCAL TIME</span><time id="local-clock"></time></span></div>
