@@ -16,7 +16,7 @@
     <meta name="twitter:title" content="Applications - Bootleg OS">
     <meta name="twitter:description" content="Browse the Bootleg OS app drawer — weather, world clock, pirate radio, image tools, archive scraper and video converter.">
     <link rel="stylesheet" href="css/style.css?v=compressor-1">
-  <link rel="stylesheet" href="css/yarn-downloader.css"></head>
+  <link rel="stylesheet" href="css/yarn-downloader.css?v=batch-3"></head>
   <body>
     <header class="site-header">
       <div class="shell topbar">
@@ -76,24 +76,34 @@
         <span class="eyebrow">Editing tools / browser companion</span><h1>Yarn sequence downloader</h1>
         <p>Keep the moments before and after a quote. Collect neighbouring Yarn clips and download numbered MP4s in their original scene order.</p>
       </div></section>
+      <details class="card yarn-setup" id="yarn-setup" open>
+        <summary>Set up the Yarn helper <span>Desktop Chrome or Edge</span></summary>
+        <div class="card-content">
+          <div class="yarn-actions">
+            <a class="btn" href="downloads/Bootleg-Yarn-Browser-Companion.zip" download>Download helper ZIP</a>
+            <button class="btn" id="yarn-installed" type="button" hidden>I already have the helper</button>
+          </div>
+          <ol class="yarn-steps">
+            <li>Extract the ZIP into a folder you’ll keep.</li>
+            <li>Open <code>chrome://extensions</code> in Chrome or <code>edge://extensions</code> in Edge.</li>
+            <li>Turn on <strong>Developer mode</strong>, click <strong>Load unpacked</strong>, and pick the extracted folder containing <code>manifest.json</code>.</li>
+          </ol>
+          <p>On your starting clip’s Yarn page, open the helper from the browser’s Extensions menu. Click <strong>Collect sequence</strong>, review the list, then click <strong>Download MP4s</strong>. Files go to <strong>Downloads/Bootleg-Yarn</strong>.</p>
+        </div>
+      </details>
       <section class="yarn-layout">
         <article class="card"><div class="card-content">
           <h2>Build your clip batch</h2>
           <form id="yarn-form">
             <label for="yarn-url">Starting Yarn clip</label>
-            <input id="yarn-url" type="url" placeholder="https://getyarn.io/yarn-clip/…" required>
+            <input id="yarn-url" type="url" placeholder="https://yarn.co/yarn-clip/…" aria-describedby="yarn-link-help" required>
+            <p class="yarn-small" id="yarn-link-help">Paste a clip, GIF, meme or embed link tied to a Yarn clip. Music-video clips work too when they have a Yarn clip page.</p>
             <div class="yarn-counts"><label>Clips before<input id="yarn-before" type="number" min="0" max="15" value="3" required></label><label>Clips after<input id="yarn-after" type="number" min="0" max="15" value="3" required></label></div>
             <p id="yarn-total">7 clips including the starting clip.</p>
             <button class="btn" type="submit">Prepare batch</button>
           </form>
           <div id="yarn-job" hidden><p id="yarn-status" role="status"></p><div class="yarn-actions"><a class="btn" id="yarn-open" hidden>Open starting clip</a><button class="btn" id="yarn-export" type="button" hidden>Save batch settings</button></div><p>Open the starting clip, then launch the companion on that page and click Collect sequence. To carry over your counts, save the settings before opening the clip.</p></div>
           <aside class="post-note"><strong>Why a browser companion?</strong><p>Yarn does not let another website read its clip pages directly. The companion reads the Yarn page you open using your normal browser session. If Yarn refuses a request, it stops and reports the error.</p></aside>
-        </div></article>
-        <article class="card"><div class="card-content"><span class="eyebrow">Chrome / Edge · desktop</span><h2>Install once, use whenever</h2>
-          <a class="btn" href="downloads/Bootleg-Yarn-Browser-Companion.zip" download>Download browser companion</a>
-          <ol class="yarn-steps"><li>Extract the ZIP into a folder you will keep.</li><li>Open <code>chrome://extensions</code> or <code>edge://extensions</code>.</li><li>Turn on <strong>Developer mode</strong>, choose <strong>Load unpacked</strong>, and select the extracted folder containing <code>manifest.json</code>.</li><li>Open your Yarn clip, then click the companion in your browser toolbar.</li><li><strong>Collect sequence</strong>, review the titles, then <strong>Download MP4s</strong>.</li></ol>
-          <p>Downloads are saved under <strong>Downloads/Bootleg-Yarn</strong>. The starting clip is marked START; files are numbered in scene order. Keep the Yarn tab open while collecting.</p>
-          <p class="yarn-small">No account, proxy or external server. The companion reads only the tab you activate and stores batch details locally. Desktop Chrome and Edge are supported; iPhone cannot install this extension.</p>
         </div></article>
       </section>
     </main>
@@ -105,5 +115,5 @@
     <script src="js/app.js?v=compressor-1"></script>
     <script src="js/radio-data.js"></script>
     <script src="js/radio-player.js"></script>
-  <script type="module" src="js/yarn-downloader.js?v=batch-2"></script></body>
+  <script type="module" src="js/yarn-downloader.js?v=batch-3"></script></body>
 </html>
