@@ -11,17 +11,22 @@
  form.addEventListener('submit',async e=>{
   e.preventDefault();stopped=false;start.disabled=true;download.hidden=true;cancel.hidden=true;progress.hidden=false;progress.removeAttribute('value');status.textContent='Checking video…';document.querySelector('#yt-title').textContent='';
   try{
+   const update=document.querySelector('#yt-helper-update');
+   if(update)update.hidden=true;
    if(local){
     status.textContent='Connecting to Bootleg Helper…';
     let health;
     try {const response=await fetch(api+'/health',{signal:AbortSignal.timeout(30000)});if(response.ok)health=await response.json()}catch{}
     if(!health?.localHelper)throw Error('Bootleg Helper is not connected. Run the setup above if this is your first time, then allow the connection and retry.');
+    if(update)update.hidden=(health.helperVersion||1)>=2;
    }
+   const checkingStarted=performance.now();
+   status.textContent='Checking video on YouTube…';
    const data=await request('/jobs',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url:document.querySelector('#yt-url').value,format:document.querySelector('#yt-format').value,quality:document.querySelector('#yt-quality').value})});job=data.id;cancel.hidden=false;
    while(!stopped){const j=await request('/jobs/'+job);if(stopped)return;document.querySelector('#yt-title').textContent=j.title||'';
     if(j.status==='failed')throw Error(j.error);if(j.status==='cancelled'){status.textContent='Download cancelled.';break}
     if(j.status==='ready'){progress.value=100;status.textContent='Ready. Your file is available for 30 minutes from when you started.';download.href=api+'/jobs/'+job+'/file';download.hidden=false;break}
-    status.textContent=j.status==='checking'?'Checking video…':j.status==='converting'?'Converting your file…':`Downloading… ${Math.round(j.progress)}%`;if(j.progress)progress.value=j.progress;
+    status.textContent=j.status==='checking'?(performance.now()-checkingStarted>8000?'Still waiting for YouTube to list the available formats…':'Checking video on YouTube…'):j.status==='converting'?'Converting your file…':`Downloading… ${Math.round(j.progress)}%`;if(j.progress)progress.value=j.progress;
     await new Promise(r=>setTimeout(r,j.status==='checking'?500:900));
    }
   }catch(error){if(!stopped)status.textContent=error.message;progress.hidden=true}finally{start.disabled=false;cancel.hidden=true}
