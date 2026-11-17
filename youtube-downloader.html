@@ -16,11 +16,7 @@
     <meta name="twitter:title" content="YouTube Downloader - Bootleg OS">
     <meta name="twitter:description" content="Video Converter — a Bootleg OS utility for converting video links.">
     <link rel="stylesheet" href="css/style.css?v=compressor-1">
-    <style>
-      .post-note.youtube-setup{box-sizing:border-box;width:100%;max-width:none;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:.8rem 1.6rem;align-items:start}
-      .youtube-setup-action h2{margin:0 0 .65rem}.youtube-setup ol{margin:0;padding-inline-start:1.4rem}.youtube-setup-compat{grid-column:1/-1;margin:0}
-      @media(max-width:640px){.post-note.youtube-setup{grid-template-columns:1fr}}
-    </style>
+  <link rel="stylesheet" href="css/app-layout.css?v=1">
   </head>
   <body>
     <header class="site-header">
@@ -73,19 +69,22 @@
         </div>
       </div>
     </header>
-    <main class="shell"><section class="panel"><div class="panel-content"><span class="eyebrow">Bootleg utilities</span><h1>YouTube Downloader</h1><p>A video or an audio file. One link, a clear progress display, and a download when it’s ready.</p></div></section>
+    <main class="shell"><section class="panel app-title-panel"><div class="panel-content"><span class="eyebrow">Bootleg utilities</span><div class="app-heading-line"><h1>YouTube Downloader</h1><span class="app-icon app-heading-icon" aria-hidden="true">⇩</span></div><p>A video or an audio file. One link, a clear progress display, and a download when it’s ready.</p></div></section>
     <section class="card"><div class="card-content">
-    <aside class="post-note youtube-setup">
-      <div class="youtube-setup-action">
+    <aside class="post-note app-helper-setup">
+      <div class="app-helper-action">
         <h2>Set up once on Windows</h2>
         <a class="btn" href="downloads/Bootleg-Helper-Setup.cmd" download>Download Bootleg Helper</a>
+        <p>One install covers Yarn and YouTube on 64-bit Intel or AMD Windows.</p>
       </div>
-      <ol>
-        <li>Download Bootleg Helper.</li>
-        <li>Open the downloaded file, press <kbd>I</kbd>, then <kbd>Enter</kbd>.</li>
-        <li>When setup says the helper is running, paste a link and click <strong>Download</strong>. Choose <strong>Allow</strong> if prompted.</li>
-      </ol>
-      <p class="youtube-setup-compat">The same helper works for Yarn and YouTube on 64-bit Intel or AMD Windows.</p>
+      <div class="app-helper-walkthrough">
+        <h3>Set-up walkthrough</h3>
+        <ol>
+          <li>Download Bootleg Helper.</li>
+          <li>Open the file, press <kbd>I</kbd>, then <kbd>Enter</kbd>.</li>
+          <li>When the helper is running, paste a link and click <strong>Download</strong>. Choose <strong>Allow</strong> if prompted.</li>
+        </ol>
+      </div>
     </aside>
     <p id="yt-helper-update" hidden>A helper update is available for title-based filenames. Use the setup button above to update.</p>
     <form id="yt-form" class="download-form">
