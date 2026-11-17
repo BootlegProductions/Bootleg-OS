@@ -70,15 +70,14 @@
     </header>
     <main class="shell"><section class="panel"><div class="panel-content"><span class="eyebrow">Bootleg utilities</span><h1>YouTube Downloader</h1><p>A video or an audio file. One link, a clear progress display, and a download when it’s ready.</p></div></section>
     <section class="card"><div class="card-content">
-    <p id="yt-unavailable" role="status">YouTube downloads are unavailable while the Windows helper is being prepared.</p>
-    <div id="yt-tools" hidden><form id="yt-form" class="download-form">
+    <aside class="post-note"><strong>First time on this PC?</strong><p><a class="btn" href="downloads/Bootleg-Helper-Setup.cmd" download>Download Bootleg Helper</a></p><p>Open the downloaded setup and choose <strong>I</strong>. After it says the helper is running, return here and click Download. Choose <strong>Allow</strong> if your browser asks to connect. One install covers Yarn and YouTube on 64-bit Intel or AMD Windows.</p></aside>
+    <form id="yt-form" class="download-form">
     <label for="yt-url">YouTube video link</label><input id="yt-url" type="url" placeholder="https://www.youtube.com/watch?v=…" required>
     <div class="download-options"><label>Format <select id="yt-format"><option value="mp4">MP4 video</option><option value="mp3">MP3 audio · 192 kbps</option></select></label><label>Maximum video resolution <select id="yt-quality"><option value="720">720p · smaller file</option><option value="1080">1080p</option></select></label></div>
     <div><button class="btn" id="yt-start" disabled>Download</button> <button class="btn" id="yt-cancel" type="button" hidden>Cancel</button></div></form>
     <p id="yt-status" role="status" aria-live="polite">Bootleg Helper runs downloads on this PC.</p><progress id="yt-progress" max="100" value="0" hidden></progress><p id="yt-title"></p><a class="btn" id="yt-download" hidden>Download file</a>
-    <p><a href="https://github.com/BootlegProductions/Bootleg-OS/tree/main/services/youtube-downloader#local-helper-pilot">Developer test setup</a></p>
     <aside class="boots-note"><strong>Before downloading</strong><p>Use videos you own or have permission to download. Completed videos up to 30 minutes and files up to 250 MB are supported. Files expire after 30 minutes.</p></aside>
-    </div></div></section></main>
+    </div></section></main>
     <footer class="shell footer">
       <div class="footer-left"><a class="footer-support" href="https://buymeacoffee.com/supportweb" target="_blank" rel="noopener noreferrer"><svg class="footer-coffee-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M7 12h16v9a6 6 0 0 1-6 6h-4a6 6 0 0 1-6-6Z" fill="currentColor"/><path d="M23 14h2a4 4 0 0 1 0 8h-2M5 29h21M11 3v5M16 2v5M21 3v5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg><span class="footer-support-copy"><strong>Buy me a coffee</strong><small>Thanks for supporting my work ♥</small></span></a><span class="footer-time"><span>LOCAL TIME</span><time id="local-clock"></time></span></div>
       <span class="footer-status"><span class="footer-online-dot" aria-hidden="true"></span>SYSTEM ONLINE</span>
@@ -87,5 +86,5 @@
     <script src="js/app.js?v=compressor-1"></script>
     <script src="js/radio-data.js"></script>
     <script src="js/radio-player.js"></script>
-    <script src="js/download-config.js"></script><script src="js/youtube-downloader.js?v=local-2"></script>
+    <script src="js/download-config.js"></script><script src="js/youtube-downloader.js?v=windows-setup-1"></script>
   </body></html>
