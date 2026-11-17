@@ -1,12 +1,58 @@
-const $=id=>document.getElementById(id);
-let job=null;
-function total(){const n=Number($('yarn-before').value)+Number($('yarn-after').value)+1;$('yarn-total').textContent=`Up to ${n} clips including the starting clip; collection stops at the end of a scene.`;}
-$('yarn-before').addEventListener('input',total);$('yarn-after').addEventListener('input',total);total();
-$('yarn-form').addEventListener('submit',e=>{
-  e.preventDefault();
-  try{const u=new URL($('yarn-url').value.trim());if(u.protocol!=='https:'||!['getyarn.io','www.getyarn.io'].includes(u.hostname)||!/^\/yarn-clip\/[\da-f]{8}(?:-[\da-f]{4}){3}-[\da-f]{12}\/?$/i.test(u.pathname))throw Error('Paste a full Yarn clip link.');
-  job={version:1,url:`https://getyarn.io${u.pathname.replace(/\/$/,'')}`,before:Number($('yarn-before').value),after:Number($('yarn-after').value)};
-  $('yarn-job').hidden=false;$('yarn-status').textContent=`Batch ready: ${job.before} before + starting clip + ${job.after} after.`;$('yarn-open').href=job.url;
-  }catch(error){$('yarn-job').hidden=false;$('yarn-status').textContent=error.message;$('yarn-open').removeAttribute('href');job=null;}
+const $ = id => document.getElementById(id);
+const form = $('yarn-form');
+const open = $('yarn-open');
+const save = $('yarn-export');
+let job = null;
+
+function counts() {
+  return {before: Number($('yarn-before').value), after: Number($('yarn-after').value)};
+}
+
+function reset() {
+  const {before, after} = counts();
+  $('yarn-total').textContent = `Up to ${before + after + 1} clips including the starting clip; collection stops at the end of a scene.`;
+  job = null;
+  $('yarn-job').hidden = true;
+  open.removeAttribute('href');
+  open.hidden = true;
+  save.hidden = true;
+}
+
+function clipUrl(value) {
+  const url = new URL(value.trim());
+  const host = url.hostname.replace(/^www\./, '');
+  const path = /^\/yarn-clip\/([\da-f]{8}(?:-[\da-f]{4}){3}-[\da-f]{12})\/?$/i.exec(url.pathname);
+  if (url.origin !== `https://${url.hostname}` || !['getyarn.io', 'yarn.co'].includes(host) || !path) {
+    throw new Error('Paste a full Yarn clip link from yarn.co or getyarn.io.');
+  }
+  return `https://getyarn.io/yarn-clip/${path[1].toLowerCase()}`;
+}
+
+form.addEventListener('input', reset);
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  reset();
+  $('yarn-job').hidden = false;
+  try {
+    job = {version: 1, url: clipUrl($('yarn-url').value), ...counts()};
+  } catch {
+    $('yarn-status').textContent = 'Paste a full Yarn clip link from yarn.co or getyarn.io.';
+    return;
+  }
+  open.href = job.url;
+  open.hidden = false;
+  save.hidden = false;
+  $('yarn-status').textContent = `Batch ready: ${job.before} before + starting clip + ${job.after} after.`;
 });
-$('yarn-export').addEventListener('click',()=>{if(!job)return;const url=URL.createObjectURL(new Blob([JSON.stringify(job,null,2)],{type:'application/json'})),a=document.createElement('a');a.href=url;a.download='Bootleg-Yarn-Batch.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
+
+save.addEventListener('click', () => {
+  if (!job) return;
+  const url = URL.createObjectURL(new Blob([JSON.stringify(job, null, 2)], {type: 'application/json'}));
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'Bootleg-Yarn-Batch.json';
+  link.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+});
+
+reset();
