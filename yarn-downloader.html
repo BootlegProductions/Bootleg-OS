@@ -86,7 +86,7 @@
             <p id="yarn-total">7 clips including the starting clip.</p>
             <button class="btn" type="submit">Prepare batch</button>
           </form>
-          <div id="yarn-job" hidden><p id="yarn-status" role="status"></p><div class="yarn-actions"><a class="btn" id="yarn-open" target="_blank" rel="noopener">Open starting clip</a><button class="btn" id="yarn-export">Save batch settings</button></div><p>Open the companion on the Yarn tab. Import your batch settings or enter the counts, collect the sequence, then download.</p></div>
+          <div id="yarn-job" hidden><p id="yarn-status" role="status"></p><div class="yarn-actions"><a class="btn" id="yarn-open" hidden>Open starting clip</a><button class="btn" id="yarn-export" type="button" hidden>Save batch settings</button></div><p>Open the starting clip, then launch the companion on that page and click Collect sequence. To carry over your counts, save the settings before opening the clip.</p></div>
           <aside class="post-note"><strong>Why a browser companion?</strong><p>Yarn does not let another website read its clip pages directly. The companion reads the Yarn page you open using your normal browser session. If Yarn refuses a request, it stops and reports the error.</p></aside>
         </div></article>
         <article class="card"><div class="card-content"><span class="eyebrow">Chrome / Edge · desktop</span><h2>Install once, use whenever</h2>
@@ -105,5 +105,5 @@
     <script src="js/app.js?v=compressor-1"></script>
     <script src="js/radio-data.js"></script>
     <script src="js/radio-player.js"></script>
-  <script type="module" src="js/yarn-downloader.js"></script></body>
+  <script type="module" src="js/yarn-downloader.js?v=batch-2"></script></body>
 </html>
