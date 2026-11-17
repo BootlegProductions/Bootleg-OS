@@ -34,7 +34,7 @@ try {
     $install = Join-Path $root 'Helper'
     $startup = [Environment]::GetFolderPath('Startup')
     if (-not $startup) { throw 'Windows did not provide a Startup folder.' }
-    $answer = Read-Host '[I] Install or update  [U] Uninstall  [Enter] Exit'
+    $answer = Read-Host '[I] Install or update  [R] Refresh download tools  [U] Uninstall  [Enter] Exit'
     if ($answer -eq 'u') {
         $oldNode = Join-Path $install 'bin\node.exe'
         Get-Process -Name 'node' -ErrorAction SilentlyContinue |
@@ -47,32 +47,40 @@ try {
         Read-Host 'Press Enter to close setup' | Out-Null
         exit 0
     }
-    if ($answer -ne 'i') { exit 0 }
+    if ($answer -ne 'i' -and $answer -ne 'r') { exit 0 }
     $stage = Join-Path $root ('setup-' + [guid]::NewGuid().ToString('N'))
     $payload = Join-Path $stage 'Helper'
     $bin = Join-Path $payload 'bin'
     New-Item -ItemType Directory -Path $bin -Force | Out-Null
 
-    Write-Host '1 of 3: Downloading Node.js...'
-    Save-VerifiedFile 'https://nodejs.org/dist/v24.22.3/win-x64/node.exe' (Join-Path $bin 'node.exe') '86fc4785327db5f5c7558dc6156c543b433c313e813a222e088086222ab4afa6'
+    $existingBin = Join-Path $install 'bin'
+    $tools = 'node.exe', 'yt-dlp.exe', 'ffmpeg.exe', 'ffprobe.exe'
+    $missing = @($tools | Where-Object { -not (Test-Path -LiteralPath (Join-Path $existingBin $_) -PathType Leaf) })
+    if ($answer -eq 'i' -and $missing.Count -eq 0) {
+        Write-Host 'Updating Bootleg Helper with the tools already installed...'
+        foreach ($tool in $tools) { Copy-Item -LiteralPath (Join-Path $existingBin $tool) -Destination (Join-Path $bin $tool) }
+    } else {
+        Write-Host '1 of 3: Downloading Node.js...'
+        Save-VerifiedFile 'https://nodejs.org/dist/v24.22.3/win-x64/node.exe' (Join-Path $bin 'node.exe') '86fc4785327db5f5c7558dc6156c543b433c313e813a222e088086222ab4afa6'
 
-    Write-Host '2 of 3: Downloading yt-dlp...'
-    $release = Invoke-RestMethod -Uri 'https://api.github.com/repos/yt-dlp/yt-dlp/releases/latest' -Headers @{'User-Agent' = 'Bootleg-OS-Helper-Setup'} -TimeoutSec 60
-    if ($release.tag_name -notmatch '^\d{4}\.\d{2}\.\d{2}(?:\.\d+)?$') { throw 'Could not identify the current yt-dlp release.' }
-    $ytBase = 'https://github.com/yt-dlp/yt-dlp/releases/download/' + $release.tag_name
-    $sums = (Invoke-WebRequest -UseBasicParsing -Uri ($ytBase + '/SHA2-256SUMS') -TimeoutSec 60).Content
-    if ($sums -is [byte[]]) { $sums = [Text.Encoding]::UTF8.GetString($sums) }
-    $ytHash = [regex]::Match($sums, '(?m)^([0-9a-f]{64})\s+\*?yt-dlp\.exe\s*$').Groups[1].Value
-    Save-VerifiedFile ($ytBase + '/yt-dlp.exe') (Join-Path $bin 'yt-dlp.exe') $ytHash
+        Write-Host '2 of 3: Downloading yt-dlp...'
+        $release = Invoke-RestMethod -Uri 'https://api.github.com/repos/yt-dlp/yt-dlp/releases/latest' -Headers @{'User-Agent' = 'Bootleg-OS-Helper-Setup'} -TimeoutSec 60
+        if ($release.tag_name -notmatch '^\d{4}\.\d{2}\.\d{2}(?:\.\d+)?$') { throw 'Could not identify the current yt-dlp release.' }
+        $ytBase = 'https://github.com/yt-dlp/yt-dlp/releases/download/' + $release.tag_name
+        $sums = (Invoke-WebRequest -UseBasicParsing -Uri ($ytBase + '/SHA2-256SUMS') -TimeoutSec 60).Content
+        if ($sums -is [byte[]]) { $sums = [Text.Encoding]::UTF8.GetString($sums) }
+        $ytHash = [regex]::Match($sums, '(?m)^([0-9a-f]{64})\s+\*?yt-dlp\.exe\s*$').Groups[1].Value
+        Save-VerifiedFile ($ytBase + '/yt-dlp.exe') (Join-Path $bin 'yt-dlp.exe') $ytHash
 
-    Write-Host '3 of 3: Downloading FFmpeg (the largest part)...'
-    $archive = Join-Path $stage 'ffmpeg.zip'
-    Save-VerifiedFile 'https://www.gyan.dev/ffmpeg/builds/packages/ffmpeg-9.0.2-essentials_build.zip' $archive '60f467265b1e312373dbcd92200c2618a74850f98d3d078e94296bb3fa2047ba'
-    Expand-Archive -LiteralPath $archive -DestinationPath (Join-Path $stage 'ffmpeg')
-    foreach ($name in 'ffmpeg.exe', 'ffprobe.exe') {
-        $binary = Get-ChildItem -LiteralPath (Join-Path $stage 'ffmpeg') -Filter $name -File -Recurse | Select-Object -First 1
-        if (-not $binary) { throw "FFmpeg archive is missing $name." }
-        Copy-Item -LiteralPath $binary.FullName -Destination (Join-Path $bin $name)
+        Write-Host '3 of 3: Downloading FFmpeg (the largest part)...'
+        $archive = Join-Path $stage 'ffmpeg.zip'
+        Save-VerifiedFile 'https://www.gyan.dev/ffmpeg/builds/packages/ffmpeg-9.0.2-essentials_build.zip' $archive '60f467265b1e312373dbcd92200c2618a74850f98d3d078e94296bb3fa2047ba'
+        Expand-Archive -LiteralPath $archive -DestinationPath (Join-Path $stage 'ffmpeg')
+        foreach ($name in 'ffmpeg.exe', 'ffprobe.exe') {
+            $binary = Get-ChildItem -LiteralPath (Join-Path $stage 'ffmpeg') -Filter $name -File -Recurse | Select-Object -First 1
+            if (-not $binary) { throw "FFmpeg archive is missing $name." }
+            Copy-Item -LiteralPath $binary.FullName -Destination (Join-Path $bin $name)
+        }
     }
 
     $parts = [regex]::Split($setup, '(?m)^::BOOTLEG_FILE ([a-z-]+\.mjs)\r?\n')
@@ -215,6 +223,15 @@ export function youtubeURL(input){
  if(!/^[a-zA-Z0-9_-]{11}$/.test(id||''))throw Error('Use a link to one YouTube video, not a channel or playlist.');
  return 'https://www.youtube.com/watch?v='+id;
 }
+function attachment(title, videoId, format) {
+ const safe=Array.from(String(title||'').toWellFormed().replace(/[<>:"/\\|?*\u0000-\u001f\u007f]/g,'').trim()).slice(0,140).join('').replace(/[. ]+$/,'');
+ const stem=safe && !/^(?:CON|PRN|AUX|NUL|COM[1-9¹²³]|LPT[1-9¹²³])(?:\.|$)/i.test(safe) ? safe : 'bootleg-'+videoId;
+ const name=stem+'.'+format;
+ const fallback=name.replace(/[^\x20-\x7e]/g,'_');
+ const encoded=encodeURIComponent(name).replace(/['()*]/g,char=>'%'+char.charCodeAt(0).toString(16).toUpperCase());
+ return "attachment; filename=\""+fallback+"\"; filename*=UTF-8''"+encoded;
+}
+
 export function formatArgs(format,quality){
  if(!['mp4','mp3'].includes(format)||!['720','1080'].includes(quality))throw Error('Choose MP4 or MP3 and a supported quality.');
  return format==='mp3'?['-f','bestaudio/best','-x','--audio-format','mp3','--audio-quality','192K']:
@@ -247,7 +264,7 @@ export function createService({localHost, localRoute} = {}){
   const json=(status,data)=>{res.writeHead(status,{'Content-Type':'application/json'});res.end(JSON.stringify(data))};
   if(req.method==='OPTIONS'){res.writeHead(204);res.end();return}
   const path=new URL(req.url,'http://service').pathname;
-  if(path==='/health'&&req.method==='GET'){json(200,{ready:true,formats:['mp4','mp3'],maxMinutes:30,...(localHost?{localHelper:true}:{})});return}
+  if(path==='/health'&&req.method==='GET'){json(200,{ready:true,formats:['mp4','mp3'],maxMinutes:30,...(localHost?{localHelper:true,helperVersion:2}:{})});return}
   try{
    if(localRoute && await localRoute({path,req,res,json}))return;
    const match=path.match(/^\/jobs\/([a-f0-9]{48})(\/file)?$/);
@@ -257,7 +274,7 @@ export function createService({localHost, localRoute} = {}){
     if(req.method!=='GET'){json(405,{error:'Method not supported.'});return}
     if(match[2]){
      if(j.status!=='ready'){json(409,{error:'The file is not ready.'});return}
-     res.writeHead(200,{'Content-Type':j.format==='mp3'?'audio/mpeg':'video/mp4','Content-Length':j.size,'Content-Disposition':`attachment; filename="bootleg-${j.videoId}.${j.format}"`});const stream=createReadStream(j.file);stream.on('error',()=>res.destroy());res.on('close',()=>stream.destroy());stream.pipe(res);return;
+     res.writeHead(200,{'Content-Type':j.format==='mp3'?'audio/mpeg':'video/mp4','Content-Length':j.size,'Content-Disposition':attachment(j.title,j.videoId,j.format)});const stream=createReadStream(j.file);stream.on('error',()=>res.destroy());res.on('close',()=>stream.destroy());stream.pipe(res);return;
     }
     json(200,{status:j.status,progress:j.progress,title:j.title,error:j.error});return;
    }
