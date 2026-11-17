@@ -1,5 +1,11 @@
 const $ = id => document.getElementById(id);
 const form = $('yarn-form');
+const local = $('yarn-local');
+const pilot = new URLSearchParams(location.search).get('pilot') === '1';
+local.hidden = !pilot;
+if (pilot) local.style.removeProperty('display');
+const pilotNote = $('yarn-pilot-note');
+if (pilotNote) pilotNote.hidden = !pilot;
 const open = $('yarn-open');
 const save = $('yarn-export');
 let job = null;
@@ -60,7 +66,7 @@ installed.addEventListener('click', () => {
 form.addEventListener('input', reset);
 form.addEventListener('submit', async event => {
   event.preventDefault();
-  if ($('yarn-local').disabled) return;
+  if (local.disabled) return;
   reset();
   $('yarn-job').hidden = false;
   try {
@@ -71,7 +77,7 @@ form.addEventListener('submit', async event => {
     $('yarn-status').textContent = 'Open an individual Yarn clip and copy its link. Search pages, collections and full tracks need a starting clip.';
     return;
   }
-  if (event.submitter?.value === 'local') {
+  if (pilot && event.submitter === local) {
     await downloadSequence(job);
     return;
   }
