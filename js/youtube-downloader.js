@@ -22,7 +22,7 @@
     if(j.status==='failed')throw Error(j.error);if(j.status==='cancelled'){status.textContent='Download cancelled.';break}
     if(j.status==='ready'){progress.value=100;status.textContent='Ready. Your file is available for 30 minutes from when you started.';download.href=api+'/jobs/'+job+'/file';download.hidden=false;break}
     status.textContent=j.status==='checking'?'Checking video…':j.status==='converting'?'Converting your file…':`Downloading… ${Math.round(j.progress)}%`;if(j.progress)progress.value=j.progress;
-    await new Promise(r=>setTimeout(r,1200));
+    await new Promise(r=>setTimeout(r,j.status==='checking'?500:900));
    }
   }catch(error){if(!stopped)status.textContent=error.message;progress.hidden=true}finally{start.disabled=false;cancel.hidden=true}
  });
