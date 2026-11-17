@@ -77,10 +77,21 @@ export function createService({localHost, localRoute} = {}){
    json(202,{id});
    (async()=>{
     try{
-     const meta=JSON.parse(await run(['--dump-single-json','--skip-download',url],{signal:j.abort.signal,timeout:60000}));
-     if(meta.is_live||!meta.duration||meta.duration>1800)throw Error('Choose a completed video up to 30 minutes long.');
-     j.title=meta.title;j.status='downloading';
-     await run([...args,'--max-filesize','250M','--newline','--progress-template','download:PROGRESS:%(progress._percent_str)s','-o',join(dir,'media.%(ext)s'),url],{signal:j.abort.signal,onLine:line=>{if(line.startsWith('PROGRESS:'))j.progress=Math.min(99,parseFloat(line.slice(9))||0);if(line.includes('[Merger]')||line.includes('[ExtractAudio]'))j.status='converting'}});
+     await run([...args,'--match-filters','duration > 0 & duration <= 1800 & !is_live',
+       '--no-simulate','--print','before_dl:BOOTLEG_TITLE:%(title)j',
+       '--max-filesize','250M','--progress','--newline','--progress-template','download:PROGRESS:%(progress._percent_str)s',
+       '-o',join(dir,'media.%(ext)s'),url],{signal:j.abort.signal,timeout:240000,onLine:line=>{
+       if(line.startsWith('BOOTLEG_TITLE:')){
+        try{j.title=JSON.parse(line.slice('BOOTLEG_TITLE:'.length))}catch{}
+        j.status='downloading';
+       }
+       if(line.startsWith('PROGRESS:')){
+        j.progress=Math.min(99,parseFloat(line.slice(9))||0);
+        j.status='downloading';
+       }
+       if(line.includes('[Merger]')||line.includes('[ExtractAudio]'))j.status='converting';
+     }});
+     if(j.status==='checking')throw Error('Choose a completed video up to 30 minutes long.');
      const files=(await readdir(dir)).filter(f=>f.endsWith('.'+j.format));if(files.length!==1)throw Error('No complete file was produced.');
      j.file=join(dir,files[0]);j.size=(await stat(j.file)).size;if(j.size>262144000)throw Error('The completed file exceeds the 250 MB limit.');
      j.status='ready';j.progress=100;
