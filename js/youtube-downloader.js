@@ -4,6 +4,11 @@
  let local=true;
  try {const u=new URL(window.BOOTLEG_DOWNLOAD_API);if(u.protocol!=='https:')throw Error();api=u.origin;local=false}catch{}
  async function request(path,options={}){const r=await fetch(api+path,{...options,signal:AbortSignal.timeout(path==='/health'?120000:25000)});const data=await r.json();if(!r.ok)throw Error(data.error||'The download service is unavailable.');return data}
+ const pilot=new URLSearchParams(location.search).get('pilot')==='1';
+ if(local&&!pilot){status.textContent='YouTube downloads are unavailable while the Windows helper is being prepared.';return}
+ const tools=document.querySelector('#yt-tools'), unavailable=document.querySelector('#yt-unavailable');
+ if(tools)tools.hidden=false;
+ if(unavailable)unavailable.hidden=true;
  status.textContent=local?'Start Bootleg Helper on this PC, then click Download.':'Paste a video link to begin.';
  start.disabled=false;
  document.querySelector('#yt-format').addEventListener('change',e=>{document.querySelector('#yt-quality').disabled=e.target.value==='mp3'});
