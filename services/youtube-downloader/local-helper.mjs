@@ -1,6 +1,15 @@
+import {existsSync} from 'node:fs';
+import {delimiter, join} from 'node:path';
+import {fileURLToPath} from 'node:url';
 import {createService} from './server.mjs';
 import {collectYarn} from './yarn-sequence.mjs';
 
+const bin = fileURLToPath(new URL('./bin/', import.meta.url));
+const binary = join(bin, 'yt-dlp.exe');
+if (process.platform === 'win32' && existsSync(binary)) {
+  process.env.YTDLP = binary;
+  process.env.PATH = [bin, process.env.PATH].filter(Boolean).join(delimiter);
+}
 const host = '127.0.0.1';
 const port = 47832;
 const origin = 'https://bootlegproductions.github.io';
