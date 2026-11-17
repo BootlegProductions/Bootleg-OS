@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Yarn Sequence Downloader - Bootleg OS</title>
     <link rel="canonical" href="https://bootlegproductions.github.io/Bootleg-OS/yarn-downloader.html">
-    <meta name="description" content="Collect neighbouring Yarn clips and download MP4 sequences with the Bootleg browser companion.">
+    <meta name="description" content="Collect neighbouring Yarn clips and download MP4 sequences as one ZIP with Bootleg Helper.">
     <link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg?v=3">
     <meta property="og:title" content="Applications - Bootleg OS">
     <meta property="og:description" content="Browse the Bootleg OS app drawer — weather, world clock, pirate radio, image tools, archive scraper and video converter.">
@@ -73,38 +73,30 @@
     <main class="shell">
       <a class="btn" href="applications.html">← All apps</a>
       <section class="panel"><div class="panel-content">
-        <span class="eyebrow">Editing tools / browser companion</span><h1>Yarn sequence downloader</h1>
+        <span class="eyebrow">Editing tools / Bootleg Helper</span><h1>Yarn sequence downloader</h1>
         <p>Keep the moments before and after a quote. Collect neighbouring Yarn clips and download numbered MP4s in their original scene order.</p>
       </div></section>
-      <details class="card yarn-setup" id="yarn-setup" open>
-        <summary>Set up the Yarn helper <span>Desktop Chrome or Edge</span></summary>
-        <div class="card-content">
-          <div class="yarn-actions">
-            <a class="btn" href="downloads/Bootleg-Yarn-Browser-Companion.zip" download>Download helper ZIP</a>
-            <button class="btn" id="yarn-installed" type="button" hidden>I already have the helper</button>
-          </div>
-          <ol class="yarn-steps">
-            <li>Extract the ZIP into a folder you’ll keep.</li>
-            <li>Open <code>chrome://extensions</code> in Chrome or <code>edge://extensions</code> in Edge.</li>
-            <li>Turn on <strong>Developer mode</strong>, click <strong>Load unpacked</strong>, and pick the extracted folder containing <code>manifest.json</code>.</li>
-          </ol>
-          <p>On your starting clip’s Yarn page, open the helper from the browser’s Extensions menu. Click <strong>Collect sequence</strong>, review the list, then click <strong>Download MP4s</strong>. Files go to <strong>Downloads/Bootleg-Yarn</strong>.</p>
-        </div>
-      </details>
       <section class="yarn-layout">
         <article class="card"><div class="card-content">
           <h2>Build your clip batch</h2>
-          <aside class="post-note"><strong>First time on this PC?</strong><p><a class="btn" href="downloads/Bootleg-Helper-Setup.cmd" download>Download Bootleg Helper</a></p><p>Open the downloaded setup and choose <strong>I</strong>. After it says the helper is running, return here and click Download. Choose <strong>Allow</strong> if your browser asks to connect. One install covers Yarn and YouTube on 64-bit Intel or AMD Windows.</p></aside>
+          <aside class="post-note">
+      <strong>Set up once on Windows</strong>
+      <ol>
+        <li>Click <a class="btn" href="downloads/Bootleg-Helper-Setup.cmd" download>Download Bootleg Helper</a>.</li>
+        <li>Open the downloaded file, press <kbd>I</kbd>, then <kbd>Enter</kbd>.</li>
+        <li>When setup says the helper is running, paste a link and click <strong>Download</strong>. Choose <strong>Allow</strong> if prompted.</li>
+      </ol>
+      <p>The same helper works for Yarn and YouTube on 64-bit Intel or AMD Windows.</p>
+    </aside>
           <form id="yarn-form">
             <label for="yarn-url">Starting Yarn clip</label>
             <input id="yarn-url" type="url" placeholder="https://yarn.co/yarn-clip/…" aria-describedby="yarn-link-help" required>
             <p class="yarn-small" id="yarn-link-help">Paste a clip, GIF, meme or embed link tied to a Yarn clip. Music-video clips work too when they have a Yarn clip page.</p>
             <div class="yarn-counts"><label>Clips before<input id="yarn-before" type="number" min="0" max="15" value="3" required></label><label>Clips after<input id="yarn-after" type="number" min="0" max="15" value="3" required></label></div>
             <p id="yarn-total">7 clips including the starting clip.</p>
-            <button class="btn" id="yarn-local" type="submit">Download sequence ZIP</button> <button class="btn" type="submit">Prepare batch for browser extension</button>
+            <button class="btn" id="yarn-local" type="submit">Download sequence ZIP</button>
           </form>
-          <div id="yarn-job" hidden><p id="yarn-status" role="status"></p><div class="yarn-actions"><a class="btn" id="yarn-open" hidden>Open starting clip</a><button class="btn" id="yarn-export" type="button" hidden>Save batch settings</button></div><p>Open the starting clip, then launch the companion on that page and click Collect sequence. To carry over your counts, save the settings before opening the clip.</p></div>
-          <aside class="post-note"><strong>Why a browser companion?</strong><p>Yarn does not let another website read its clip pages directly. The companion reads the Yarn page you open using your normal browser session. If Yarn refuses a request, it stops and reports the error.</p></aside>
+          <div id="yarn-job" hidden><p id="yarn-status" role="status"></p></div>
         </div></article>
       </section>
     </main>
@@ -116,5 +108,5 @@
     <script src="js/app.js?v=compressor-1"></script>
     <script src="js/radio-data.js"></script>
     <script src="js/radio-player.js"></script>
-  <script type="module" src="js/yarn-downloader.js?v=windows-setup-1"></script></body>
+  <script type="module" src="js/yarn-downloader.js?v=windows-setup-2"></script></body>
 </html>
