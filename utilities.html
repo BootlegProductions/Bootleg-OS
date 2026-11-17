@@ -17,7 +17,7 @@
     <meta name="twitter:description" content="Image Tools — browser-based image utilities from the Bootleg OS app drawer.">
     <link rel="stylesheet" href="css/style.css?v=brush-preview-1">
     <link rel="stylesheet" href="css/image-tools.css?v=zoom-1">
-  <link rel="stylesheet" href="css/app-layout.css?v=3">
+  <link rel="stylesheet" href="css/app-layout.css?v=4">
   </head>
   <body class="image-tools-page">
     <header class="site-header">
@@ -75,7 +75,14 @@
     <main class="shell image-workspace">
       <section class="boot-window app-title-panel">
         <div class="window-bar"><div class="lights" aria-hidden="true"><span></span><span></span><span></span></div> background-remover.exe</div>
-        <div class="panel-content"><span class="eyebrow">Image Tools</span><div class="app-heading-line"><h1>Background Remover</h1><span class="app-icon app-heading-icon" aria-hidden="true">✦</span></div><p>Drop in an image, cut out the subject, then refine the edges before saving a transparent PNG.</p><div class="app-title-action"><a class="btn" href="pixel-studio.html">Open Pixel Studio</a></div></div>
+        <div class="panel-content app-header-content">
+          <div class="app-header-copy">
+            <span class="eyebrow">Image Tools</span>
+            <h1>Background Remover</h1>
+            <p>Drop in an image, cut out the subject, then refine the edges before saving a transparent PNG.</p><div class="app-title-action"><a class="btn" href="pixel-studio.html">Open Pixel Studio</a></div>
+          </div>
+          <span class="app-icon app-heading-icon" aria-hidden="true">✦</span>
+        </div>
       </section>
       <section class="image-editor" aria-label="Background removal editor"><div class="image-filebar">          <label class="file-drop" for="bg-input"><strong>Choose an image</strong><span>PNG, JPG or WebP · stays in your browser</span><input id="bg-input" type="file" accept="image/png,image/jpeg,image/webp"></label>
           <button class="btn" type="button" id="auto-remove" disabled>Auto cutout</button>
