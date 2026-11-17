@@ -19,6 +19,15 @@ export function youtubeURL(input){
  if(!/^[a-zA-Z0-9_-]{11}$/.test(id||''))throw Error('Use a link to one YouTube video, not a channel or playlist.');
  return 'https://www.youtube.com/watch?v='+id;
 }
+function attachment(title, videoId, format) {
+ const safe=Array.from(String(title||'').toWellFormed().replace(/[<>:"/\\|?*\u0000-\u001f\u007f]/g,'').trim()).slice(0,140).join('').replace(/[. ]+$/,'');
+ const stem=safe && !/^(?:CON|PRN|AUX|NUL|COM[1-9¹²³]|LPT[1-9¹²³])(?:\.|$)/i.test(safe) ? safe : 'bootleg-'+videoId;
+ const name=stem+'.'+format;
+ const fallback=name.replace(/[^\x20-\x7e]/g,'_');
+ const encoded=encodeURIComponent(name).replace(/['()*]/g,char=>'%'+char.charCodeAt(0).toString(16).toUpperCase());
+ return "attachment; filename=\""+fallback+"\"; filename*=UTF-8''"+encoded;
+}
+
 export function formatArgs(format,quality){
  if(!['mp4','mp3'].includes(format)||!['720','1080'].includes(quality))throw Error('Choose MP4 or MP3 and a supported quality.');
  return format==='mp3'?['-f','bestaudio/best','-x','--audio-format','mp3','--audio-quality','192K']:
@@ -51,7 +60,7 @@ export function createService({localHost, localRoute} = {}){
   const json=(status,data)=>{res.writeHead(status,{'Content-Type':'application/json'});res.end(JSON.stringify(data))};
   if(req.method==='OPTIONS'){res.writeHead(204);res.end();return}
   const path=new URL(req.url,'http://service').pathname;
-  if(path==='/health'&&req.method==='GET'){json(200,{ready:true,formats:['mp4','mp3'],maxMinutes:30,...(localHost?{localHelper:true}:{})});return}
+  if(path==='/health'&&req.method==='GET'){json(200,{ready:true,formats:['mp4','mp3'],maxMinutes:30,...(localHost?{localHelper:true,helperVersion:2}:{})});return}
   try{
    if(localRoute && await localRoute({path,req,res,json}))return;
    const match=path.match(/^\/jobs\/([a-f0-9]{48})(\/file)?$/);
@@ -61,7 +70,7 @@ export function createService({localHost, localRoute} = {}){
     if(req.method!=='GET'){json(405,{error:'Method not supported.'});return}
     if(match[2]){
      if(j.status!=='ready'){json(409,{error:'The file is not ready.'});return}
-     res.writeHead(200,{'Content-Type':j.format==='mp3'?'audio/mpeg':'video/mp4','Content-Length':j.size,'Content-Disposition':`attachment; filename="bootleg-${j.videoId}.${j.format}"`});const stream=createReadStream(j.file);stream.on('error',()=>res.destroy());res.on('close',()=>stream.destroy());stream.pipe(res);return;
+     res.writeHead(200,{'Content-Type':j.format==='mp3'?'audio/mpeg':'video/mp4','Content-Length':j.size,'Content-Disposition':attachment(j.title,j.videoId,j.format)});const stream=createReadStream(j.file);stream.on('error',()=>res.destroy());res.on('close',()=>stream.destroy());stream.pipe(res);return;
     }
     json(200,{status:j.status,progress:j.progress,title:j.title,error:j.error});return;
    }
