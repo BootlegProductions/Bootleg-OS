@@ -35,20 +35,25 @@ function run(args,{onLine,signal,timeout=180000}={}){
   child.on('close',code=>{clearTimeout(timer);code===0?resolve(stdout):reject(Error(stderr.includes('Sign in')?'YouTube is blocking this server. Try again later; this video cannot currently be downloaded.':stderr.slice(-600)||'Download stopped or timed out.'))});
  });
 }
-export function createService(){
+export function createService({localHost, localRoute} = {}){
  const jobs=new Map(),rates=new Map();let active=0;
  const allowed=(process.env.ALLOWED_ORIGINS||'').split(',').filter(Boolean);
  const sweep=setInterval(()=>{const now=Date.now();for(const [id,j]of jobs)if(now-j.created>1800000){j.abort.abort();jobs.delete(id);rm(j.dir,{recursive:true,force:true}).catch(()=>{})}for(const [ip,r]of rates)if(now-r.start>60000)rates.delete(ip)},60000);sweep.unref();
  const server=http.createServer(async(req,res)=>{
   const origin=req.headers.origin;
+  if(localHost && (req.headers.host !== localHost ||
+      (['POST','DELETE'].includes(req.method) && !allowed.includes(origin)))) {
+    res.writeHead(403);res.end();return;
+  }
   if(origin&&!allowed.includes(origin)){res.writeHead(403);res.end();return}
   if(origin){res.setHeader('Access-Control-Allow-Origin',origin);res.setHeader('Vary','Origin')}
-  res.setHeader('Access-Control-Allow-Methods','GET,POST,DELETE,OPTIONS');res.setHeader('Access-Control-Allow-Headers','Content-Type');res.setHeader('Cache-Control','no-store');res.setHeader('X-Content-Type-Options','nosniff');
+  res.setHeader('Access-Control-Allow-Methods','GET,POST,DELETE,OPTIONS');res.setHeader('Access-Control-Allow-Headers','Content-Type');if(localHost&&origin&&req.headers['access-control-request-private-network']==='true')res.setHeader('Access-Control-Allow-Private-Network','true');res.setHeader('Cache-Control','no-store');res.setHeader('X-Content-Type-Options','nosniff');
   const json=(status,data)=>{res.writeHead(status,{'Content-Type':'application/json'});res.end(JSON.stringify(data))};
   if(req.method==='OPTIONS'){res.writeHead(204);res.end();return}
   const path=new URL(req.url,'http://service').pathname;
-  if(path==='/health'&&req.method==='GET'){json(200,{ready:true,formats:['mp4','mp3'],maxMinutes:30});return}
+  if(path==='/health'&&req.method==='GET'){json(200,{ready:true,formats:['mp4','mp3'],maxMinutes:30,...(localHost?{localHelper:true}:{})});return}
   try{
+   if(localRoute && await localRoute({path,req,res,json}))return;
    const match=path.match(/^\/jobs\/([a-f0-9]{48})(\/file)?$/);
    if(match){
     const j=jobs.get(match[1]);if(!j){json(404,{error:'This download expired. Create a new one.'});return}
