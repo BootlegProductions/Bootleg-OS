@@ -94,14 +94,14 @@
       <section class="yarn-layout">
         <article class="card"><div class="card-content">
           <h2>Build your clip batch</h2>
+          <aside class="post-note"><strong>First time on this PC?</strong><p><a class="btn" href="downloads/Bootleg-Helper-Setup.cmd" download>Download Bootleg Helper</a></p><p>Open the downloaded setup and choose <strong>I</strong>. After it says the helper is running, return here and click Download. Choose <strong>Allow</strong> if your browser asks to connect. One install covers Yarn and YouTube on 64-bit Intel or AMD Windows.</p></aside>
           <form id="yarn-form">
             <label for="yarn-url">Starting Yarn clip</label>
             <input id="yarn-url" type="url" placeholder="https://yarn.co/yarn-clip/…" aria-describedby="yarn-link-help" required>
             <p class="yarn-small" id="yarn-link-help">Paste a clip, GIF, meme or embed link tied to a Yarn clip. Music-video clips work too when they have a Yarn clip page.</p>
             <div class="yarn-counts"><label>Clips before<input id="yarn-before" type="number" min="0" max="15" value="3" required></label><label>Clips after<input id="yarn-after" type="number" min="0" max="15" value="3" required></label></div>
             <p id="yarn-total">7 clips including the starting clip.</p>
-            <button class="btn" type="submit">Prepare batch</button> <button class="btn" id="yarn-local" type="submit" hidden style="display:none">Download sequence ZIP</button>
-            <p class="yarn-small" id="yarn-pilot-note" hidden><strong>Developer test:</strong> ZIP download uses the <a href="https://github.com/BootlegProductions/Bootleg-OS/tree/main/services/youtube-downloader#local-helper-pilot">Bootleg Helper pilot</a>.</p>
+            <button class="btn" id="yarn-local" type="submit">Download sequence ZIP</button> <button class="btn" type="submit">Prepare batch for browser extension</button>
           </form>
           <div id="yarn-job" hidden><p id="yarn-status" role="status"></p><div class="yarn-actions"><a class="btn" id="yarn-open" hidden>Open starting clip</a><button class="btn" id="yarn-export" type="button" hidden>Save batch settings</button></div><p>Open the starting clip, then launch the companion on that page and click Collect sequence. To carry over your counts, save the settings before opening the clip.</p></div>
           <aside class="post-note"><strong>Why a browser companion?</strong><p>Yarn does not let another website read its clip pages directly. The companion reads the Yarn page you open using your normal browser session. If Yarn refuses a request, it stops and reports the error.</p></aside>
@@ -116,5 +116,5 @@
     <script src="js/app.js?v=compressor-1"></script>
     <script src="js/radio-data.js"></script>
     <script src="js/radio-player.js"></script>
-  <script type="module" src="js/yarn-downloader.js?v=local-2"></script></body>
+  <script type="module" src="js/yarn-downloader.js?v=windows-setup-1"></script></body>
 </html>
