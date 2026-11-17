@@ -16,6 +16,11 @@
     <meta name="twitter:title" content="YouTube Downloader - Bootleg OS">
     <meta name="twitter:description" content="Video Converter — a Bootleg OS utility for converting video links.">
     <link rel="stylesheet" href="css/style.css?v=compressor-1">
+    <style>
+      .post-note.youtube-setup{box-sizing:border-box;width:100%;max-width:none;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:.8rem 1.6rem;align-items:start}
+      .youtube-setup-action h2{margin:0 0 .65rem}.youtube-setup ol{margin:0;padding-inline-start:1.4rem}.youtube-setup-compat{grid-column:1/-1;margin:0}
+      @media(max-width:640px){.post-note.youtube-setup{grid-template-columns:1fr}}
+    </style>
   </head>
   <body>
     <header class="site-header">
@@ -70,15 +75,19 @@
     </header>
     <main class="shell"><section class="panel"><div class="panel-content"><span class="eyebrow">Bootleg utilities</span><h1>YouTube Downloader</h1><p>A video or an audio file. One link, a clear progress display, and a download when it’s ready.</p></div></section>
     <section class="card"><div class="card-content">
-    <aside class="post-note">
-      <strong>Set up once on Windows</strong>
+    <aside class="post-note youtube-setup">
+      <div class="youtube-setup-action">
+        <h2>Set up once on Windows</h2>
+        <a class="btn" href="downloads/Bootleg-Helper-Setup.cmd" download>Download Bootleg Helper</a>
+      </div>
       <ol>
-        <li>Click <a class="btn" href="downloads/Bootleg-Helper-Setup.cmd" download>Download Bootleg Helper</a>.</li>
+        <li>Download Bootleg Helper.</li>
         <li>Open the downloaded file, press <kbd>I</kbd>, then <kbd>Enter</kbd>.</li>
         <li>When setup says the helper is running, paste a link and click <strong>Download</strong>. Choose <strong>Allow</strong> if prompted.</li>
       </ol>
-      <p>The same helper works for Yarn and YouTube on 64-bit Intel or AMD Windows.</p>
+      <p class="youtube-setup-compat">The same helper works for Yarn and YouTube on 64-bit Intel or AMD Windows.</p>
     </aside>
+    <p id="yt-helper-update" hidden>A helper update is available for title-based filenames. Use the setup button above to update.</p>
     <form id="yt-form" class="download-form">
     <label for="yt-url">YouTube video link</label><input id="yt-url" type="url" placeholder="https://www.youtube.com/watch?v=…" required>
     <div class="download-options"><label>Format <select id="yt-format"><option value="mp4">MP4 video</option><option value="mp3">MP3 audio · 192 kbps</option></select></label><label>Maximum video resolution <select id="yt-quality"><option value="720">720p · smaller file</option><option value="1080">1080p</option></select></label></div>
@@ -94,5 +103,5 @@
     <script src="js/app.js?v=compressor-1"></script>
     <script src="js/radio-data.js"></script>
     <script src="js/radio-player.js"></script>
-    <script src="js/download-config.js"></script><script src="js/youtube-downloader.js?v=windows-setup-2"></script>
+    <script src="js/download-config.js"></script><script src="js/youtube-downloader.js?v=windows-setup-3"></script>
   </body></html>
