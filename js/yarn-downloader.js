@@ -58,8 +58,9 @@ installed.addEventListener('click', () => {
 });
 
 form.addEventListener('input', reset);
-form.addEventListener('submit', event => {
+form.addEventListener('submit', async event => {
   event.preventDefault();
+  if ($('yarn-local').disabled) return;
   reset();
   $('yarn-job').hidden = false;
   try {
@@ -70,11 +71,54 @@ form.addEventListener('submit', event => {
     $('yarn-status').textContent = 'Open an individual Yarn clip and copy its link. Search pages, collections and full tracks need a starting clip.';
     return;
   }
+  if (event.submitter?.value === 'local') {
+    await downloadSequence(job);
+    return;
+  }
   open.href = job.url;
   open.hidden = false;
   save.hidden = false;
   $('yarn-status').textContent = `Batch ready: ${job.before} before + starting clip + ${job.after} after. Opening the source MP4 clip page.`;
 });
+
+async function downloadSequence(settings) {
+  const status = $('yarn-status');
+  const submit = $('yarn-local');
+  const controls = Array.from(form.elements);
+  const api = 'http://127.0.0.1:47832';
+  const disabled = controls.map(control => control.disabled);
+  controls.forEach(control => {control.disabled = true;});
+  status.textContent = 'Connecting to Bootleg Helper…';
+  try {
+    let health;
+    try {
+      const response = await fetch(api + '/health', {signal: AbortSignal.timeout(30000)});
+      if (response.ok) health = await response.json();
+    } catch {}
+    if (!health?.localHelper) throw new Error('Start Bootleg Helper on this PC and allow the browser to connect, then try again.');
+    status.textContent = 'Collecting clips and preparing the ZIP…';
+    const response = await fetch(api + '/yarn/sequence', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(settings),
+      signal: AbortSignal.timeout(100000)
+    });
+    if (!response.ok) throw new Error((await response.json()).error || 'The sequence could not be collected.');
+    if (response.headers.get('content-type') !== 'application/zip') throw new Error('The helper did not return a ZIP.');
+    const url = URL.createObjectURL(await response.blob());
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'bootleg-yarn-sequence.zip';
+    link.click();
+    setTimeout(() => URL.revokeObjectURL(url), 30000);
+    status.textContent = 'ZIP ready. Check your browser downloads.';
+  } catch (error) {
+    status.textContent = error.message + ' You can still use Prepare batch with the browser companion.';
+  } finally {
+    controls.forEach((control, index) => {control.disabled = disabled[index];});
+    submit.focus();
+  }
+}
 
 save.addEventListener('click', () => {
   if (!job) return;
