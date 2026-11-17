@@ -17,6 +17,7 @@
     <meta name="twitter:description" content="Live Weather — a Bootleg OS app with geolocation weather, search and a pressure gauge.">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
     <link rel="stylesheet" href="css/style.css?v=compressor-1">
+  <link rel="stylesheet" href="css/app-layout.css?v=1">
   </head>
   <body>
     <header class="site-header">
@@ -70,7 +71,7 @@
       </div>
     </header>
     <main class="shell weather-app-page">
-      <section class="boot-window wx-hero-window">
+      <section class="boot-window wx-hero-window app-title-panel">
         <div class="window-bar">
           <div class="lights">
             <span></span>
@@ -80,7 +81,7 @@
         <div class="panel-content wx-hero-grid">
           <div>
             <span class="eyebrow">BOOT 04 · live weather console</span>
-            <h1>Pastel cyber weather station.</h1>
+            <div class="app-heading-line"><h1>Pastel cyber weather station.</h1><span class="app-icon app-heading-icon" aria-hidden="true">☁</span></div>
             <p>Local weather, searched locations, current conditions, map layers, hourly readings, seven-day forecast and weather stories.</p>
             <div class="badge-list">
               <span class="badge">Geolocation</span>
