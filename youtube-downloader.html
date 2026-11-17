@@ -72,8 +72,9 @@
     <section class="card"><div class="card-content"><form id="yt-form" class="download-form">
     <label for="yt-url">YouTube video link</label><input id="yt-url" type="url" placeholder="https://www.youtube.com/watch?v=…" required>
     <div class="download-options"><label>Format <select id="yt-format"><option value="mp4">MP4 video</option><option value="mp3">MP3 audio · 192 kbps</option></select></label><label>Maximum video resolution <select id="yt-quality"><option value="720">720p · smaller file</option><option value="1080">1080p</option></select></label></div>
-    <div><button class="btn" id="yt-start" disabled>Prepare download</button> <button class="btn" id="yt-cancel" type="button" hidden>Cancel</button></div></form>
-    <p id="yt-status" role="status" aria-live="polite">Checking download service…</p><progress id="yt-progress" max="100" value="0" hidden></progress><p id="yt-title"></p><a class="btn" id="yt-download" hidden>Download file</a>
+    <div><button class="btn" id="yt-start" disabled>Download</button> <button class="btn" id="yt-cancel" type="button" hidden>Cancel</button></div></form>
+    <p id="yt-status" role="status" aria-live="polite">Bootleg Helper runs downloads on this PC.</p><progress id="yt-progress" max="100" value="0" hidden></progress><p id="yt-title"></p><a class="btn" id="yt-download" hidden>Download file</a>
+    <p><a href="https://github.com/BootlegProductions/Bootleg-OS/tree/main/services/youtube-downloader#local-helper-pilot">Bootleg Helper pilot setup</a></p>
     <aside class="boots-note"><strong>Before downloading</strong><p>Use videos you own or have permission to download. Completed videos up to 30 minutes and files up to 250 MB are supported. Files expire after 30 minutes.</p></aside>
     </div></section></main>
     <footer class="shell footer">
@@ -84,5 +85,5 @@
     <script src="js/app.js?v=compressor-1"></script>
     <script src="js/radio-data.js"></script>
     <script src="js/radio-player.js"></script>
-    <script src="js/download-config.js"></script><script src="js/youtube-downloader.js"></script>
+    <script src="js/download-config.js"></script><script src="js/youtube-downloader.js?v=local-1"></script>
   </body></html>
