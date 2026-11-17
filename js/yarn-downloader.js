@@ -1,11 +1,6 @@
 const $ = id => document.getElementById(id);
 const form = $('yarn-form');
 const local = $('yarn-local');
-const pilot = new URLSearchParams(location.search).get('pilot') === '1';
-local.hidden = !pilot;
-if (pilot) local.style.removeProperty('display');
-const pilotNote = $('yarn-pilot-note');
-if (pilotNote) pilotNote.hidden = !pilot;
 const open = $('yarn-open');
 const save = $('yarn-export');
 let job = null;
@@ -77,7 +72,7 @@ form.addEventListener('submit', async event => {
     $('yarn-status').textContent = 'Open an individual Yarn clip and copy its link. Search pages, collections and full tracks need a starting clip.';
     return;
   }
-  if (pilot && event.submitter === local) {
+  if (!event.submitter || event.submitter === local) {
     await downloadSequence(job);
     return;
   }
@@ -101,7 +96,7 @@ async function downloadSequence(settings) {
       const response = await fetch(api + '/health', {signal: AbortSignal.timeout(30000)});
       if (response.ok) health = await response.json();
     } catch {}
-    if (!health?.localHelper) throw new Error('Start Bootleg Helper on this PC and allow the browser to connect, then try again.');
+    if (!health?.localHelper) throw new Error('Bootleg Helper is not connected. Run the setup above if this is your first time, then allow the connection and retry.');
     status.textContent = 'Collecting clips and preparing the ZIP…';
     const response = await fetch(api + '/yarn/sequence', {
       method: 'POST',
