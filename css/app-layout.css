@@ -14,14 +14,25 @@
   overflow-wrap: anywhere;
 }
 
-.app-heading-line .app-heading-icon {
+.app-title-panel .app-heading-icon {
   justify-self: center;
-  width: clamp(44px, 7vw, 104px);
-  height: clamp(44px, 7vw, 104px);
+  width: clamp(48px, 12.5vw, 192px);
+  height: clamp(48px, 12.5vw, 192px);
   margin: 0;
   background: linear-gradient(135deg, #312044, #18384a);
   border-radius: .45rem;
-  font-size: clamp(1.25rem, 4vw, 3.4rem);
+  font-size: clamp(1.6rem, 6vw, 5.6rem);
+}
+
+.app-title-panel .wx-search-card {
+  align-content: start;
+}
+
+.app-title-panel .wx-search-card .app-heading-icon {
+  justify-self: end;
+  width: clamp(48px, 11vw, 168px);
+  height: clamp(48px, 11vw, 168px);
+  margin-inline-end: 9%;
 }
 
 .app-title-action {
@@ -31,6 +42,13 @@
 @media (max-width: 640px) {
   .app-title-panel .app-heading-line {
     grid-template-columns: minmax(0, 1fr) minmax(max-content, 18%);
+  }
+
+  .app-title-panel .app-heading-icon,
+  .app-title-panel .wx-search-card .app-heading-icon {
+    width: clamp(48px, 14vw, 82px);
+    height: clamp(48px, 14vw, 82px);
+    font-size: clamp(1.6rem, 7vw, 2.6rem);
   }
 
   .app-heading-line h1 {
