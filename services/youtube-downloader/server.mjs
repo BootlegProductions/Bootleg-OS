@@ -41,7 +41,7 @@ function run(args,{onLine,signal,timeout=180000}={}){
   child.stderr.on('data',chunk=>{stderr=(stderr+chunk).slice(-4000)});
   const timer=setTimeout(()=>child.kill('SIGKILL'),timeout);
   child.on('error',e=>{clearTimeout(timer);reject(e)});
-  child.on('close',code=>{clearTimeout(timer);code===0?resolve(stdout):reject(Error(stderr.includes('Sign in')?'YouTube is blocking this server. Try again later; this video cannot currently be downloaded.':stderr.slice(-600)||'Download stopped or timed out.'))});
+  child.on('close',code=>{clearTimeout(timer);code===0?resolve(stdout):reject(Error(/Sign in to confirm.*(?:bot|human)/i.test(stderr)?'YouTube asked this PC to confirm it is human. Run Bootleg Helper setup and choose R to refresh the download tools, then retry. If it still fails, open this video on YouTube and check whether it plays normally.':/Sign in/i.test(stderr)?'YouTube requires sign-in for this video. Open its YouTube page to check its access requirements.':stderr.slice(-600)||'Download stopped or timed out.'))});
  });
 }
 export function createService({localHost, localRoute} = {}){
