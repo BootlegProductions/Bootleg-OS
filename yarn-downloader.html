@@ -76,7 +76,7 @@
       <section class="boot-window app-title-panel">
         <div class="window-bar"><div class="lights" aria-hidden="true"><span></span><span></span><span></span></div> yarn-sequencer.exe</div><div class="panel-content app-header-content">
           <div class="app-header-copy">
-            <span class="eyebrow">Editing tools / Bootleg Helper</span>
+            <span class="eyebrow">Editing tools / browser extension</span>
             <h1>Yarn.co Sequencer</h1>
             <p>Collect clips before and after a Yarn quote and save the numbered MP4s as one ZIP.</p>
           </div>
@@ -84,31 +84,33 @@
         </div></section>
       <section class="yarn-layout">
         <article class="card"><div class="card-content">
-          <h2>Build your clip batch</h2>
+          <h2>Download directly from Yarn</h2>
+          <p>After installing the extension, open any Yarn clip and click <strong>Choose clips</strong> on that page. Its title is detected automatically. Set the clips before and after, collect the sequence, then save one ZIP.</p>
           <aside class="post-note app-helper-setup">
-      <div class="app-helper-action">
-        <h2>Set up once on Windows</h2>
-        <a class="btn" href="downloads/Bootleg-Helper-Setup.cmd" download>Download Bootleg Helper</a>
-        <p>One install covers Yarn and YouTube on 64-bit Intel or AMD Windows.</p>
-      </div>
-      <div class="app-helper-walkthrough">
-        <h3>Set-up walkthrough</h3>
-        <ol>
-          <li>Download Bootleg Helper.</li>
-          <li>Open the file, press <kbd>I</kbd>, then <kbd>Enter</kbd>.</li>
-          <li>When the helper is running, paste a link and click <strong>Download</strong>. Choose <strong>Allow</strong> if prompted.</li>
-        </ol>
-      </div>
-    </aside>
-          <form id="yarn-form">
-            <label for="yarn-url">Starting Yarn clip</label>
-            <input id="yarn-url" type="url" placeholder="https://yarn.co/yarn-clip/…" aria-describedby="yarn-link-help" required>
-            <p class="yarn-small" id="yarn-link-help">Paste a clip, GIF, meme or embed link tied to a Yarn clip. Music-video clips work too when they have a Yarn clip page.</p>
-            <div class="yarn-counts"><label>Clips before<input id="yarn-before" type="number" min="0" max="15" value="3" required></label><label>Clips after<input id="yarn-after" type="number" min="0" max="15" value="3" required></label></div>
-            <p id="yarn-total">7 clips including the starting clip.</p>
-            <button class="btn" id="yarn-local" type="submit">Download sequence ZIP</button>
-          </form>
-          <div id="yarn-job" hidden><p id="yarn-status" role="status"></p><div id="yarn-fallback" hidden><p>Open this clip on Yarn and use the browser companion on that tab. Enter the same counts, then choose <strong>Collect sequence</strong>.</p><a class="btn" id="yarn-fallback-open" target="_blank" rel="noopener">Open clip on Yarn</a> <a href="downloads/Bootleg-Yarn-Browser-Companion.zip" download>Get the Yarn browser companion</a></div></div>
+            <div class="app-helper-action">
+              <h2>Install the Yarn extension</h2>
+              <a class="btn" href="downloads/Bootleg-Yarn-Browser-Companion.zip?v=2.2.0" download>Download Yarn extension 2.2.0</a>
+              <p>Desktop Chrome and Edge. Keep the Yarn page and sequence window open while preparing the ZIP.</p>
+            </div>
+            <div class="app-helper-walkthrough">
+              <h3>Set-up walkthrough</h3>
+              <ol>
+                <li>Extract the ZIP into a folder you will keep.</li>
+                <li>Open <code>chrome://extensions</code> or <code>edge://extensions</code>, enable Developer mode, then choose <strong>Load unpacked</strong> and select that folder.</li>
+                <li>Refresh your Yarn clip page and click <strong>Choose clips</strong>.</li>
+              </ol>
+              <p>Already installed? Replace the files in your existing extension folder, click <strong>Reload</strong> on its extension card, close old sequencer windows, then refresh Yarn. Check that the new window says <strong>2.2.0</strong>.</p>
+            </div>
+          </aside>
+          <details><summary>Start from a link on Bootleg OS</summary>
+            <form id="yarn-form">
+              <label for="yarn-url">Starting Yarn clip</label>
+              <input id="yarn-url" type="url" placeholder="https://yarn.co/yarn-clip/…" required>
+              <div class="yarn-counts"><label>Clips before<input id="yarn-before" type="number" min="0" max="15" value="3" required></label><label>Clips after<input id="yarn-after" type="number" min="0" max="15" value="3" required></label></div>
+              <button class="btn" type="submit">Open clip on Yarn</button>
+              <p id="yarn-status" role="status"></p>
+            </form>
+          </details>
         </div></article>
       </section>
     <p class="app-return"><a href="applications.html">← All apps</a></p>
@@ -121,5 +123,5 @@
     <script src="js/app.js?v=compressor-1"></script>
     <script src="js/radio-data.js"></script>
     <script src="js/radio-player.js"></script>
-  <script type="module" src="js/yarn-downloader.js?v=windows-setup-3"></script></body>
+  <script type="module" src="js/yarn-downloader.js?v=extension-2.2.0"></script></body>
 </html>
