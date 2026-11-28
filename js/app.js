@@ -86,3 +86,6 @@ initGallery();
 
 // Load the shared guide relative to this script, including nested project pages.
 {const entry=document.currentScript;if(entry){const helper=document.createElement('script');helper.src=new URL('boots.js?v=compressor-1',entry.src).href;helper.defer=true;document.body.append(helper)}}
+
+// Shared artwork preview for project pages, articles and other content images.
+{const entry=document.currentScript;if(entry){const viewer=document.createElement('script');viewer.src=new URL('image-viewer.js?v=1',entry.src).href;viewer.defer=true;document.body.append(viewer)}}
