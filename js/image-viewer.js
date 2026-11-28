@@ -1,9 +1,10 @@
 (() => {
-  if (document.getElementById('gallery-root')) return;
+  if (document.querySelector('.site-image-viewer')) return;
+  if (document.getElementById('gallery-root') && !new URLSearchParams(location.search).has('cat')) return;
   const scriptURL = document.currentScript.src;
   const sheet = document.createElement('link');
   sheet.rel = 'stylesheet';
-  sheet.href = new URL('../css/image-viewer.css?v=1', scriptURL).href;
+  sheet.href = new URL('../css/image-viewer.css?v=2', scriptURL).href;
   document.head.append(sheet);
   const dialog = document.createElement('dialog');
   dialog.className = 'site-image-viewer boot-window';
@@ -23,7 +24,7 @@
 
   document.addEventListener('click', event => {
     if (event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
-    const image = event.target.closest('main img');
+    const image = event.target.closest('main img') || event.target.closest('main a')?.querySelector('img');
     if (!image || image.closest('[data-no-image-viewer], .app-icon, button, .image-editor, .pixel-editor, .archive-dialog, .site-image-viewer')) return;
     const link = image.closest('a');
     if (link?.hasAttribute('download')) return;
@@ -41,7 +42,7 @@
     preview.alt = image.alt;
     preview.src = isImageLink ? target.href : image.currentSrc || image.src;
     dialog.showModal();
-  });
+  }, true);
 
   function makeFocusable(image) {
     if (image.closest('a, button, [data-no-image-viewer], .image-editor, .pixel-editor') || (!image.closest('figure') && !image.hasAttribute('data-enlarge'))) return;

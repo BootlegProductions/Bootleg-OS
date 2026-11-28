@@ -5,3 +5,5 @@ Images in project pages and blog articles should enlarge in the shared Bootleg O
 Use a figure with an image, descriptive alt text and a figcaption. For a separate full-resolution file, wrap the image in a link to that image. The shared image viewer loads through js/app.js and handles those links, Escape, backdrop clicks and keyboard access. Use data-enlarge for an image outside a figure. Use data-no-image-viewer on an image or container when it belongs to an interactive tool.
 
 Keep navigation cards linking to their destination pages. The Gallery retains its existing artwork viewer.
+
+Keep CSS human-readable, with one declaration per line and related rules grouped together. Inspect existing shared and page styles before adding rules. Amend existing rules when appropriate and remove superseded overrides. Include the versioned image-viewer.js script explicitly on content pages so the image popup does not depend on a cached app.js loader.

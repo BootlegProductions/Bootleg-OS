@@ -56,11 +56,9 @@
     color: #94ff9b;
 
     background:
-        radial-gradient(
-            circle at 50% 40%,
+        radial-gradient(circle at 50% 40%,
             rgba(50, 255, 100, .12),
-            transparent 65%
-        ),
+            transparent 65%),
         #031309;
 
     border-radius: 8px;
@@ -83,7 +81,7 @@
 .boombox-station {
     font-weight: 900;
     letter-spacing: .08em;
-    
+
 
     white-space: nowrap;
     overflow: hidden;
